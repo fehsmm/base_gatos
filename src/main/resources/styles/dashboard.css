@@ -1,0 +1,37 @@
+body {
+    background-color: white;
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background-color: #212529;
+}
+
+.sidebar a {
+    color: #adb5bd;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 8px;
+}
+
+.sidebar a:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+.sidebar .active {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #fd7e14;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
