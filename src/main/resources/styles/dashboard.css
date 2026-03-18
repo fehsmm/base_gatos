@@ -1,7 +1,3 @@
-.header{
-    display: flex;
-}
-
 body {
     background-color: white;
 }
@@ -12,6 +8,10 @@ body {
     background-color: #212529;
     color: white;
     padding: 15px;
+}
+
+.sidebar-header {
+    display: flex;
 }
 
 .sidebar a {
