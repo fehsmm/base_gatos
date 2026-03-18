@@ -5,9 +5,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pt.upskill.m5_spring_2026.entities.User;
-import pt.upskill.m5_spring_2026.models.SignUpModel;
-import pt.upskill.m5_spring_2026.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.SignUpModel;
+import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 @Service
 public class AuthService {
