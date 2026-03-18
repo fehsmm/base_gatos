@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 <body>
-<h1>Bem-vindo à MEG!</h1>
-<p>Ajude-nos a ajudar os gatinhos da comunidade.</p>
+<div class="admin-dashboard">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <img src="/images/logo.png" alt="logo">
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
