@@ -17,19 +17,19 @@ public class AuthController {
 
     @GetMapping(value = "/login")
     public String loginPage() {
-        return "login";
+        return "auth/login";
     }
 
 
     @GetMapping(value = "/signup")
     public String signUpPage() {
-        return "signup";
+        return "auth/signup";
     }
 
     @PostMapping(value = "/signUpAction")
     public String signUpAction(SignUpModel signUp) {
         User user = authService.register(signUp);
-        return "login";
+        return "auth/login";
     }
 
 }

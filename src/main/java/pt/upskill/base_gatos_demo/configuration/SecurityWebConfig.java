@@ -20,7 +20,7 @@ public class SecurityWebConfig {
         httpSecurity.authorizeHttpRequests(auth -> {
             auth.dispatcherTypeMatchers(DispatcherType.FORWARD);
             auth.requestMatchers("/auth/**", "/styles/**", "/WEB-INF/**").permitAll();
-            auth.requestMatchers("/styles/**", "/scripts/**", "/images/**").permitAll();
+            auth.requestMatchers("/styles/**", "/scripts/**", "/images/**","/icons/**").permitAll();
             auth.requestMatchers("/**").denyAll();
         });
         httpSecurity.formLogin(login -> {
