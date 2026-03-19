@@ -1,15 +1,87 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Base de Gatos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/estilos.css">
-</head>
-<body>
-<h1>Bem-vindo à MEG!</h1>
-<p>Ajude-nos a ajudar os gatinhos da comunidade.</p>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<html>
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contacto | Abrigo Felino</title>
+    <link rel="stylesheet" href="/styles/global.css"/></head>
+<body class="flex flex-col min-h-screen">
+<header class="navbar"><div class="navbar-inner">
+    <a href="/" class="logo"><div class="logo-icon"></div><span>Abrigo Felino</span></a>
+    <nav class="nav-links hide-mobile">
+        <a href="/" class="nav-link"> Início</a><a href="/gatos" class="nav-link"> Gatos</a>
+        <a href="/adocao" class="nav-link">️ Adoção</a><a href="/donativos" class="nav-link"> Donativos</a>
+        <a href="/contacto" class="nav-link active"> Contacto</a>
+    </nav>
+    <div class="nav-auth hide-mobile">
+        <sec:authorize access="!isAuthenticated()"><a href="/login" class="btn btn-ghost btn-sm">Entrar</a><a href="/register" class="btn btn-primary btn-sm">Registar</a></sec:authorize>
+        <sec:authorize access="isAuthenticated()"><form action="/logout" method="post" style="display:inline"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="btn btn-ghost btn-sm">Sair</button></form></sec:authorize>
+    </div>
+</div></header>
+
+<main class="flex-1 page">
+    <div class="container-sm">
+        <div class="text-center mb-8">
+            <h1>Entre em Contacto</h1>
+            <p>Tem alguma questão ou quer saber mais sobre o nosso trabalho? Adoramos ouvir de si!</p>
+        </div>
+
+        <c:if test="${success != null}">
+            <div class="alert alert-success">${success}</div>
+        </c:if>
+
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:2rem">
+            <!-- FORM -->
+            <div class="card">
+                <div class="card-header"><strong> Envie-nos uma Mensagem</strong></div>
+                <div class="card-body">
+                    <form action="/contacto" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <div class="grid grid-2" style="gap:1rem">
+                            <div class="form-group"><label>Nome *</label><input type="text" name="name" required placeholder="O seu nome"/></div>
+                            <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="seu@email.com"/></div>
+                        </div>
+                        <div class="form-group"><label>Assunto *</label><input type="text" name="subject" required placeholder="Sobre o que quer falar?"/></div>
+                        <div class="form-group"><label>Mensagem *</label><textarea name="message" rows="6" required placeholder="Escreva a sua mensagem aqui..."></textarea></div>
+                        <button type="submit" class="btn btn-primary btn-lg w-full"> Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- INFO -->
+            <div style="display:flex;flex-direction:column;gap:1rem">
+                <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
+                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">📞</div>
+                    <div><h3>Telefone</h3><a href="tel:+351912345678" style="color:#f97316;font-size:.875rem">+351 912 345 678</a></div>
+                </div></div>
+                <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
+                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">️</div>
+                    <div><h3>Email</h3><a href="mailto:info@abrigofelino.pt" style="color:#f97316;font-size:.875rem">info@abrigofelino.pt</a></div>
+                </div></div>
+                <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
+                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"></div>
+                    <div><h3>Morada</h3><p class="text-sm">Rua dos Gatos, 123<br/>1000-001 Lisboa, Portugal</p></div>
+                </div></div>
+                <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
+                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"></div>
+                    <div><h3>Horário</h3><p class="text-sm">Ter-Dom: 10h00 - 18h00<br/>Segunda: Encerrado</p></div>
+                </div></div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mt-8">
+            <h2 class="text-center mb-6">Perguntas Frequentes</h2>
+            <div class="grid grid-2" style="gap:1rem">
+                <div class="card"><div class="card-body"><h3>Posso visitar os gatos sem compromisso?</h3><p class="text-sm">Sim! Encorajamos visitas para conhecer os nossos gatos. Não há qualquer obrigação de adoção.</p></div></div>
+                <div class="card"><div class="card-body"><h3>Como posso tornar-me voluntário?</h3><p class="text-sm">Entre em contacto connosco através do formulário ou email. Teremos todo o gosto em explicar o processo.</p></div></div>
+                <div class="card"><div class="card-body"><h3>Aceitam gatos para o abrigo?</h3><p class="text-sm">Dependendo da nossa capacidade atual. Contacte-nos para discutir a situação e encontrarmos a melhor solução.</p></div></div>
+                <div class="card"><div class="card-body"><h3>Quanto custa adotar um gato?</h3><p class="text-sm">Pedimos um contributo simbólico de €50 que cobre parte dos custos veterinários. O gato é entregue vacinado, desparasitado e esterilizado.</p></div></div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom">© 2026 Abrigo Felino. Todos os direitos reservados.</div></div></footer>
 </body>
 </html>
