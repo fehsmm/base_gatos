@@ -2,13 +2,13 @@
 
 <header class="navbar">
 <div class="main-header">
-    <img src="/images/logo.svg" alt="Logo MEG" class="site-logo">
+    <img src="/images/logo.svg" alt="Logo " class="site-logo">
     <div class="header-text">
-        <h1>MEG</h1>
+        <h1></h1>
         <p>Associação de apoio aos gatos</p>
 
             <div class="navbar-inner">
-                <a href="/" class="logo"><div class="logo-icon"></div><span>Meg</span></a>
+                <a href="/" class="logo"><div class="logo-icon"></div><span></span></a>
                 <nav class="nav-links hide-mobile">
                     <a href="/" class="nav-link"> Início</a>
                     <a href="/gatos" class="nav-link"> Gatos</a>

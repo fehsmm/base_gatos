@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<h1>Bem-vindo à MEG!</h1>
+<h1>Bem-vindo à !</h1>
 <p>Ajude-nos a ajudar os gatinhos da comunidade.</p>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

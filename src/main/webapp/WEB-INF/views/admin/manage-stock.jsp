@@ -10,7 +10,7 @@
 <body>
 <nav class="sidebar">
     <div class="sidebar-header">
-        <span class="logo-icon">MEG</span>
+        <span class="logo-icon"></span>
         <div class="header">
             <strong>Nome do Utilizador</strong><br>
             <small>Administrador</small>
