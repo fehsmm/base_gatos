@@ -5,18 +5,7 @@
 <html>
 <head><meta charset="UTF-8"/><title>Donativos | Abrigo Felino</title><link rel="stylesheet" href="/styles/global.css"/></head>
 <body class="flex flex-col min-h-screen">
-<header class="navbar"><div class="navbar-inner">
-    <a href="/" class="logo"><div class="logo-icon"></div><span>Abrigo Felino</span></a>
-    <nav class="nav-links hide-mobile">
-        <a href="/" class="nav-link"> Início</a><a href="/gatos" class="nav-link"> Gatos</a>
-        <a href="/adocao" class="nav-link">️ Adoção</a><a href="/donativos" class="nav-link active"> Donativos</a>
-        <a href="/contacto" class="nav-link">️ Contacto</a>
-    </nav>
-    <div class="nav-auth hide-mobile">
-        <sec:authorize access="!isAuthenticated()"><a href="/login" class="btn btn-ghost btn-sm">Entrar</a><a href="/register" class="btn btn-primary btn-sm">Registar</a></sec:authorize>
-        <sec:authorize access="isAuthenticated()"><form action="/logout" method="post" style="display:inline"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="btn btn-ghost btn-sm">Sair</button></form></sec:authorize>
-    </div>
-</div></header>
+<%@ include file="../header.jsp" %>
 
 <main class="flex-1 page">
 <div class="container-sm">
