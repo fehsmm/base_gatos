@@ -2,25 +2,29 @@ package pt.upskill.base_gatos_demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/volunteer")
 public class VolunteerController {
 
-    @GetMapping(value = "/volunteer")
-    public String volunteer(){ return "volunteer/volunteer";}
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard_volunteer";
+    }
 
-    @GetMapping(value = "/leave-shift-note")
-    public String leaveShiftNote(){return "volunteer/leave-shift-note";}
+    @GetMapping("/tasks")
+    public String tasks() {
+        return "tasks_volunteer";
+    }
 
-    @GetMapping(value = "/request-stock")
-    public String requestStock(){return "volunteer/request-stock";}
+    @GetMapping("/task-details")
+    public String taskDetails() {
+        return "task_details";
+    }
 
-    @GetMapping(value = "/view-announcement")
-    public String viewAnnouncement(){return "volunteer/view-announcement";}
-
-    @GetMapping(value = "/view-schedule")
-    public String viewSchedule(){return "volunteer/view-schedule";}
-
-    @GetMapping(value = "/leave-shift-note")
-    public String viewShift(){return "volunteer/leave-shift-note";}
+    @GetMapping("/notes")
+    public String notes() {
+        return "notes_previous";
+    }
 }
