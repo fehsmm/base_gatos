@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"/><title>Donativos | Abrigo Felino</title><link rel="stylesheet" href="/styles/global.css"/></head>
+<head><meta charset="UTF-8"/><title>Donativos | Meg</title><link rel="stylesheet" href="/styles/global.css"/></head>
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>
 
@@ -105,7 +105,7 @@
             <h3>Transferência Bancária Direta</h3>
             <div class="bg-gray-50 mb-4">
                 <p class="text-sm"><strong>IBAN:</strong> PT50 0000 0000 0000 0000 0000 0<br/>
-                <strong>Titular:</strong> Abrigo Felino<br/>
+                <strong>Titular:</strong> Meg<br/>
                 <strong>NIF:</strong> 123456789</p>
             </div>
             <h3>Doações em Espécie</h3>
@@ -117,7 +117,7 @@
 </div>
 </main>
 
-<footer class="footer"><div class="container"><div class="footer-bottom">© 2026 Abrigo Felino. Todos os direitos reservados.</div></div></footer>
+<footer class="footer"><div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div></footer>
 
 <script>
 let selectedAmount = '';

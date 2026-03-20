@@ -9,7 +9,7 @@
     <!--<link rel="stylesheet" href="/src/main/resources/estilos.css"/></head>-->
 <body style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff7ed,#fce7f3);padding:1rem">
 <div style="width:100%;max-width:420px">
-    <div class="text-center mb-6"><a class="logo" style="justify-content:center;font-size:1.3rem"><div class="logo-icon" style="width:3rem;height:3rem;font-size:1.3rem">🐱</div>Abrigo Felino</a></div>
+    <div class="text-center mb-6"><a class="logo" style="justify-content:center;font-size:1.3rem"><div class="logo-icon" style="width:3rem;height:3rem;font-size:1.3rem">🐱</div>Meg</a></div>
     <div class="card">
         <div class="card-header"><h2 style="margin:0">🔑 Recuperar Password</h2><p class="text-sm">Introduza o seu email para receber instruções</p></div>
         <div class="card-body">

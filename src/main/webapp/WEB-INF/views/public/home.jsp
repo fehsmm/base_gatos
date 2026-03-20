@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Abrigo Felino</title>
+    <title>Meg</title>
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -62,11 +62,11 @@
 
 <footer class="footer"><div class="container">
     <div class="grid grid-3" style="gap:2rem">
-        <div><div class="logo" style="color:white;margin-bottom:1rem"><div class="logo-icon"></div><span>Abrigo Felino</span></div><p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p></div>
+        <div><div class="logo" style="color:white;margin-bottom:1rem"><div class="logo-icon"></div><span>Meg</span></div><p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p></div>
         <div><h3>Links Rápidos</h3><ul class="footer-links"><li><a href="/gatos">Gatos para Adoção</a></li><li><a href="/adocao">Processo de Adoção</a></li><li><a href="/donativos">Fazer Donativo</a></li><li><a href="/contacto">Contactar-nos</a></li></ul></div>
         <div><h3>Contacto</h3><ul class="footer-links"><li>info@abrigofelino.pt</li><li>+351 912 345 678</li><li>Lisboa, Portugal</li></ul></div>
     </div>
-    <div class="footer-bottom">© 2026 Abrigo Felino. Todos os direitos reservados.</div>
+    <div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div>
 </div></footer>
 </body>
 </html>

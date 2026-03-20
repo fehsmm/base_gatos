@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>${cat.name} | Abrigo Felino</title>
+    <title>${cat.name} | Meg</title>
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -97,7 +97,7 @@
 </main>
 
 <footer class="footer">
-    <div class="container"><div class="footer-bottom">© 2026 Abrigo Felino. Todos os direitos reservados.</div></div>
+    <div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div>
 </footer>
 </body>
 </html>
