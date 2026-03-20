@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class VolunteerController {
 
     @GetMapping(value = "/volunteer")
-    public String volunteer(){ return "volunteer";}
+    public String volunteer(){ return "volunteer/volunteer";}
 
     @GetMapping(value = "/leave-shift-notes")
-    public String leaveShiftNotes(){return "leave-shift-notes";}
+    public String leaveShiftNotes(){return "volunteer/leave-shift-notes";}
 
     @GetMapping(value = "/request-stock")
-    public String requestStock(){return "request-stock";}
+    public String requestStock(){return "volunteer/request-stock";}
 
     @GetMapping(value = "/view-announcement")
-    public String viewAnnouncement(){return "view-announcement";}
+    public String viewAnnouncement(){return "volunteer/view-announcement";}
 
     @GetMapping(value = "/view-schedule")
-    public String viewSchedule(){return "view-schedule";}
+    public String viewSchedule(){return "volunteer/view-schedule";}
 
     @GetMapping(value = "/view-shift")
-    public String viewShift(){return "view-shift";}
+    public String viewShift(){return "volunteer/view-shift";}
 }
