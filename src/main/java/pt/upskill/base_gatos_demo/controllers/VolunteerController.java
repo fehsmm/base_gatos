@@ -1,4 +1,26 @@
 package pt.upskill.base_gatos_demo.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
 public class VolunteerController {
+
+    @GetMapping(value = "/volunteer")
+    public String volunteer(){ return "volunteer";}
+
+    @GetMapping(value = "/leave-shift-notes")
+    public String leaveShiftNotes(){return "leave-shift-notes";}
+
+    @GetMapping(value = "/request-stock")
+    public String requestStock(){return "request-stock";}
+
+    @GetMapping(value = "/view-announcement")
+    public String viewAnnouncement(){return "view-announcement";}
+
+    @GetMapping(value = "/view-schedule")
+    public String viewSchedule(){return "view-schedule";}
+
+    @GetMapping(value = "/view-shift")
+    public String viewShift(){return "view-shift";}
 }
