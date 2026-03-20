@@ -21,7 +21,7 @@ public class SecurityWebConfig {
             auth.dispatcherTypeMatchers(DispatcherType.FORWARD);
             auth.requestMatchers("/auth/**", "/styles/**", "/WEB-INF/**").permitAll();
             auth.requestMatchers("/styles/**", "/scripts/**", "/images/**","/icons/**").permitAll();
-            auth.requestMatchers("/volunteer/**", "/admin/**", "/adopter/**", "/private/**", "/public/**").authenticated();
+            auth.requestMatchers("/volunteer/**", "/admin/**", "/adopter/**", "/private/**", "/public/**").permitAll();
             auth.requestMatchers("/**").denyAll();
         });
         httpSecurity.formLogin(login -> {
