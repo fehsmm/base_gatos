@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BaseGatosApplication {
-
+public class MegApp {
     public static void main(String[] args) {
-        SpringApplication.run(BaseGatosApplication.class, args);
+        SpringApplication.run(MegApp.class, args);
     }
+
 }
+
