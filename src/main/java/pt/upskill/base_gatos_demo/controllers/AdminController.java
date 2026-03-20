@@ -12,7 +12,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-application")
-    public String manageApplications(){ return "admin/manage-application";}
+    public String manageApplication(){ return "admin/manage-application";}
 
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(){ return "admin/manage-schedule";}
@@ -21,11 +21,11 @@ public class AdminController {
     public String manageStock(){ return "admin/manage-stock";}
 
     @GetMapping(value = "/manage-user")
-    public String manageUsers(){ return "admin/manage-user";}
+    public String manageUser(){ return "admin/manage-user";}
 
     @GetMapping(value = "/post-announcement")
     public String postAnnouncement(){ return "admin/post-announcement";}
 
     @GetMapping(value = "/vet")
-    public String vet(){ return "admin/vet";}
+    public String viewClinicalInformation(){ return "admin/vet";}
 }

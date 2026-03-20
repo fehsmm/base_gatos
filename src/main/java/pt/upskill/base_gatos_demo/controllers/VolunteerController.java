@@ -10,7 +10,7 @@ public class VolunteerController {
     public String volunteer(){ return "volunteer/volunteer";}
 
     @GetMapping(value = "/leave-shift-note")
-    public String leaveShiftNotes(){return "volunteer/leave-shift-note";}
+    public String leaveShiftNote(){return "volunteer/leave-shift-note";}
 
     @GetMapping(value = "/request-stock")
     public String requestStock(){return "volunteer/request-stock";}
