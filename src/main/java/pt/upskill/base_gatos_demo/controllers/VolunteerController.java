@@ -9,8 +9,8 @@ public class VolunteerController {
     @GetMapping(value = "/volunteer")
     public String volunteer(){ return "volunteer/volunteer";}
 
-    @GetMapping(value = "/leave-shift-notes")
-    public String leaveShiftNotes(){return "volunteer/leave-shift-notes";}
+    @GetMapping(value = "/leave-shift-note")
+    public String leaveShiftNotes(){return "volunteer/leave-shift-note";}
 
     @GetMapping(value = "/request-stock")
     public String requestStock(){return "volunteer/request-stock";}
@@ -21,6 +21,6 @@ public class VolunteerController {
     @GetMapping(value = "/view-schedule")
     public String viewSchedule(){return "volunteer/view-schedule";}
 
-    @GetMapping(value = "/view-shift")
-    public String viewShift(){return "volunteer/view-shift";}
+    @GetMapping(value = "/leave-shift-note")
+    public String viewShift(){return "volunteer/leave-shift-note";}
 }
