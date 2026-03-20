@@ -96,8 +96,6 @@
     </div>
 </main>
 
-<footer class="footer">
-    <div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div>
-</footer>
+
 </body>
 </html>
