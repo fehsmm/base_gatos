@@ -12,7 +12,7 @@
     <jsp:include page="sidebar.jsp" />
 
     <main class="main-content">
-        <jsp:include page="../header.jsp" />
+        <jsp:include page="../layout.jsp" />
         <div class="page-title">Comunicados</div>
         <div class="page-subtitle">Informações importantes para os voluntários.</div>
 
