@@ -82,7 +82,7 @@
                                     <span class="badge badge-outline">${trait}</span>
                                 </c:forEach>
                             </div>
-                            <a href="/gatos/${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
+                            <a href="public/cat-list${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
                         </div>
                     </div>
                 </c:forEach>

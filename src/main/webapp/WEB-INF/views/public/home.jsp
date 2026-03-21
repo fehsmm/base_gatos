@@ -17,8 +17,8 @@
         <h1>Juntos Salvamos Vidas Felinas 🐾</h1>
         <p>Dê um lar amoroso a um gato que precisa. Cada adoção é uma segunda chance para uma vida feliz.</p>
         <div class="hero-btns">
-            <a href="/gatos" class="btn btn-white btn-lg">Ver Gatos Disponíveis →</a>
-            <a href="/donativos" class="btn btn-outline btn-lg" style="border-color:white;color:white">Fazer Donativo</a>
+            <a href="public/cat-list" class="btn btn-white btn-lg">Ver Gatos Disponíveis →</a>
+            <a href="public/donate" class="btn btn-outline btn-lg" style="border-color:white;color:white">Fazer Donativo</a>
         </div>
     </div></section>
 
@@ -46,16 +46,16 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="text-center mt-8"><a href="/cat-list" class="btn btn-outline btn-lg">Ver Todos os Gatos →</a></div>
+        <div class="text-center mt-8"><a href="public/cat-list" class="btn btn-outline btn-lg">Ver Todos os Gatos →</a></div>
     </div></section>
 
     <section style="padding:4rem 1.5rem;background:linear-gradient(135deg,#f97316,#ec4899);color:white;text-align:center"><div class="container-sm">
         <h2 style="font-size:2rem;color:white">Como Pode Ajudar?</h2>
         <p style="color:#fde68a;font-size:1.1rem;margin-bottom:2rem">Há várias formas de apoiar o nosso trabalho</p>
         <div class="grid grid-3" style="gap:1rem">
-            <a href="/adoption" class="btn btn-white btn-lg">️ Adotar</a>
-            <a href="/donate" class="btn btn-white btn-lg"> Doar</a>
-            <a href="/contact" class="btn btn-white btn-lg"> Voluntariar</a>
+            <a href="public/adoption" class="btn btn-white btn-lg">️ Adotar</a>
+            <a href="public/donate" class="btn btn-white btn-lg"> Doar</a>
+            <a href="public/contact" class="btn btn-white btn-lg"> Voluntariar</a>
         </div>
     </div></section>
 </main>

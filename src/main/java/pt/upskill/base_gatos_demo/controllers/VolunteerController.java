@@ -42,10 +42,10 @@ public class VolunteerController {
         return "volunteer/view-shift";
     }
 
-    @GetMapping("/view-announcements")
-    public String viewAnnouncements(Authentication authentication, Model model) {
+    @GetMapping("/view-announcement")
+    public String viewAnnouncement(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
-        return "volunteer/view-announcements";
+        return "volunteer/view-announcement";
     }
 
     @GetMapping("/request-stock")
@@ -54,9 +54,9 @@ public class VolunteerController {
         return "volunteer/request-stock";
     }
 
-    @GetMapping("/leave-shift-notes")
-    public String leaveShiftNotes(Authentication authentication, Model model) {
+    @GetMapping("/leave-shift-note")
+    public String leaveShiftNote(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
-        return "volunteer/leave-shift-notes";
+        return "volunteer/leave-shift-note";
     }
 }
