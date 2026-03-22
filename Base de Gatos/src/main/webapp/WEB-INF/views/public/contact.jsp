@@ -7,7 +7,7 @@
     <title>Contacto | Meg</title>
     <link rel="stylesheet" href="/styles/global.css"/></head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1 page">
     <div class="container-sm">
@@ -69,8 +69,83 @@
                 <div class="card"><div class="card-body"><h3>Quanto custa adotar um gato?</h3><p class="text-sm">Pedimos um contributo simbólico de €50 que cobre parte dos custos veterinários. O gato é entregue vacinado, desparasitado e esterilizado.</p></div></div>
             </div>
         </div>
+
+        <!-- Esta divisão é apenas para ficar como exemplo, o real será o que está abaixo,
+        e deveremos colocar ainda as perguntas e respostas-->
+        <div class="container-sm">
+            <div class="text-center mb-8">
+                <h1>Perguntas Frequentes</h1>
+                <p>Encontre respostas às dúvidas mais comuns sobre o nosso abrigo, adoções e como pode ajudar.</p>
+            </div>
+
+
+            <!-- TODO!!!!-->
+
+            <!-- SECTION: Adoção -->
+            <h2 class="mb-6">🐾 Adoção</h2>
+            <div class="grid grid-1" style="gap:1rem;margin-bottom:2.5rem">
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 1 sobre adoção --></h3>
+                    <p class="text-sm"><!-- Resposta 1 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 2 sobre adoção --></h3>
+                    <p class="text-sm"><!-- Resposta 2 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 3 sobre adoção --></h3>
+                    <p class="text-sm"><!-- Resposta 3 --></p>
+                </div></div>
+            </div>
+
+            <!-- SECTION: Abrigo -->
+            <h2 class="mb-6"> O Abrigo</h2>
+            <div class="grid grid-1" style="gap:1rem;margin-bottom:2.5rem">
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 1 sobre o abrigo --></h3>
+                    <p class="text-sm"><!-- Resposta 1 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 2 sobre o abrigo --></h3>
+                    <p class="text-sm"><!-- Resposta 2 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 3 sobre o abrigo --></h3>
+                    <p class="text-sm"><!-- Resposta 3 --></p>
+                </div></div>
+            </div>
+
+            <!-- SECTION: Donativos e Voluntariado -->
+            <h2 class="mb-6"> Donativos e Voluntariado</h2>
+            <div class="grid grid-1" style="gap:1rem;margin-bottom:2.5rem">
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 1 sobre donativos/voluntariado --></h3>
+                    <p class="text-sm"><!-- Resposta 1 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 2 sobre donativos/voluntariado --></h3>
+                    <p class="text-sm"><!-- Resposta 2 --></p>
+                </div></div>
+                <div class="card"><div class="card-body">
+                    <h3><!-- Pergunta 3 sobre donativos/voluntariado --></h3>
+                    <p class="text-sm"><!-- Resposta 3 --></p>
+                </div></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="bg-orange-50 text-center">
+                <h3>Não encontrou a sua resposta?</h3>
+                <p style="margin-bottom:1rem">Entre em contacto connosco e teremos todo o gosto em ajudar.</p>
+                <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                    ⬆ Voltar ao topo
+                </button>
+            </div>
+        </div>
+
     </div>
 </main>
-<footer class="footer"><div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div></footer>
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>
+

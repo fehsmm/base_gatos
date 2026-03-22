@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1">
     <section class="hero"><div class="container">
         <h1>Juntos Salvamos Vidas Felinas 🐾</h1>
         <p>Dê um lar amoroso a um gato que precisa. Cada adoção é uma segunda chance para uma vida feliz.</p>
         <div class="hero-btns">
-            <a href="/gatos" class="btn btn-white btn-lg">Ver Gatos Disponíveis →</a>
-            <a href="/donativos" class="btn btn-outline btn-lg" style="border-color:white;color:white">Fazer Donativo</a>
+            <a href="public/cat-list" class="btn btn-white btn-lg">Ver Gatos Disponíveis →</a>
+            <a href="public/donate" class="btn btn-outline btn-lg" style="border-color:white;color:white">Fazer Donativo</a>
         </div>
     </div></section>
 
@@ -46,27 +46,19 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="text-center mt-8"><a href="/gatos" class="btn btn-outline btn-lg">Ver Todos os Gatos →</a></div>
+        <div class="text-center mt-8"><a href="public/cat-list" class="btn btn-outline btn-lg">Ver Todos os Gatos →</a></div>
     </div></section>
 
     <section style="padding:4rem 1.5rem;background:linear-gradient(135deg,#f97316,#ec4899);color:white;text-align:center"><div class="container-sm">
         <h2 style="font-size:2rem;color:white">Como Pode Ajudar?</h2>
         <p style="color:#fde68a;font-size:1.1rem;margin-bottom:2rem">Há várias formas de apoiar o nosso trabalho</p>
         <div class="grid grid-3" style="gap:1rem">
-            <a href="/adocao" class="btn btn-white btn-lg">️ Adotar</a>
-            <a href="/donativos" class="btn btn-white btn-lg"> Doar</a>
-            <a href="/contacto" class="btn btn-white btn-lg"> Voluntariar</a>
+            <a href="public/adoption" class="btn btn-white btn-lg">️ Adotar</a>
+            <a href="public/donate" class="btn btn-white btn-lg"> Doar</a>
+            <a href="public/contact" class="btn btn-white btn-lg"> Voluntariar</a>
         </div>
     </div></section>
 </main>
-
-<footer class="footer"><div class="container">
-    <div class="grid grid-3" style="gap:2rem">
-        <div><div class="logo" style="color:white;margin-bottom:1rem"><div class="logo-icon"></div><span>Meg</span></div><p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p></div>
-        <div><h3>Links Rápidos</h3><ul class="footer-links"><li><a href="/gatos">Gatos para Adoção</a></li><li><a href="/adocao">Processo de Adoção</a></li><li><a href="/donativos">Fazer Donativo</a></li><li><a href="/contacto">Contactar-nos</a></li></ul></div>
-        <div><h3>Contacto</h3><ul class="footer-links"><li>info@abrigofelino.pt</li><li>+351 912 345 678</li><li>Lisboa, Portugal</li></ul></div>
-    </div>
-    <div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div>
-</div></footer>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

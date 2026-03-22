@@ -1,15 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Base de Gatos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/estilos.css">
+    <title>Turno Atual</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<h1>Bem-vindo à MEG!</h1>
-<p>Ajude-nos a ajudar os gatinhos da comunidade.</p>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<div class="layout">
+    <jsp:include page="sidebar.jsp" />
+
+    <main class="main-content">
+        <jsp:include page="../header.jsp" />
+        <div class="page-title">Turno Atual</div>
+        <div class="page-subtitle">Resumo do turno em curso.</div>
+
+        <div class="shift-card">
+            <div class="shift-date">quarta-feira, 18 de março de 2026</div>
+            <div class="shift-time">10:00 - 14:00</div>
+
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div>
+                        <div class="task-title">Trocar água</div>
+                        <div class="task-description">Verificar todos os recipientes</div>
+                    </div>
+                </div>
+
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div>
+                        <div class="task-title">Limpar zona comum</div>
+                        <div class="task-description">Varredura e organização</div>
+                    </div>
+                </div>
+
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div>
+                        <div class="task-title">Observar gato em recuperação</div>
+                        <div class="task-description">Monitorizar comportamento do Thor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 </body>
 </html>

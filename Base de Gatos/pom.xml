@@ -8,11 +8,11 @@
         <version>4.0.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.meg</groupId>
-    <artifactId>base_gatos</artifactId>
+    <groupId>pt.upskill</groupId>
+    <artifactId>base_gatos_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>base_gatos</name>
-    <description>base_gatos</description>
+    <name>base_gatos_demo</name>
+    <description>base_gatos_demo</description>
     <url/>
     <licenses>
         <license/>

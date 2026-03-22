@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1 page">
     <div class="container-sm">
@@ -128,6 +128,7 @@
     </div>
 </main>
 
-<footer class="footer"><div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div></footer>
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>

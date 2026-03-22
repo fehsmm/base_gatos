@@ -1,13 +1,14 @@
 package com.meg.service;
 
+import com.meg.entity.User;
+import com.meg.models.SignUpModel;
+import com.meg.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pt.upskill.base_gatos_demo.entities.User;
-import pt.upskill.base_gatos_demo.models.SignUpModel;
-import pt.upskill.base_gatos_demo.repositories.UserRepository;
+
 
 @Service
 public class AuthService {

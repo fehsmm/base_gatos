@@ -7,7 +7,7 @@
     <title>Perguntas Frequentes | Meg</title>
     <link rel="stylesheet" href="/styles/global.css"/></head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1 page">
     <div class="container-sm">

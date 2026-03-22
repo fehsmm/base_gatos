@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1 page">
     <div class="container">
@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <h3>${cat.name}</h3>
                             <p class="text-sm mb-4">
-                                ${cat.formattedAge}
+                                    ${cat.formattedAge}
                                 • ${cat.gender}
                                 <br/>${cat.breed}
                             </p>
@@ -82,7 +82,7 @@
                                     <span class="badge badge-outline">${trait}</span>
                                 </c:forEach>
                             </div>
-                            <a href="/gatos/${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
+                            <a href="public/cat-list${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -96,19 +96,7 @@
         </c:if>
     </div>
 </main>
-
-<footer class="footer">
-    <div class="container">
-        <div class="grid grid-3" style="gap:2rem">
-            <div>
-                <div class="logo" style="color:white;margin-bottom:1rem"><div class="logo-icon">🐱</div><span>Meg</span></div>
-                <p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p>
-            </div>
-            <div><h3>Links Rápidos</h3><ul class="footer-links"><li><a href="/gatos">Gatos para Adoção</a></li><li><a href="/adocao">Processo de Adoção</a></li><li><a href="/donativos">Fazer Donativo</a></li><li><a href="/contacto">Contactar-nos</a></li></ul></div>
-            <div><h3>Contacto</h3><ul class="footer-links"><li>info@abrigofelino.pt</li><li>+351 912 345 678</li><li>Lisboa, Portugal</li></ul></div>
-        </div>
-        <div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div>
-    </div>
-</footer>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
+

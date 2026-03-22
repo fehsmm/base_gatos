@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="/styles/global.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
-<%@ include file="layout.jsp" %>
+<%@ include file="header.jsp" %>
 
 <main class="flex-1 page">
     <div class="container-sm">
-        <a href="/gatos" class="btn btn-ghost btn-sm mb-6">← Voltar à Lista</a>
+        <a href="public/cat-list" class="btn btn-ghost btn-sm mb-6">← Voltar à Lista</a>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
             <!-- IMAGE -->
@@ -76,7 +76,7 @@
                     <div class="bg-orange-50 mb-4">
                         <h3>Interessado em adotar ${cat.name}?</h3>
                         <p style="margin-bottom:1rem">Preencha o formulário de candidatura e a nossa equipa entrará em contacto consigo.</p>
-                        <a href="/adocao" class="btn btn-primary">Candidatar-me à Adoção</a>
+                        <a href="public/adoption" class="btn btn-primary">Candidatar-me à Adoção</a>
                     </div>
                 </c:if>
                 <c:if test="${cat.adoptionStatus == 'Em Processo'}">
@@ -96,8 +96,7 @@
     </div>
 </main>
 
-<footer class="footer">
-    <div class="container"><div class="footer-bottom">© 2026 Meg. Todos os direitos reservados.</div></div>
-</footer>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
+
