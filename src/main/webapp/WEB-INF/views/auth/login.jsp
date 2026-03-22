@@ -46,20 +46,20 @@
 
             <p class="mb-4 text-center">Entre na sua conta para aceder à área reservada</p>
 
-            <form>
+            <form action="/auth/login" method="post">
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
+                    <label for="username" class="form-label">Username</label>
                     <div class="input-group">
-                        <input type="email" class="form-control custom-input" id="email" placeholder="seu@email.com"/>
+                        <input type="text" class="form-control custom-input" id="username" name="username" placeholder="O seu username"/>
               </span>
                     </div>
                 </div>
 
 
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
+                    <label class="form-label" for="paswword">Password</label>
                     <div class="input-group">
-                        <input type="password" class="form-control custom-input" id="password" placeholder="••••••••"/>
+                        <input type="password" class="form-control custom-input" id="password" name="password" placeholder="••••••••"/>
                         <button class="input-group-text" type="button" id="rPassword"></button>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 
 
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-dark">Entrar</button>
+                    <button class="btn btn-dark">Entrar</button>
                 </div>
             </form>
 
