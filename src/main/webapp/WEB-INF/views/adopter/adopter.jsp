@@ -55,10 +55,101 @@
 
     </aside>
 
-    <main class="container">
-        <div class="card">
-        <div class="card-header"><h1>Bem-vindo à !</h1></div>
-        <div class="card-body"><p>Ajude-nos a ajudar os gatinhos da comunidade.</p></div>
+    <main class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-1 fw-bold">Área do Adotante</h4>
+            </div>
+        </div>
+
+
+        <div class="content-area">
+            <div class="mb-4">
+                <p class="">Acompanhe os seus gatos adotados</p>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="stats-card">
+
+                        <div>
+                            <div class="">Gatos Adotados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <div>
+                            <div class="">Relatório Pendente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <div>
+                            <div class="">Taxa de Felicidade</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <section class="section-card mb-4">
+                <h3 class="bold mb-4">
+                    Os Meus Gatos
+                </h3>
+
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                        <div class="cat-card">
+                            <img src="#" alt=""/>
+                            <div>
+                                <h4 class="mb-2">Gato 1</h4>
+                                <span class="badge-soft-success">Adotado</span>
+                                <p class="mt-3 mb-1 text-muted">Adotado em: xx/xx/xxxx</p>
+                                <p class="mb-0 text-muted">Próxima consulta: xx/xx/xxxx</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="cat-card">
+                            <img src="#" alt=""/>
+                            <div>
+                                <div>
+                                    <h4 class="mb-2">Gato 2</h4>
+                                    <span class="badge-soft-success">Adotado</span>
+                                    <p class="mt-3 mb-1 text-muted">Adotado em: xx/xx/xxxx</p>
+                                    <p class="mb-0 text-muted">Próxima consulta: xx/xx/xxxx</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h3 class="fw-bold mb-4">Ações Rápidas</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <button class="btn btn-primary p-4">
+                            Ver Todos os Meus Gatos
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary p-4">
+                            Preencher Relatório
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary p-4">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 </div>
