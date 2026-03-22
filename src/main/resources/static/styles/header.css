@@ -2,9 +2,53 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.header img {
+/*.header img {
     height: 60px;
+}*/
+
+/* Esses abaixo são para o header */
+.top-logo {
+    width: 300px;
+    height: 180px;
+    object-fit: contain;
+
 }
+
+.top-title {
+    font-size: 1.4rem;
+    font-weight: 1000;
+    color: #f97316;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+.top-subtitle {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 0.40rem;
+}
+
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.top-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+/* até aqui */
