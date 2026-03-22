@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/adopter")
 public class AdopterController {
 
-    @GetMapping(value = "/adopter")
+    @GetMapping(value = "")
     public String adopter(){return "adopter/adopter";}
 
     @GetMapping(value = "/adopted-cat-list")
