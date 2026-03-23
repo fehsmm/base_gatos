@@ -32,7 +32,6 @@ public class SecurityWebConfig {
             login.loginPage("/auth/login");
             login.loginProcessingUrl("/login");
             login.defaultSuccessUrl("/volunteer/view-schedule", true);
-            login.permitAll();
         });
         httpSecurity.logout(logout -> {
             logout.logoutUrl("/logout");
