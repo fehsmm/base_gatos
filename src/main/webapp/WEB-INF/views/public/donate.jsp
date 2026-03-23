@@ -160,5 +160,8 @@ function handleDonation(e) {
     updateDonateBtn();
 }
 </script>
+
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>
