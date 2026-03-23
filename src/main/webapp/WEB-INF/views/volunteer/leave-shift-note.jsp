@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<div class="layout">
-    <jsp:include page="sidebar.jsp" />
-
-    <main class="main-content">
-        <jsp:include page="../layout.jsp" />
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon"></span>
+        <div class="header">
         <div class="page-title">Notas do Turno</div>
         <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
 
@@ -25,7 +24,8 @@
 
             <button class="btn-primary-custom">Guardar Notas</button>
         </div>
-    </main>
-</div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

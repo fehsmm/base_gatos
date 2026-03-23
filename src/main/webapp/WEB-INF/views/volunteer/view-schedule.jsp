@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<div class="layout">
-    <jsp:include page="sidebar.jsp" />
-
-    <main class="main-content">
-        <jsp:include page="../header.jsp" />
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon"></span>
+        <div class="header">
         <div class="page-title">As Minhas Escalas</div>
         <div class="info-line">${user.username} &nbsp;•&nbsp; ${user.email}</div>
 
@@ -118,7 +117,8 @@
                 <li>Consulte o manual de procedimentos na área comum do abrigo</li>
             </ul>
         </div>
-    </main>
-</div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

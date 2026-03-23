@@ -5,7 +5,7 @@
         <div class="brand-box">
             <img src="/images/logo.svg" alt="Logo MEG" class="brand-logo">
             <div>
-                <div class="brand-title">Abrigo Felino</div>
+                <div class="brand-title">MEG</div>
                 <div class="brand-subtitle">Voluntário</div>
             </div>
         </div>

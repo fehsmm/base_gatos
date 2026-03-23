@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<div class="layout">
-    <jsp:include page="sidebar.jsp" />
-
-    <main class="main-content">
-        <jsp:include page="../layout.jsp" />
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon"></span>
+        <div class="header">
         <div class="page-title">Comunicados</div>
         <div class="page-subtitle">Informações importantes para os voluntários.</div>
 
@@ -30,7 +29,8 @@
             <strong>Limpeza de sábado</strong>
             <p>No próximo sábado haverá limpeza geral da área externa do abrigo.</p>
         </div>
-    </main>
-</div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<div class="layout">
-    <jsp:include page="sidebar.jsp" />
-
-    <main class="main-content">
-        <jsp:include page="../header.jsp" />
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon"></span>
+        <div class="header">
         <div class="page-title">Turno Atual</div>
         <div class="page-subtitle">Resumo do turno em curso.</div>
 
@@ -46,7 +45,8 @@
                 </div>
             </div>
         </div>
-    </main>
-</div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

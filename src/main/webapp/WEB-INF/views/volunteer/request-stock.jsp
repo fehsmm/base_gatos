@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/styles/volunteer.css">
 </head>
 <body>
-<div class="layout">
-    <jsp:include page="sidebar.jsp" />
-
-    <main class="main-content">
-        <jsp:include page="../header.jsp" />
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon"></span>
+        <div class="header">
         <div class="page-title">Pedir Stock</div>
         <div class="page-subtitle">Registe materiais em falta no abrigo.</div>
 
@@ -35,7 +34,8 @@
 
             <button class="btn-primary-custom">Enviar Pedido</button>
         </div>
-    </main>
-</div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>
