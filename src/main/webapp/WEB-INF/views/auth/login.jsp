@@ -10,35 +10,12 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
-<style>
-    body {
-        background: navajowhite;
-        font-family: Arial, Helvetica, sans-serif;
-    }
 
-    .title{
-        color:black;
-        text-decoration: dotted;
-    }
-
-    .balaoIniciarSessao{
-        border-radius:8px;
-    }
-
-
-
-</style>
 <body>
+<%@ include file="../public/header.jsp" %>
 <div class="container d-flex flex-column align-items-center justify-content-center">
 
-    <div class="containerTitle">
-    <div class="align-items-center gap-3 mb-4">
-        <h1 class="title mt-4">MEG</h1>
-    </div>
-    </div>
-
-
-    <div class="card balaoIniciarSessao p-4">
+    <div class="card p-4">
         <div class="card-header text-center">
             <h2 class="mb-2">Iniciar Sessão</h2>
         </div>
@@ -81,29 +58,6 @@
 
             <hr/>
 
-            <p class="mb-3 text-center">Contas de Demonstração:</p>
-
-            <div class="badge text-bg-primary p-4">
-                <strong>Administrador:</strong><br />
-                admin@abrigofelino.pt / admin123
-            </div>
-
-            <div class="badge text-bg-success p-4">
-                <strong>Voluntário:</strong><br />
-                voluntario@abrigofelino.pt / vol123
-            </div>
-
-            <div class="badge text-bg-info p-4">
-                <strong>Veterinário:</strong><br />
-                veterinario@abrigofelino.pt / vet123
-            </div>
-
-            <div class="badge text-bg-secondary p-4">
-                <strong>Adotante:</strong><br />
-                adotante@email.com / adot123
-            </div>
-
-
             <div class="text-center mt-4">
                 <p class="mb-2">
                     Não tem conta?
@@ -114,6 +68,7 @@
         </div>
     </div>
 </div>
+<%@ include file="../public/footer.jsp" %>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
