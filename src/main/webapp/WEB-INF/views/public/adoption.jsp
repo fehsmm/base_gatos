@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Processo de Adoção | Meg</title>
-    <link rel="stylesheet" href="/styles/global.css"/>
+    <link rel="stylesheet" href="/styles/Public/adoption.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Porque quer adotar um gato? *</label>
+                        <label>Por que quer adotar um gato? *</label>
                         <textarea name="reason" rows="4" required placeholder="Conte-nos sobre as suas motivações..."></textarea>
                     </div>
 
