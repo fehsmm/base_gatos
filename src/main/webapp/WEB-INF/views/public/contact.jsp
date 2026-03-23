@@ -137,7 +137,7 @@
                 <h3>Não encontrou a sua resposta?</h3>
                 <p style="margin-bottom:1rem">Entre em contacto connosco e teremos todo o gosto em ajudar.</p>
                 <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                    ⬆ Voltar ao topo
+                    ⬆ Contactar
                 </button>
             </div>
         </div>
