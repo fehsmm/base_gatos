@@ -7,7 +7,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>${cat.name} | Meg</title>
-    <link rel="stylesheet" href="/styles/global.css"/>
+    <link rel="stylesheet" href="/styles//Public/cat-profile.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>

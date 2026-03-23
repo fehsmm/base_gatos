@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"/><title>Donativos | Meg</title><link rel="stylesheet" href="/styles/global.css"/></head>
+<head><meta charset="UTF-8"/><title>Donativos | Meg</title><link rel="stylesheet" href="/styles/Public/donate.css"/></head>
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>
 

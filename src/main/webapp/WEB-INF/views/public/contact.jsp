@@ -5,7 +5,7 @@
 <html>
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Contacto | Meg</title>
-    <link rel="stylesheet" href="/styles/global.css"/></head>
+    <link rel="stylesheet" href="/styles/Public/contact.css"/></head>
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>
 
