@@ -30,8 +30,8 @@ public class SecurityWebConfig {
         });
         httpSecurity.formLogin(login -> {
             login.loginPage("/auth/login");
-            login.loginProcessingUrl("/login");
-            login.defaultSuccessUrl("/volunteer/view-schedule", true);
+            login.loginProcessingUrl("/auth/login");
+            login.defaultSuccessUrl("/auth/dashboard", true);
         });
         httpSecurity.authenticationProvider(userAuthenticationProvider);
         return httpSecurity.build();

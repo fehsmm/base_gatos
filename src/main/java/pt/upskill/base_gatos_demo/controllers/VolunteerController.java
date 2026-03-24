@@ -24,7 +24,7 @@ public class VolunteerController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String volunteer(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
         return "volunteer/volunteer";

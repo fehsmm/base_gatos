@@ -11,7 +11,6 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 @Service
 public class AuthService {
-
     @Autowired
     UserRepository userRepository;
 
@@ -24,6 +23,8 @@ public class AuthService {
 
         String encodedPassword = passwordEncoder.encode(signUpModel.getPassword());
         user.setPassword(encodedPassword);
+
+        user.setRole(signUpModel.getRole());
 
         return userRepository.save(user);
     }

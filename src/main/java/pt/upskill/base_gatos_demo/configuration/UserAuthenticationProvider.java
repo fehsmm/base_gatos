@@ -32,9 +32,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
                 roleList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             }*/
             //ALternativa:
-            //roleList.add(new SimpleGrantedAuthority("ROLE_" + utilizador.getRole()));
+            roleList.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()));
 
-            roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+            //roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
 
             return new UsernamePasswordAuthenticationToken(username, password, roleList);
         }

@@ -33,7 +33,20 @@ public class AuthController {
     @PostMapping(value = "/signUpAction")
     public String signUpAction(SignUpModel signUp) {
         User user = authService.register(signUp);
-        return "auth/login";
+        return "redirect:/auth/login";
+    }
+
+    @GetMapping(value = "/dashboard")
+    public String dashboardPage() {
+        User user = authService.getAuthenticatedUser();
+
+        if (user.getRole().equals("volunteer")) {
+            return "redirect:/volunteer/";
+        } else if (user.getRole().equals("admin")) {
+            return "redirect:/admin/";
+        } else {
+            return "redirect:/adopter/";
+        }
     }
 
     //post mapping login
