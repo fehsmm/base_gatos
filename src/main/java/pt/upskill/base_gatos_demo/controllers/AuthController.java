@@ -36,4 +36,10 @@ public class AuthController {
         return "auth/login";
     }
 
+    //post mapping login
+    //post mapping signup
+    //post mapping forgot password
+
+    //perguntar sobre o excluir conta
+
 }

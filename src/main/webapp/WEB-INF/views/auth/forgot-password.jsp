@@ -13,8 +13,8 @@
     </style>
 
 <body>
+<%@ include file="../public/header.jsp" %>
 <div class="container d-flex flex-column align-items-center justify-content-center">
-    <div class="title text-center mb-6"><h2>Meg</h2></div>
     <div class="card text-center">
         <div class="card-header"><h3>Recuperar Password</h3>
             <p>Introduza o seu email para receber instruções</p></div>
@@ -28,6 +28,7 @@
         </div>
     </div>
 </div>
+<%@ include file="../public/footer.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
