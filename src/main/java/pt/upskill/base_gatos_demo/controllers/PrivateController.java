@@ -1,5 +1,6 @@
 package pt.upskill.base_gatos_demo.controllers;
 
+import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PrivateController {
 
     @GetMapping(value = "/full-cat-list")
-    public String viewFullCatList(){return "private/full-cat-list";}
+    public String viewFullCatList(@Nullable String status){return "private/full-cat-list";}
 
     @GetMapping(value = "/full-cat-profile")
     public String viewFullCatProfile(){return "private/full-cat-profile";}
