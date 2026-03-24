@@ -3,14 +3,16 @@ package pt.upskill.base_gatos_demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     @GetMapping(value="")
-    public String admin(){
-        return "admin/admin";
+    public ModelAndView admin(){
+        ModelAndView mav = new ModelAndView("admin/admin");
+        return mav;
     }
 
     @GetMapping(value = "/manage-application")

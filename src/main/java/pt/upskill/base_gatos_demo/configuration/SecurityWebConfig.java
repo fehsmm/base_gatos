@@ -33,11 +33,6 @@ public class SecurityWebConfig {
             login.loginProcessingUrl("/login");
             login.defaultSuccessUrl("/volunteer/view-schedule", true);
         });
-        httpSecurity.logout(logout -> {
-            logout.logoutUrl("/logout");
-            logout.logoutSuccessUrl("/");
-            logout.deleteCookies("JSESSIONID");
-        });
         httpSecurity.authenticationProvider(userAuthenticationProvider);
         return httpSecurity.build();
     }
