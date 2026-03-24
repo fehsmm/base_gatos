@@ -45,4 +45,29 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public boolean isAdmin() {
+        if(role == "Admin") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isVolunteer() {
+        if(role == "Volunteer"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isAdopter() {
+        if(role == "Adopter"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
