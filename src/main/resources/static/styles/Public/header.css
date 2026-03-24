@@ -9,7 +9,7 @@
     height: 60px;
 }*/
 
-/* Esses abaixo são para o header */
+
 .top-logo {
     width: 300px;
     height: 180px;
@@ -51,4 +51,15 @@
     align-items: center;
     gap: 0.75rem;
 }
-/* até aqui */
+
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row;
+    list-style: none;
+}
+
+.header-links a {
+    color: #c2410c;
+}
