@@ -33,5 +33,11 @@ public class PublicController {
 
     @GetMapping(value = "/donate")
     public String donate(){ return "public/donate";}
+
+    //post mapping para o formulario de adocao
+
+    //post mapping para formulario de doacao
+
+    //post mapping para formulario de contacto
 }
 

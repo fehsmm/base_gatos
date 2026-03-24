@@ -59,4 +59,12 @@ public class VolunteerController {
         addLoggedUserToModel(authentication, model);
         return "volunteer/leave-shift-note";
     }
+
+    //marcar tarefas como concluidas
+    //nota de horario / comentario
+
+    //post mapping pedido de stock
+
+    //post mapping deixar notas de turno
+
 }
