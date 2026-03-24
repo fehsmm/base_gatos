@@ -1,16 +1,9 @@
 package pt.upskill.base_gatos_demo.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
 import java.util.Date;
 import java.util.List;
 
-public class CatModel {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class AddCatModel {
 
     private String image;
     private String name;
@@ -27,14 +20,6 @@ public class CatModel {
     private boolean vaccination;
     private boolean parasiteControl;
     private boolean sterilization;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getImage() {
         return image;

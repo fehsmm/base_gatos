@@ -1,11 +1,13 @@
 package pt.upskill.base_gatos_demo.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Cat {
     @Id
     @GeneratedValue

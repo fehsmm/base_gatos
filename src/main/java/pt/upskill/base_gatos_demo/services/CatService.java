@@ -1,11 +1,13 @@
 package pt.upskill.base_gatos_demo.services;
 
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
-import pt.upskill.base_gatos_demo.models.CatModel;
+import pt.upskill.base_gatos_demo.models.AddCatModel;
+import pt.upskill.base_gatos_demo.models.EditCatModel;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 
 import java.util.List;
@@ -16,21 +18,25 @@ public class CatService {
     @Autowired
     CatRepository catRepository;
 
-    public List<Cat> listCats(User user){
+    @Autowired
+    AuthService authService;
+
+    public List<Cat> listCats(@Nullable String status, boolean genderSelected, boolean vaccined, boolean sterilized, boolean healthy){
+        User user = authService.getAuthenticatedUser();
         Cat filter = new Cat();
         if ((!user.isAdmin() && !user.isVolunteer()) || status == "Disponível") {
             filter.setStatus("Disponível");
         } else if (status != null) {
             filter.setStatus(status);
         }
-        if (gender != null) {
-            filter.setGender(gender);
+        if (genderSelected) {
+            filter.setGender(genderSelected);
         }
-        if(vaccine) {
+        if(vaccined) {
             filter.setVaccination(true);
         }
-        if(sterelized) {
-            filter.setVaccination(false);
+        if(sterilized) {
+            filter.setSterilization(true);
         }
         if(healthy) {
             filter.setFiv(false);
@@ -43,7 +49,7 @@ public class CatService {
         return catRepository.getReferenceById(id);
     }
 
-    public void updateCat(CatModel model) {
+    public void updateCat(EditCatModel model) {
         Cat cat = getById(model.getId());
         cat.setImage(model.getImage());
         cat.setName(model.getName());
@@ -62,12 +68,11 @@ public class CatService {
         catRepository.save(cat);
     }
 
-    public void deleteCat(CatModel model) {
-        Cat cat = getById(model.getId());
-        catRepository.delete(cat);
+    public void deleteCat(Long id) {
+        catRepository.deleteById(id);
     }
 
-    public void createCat(CatModel model) {
+    public void createCat(AddCatModel model) {
         Cat cat = new Cat();
         cat.setImage(model.getImage());
         cat.setName(model.getName());
