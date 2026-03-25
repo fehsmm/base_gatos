@@ -28,7 +28,7 @@ public class Cat {
     private boolean vaccination;
     private boolean parasiteControl;
     private boolean sterilization;
-    private boolean health = isHealth();
+    private boolean health = isHealthy();
 
     public Long getId() {
         return id;
@@ -150,7 +150,7 @@ public class Cat {
         this.sterilization = sterilization;
     }
 
-    public boolean isHealth() {
+    public boolean isHealthy() {
         if(fiv && felv) {
             return true;
         } else {
