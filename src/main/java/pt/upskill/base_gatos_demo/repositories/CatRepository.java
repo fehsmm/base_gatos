@@ -18,5 +18,5 @@ public interface CatRepository extends JpaRepository<Cat,Long> {
 
     List<Cat> findByVaccine(boolean vaccination);
 
-    List<Cat> findBySterilized(boolean sterilization);
+    List<Cat> findBySterilization(boolean sterilization);
 }

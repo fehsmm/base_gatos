@@ -28,6 +28,8 @@ public class Cat {
     private boolean vaccination;
     private boolean parasiteControl;
     private boolean sterilization;
+    private boolean health;
+    private boolean vaccine;
 
     public Long getId() {
         return id;
@@ -148,4 +150,14 @@ public class Cat {
     public void setSterilization(boolean sterilization) {
         this.sterilization = sterilization;
     }
+
+    public boolean isHealth() {
+        return health;
+    }
+
+    public void setHealth(boolean health) {
+        this.health = health;
+    }
+    public boolean isVaccine() { return vaccine; }
+    public void setVaccine(boolean vaccine) { this.vaccine = vaccine; }
 }
