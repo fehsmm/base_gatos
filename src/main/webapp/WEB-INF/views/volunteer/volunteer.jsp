@@ -90,10 +90,10 @@
     </aside>
     <main class="flex-1 page">
         <div class="container-sm">
-            <div class="text-center mb-8">
+            <p class="text-center mb-8">
                 <div class="page-title">Área do Voluntário</div>
+                <p>
                 <div class="page-subtitle">Bem-vindo à tua área de trabalho.</div>
-
                 <div class="panel">
                     <p>Nesta área podes consultar as tuas escalas, ver o teu turno atual, acompanhar comunicados, pedir
                         stock e deixar notas do turno.</p>
