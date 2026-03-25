@@ -21,7 +21,7 @@ public class CatService {
     @Autowired
     AuthService authService;
 
-    public List<Cat> listCats(@Nullable String status, boolean genderSelected, boolean vaccined, boolean sterilized, boolean healthy){
+    public List<Cat> listCats(@Nullable String status, boolean gender, boolean vaccination, boolean sterilization, boolean healthy){
         User user = authService.getAuthenticatedUser();
         Cat filter = new Cat();
         if ((!user.isAdmin() && !user.isVolunteer()) || status == "Disponível") {
@@ -29,13 +29,13 @@ public class CatService {
         } else if (status != null) {
             filter.setStatus(status);
         }
-        if (genderSelected) {
-            filter.setGender(genderSelected);
+        if (gender) {
+            filter.setGender(gender);
         }
-        if(vaccined) {
+        if(vaccination) {
             filter.setVaccination(true);
         }
-        if(sterilized) {
+        if(sterilization) {
             filter.setSterilization(true);
         }
         if(healthy) {
