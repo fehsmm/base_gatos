@@ -34,7 +34,7 @@
 
 
                 <div class="mb-3">
-                    <label class="form-label" for="paswword">Password</label>
+                    <label class="form-label" for="password">Password</label>
                     <div class="input-group">
                         <input type="password" class="form-control custom-input" id="password" name="password" placeholder="••••••••"/>
                         <button class="input-group-text" type="button" id="rPassword"></button>
@@ -47,7 +47,7 @@
                         <label class="remember">Lembrar-me</label>
                     </div>
 
-                    <a href="#" class="link-passwd">Esqueceu a password?</a>
+                    <a href="/auth/signup" class="link-passwd">Esqueceu a password?</a>
                 </div>
 
 
@@ -61,7 +61,7 @@
             <div class="text-center mt-4">
                 <p class="mb-2">
                     Não tem conta?
-                    <a href="#" class="register">Registar</a>
+                    <a href="/auth/signup" class="register">Registar</a>
                 </p>
                 <a href="#">Voltar ao site</a>
             </div>

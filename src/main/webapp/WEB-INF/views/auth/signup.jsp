@@ -14,7 +14,7 @@
 <div class="container">
     <div class="card mt-4">
         <div class="card-header">
-            <h2>Erro ao criar Conta</h2>
+            <h2>Sign Up</h2>
             <p>Registe-se para adotar, voluntariar ou candidatar-se a veterinário.</p>
         </div>
         <div class="card-body">
@@ -71,7 +71,7 @@
             </div>
                 </div>
         </form>
-            <div class="text-center mt-2"><a href="public/home">Voltar ao site</a></div>
+            <div class="text-center mt-2"><a href="/public/home">Voltar ao site</a></div>
         </div>
     </div>
 </div>
