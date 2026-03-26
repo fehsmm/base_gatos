@@ -6,8 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/volunteer")
@@ -15,6 +21,9 @@ public class VolunteerController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ShiftRepository shiftRepository;
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
         if (authentication != null) {
@@ -33,6 +42,30 @@ public class VolunteerController {
     @GetMapping("/view-schedule")
     public String viewSchedule(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
+
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+
+        // Buscar todos os turnos do voluntário
+        List<Shift> allShifts = shiftRepository.findAllByVolunteersId(user.getId());
+
+        LocalDate today = LocalDate.now();
+
+        // Separar em próximos e anteriores
+        List<Shift> upcomingShifts = allShifts.stream()
+                .filter(s -> !s.getDate().isBefore(today))
+                .sorted((a, b) -> a.getDate().compareTo(b.getDate()))
+                .collect(Collectors.toList());
+
+        List<Shift> pastShifts = allShifts.stream()
+                .filter(s -> s.getDate().isBefore(today))
+                .sorted((a, b) -> b.getDate().compareTo(a.getDate()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("upcomingShifts", upcomingShifts);
+        model.addAttribute("pastShifts", pastShifts);
+        model.addAttribute("upcomingCount", upcomingShifts.size());
+
         return "volunteer/view-schedule";
     }
 
@@ -59,6 +92,7 @@ public class VolunteerController {
         addLoggedUserToModel(authentication, model);
         return "volunteer/leave-shift-note";
     }
+}
 
     //marcar tarefas como concluidas
     //nota de horario / comentario
@@ -67,4 +101,3 @@ public class VolunteerController {
 
     //post mapping deixar notas de turno
 
-}
