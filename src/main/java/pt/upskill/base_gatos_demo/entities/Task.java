@@ -2,17 +2,21 @@ package pt.upskill.base_gatos_demo.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
+
 @Entity
 public class Task {
     @Id
     @GeneratedValue
     private Long id;
 
-    private String description;
-
     @ManyToOne
     @JoinColumn(name = "shift_id")
     private Shift shift;
+
+    private String title;
+    private String description;
+    private LocalTime time;
 
     public Long getId() {
         return id;
@@ -28,6 +32,22 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public Shift getShift() {

@@ -12,21 +12,22 @@ public class Shift {
     @GeneratedValue
     private Long id;
 
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
     @ManyToMany
     @JoinTable(
             name = "shift_volunteers",
-            joinColumns = @JoinColumn(name = "shift_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "shift_id"), //coluna deste lado
+            inverseJoinColumns = @JoinColumn(name = "user_id") //inverso - coluna do outro lado
     )
     private List<User> volunteers;
-
-    @OneToMany(mappedBy = "shift")
+    @OneToMany (mappedBy = "shift") //relação gerida pelo shift na classe task
     private List<Task> tasks;
 
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public Long getId() {
         return id;
@@ -60,10 +61,19 @@ public class Shift {
         this.endTime = endTime;
     }
 
-    public List<User> getVolunteers() { return volunteers; }
-    public void setVolunteers(List<User> volunteers) { this.volunteers = volunteers; }
+    public List<User> getVolunteers() {
+        return volunteers;
+    }
 
-    public List<Task> getTasks() { return tasks; }
-    public void setTasks(List<Task> tasks) { this.tasks = tasks; }
+    public void setVolunteers(List<User> volunteers) {
+        this.volunteers = volunteers;
+    }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

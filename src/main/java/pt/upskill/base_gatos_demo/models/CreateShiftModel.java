@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class AddShiftModel {
+public class CreateShiftModel {
 
     private LocalDate date;
     private List<User> volunteers;
