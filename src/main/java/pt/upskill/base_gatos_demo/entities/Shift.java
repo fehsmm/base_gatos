@@ -13,10 +13,25 @@ public class Shift {
     private Long id;
 
     private LocalDate date;
-    private List<User> volunteers;
-    private List<Task> tasks;
     private LocalTime startTime;
     private LocalTime endTime;
+
+    @ManyToMany
+    @JoinTable(
+            name = "shift_volunteers",
+            joinColumns = @JoinColumn(name = "shift_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> volunteers;
+
+    @ManyToMany
+    @JoinTable(
+            name = "shift_tasks",
+            joinColumns = @JoinColumn(name = "shift_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Task> tasks;
+
 
     public Long getId() {
         return id;
@@ -50,19 +65,10 @@ public class Shift {
         this.endTime = endTime;
     }
 
-    public List<User> getVolunteers() {
-        return volunteers;
-    }
+    public List<User> getVolunteers() { return volunteers; }
+    public void setVolunteers(List<User> volunteers) { this.volunteers = volunteers; }
 
-    public void setVolunteers(List<User> volunteers) {
-        this.volunteers = volunteers;
-    }
+    public List<Task> getTasks() { return tasks; }
+    public void setTasks(List<Task> tasks) { this.tasks = tasks; }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
 }

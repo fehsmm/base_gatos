@@ -1,8 +1,6 @@
 package pt.upskill.base_gatos_demo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +11,10 @@ public class Schedule {
     @GeneratedValue
     private Long id;
 
+    @OneToMany
+    @JoinColumn(name = "schedule_id")
     private List<Shift> shifts;
+
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -25,13 +26,8 @@ public class Schedule {
         this.id = id;
     }
 
-    public List<Shift> getShifts() {
-        return shifts;
-    }
-
-    public void setShifts(List<Shift> shifts) {
-        this.shifts = shifts;
-    }
+    public List<Shift> getShifts() { return shifts; }
+    public void setShifts(List<Shift> shifts) { this.shifts = shifts; }
 
     public LocalDate getStartDate() {
         return startDate;
