@@ -82,7 +82,7 @@
         <div class="container-sm">
             <div class="text-center mb-8">
                 <div class="page-title">As Minhas Escalas</div>
-                <div class="info-line">${user.username} &nbsp;•&nbsp; ${user.email}</div>
+                <div class="info-line">${user.username} &nbsp;•&nbsp; ${user.role}</div>
 
                 <%-- Cards de estatísticas --%>
                 <div class="stats-row">
@@ -91,7 +91,7 @@
                         <div>Turnos Próximos</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number green">${fn:length(pastShifts)}</div>
+                        <div class="stat-number green">${pastShifts.size()}</div>
                         <div>Turnos Completos</div>
                     </div>
                 </div>
