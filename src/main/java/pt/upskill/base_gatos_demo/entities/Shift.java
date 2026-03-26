@@ -24,12 +24,7 @@ public class Shift {
     )
     private List<User> volunteers;
 
-    @ManyToMany
-    @JoinTable(
-            name = "shift_tasks",
-            joinColumns = @JoinColumn(name = "shift_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id")
-    )
+    @OneToMany(mappedBy = "shift")
     private List<Task> tasks;
 
 

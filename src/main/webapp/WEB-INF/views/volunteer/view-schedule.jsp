@@ -124,8 +124,7 @@
                                             <div class="task-item">
                                                 <input type="checkbox" disabled>
                                                 <div>
-                                                    <div class="task-title">${task.name}</div>
-                                                    <div class="task-description">${task.description}</div>
+                                                    <div class="task-title">${task.description}</div>
                                                 </div>
                                             </div>
                                         </c:forEach>
@@ -158,8 +157,7 @@
                                         <div class="task-item">
                                             <input type="checkbox" disabled>
                                             <div>
-                                                <div class="task-title">${task.name}</div>
-                                                <div class="task-description">${task.description}</div>
+                                                <div class="task-title">${task.description}</div>
                                             </div>
                                         </div>
                                     </c:forEach>
