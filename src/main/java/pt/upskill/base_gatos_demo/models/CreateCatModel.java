@@ -3,7 +3,7 @@ package pt.upskill.base_gatos_demo.models;
 import java.util.Date;
 import java.util.List;
 
-public class AddCatModel {
+public class CreateCatModel {
 
     private String image;
     private String name;

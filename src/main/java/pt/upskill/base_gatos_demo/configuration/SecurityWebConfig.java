@@ -24,7 +24,7 @@ public class SecurityWebConfig {
             auth.requestMatchers("/volunteer/**").hasRole("VOLUNTEER");
             auth.requestMatchers("/admin/**").hasRole("ADMIN");
             auth.requestMatchers("/adopter/**").hasRole("ADOPTER");
-            auth.requestMatchers("/private/**").hasRole("PRIVATE");
+            auth.requestMatchers("/private/**").hasAnyRole("ADMIN", "VOLUNTEER");
             auth.requestMatchers( "/public/**").permitAll();
             auth.requestMatchers("/**").denyAll();
         });

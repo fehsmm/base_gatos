@@ -10,9 +10,12 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    private String name;
     private String username;
     private String password;
     private String role;
+    private long telephone;
+    private String address;
 
     public Long getId() {
         return id;
@@ -44,6 +47,30 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(long telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean isAdmin() {
