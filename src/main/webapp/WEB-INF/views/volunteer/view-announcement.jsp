@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Comunicados</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 <body>
 <div class="admin-layout">

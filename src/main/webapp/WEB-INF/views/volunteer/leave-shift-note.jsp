@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Notas do Turno</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 <body>
 <div class="admin-layout">
@@ -88,10 +88,13 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-sm">
-            <div class="text-center mb-8">
-                <h1>Notas do Turno</h1>
+        <div class="container-fluid px-4 py-4">
+            <div class="mb-4">
+                <div class="page-title">
+                <h1 style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;font-weight:bold;">Notas do Turno</h1>
+
                 <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
+                    <p></p>
 
                 <div class="panel">
                     <label class="form-label">Resumo do turno</label>
@@ -102,7 +105,7 @@
                     <textarea class="form-textarea-custom"
                               placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
 
-                    <button class="btn-primary-custom">Guardar Notas</button>
+                    <button type="button" class="btn btn-primary">Guardar Notas</button>
                 </div>
             </div>
         </div>
