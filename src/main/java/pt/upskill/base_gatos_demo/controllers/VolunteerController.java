@@ -47,7 +47,7 @@ public class VolunteerController {
         User user = userRepository.getUserByUsername(username);
 
         // Buscar todos os turnos do voluntário
-        List<Shift> allShifts = shiftRepository.findAllByVolunteersId(user.getId());
+        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
 
         LocalDate today = LocalDate.now();
 
