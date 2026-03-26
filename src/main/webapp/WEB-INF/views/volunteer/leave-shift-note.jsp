@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Notas do Turno</title>
@@ -44,7 +44,7 @@
                     <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm-20-80h40v-100h100v-40H740v-100h-40v100H600v40h100v100Z"/>
                 </svg>
                 Notas do Turno</a>
-            <a href="/volunteer/request-stock" >
+            <a href="/volunteer/request-stock">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                      fill="#adb5bd">
                     <path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/>
@@ -90,22 +90,25 @@
     <main class="flex-1 page">
         <div class="container-fluid px-4 py-4">
             <div class="mb-4">
-                <div class="page-title">
-                <h1 style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;font-weight:bold;">Notas do Turno</h1>
+                <div class="page-title fw-bold"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                    <h1 style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;font-weight:bold;">Notas do
+                        Turno</h1>
 
-                <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
+                    <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
                     <p></p>
 
-                <div class="panel">
-                    <label class="form-label">Resumo do turno</label>
-                    <textarea class="form-textarea-custom"
-                              placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
+                    <div class="panel">
+                        <label class="form-label">Resumo do turno</label>
+                        <textarea class="form-textarea-custom"
+                                  placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
 
-                    <label class="form-label">Ocorrências importantes</label>
-                    <textarea class="form-textarea-custom"
-                              placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
+                        <label class="form-label">Ocorrências importantes</label>
+                        <textarea class="form-textarea-custom"
+                                  placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
 
-                    <button type="button" class="btn btn-primary">Guardar Notas</button>
+                        <button type="button" class="btn btn-primary">Guardar Notas</button>
+                    </div>
                 </div>
             </div>
         </div>

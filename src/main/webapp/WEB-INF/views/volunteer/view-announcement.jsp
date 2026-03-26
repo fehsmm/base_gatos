@@ -44,15 +44,15 @@
                     <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm-20-80h40v-100h100v-40H740v-100h-40v100H600v40h100v100Z"/>
                 </svg>
                 Notas do Turno</a>
-            <a href="/volunteer/request-stock" class="active">
+            <a href="/volunteer/request-stock">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="white">
+                     fill="#adb5bd">
                     <path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/>
                 </svg>
                 Pedido de Stock</a>
-            <a href="/volunteer/view-announcement">
+            <a href="/volunteer/view-announcement" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="#adb5bd">
+                     fill="white">
                     <path d="M720-440v-80h160v80H720Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM200-200v-160h-40q-33 0-56.5-23.5T80-440v-80q0-33 23.5-56.5T160-600h160l200-120v480L320-360h-40v160h-80Zm240-182v-196l-98 58H160v80h182l98 58Zm120 36v-268q27 24 43.5 58.5T620-480q0 41-16.5 75.5T560-346ZM300-480Z"/>
                 </svg>
                 Comunicados</a>
@@ -88,25 +88,28 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-sm">
-            <div class="text-center mb-8">
-                <div class="page-title">Comunicados</div>
-                <p>
-                <div class="page-subtitle">Informações importantes para os voluntários.</div>
-                </p>
-                <div class="panel">
-                    <strong>Atualização de rotina</strong>
-                    <p>A medicação do gato Thor passa a ser administrada duas vezes por dia.</p>
-                </div>
+        <div class="container-fluid px-4 py-4">
+            <div class="mb-4">
+                <div class="page-title fw-bold"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                    <div class="page-title">Comunicados</div>
+                    <p>
+                    <div class="page-subtitle">Informações importantes para os voluntários.</div>
+                    </p>
+                    <div class="panel">
+                        <strong>Atualização de rotina</strong>
+                        <p>A medicação do gato Thor passa a ser administrada duas vezes por dia.</p>
+                    </div>
 
-                <div class="panel">
-                    <strong>Falta de stock</strong>
-                    <p>Estamos com pouco stock de ração húmida. Registar pedidos quando necessário.</p>
-                </div>
+                    <div class="panel">
+                        <strong>Falta de stock</strong>
+                        <p>Estamos com pouco stock de ração húmida. Registar pedidos quando necessário.</p>
+                    </div>
 
-                <div class="panel">
-                    <strong>Limpeza de sábado</strong>
-                    <p>No próximo sábado haverá limpeza geral da área externa do abrigo.</p>
+                    <div class="panel">
+                        <strong>Limpeza de sábado</strong>
+                        <p>No próximo sábado haverá limpeza geral da área externa do abrigo.</p>
+                    </div>
                 </div>
             </div>
         </div>

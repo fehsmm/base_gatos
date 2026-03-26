@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Turno Atual</title>
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="shift-card" style="max-width: 900px; font-weight:bolder;">
-                    <div class="shift-date">quarta-feira, 18 de março de 2026 - class="shift-time">10:00 - 14:00</div>
+                    <div class="shift-date">quarta-feira, 18 de março de 2026 - 10:00 - 14:00</div>
 
                     <ul class="list-group">
                         <li class="list-group-item">

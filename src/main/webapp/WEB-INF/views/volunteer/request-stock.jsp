@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Pedir Stock</title>
@@ -88,30 +88,33 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-sm">
-            <div class="text-center mb-8">
-                <h1>Pedir Stock</h1>
-                <p>Registe materiais em falta no abrigo para que possamos repor o mais rapidamente possível.</p>
-            </div>
+        <div class="container-fluid px-4 py-4">
+            <div class="mb-4">
+                <div class="page-title fw-bold"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                    <h1>Pedir Stock</h1>
+                    <p>Registe materiais em falta no abrigo para que possamos repor o mais rapidamente possível.</p>
+                </div>
 
-            <div class="panel">
-                <label class="form-label">Item</label>
-                <select class="form-select-custom">
-                    <option>Ração seca</option>
-                    <option>Ração húmida</option>
-                    <option>Areia</option>
-                    <option>Medicamentos</option>
-                    <option>Luvas</option>
-                    <option>Produtos de limpeza</option>
-                </select>
+                <div class="panel">
+                    <label class="form-label">Item</label>
+                    <select class="form-select-custom">
+                        <option>Ração seca</option>
+                        <option>Ração húmida</option>
+                        <option>Areia</option>
+                        <option>Medicamentos</option>
+                        <option>Luvas</option>
+                        <option>Produtos de limpeza</option>
+                    </select>
 
-                <label class="form-label">Quantidade</label>
-                <input type="number" class="form-control-custom" placeholder="Ex: 5">
+                    <label class="form-label">Quantidade</label>
+                    <input type="number" class="form-control-custom" placeholder="Ex: 5">
 
-                <label class="form-label">Observações</label>
-                <textarea class="form-textarea-custom" placeholder="Explique o motivo do pedido"></textarea>
+                    <label class="form-label">Observações</label>
+                    <textarea class="form-textarea-custom" placeholder="Explique o motivo do pedido"></textarea>
 
-                <button type="button" class="btn btn-success">Enviar Pedido</button>
+                    <button type="button" class="btn btn-success">Enviar Pedido</button>
+                </div>
             </div>
         </div>
     </main>
