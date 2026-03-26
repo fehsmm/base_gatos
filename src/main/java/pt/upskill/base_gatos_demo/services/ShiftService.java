@@ -14,7 +14,7 @@ public class ShiftService {
     @Autowired
     ShiftRepository shiftRepository;
 
-    public List<Shift> listAllShiftsByVolunteer(Long id){}
+    /*public List<Shift> listAllShiftsByVolunteer(Long id){}
 
     public List<Shift> listAllShifts() {}
 
@@ -24,5 +24,5 @@ public class ShiftService {
 
     public Shift editShift(Long id) {}
 
-    public void deleteShift(Long id){}
+    public void deleteShift(Long id){}*/
 }

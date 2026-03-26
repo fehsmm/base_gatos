@@ -1,10 +1,9 @@
 package pt.upskill.base_gatos_demo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -13,11 +12,11 @@ public class Shift {
     @GeneratedValue
     private Long id;
 
-    private Date date;
+    private LocalDate date;
     private List<User> volunteers;
     private List<Task> tasks;
-    /*para dar aos voluntários horários específicos teriamos que queriar uma entidade ShiftAssignment
-    que guarda um voluntario um tempo de inicio e um tempo de fim*/
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public Long getId() {
         return id;
@@ -27,12 +26,28 @@ public class Shift {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public List<User> getVolunteers() {
@@ -50,5 +65,4 @@ public class Shift {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
-
 }
