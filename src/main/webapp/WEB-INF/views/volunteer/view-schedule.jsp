@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,12 +118,10 @@
                                 <div class="shift-header">
                                     <div>
                                         <div class="shift-date">
-                                            <fmt:formatDate value="${shift.date}" pattern="EEEE, d 'de' MMMM 'de' yyyy"
-                                                            type="date"/>
+                                                ${shift.date}
                                         </div>
                                         <div class="shift-time">
-                                            <fmt:formatDate value="${shift.startTime}" pattern="HH:mm" type="time"/> -
-                                            <fmt:formatDate value="${shift.endTime}" pattern="HH:mm" type="time"/>
+                                                ${shift.startTime} - ${shift.endTime}
                                         </div>
                                     </div>
                                 </div>
@@ -152,12 +150,10 @@
                             <div class="shift-header">
                                 <div>
                                     <div class="shift-date">
-                                        <fmt:formatDate value="${shift.date}" pattern="EEEE, d 'de' MMMM 'de' yyyy"
-                                                        type="date"/>
+                                            ${shift.date}
                                     </div>
                                     <div class="shift-time">
-                                        <fmt:formatDate value="${shift.startTime}" pattern="HH:mm" type="time"/> -
-                                        <fmt:formatDate value="${shift.endTime}" pattern="HH:mm" type="time"/>
+                                            ${shift.startTime} - ${shift.endTime}
                                     </div>
                                 </div>
                             </div>
