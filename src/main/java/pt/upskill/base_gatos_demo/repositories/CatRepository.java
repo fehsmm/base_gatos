@@ -11,6 +11,7 @@ public interface CatRepository extends JpaRepository<Cat,Long> {
 
     List<Cat> findByName(String name);
     List<Cat> findByStatus(String status);
+    List<Cat> findByStatusAndGender(String status, boolean gender);
 
     List<Cat> findByGender(boolean gender);
 
