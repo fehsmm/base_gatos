@@ -97,6 +97,12 @@ public class AdminController {
     @GetMapping(value = "/vet")
     public String viewClinicalInformation(){ return "admin/vet";}
 
+    @GetMapping(value = "/manage-cat")
+    public String manageCat(){return "admin/manage-cat";}
+
+    @GetMapping(value = "/view-shift-note")
+    public String viewShiftNote(){return "admin/view-shift-note";}
+
     //post mapping add cat
     //post mapping edit cat
     //perguntat sobre eliminar gato

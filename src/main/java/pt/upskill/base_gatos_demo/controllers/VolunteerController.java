@@ -92,6 +92,9 @@ public class VolunteerController {
         addLoggedUserToModel(authentication, model);
         return "volunteer/leave-shift-note";
     }
+
+    @GetMapping(value = "/manage-cat")
+    public String manageCat(){return "volunteer/manage-cat";}
 }
 
     //marcar tarefas como concluidas

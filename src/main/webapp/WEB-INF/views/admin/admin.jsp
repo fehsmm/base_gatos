@@ -38,9 +38,9 @@
             <a href="/admin/" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h320v-560H200v560Zm400 0h160v-240H600v240Zm0-320h160v-240H600v240Z"/></svg>
                 Página Inicial</a>
-            <a href="/admin/vet">
+            <a href="/admin/manage-cat">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
-                Informação Clínica</a>
+                Gatos</a>
             <a href="/admin/manage-schedule">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-188.5-11.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5ZM640-400q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-188.5-11.5Q280-263 280-280t11.5-28.5Q303-320 320-320t28.5 11.5Q360-297 360-280t-11.5 28.5Q337-240 320-240t-28.5-11.5ZM640-240q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
                 Escalas</a>
@@ -56,6 +56,12 @@
             <a href="/admin/manage-application">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>
                 Candidaturas</a>
+            <a href="/admin/view-shift-note">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+                Notas de Turno</a>
+            <a href="/admin/vet">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                Informação Clínica</a>
         </nav>
         <div class="sidebar-footer">
             <a href="/public/home" class="sidebar-link">
@@ -72,6 +78,7 @@
     </aside>
 
     <main class="admin-main">
+
         <div style="padding:1.5rem">
         <div class="mb-8">
             <h1 style="margin-bottom:.25rem">
@@ -80,50 +87,78 @@
             <p>Visão geral do abrigo e atividades recentes</p>
         </div>
 
-            <c:if test="${success != null}">
-                <div class="alert alert-success">${success}</div>
-            </c:if>
+        <c:if test="${success != null}">
+            <div class="alert alert-success">${success}</div>
+        </c:if>
 
-        <!-- ALERTS -->
-        <div th:if="${pendingUsersCount > 0 or lowStockCount > 0}" style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
-            <div th:if="${pendingUsersCount > 0}" class="alert alert-warning" style="flex:1;min-width:200px">
-                ⚠️ <span th:text="${pendingUsersCount}"></span> conta(s) pendente(s) de aprovação — <a th:href="@{/admin/utilizadores}" style="color:inherit;font-weight:600">Ver agora</a>
+        <c:if test="${pendingUserCount > 0 || lowStockCount > 0}">
+            <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+
+                <c:if test="${pendingUsersCount > 0}">
+                    <div class="alert alert-warning" style="flex:1;min-width:200px">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                        ${pendingUsersCount} conta(s) pendente(s) de aprovação —
+                        <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver agora</a>
+                    </div>
+                </c:if>
+
+                <c:if test="${lowStockCount > 0}">
+                    <div class="alert alert-error" style="flex:1;min-width:200px">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg>
+                        ${lowStockCount} item(ns) de stock abaixo do mínimo —
+                        <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver agora</a>
+                    </div>
+                </c:if>
+
             </div>
-            <div th:if="${lowStockCount > 0}" class="alert alert-error" style="flex:1;min-width:200px">
-                📦 <span th:text="${lowStockCount}"></span> item(ns) de stock abaixo do mínimo — <a th:href="@{/admin/stock}" style="color:inherit;font-weight:600">Ver agora</a>
-            </div>
+        </c:if>
         </div>
 
-        <!-- STATS -->
-        <div class="grid grid-4" style="gap:1rem;margin-bottom:2rem">
-            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Total de Gatos</p><p style="font-size:2rem;font-weight:700" th:text="${totalCats}"></p></div><div style="width:3rem;height:3rem;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">🐱</div></div></div>
-            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Disponíveis</p><p style="font-size:2rem;font-weight:700;color:#16a34a" th:text="${availableCount}"></p></div><div style="width:3rem;height:3rem;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">❤️</div></div></div>
-            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Voluntários</p><p style="font-size:2rem;font-weight:700;color:#7c3aed" th:text="${volunteersCount}"></p></div><div style="width:3rem;height:3rem;background:#f3e8ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">👥</div></div></div>
-            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Turnos Semana</p><p style="font-size:2rem;font-weight:700;color:#f97316" th:text="${shiftsCount}"></p></div><div style="width:3rem;height:3rem;background:#ffedd5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">📅</div></div></div>
-        </div>
+        <div class="card mb-6">
+            <div class="card-header">
+                <strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg>
+                    Ações Rápidas
+                </strong>
+            </div>
 
-        <!-- QUICK ACTIONS -->
-        <div class="card mb-6"><div class="card-header"><strong>⚡ Ações Rápidas</strong></div><div class="card-body">
+            <div class="card-body">
             <div class="grid grid-3" style="gap:.75rem">
-                <a th:href="@{/admin/gatos}" class="btn btn-outline">🐱 Adicionar Gato</a>
-                <a th:href="@{/admin/utilizadores}" class="btn btn-outline">👥 Gerir Utilizadores</a>
-                <a th:href="@{/admin/comunicados}" class="btn btn-outline">📢 Novo Comunicado</a>
+                <a href="/admin" class="btn btn-outline">🐱 Adicionar Gato</a>
+                <a href="/admin/utilizadores}" class="btn btn-outline">👥 Gerir Utilizadores</a>
+                <a href="/admin/comunicados}" class="btn btn-outline">📢 Novo Comunicado</a>
             </div>
-        </div></div>
+        </div>
+        </div>
 
         <div class="grid grid-2" style="gap:1.5rem">
+
             <!-- RECENT CATS -->
-            <div class="card"><div class="card-header" style="display:flex;justify-content:space-between;align-items:center"><strong>Gatos Recentes</strong><a th:href="@{/admin/gatos}" class="btn btn-ghost btn-sm">Ver Todos</a></div>
+            <div class="card">
+                <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                    <strong>Gatos Recentes</strong>
+                    <a th:href="@{/admin/gatos}" class="btn btn-ghost btn-sm">Ver Todos</a>
+                </div>
+
                 <div class="card-body" style="padding:0">
                     <div th:each="cat : ${recentCats}" style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
                         <img th:src="${cat.imageUrl}" th:alt="${cat.name}" class="avatar"/>
-                        <div style="flex:1"><div style="font-weight:500" th:text="${cat.name}"></div><div class="text-sm text-gray" th:text="${cat.breed}"></div></div>
+                        <div style="flex:1">
+                            <div style="font-weight:500" th:text="${cat.name}"></div>
+                            <div class="text-sm text-gray" th:text="${cat.breed}"></div>
+                        </div>
                         <span class="badge" th:classappend="${cat.adoptionStatus == 'Disponível'} ? 'badge-green' : (${cat.adoptionStatus == 'Em Processo'} ? 'badge-yellow' : 'badge-gray')" th:text="${cat.adoptionStatus}"></span>
                     </div>
-                </div></div>
+                </div>
+            </div>
 
             <!-- ANNOUNCEMENTS -->
-            <div class="card"><div class="card-header" style="display:flex;justify-content:space-between;align-items:center"><strong>Comunicados Recentes</strong><a th:href="@{/admin/comunicados}" class="btn btn-ghost btn-sm">Ver Todos</a></div>
+            <div class="card">
+                <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                    <strong>Comunicados Recentes</strong>
+                    <a th:href="@{/admin/comunicados}" class="btn btn-ghost btn-sm">Ver Todos</a>
+                </div>
+
                 <div class="card-body">
                     <div th:each="ann : ${announcements}" class="shift-card" th:style="${ann.priority == 'urgent'} ? 'border-color:#fca5a5' : (${ann.priority == 'high'} ? 'border-color:#fdba74' : '')">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
@@ -133,9 +168,10 @@
                         <div class="text-xs text-gray" th:text="${ann.createdAt}"></div>
                     </div>
                     <div th:if="${#lists.isEmpty(announcements)}" class="text-gray text-sm">Sem comunicados.</div>
-                </div></div>
+                </div>
+            </div>
         </div>
-    </div>
+
     </main>
 
 </div>
