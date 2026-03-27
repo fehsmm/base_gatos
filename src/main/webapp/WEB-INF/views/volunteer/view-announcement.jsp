@@ -89,10 +89,9 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-fluid px-4 py-4">
+        <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                <div class="page-title fw-bold"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                <div style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
                     <div class="page-title">Comunicados</div>
                     <p>
                     <div class="page-subtitle">Informações importantes para os voluntários.</div>

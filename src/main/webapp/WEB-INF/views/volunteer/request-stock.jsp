@@ -89,10 +89,9 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-fluid px-4 py-4">
+        <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                <div class="page-title fw-bold"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                <div style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
                     <h1>Pedir Stock</h1>
                     <p>Registe materiais em falta no abrigo para que possamos repor o mais rapidamente possível.</p>
                 </div>

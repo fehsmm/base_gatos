@@ -89,12 +89,12 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-fluid px-4 py-4">
+        <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                <div class="page-title fw-bold"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
-                    <h1 style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;font-weight:bold;">Notas do
-                        Turno</h1>
+                    <div class="page-title"
+                         style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
+                        Notas do Turno
+                    </div>
 
                     <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
                     <p></p>

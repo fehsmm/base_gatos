@@ -87,9 +87,12 @@
     </aside>
 
     <main class="flex-1 page">
-        <div class="container-sm">
-            <div class="text-center mb-8">
-                <div class="page-title">As Minhas Escalas</div>
+        <div class="container-fluid px-3 py-3">
+            <div class="mb-4">
+                <div class="page-title"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
+                    As Minhas Escalas
+                </div>
                 <div class="info-line">${user.username} &nbsp;•&nbsp; ${user.role}</div>
 
                 <%-- Cards de estatísticas --%>

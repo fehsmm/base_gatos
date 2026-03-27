@@ -90,33 +90,44 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-fluid px-4 py-4">
+        <div class="container-fluid px-3 py-3">
             <div class="mb-4">
                 <div class="page-title"
                      style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
                     Área do Voluntário
                 </div>
                 <p>
-                <div class="page-subtitle">Bem-vindo à tua área de trabalho.</div>
+                <div style="font-weight:normal;">Bem-vindo à tua área de trabalho.</div>
                 <div class="panel">
-                    <p>Nesta área podes consultar as tuas escalas, ver o teu turno atual, acompanhar comunicados,
+                    <p><div style="font-weight:normal;">Nesta área podes consultar as tuas escalas, ver o teu turno atual, acompanhar comunicados,
                         pedir
-                        stock e deixar notas do turno.</p>
+                    stock e deixar notas do turno.</div></p>
                 </div>
 
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div class="stat-number orange">1</div>
-                        <div>Turno Hoje</div>
+                <div class="card border-success mb-3" style="max-width: 30rem;">
+                    <div class="card-body text-success">
+                        <h5 class="card-title">Próximas Escalas</h5>
+                        <p class="card-text">Sei la contandor de qntas escalas faltam para o mes acabar</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number green">2</div>
-                        <div>Turnos Completos</div>
+                    <button type="button" class="btn btn-primary">Colocar Link p/ Escalas</button>
+                </div>
+
+                <div class="card border-success mb-3" style="max-width: 25rem;">
+                    <div class="card-body text-success">
+                        <h5 class="card-title">Success card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number blue">5</div>
-                        <div>Tarefas Realizadas</div>
+                    <button type="button" class="btn btn-primary">Guardar Notas</button>
+                </div>
+
+                <div class="card border-success mb-3" style="max-width: 25rem;">
+                    <div class="card-body text-success">
+                        <h5 class="card-title">Success card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
                     </div>
+                    <button type="button" class="btn btn-primary">Guardar Notas</button>
                 </div>
             </div>
         </div>

@@ -91,8 +91,8 @@
     <main class="flex-1 page">
         <div class="container-fluid px-4 py-4">
             <div class="mb-4">
-                <div class="page-title fw-bold"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
+                <div class="page-title"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
                     Turno Atual
                 </div>
                 <div class="page-subtitle"
