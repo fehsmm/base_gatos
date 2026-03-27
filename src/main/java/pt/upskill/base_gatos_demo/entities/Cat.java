@@ -1,13 +1,12 @@
 package pt.upskill.base_gatos_demo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "cat_list")
 public class Cat {
     @Id
     @GeneratedValue
@@ -21,7 +20,7 @@ public class Cat {
     private String status;
     private Date arrivalDate;
     private String description;
-    private List<String> tags;
+    private String tags;
 
     private boolean fiv;
     private boolean felv;
@@ -102,11 +101,11 @@ public class Cat {
         this.description = description;
     }
 
-    public List<String> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 
