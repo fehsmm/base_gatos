@@ -21,7 +21,7 @@
         </div>
 
         <!-- FILTERS -->
-        <form action="/gatos" method="get" style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
+        <form action="/public/cat-list" method="get" style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
             <div style="flex:1;min-width:200px">
                 <label>Estado de Adoção</label>
                 <select name="status" onchange="this.form.submit()">
@@ -55,20 +55,21 @@
                 <c:forEach items="${cats}" var="cat">
                     <div class="card cat-card">
                         <div class="cat-card-img-wrapper" style="position:relative;overflow:hidden">
-                            <img src="${cat.imageUrl}" alt="${cat.name}" style="width:100%;aspect-ratio:1;object-fit:cover;transition:transform .3s"/>
-                            <div class="cat-card-badge">
-                                <c:choose>
-                                    <c:when test="${cat.adoptionStatus == 'Disponível'}"><span class="badge badge-green">${cat.adoptionStatus}</span></c:when>
-                                    <c:when test="${cat.adoptionStatus == 'Em Processo'}"><span class="badge badge-yellow">${cat.adoptionStatus}</span></c:when>
-                                    <c:otherwise><span class="badge badge-gray">${cat.adoptionStatus}</span></c:otherwise>
-                                </c:choose>
-                            </div>
+                            <img src="${cat.image}" alt="${cat.name}" style="width:100%;aspect-ratio:1;object-fit:cover;transition:transform .3s"/>
+
                         </div>
                         <div class="card-body">
+                            <div class="cat-card-badge">
+                                <c:choose>
+                                    <c:when test="${cat.status == 'Disponível'}"><span class="badge badge-green">${cat.status}</span></c:when>
+                                    <c:when test="${cat.status == 'Em Processo'}"><span class="badge badge-yellow">${cat.status}</span></c:when>
+                                    <c:otherwise><span class="badge badge-gray">${cat.status}</span></c:otherwise>
+                                </c:choose>
+                            </div>
                             <h3>${cat.name}</h3>
                             <p class="text-sm mb-4">
-                                ${cat.formattedAge}
-                                • ${cat.gender}
+                                ${cat.estimatedAge}
+                                • ${cat.gender ? 'Macho' : 'Fêmea'}
                                 <br/>${cat.breed}
                             </p>
                             <p class="mb-4 text-sm">
@@ -78,9 +79,9 @@
                                 </c:choose>
                             </p>
                             <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
-                                <c:forEach items="${cat.personality}" var="trait">
-                                    <span class="badge badge-outline">${trait}</span>
-                                </c:forEach>
+                                <c:if test="${not empty cat.tags}">
+                                    <span class="badge badge-outline">${cat.tags}</span>
+                                </c:if>
                             </div>
                             <a href="public/cat-list${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
                         </div>
