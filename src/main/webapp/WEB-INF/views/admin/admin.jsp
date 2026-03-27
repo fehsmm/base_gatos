@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,20 +71,73 @@
 
     </aside>
 
-<main>
-    <div class="container">
-        <h2>Hello World</h2>
-        <p>Lorem ipsum etc etc etc</p>
+    <main class="admin-main">
+        <div style="padding:1.5rem">
+        <div class="mb-8">
+            <h1 style="margin-bottom:.25rem">
+                Área Administrativa
+            </h1>
+            <p>Visão geral do abrigo e atividades recentes</p>
+        </div>
+
+            <c:if test="${success != null}">
+                <div class="alert alert-success">${success}</div>
+            </c:if>
+
+        <!-- ALERTS -->
+        <div th:if="${pendingUsersCount > 0 or lowStockCount > 0}" style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+            <div th:if="${pendingUsersCount > 0}" class="alert alert-warning" style="flex:1;min-width:200px">
+                ⚠️ <span th:text="${pendingUsersCount}"></span> conta(s) pendente(s) de aprovação — <a th:href="@{/admin/utilizadores}" style="color:inherit;font-weight:600">Ver agora</a>
+            </div>
+            <div th:if="${lowStockCount > 0}" class="alert alert-error" style="flex:1;min-width:200px">
+                📦 <span th:text="${lowStockCount}"></span> item(ns) de stock abaixo do mínimo — <a th:href="@{/admin/stock}" style="color:inherit;font-weight:600">Ver agora</a>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="grid grid-4" style="gap:1rem;margin-bottom:2rem">
+            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Total de Gatos</p><p style="font-size:2rem;font-weight:700" th:text="${totalCats}"></p></div><div style="width:3rem;height:3rem;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">🐱</div></div></div>
+            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Disponíveis</p><p style="font-size:2rem;font-weight:700;color:#16a34a" th:text="${availableCount}"></p></div><div style="width:3rem;height:3rem;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">❤️</div></div></div>
+            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Voluntários</p><p style="font-size:2rem;font-weight:700;color:#7c3aed" th:text="${volunteersCount}"></p></div><div style="width:3rem;height:3rem;background:#f3e8ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">👥</div></div></div>
+            <div class="card"><div class="card-body" style="display:flex;align-items:center;justify-content:space-between"><div><p class="text-sm text-gray">Turnos Semana</p><p style="font-size:2rem;font-weight:700;color:#f97316" th:text="${shiftsCount}"></p></div><div style="width:3rem;height:3rem;background:#ffedd5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">📅</div></div></div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="card mb-6"><div class="card-header"><strong>⚡ Ações Rápidas</strong></div><div class="card-body">
+            <div class="grid grid-3" style="gap:.75rem">
+                <a th:href="@{/admin/gatos}" class="btn btn-outline">🐱 Adicionar Gato</a>
+                <a th:href="@{/admin/utilizadores}" class="btn btn-outline">👥 Gerir Utilizadores</a>
+                <a th:href="@{/admin/comunicados}" class="btn btn-outline">📢 Novo Comunicado</a>
+            </div>
+        </div></div>
+
+        <div class="grid grid-2" style="gap:1.5rem">
+            <!-- RECENT CATS -->
+            <div class="card"><div class="card-header" style="display:flex;justify-content:space-between;align-items:center"><strong>Gatos Recentes</strong><a th:href="@{/admin/gatos}" class="btn btn-ghost btn-sm">Ver Todos</a></div>
+                <div class="card-body" style="padding:0">
+                    <div th:each="cat : ${recentCats}" style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
+                        <img th:src="${cat.imageUrl}" th:alt="${cat.name}" class="avatar"/>
+                        <div style="flex:1"><div style="font-weight:500" th:text="${cat.name}"></div><div class="text-sm text-gray" th:text="${cat.breed}"></div></div>
+                        <span class="badge" th:classappend="${cat.adoptionStatus == 'Disponível'} ? 'badge-green' : (${cat.adoptionStatus == 'Em Processo'} ? 'badge-yellow' : 'badge-gray')" th:text="${cat.adoptionStatus}"></span>
+                    </div>
+                </div></div>
+
+            <!-- ANNOUNCEMENTS -->
+            <div class="card"><div class="card-header" style="display:flex;justify-content:space-between;align-items:center"><strong>Comunicados Recentes</strong><a th:href="@{/admin/comunicados}" class="btn btn-ghost btn-sm">Ver Todos</a></div>
+                <div class="card-body">
+                    <div th:each="ann : ${announcements}" class="shift-card" th:style="${ann.priority == 'urgent'} ? 'border-color:#fca5a5' : (${ann.priority == 'high'} ? 'border-color:#fdba74' : '')">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
+                            <div style="font-weight:500;font-size:.9rem" th:text="${ann.title}"></div>
+                            <span class="badge" th:classappend="${ann.priority == 'urgent'} ? 'badge-red' : (${ann.priority == 'high'} ? 'badge-orange' : (${ann.priority == 'normal'} ? 'badge-blue' : 'badge-gray'))" th:text="${ann.priority == 'urgent' ? 'Urgente' : (ann.priority == 'high' ? 'Alta' : (ann.priority == 'normal' ? 'Normal' : 'Baixa'))}"></span>
+                        </div>
+                        <div class="text-xs text-gray" th:text="${ann.createdAt}"></div>
+                    </div>
+                    <div th:if="${#lists.isEmpty(announcements)}" class="text-gray text-sm">Sem comunicados.</div>
+                </div></div>
+        </div>
     </div>
-    <div class="container">
-        <h2>Header 2</h2>
-        <p>Lorem ipsum etc etc etc</p>
-    </div>
-    <div class="container">
-        <h2>Header 3</h2>
-        <p>Lorem ipsum etc etc etc</p>
-    </div>
-</main>
+    </main>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
