@@ -47,7 +47,7 @@
                         <label class="remember">Lembrar-me</label>
                     </div>
 
-                    <a href="/auth/signup" class="link-passwd">Esqueceu a password?</a>
+                    <a href="/auth/forgotPassword" class="link-passwd">Esqueceu a password?</a>
                 </div>
 
 
@@ -63,7 +63,7 @@
                     Não tem conta?
                     <a href="/auth/signup" class="register">Registar</a>
                 </p>
-                <a href="#">Voltar ao site</a>
+                <a href="/public/home">Voltar ao site</a>
             </div>
         </div>
     </div>

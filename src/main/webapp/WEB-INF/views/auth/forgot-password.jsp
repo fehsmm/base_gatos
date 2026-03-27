@@ -5,12 +5,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        body {
-            background: navajowhite;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-    </style>
 
 <body>
 <%@ include file="../public/header.jsp" %>
@@ -24,7 +18,7 @@
                     <input class="mb-4" type="email" name="email" placeholder="seu@email.com"/></div>
                 <button type="submit" class="btn btn-primary btn-lg">Enviar Email de Recuperação</button>
             </form>
-            <div class="text-center mt-4"><a href="#" >Voltar ao Login</a></div>
+            <div class="text-center mt-4"><a href="/auth/login" >Voltar ao Login</a></div>
         </div>
     </div>
 </div>
