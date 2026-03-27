@@ -47,8 +47,8 @@ public class ShiftService {
 
     public void createShift(CreateShiftModel shiftModel) {
         Shift  shift = new Shift();
-        //falta a lista de voluntários
-        //falta a lista de tarefas
+        shift.setVolunteers(shiftModel.getVolunteers());
+        shift.setTasks(shiftModel.getTasks());
         shift.setDate(shiftModel.getDate());
         shift.setStartTime(shiftModel.getStartTime());
         shift.setEndTime(shiftModel.getEndTime());
@@ -57,8 +57,8 @@ public class ShiftService {
 
     public void updateShift(EditShiftModel model) {
         Shift shift = getById(model.getId());
-        //falta a lista de voluntários
-        //falta a lista de tarefas
+        shift.setVolunteers(model.getVolunteers());
+        shift.setTasks(model.getTasks());
         shift.setDate(model.getDate());
         shift.setStartTime(model.getStartTime());
         shift.setEndTime(model.getEndTime());

@@ -54,4 +54,5 @@ public class CreateShiftModel {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
 }
