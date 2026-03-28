@@ -114,7 +114,7 @@
         </c:if>
         </div>
 
-        <div class="card mb-6">
+        <div class="card mb-6" style="margin: 0 1.5rem; margin-bottom: 1.5rem;">
             <div class="card-header">
                 <strong>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg>
@@ -137,11 +137,11 @@
         </div>
         </div>
 
-        <div class="grid grid-2" style="gap:1.5rem">
+        <div class="grid grid-2" style="gap:1.5rem; padding: 0 1.5rem;">
 
             <div class="card">
                 <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
-                    <strong>Gatos Recentes</strong>
+                    <strong>Gatos Resgatados</strong>
                     <a href="/admin/manage-cat" class="btn btn-ghost btn-sm">Ver Todos</a>
                 </div>
 
@@ -160,6 +160,10 @@
                             </span>
                         </div>
                     </c:forEach>
+
+                    <c:if test="${empty cats}">
+                        <div class="text-gray text-sm">Sem gatos resgatados.</div>
+                    </c:if>
                 </div>
             </div>
 
