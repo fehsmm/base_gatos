@@ -1,4 +1,4 @@
-/*package pt.upskill.base_gatos_demo.services;
+package pt.upskill.base_gatos_demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,17 @@ public class StockService {
         return stockRepository.getReferenceById(id);
     }
 
-    public void updateStock(UpdateStockModel model) {
+    public int countLowStockItems() {
+        int lowStockItems = 0;
+        for(Stock item : stockRepository.findAll()) {
+            if(item.isLowStock()) {
+                lowStockItems++;
+            }
+        }
+        return lowStockItems;
+    }
+
+    /*public void updateStock(UpdateStockModel model) {
         Stock stock = getById(model.getId());
         stock.setQuantity(model.getQuantity());
         stockRepository.save(stock);
@@ -35,5 +45,5 @@ public class StockService {
     public void addStock(StockModel model) {
         Stock stock = getById(model.getId());
         stock.getQuantity();
-    }
-}*/
+    }*/
+}

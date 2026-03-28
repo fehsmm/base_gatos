@@ -16,6 +16,7 @@ public class User {
     private String role;
     private long telephone;
     private String address;
+    private boolean approved;
 
     public Long getId() {
         return id;
@@ -97,4 +98,11 @@ public class User {
         }
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }

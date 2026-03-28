@@ -25,6 +25,11 @@ public class AuthService {
         user.setPassword(encodedPassword);
 
         user.setRole(signUpModel.getRole());
+        if(signUpModel.getRole().equals("Volunteer")){
+            user.setApproved(false);
+        } else {
+            user.setApproved(true);
+        }
 
         return userRepository.save(user);
     }
@@ -40,6 +45,10 @@ public class AuthService {
         }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
+            return null;
+        }
+
+        if (!user.isApproved()) {
             return null;
         }
 

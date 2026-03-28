@@ -1,4 +1,4 @@
-/*package pt.upskill.base_gatos_demo.repositories;
+package pt.upskill.base_gatos_demo.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +13,4 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
 
 
 
-}*/
+}

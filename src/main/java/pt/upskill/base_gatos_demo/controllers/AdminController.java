@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pt.upskill.base_gatos_demo.entities.Shift;
-import pt.upskill.base_gatos_demo.entities.Task;
-import pt.upskill.base_gatos_demo.entities.User;
-import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
-import pt.upskill.base_gatos_demo.repositories.TaskRepository;
-import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.entities.*;
+import pt.upskill.base_gatos_demo.repositories.*;
+import pt.upskill.base_gatos_demo.services.StockService;
+import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,15 +25,34 @@ public class AdminController {
     UserRepository userRepository;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     ShiftRepository shiftRepository;
 
     @Autowired
-    TaskRepository taskRepository;
+    CatRepository catRepository;
+
+    @Autowired
+    StockService stockService;
+
+    @Autowired
+    StockRepository stockRepository;
+
+    @Autowired
+    AnnouncementRepository announcementRepository;
 
     @GetMapping(value="/")
-    public ModelAndView admin(){
-        ModelAndView mav = new ModelAndView("admin/admin");
-        return mav;
+    public String admin(Model model){
+        List<Cat> cats = catRepository.findAll();
+        int pendingApproval = userService.countPendingApproval();
+        int lowStock = stockService.countLowStockItems();
+        List<Announcement> announcements = announcementRepository.findAll();
+        model.addAttribute("cats", cats);
+        model.addAttribute("pendingUsersCount", pendingApproval);
+        model.addAttribute("lowStockCount", lowStock);
+        model.addAttribute("announcements", announcements);
+        return "admin/admin";
     }
 
     @GetMapping(value = "/manage-application")
@@ -43,15 +60,48 @@ public class AdminController {
 
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
-        List<User> volunteers = userRepository.findByRole("volunteer");
-        model.addAttribute("volunteers", volunteers);
-
+        List<User> volunteers = userRepository.findByRole("Volunteer");
         List<Shift> shifts = shiftRepository.findAll();
+        model.addAttribute("volunteers", volunteers);
         model.addAttribute("shifts", shifts);
         return "admin/manage-schedule";
     }
 
-    @PostMapping(value = "/manage-schedule")
+    @GetMapping(value = "/manage-stock")
+    public String manageStock(Model model){
+        List<Stock> stockList = stockRepository.findAll();
+        model.addAttribute("stockList", stockList);
+        return "admin/manage-stock";
+    }
+
+    @GetMapping(value = "/manage-user")
+    public String manageUser(Model model){
+        List<User> pendingUsers = userService.findPendingApproval();
+        model.addAttribute("pendingUsers", pendingUsers);
+        return "admin/manage-user";
+    }
+
+    @GetMapping(value = "/post-announcement")
+    public String postAnnouncement(Model model){
+        List<Announcement> announcements = announcementRepository.findAll();
+        model.addAttribute("announcements", announcements);
+        return "admin/post-announcement";
+    }
+
+    @GetMapping(value = "/vet")
+    public String viewClinicalInformation(){ return "admin/vet";}
+
+    @GetMapping(value = "/manage-cat")
+    public String manageCat(Model model){
+        List<Cat> cats = catRepository.findAll();
+        model.addAttribute("cats", cats);
+        return "admin/manage-cat";
+    }
+
+    @GetMapping(value = "/view-shift-note")
+    public String viewShiftNote(){return "admin/view-shift-note";}
+
+    /*@PostMapping(value = "/manage-schedule")
     public String createShift(
             @RequestParam("date") String date,
             @RequestParam("startTime") String startTime,
@@ -83,25 +133,7 @@ public class AdminController {
         }
 
         return "redirect:/admin/manage-schedule";
-    }
-
-    @GetMapping(value = "/manage-stock")
-    public String manageStock(){ return "admin/manage-stock";}
-
-    @GetMapping(value = "/manage-user")
-    public String manageUser(){ return "admin/manage-user";}
-
-    @GetMapping(value = "/post-announcement")
-    public String postAnnouncement(){ return "admin/post-announcement";}
-
-    @GetMapping(value = "/vet")
-    public String viewClinicalInformation(){ return "admin/vet";}
-
-    @GetMapping(value = "/manage-cat")
-    public String manageCat(){return "admin/manage-cat";}
-
-    @GetMapping(value = "/view-shift-note")
-    public String viewShiftNote(){return "admin/view-shift-note";}
+    }*/
 
     //post mapping add cat
     //post mapping edit cat

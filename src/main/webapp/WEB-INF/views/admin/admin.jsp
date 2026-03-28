@@ -142,11 +142,11 @@
             <div class="card">
                 <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
                     <strong>Gatos Recentes</strong>
-                    <a href="admin/manage-cat" class="btn btn-ghost btn-sm">Ver Todos</a>
+                    <a href="/admin/manage-cat" class="btn btn-ghost btn-sm">Ver Todos</a>
                 </div>
 
                 <div class="card-body" style="padding:0">
-                    <c:forEach var="cat" items="${recentCats}">
+                    <c:forEach var="cat" items="${cats}">
                         <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
                             <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
                             <div style="flex:1">
