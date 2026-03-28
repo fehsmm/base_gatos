@@ -93,16 +93,11 @@ public class CatService {
     }
 
     public List<Cat> listAllCats(String status, String gender) {
-        if (status != null && !status.equals("all") && gender != null && !gender.equals("all")) {
-            return catRepository.findByStatusAndGender(status, gender.equals("Macho"));
-        }
-        if (status != null && !status.equals("all")) {
-            return catRepository.findByStatus(status);
-        }
         if (gender != null && !gender.equals("all")) {
-            return catRepository.findByGender(gender.equals("Macho"));
+            return catRepository.findByStatusAndGender("Disponível", gender.equals("Macho"));
         }
-        return catRepository.findAll();
+        return catRepository.findByStatus("Disponível");
+
     }
 
 }
