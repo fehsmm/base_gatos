@@ -360,3 +360,13 @@ tr:hover td { background: #f9fafb; }
 .priority-high { border-color:#fdba74; background:#fffbf5; }
 .user-row { display:flex; align-items:center; justify-content:space-between; padding:.85rem 1rem; background:#f9fafb; border-radius:.5rem; margin-bottom:.5rem; flex-wrap:wrap; gap:.75rem; }
 .vet-stat { display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.25rem; }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body .btn-primary {
+    margin-top: auto;
+}

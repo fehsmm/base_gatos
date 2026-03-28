@@ -83,7 +83,7 @@
                                     <span class="badge badge-outline">${cat.tags}</span>
                                 </c:if>
                             </div>
-                            <a href="public/cat-list${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
+                            <a href="/public/cat-profile${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
                         </div>
                     </div>
                 </c:forEach>
