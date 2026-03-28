@@ -21,6 +21,45 @@
             <a href="/public/donate" class="btn btn-outline btn-lg" style="border-color:white;color:white">Fazer Donativo</a>
         </div>
     </div></section>
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="about-title">Sobre a Meg</h2>
+                    <p class="about-paragraph">
+                        Desde 2018, a Meg - Movimento Esterilização de Gatos de Lisboa -  dedica-se ao resgate, cuidado e reabilitação de gatos abandonados e maltratados. A nossa missão é proporcionar um ambiente seguro e amoroso enquanto procuramos o lar perfeito para cada felino.
+                    </p>
+                    <p class="about-paragraph">
+                        Com uma equipa dedicada de voluntários e apoio da comunidade, já ajudámos centenas de gatos a encontrar famílias que os amem incondicionalmente.
+                    </p>
+                    <a href="/public/adoption" class="btn-about">Saiba Mais Sobre Adoção →</a>
+                </div>
+
+                <div class="about-cards">
+                    <div class="about-card card-orange">
+                        <span class="card-icon"></span>
+                        <h3>Cuidado Veterinário</h3>
+                        <p>Todos os gatos são vacinados, esterilizados e tratados.</p>
+                    </div>
+                    <div class="about-card card-blue">
+                        <span class="card-icon"></span>
+                        <h3>Controle e cuidado</h3>
+                        <p>Cada gatinho fica identificado em nosso sistema.</p>
+                    </div>
+                    <div class="about-card card-green">
+                        <span class="card-icon"></span>
+                        <h3>Acompanhamento</h3>
+                        <p>Apoio contínuo após a adoção para garantir o sucesso.</p>
+                    </div>
+                    <div class="about-card card-purple">
+                        <span class="card-icon"></span>
+                        <h3>Dedicação</h3>
+                        <p>Voluntários comprometidos com respeito e amor pelos bichanos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
    <%-- <section style="background:white;padding:3rem 1.5rem"><div class="container">
         <div class="grid grid-4" style="gap:1.5rem">
@@ -32,7 +71,7 @@
     </div></section>--%>
 
     <section style="padding:4rem 1.5rem;background:white"><div class="container">
-        <div class="text-center mb-8"><h2 style="font-size:2rem">Conheça Alguns dos Nossos Gatos</h2><p>Estes adoráveis felinos estão à espera do seu lar para sempre</p></div>
+        <div class="text-center mb-8"><h2 style="font-size:2rem">Conheça o seu próximo gatinho!</h2><p>Estes adoráveis felinos estão à espera de um lar.</p></div>
         <div class="grid grid-3" style="gap:1.5rem">
             <c:forEach items="${featuredCats}" var="cat">
                 <div class="card cat-card">
