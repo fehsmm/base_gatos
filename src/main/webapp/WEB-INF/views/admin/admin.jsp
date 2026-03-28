@@ -147,39 +147,59 @@
 
                 <div class="card-body" style="padding:0">
                     <c:forEach var="cat" items="${recentCats}">
-                        <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6"></div>
-                        <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
-                        <div style="flex:1">
-                            <div style="font-weight:500">${cat.name}</div>
-                            <div class="text-sm text-gray">${cat.breed}</div>
+                        <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
+                            <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
+                            <div style="flex:1">
+                                <div style="font-weight:500">${cat.name}</div>
+                                <div class="text-sm text-gray">${cat.breed}</div>
+                            </div>
+                            <span class="badge
+                                    ${cat.status == 'Disponível' ? 'badge-green' :
+                                    (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
+                                    ${cat.status}
+                            </span>
                         </div>
-                        <span class="badge
-                                ${cat.status == 'Disponível' ? 'badge-green' :
-                                (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
-                                ${cat.status}</span>
-                    </div>
-
+                    </c:forEach>
                 </div>
             </div>
 
-            <!-- ANNOUNCEMENTS -->
             <div class="card">
                 <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
                     <strong>Comunicados Recentes</strong>
-                    <a th:href="@{/admin/comunicados}" class="btn btn-ghost btn-sm">Ver Todos</a>
+                    <a href="/admin/post-announcement" class="btn btn-ghost btn-sm">Ver Todos</a>
                 </div>
 
                 <div class="card-body">
-                    <div th:each="ann : ${announcements}" class="shift-card" th:style="${ann.priority == 'urgent'} ? 'border-color:#fca5a5' : (${ann.priority == 'high'} ? 'border-color:#fdba74' : '')">
-                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
-                            <div style="font-weight:500;font-size:.9rem" th:text="${ann.title}"></div>
-                            <span class="badge" th:classappend="${ann.priority == 'urgent'} ? 'badge-red' : (${ann.priority == 'high'} ? 'badge-orange' : (${ann.priority == 'normal'} ? 'badge-blue' : 'badge-gray'))" th:text="${ann.priority == 'urgent' ? 'Urgente' : (ann.priority == 'high' ? 'Alta' : (ann.priority == 'normal' ? 'Normal' : 'Baixa'))}"></span>
+                    <c:forEach var="ann" items="${announcements}">
+                        <div class="shift-card"
+                             style="${ann.priority == 'urgent' ? 'border-color:#fca5a5' :
+                             (ann.priority == 'high' ? 'border-color:#fdba74' : '')}">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
+                                <div style="font-weight:500;font-size:.9rem">
+                                        ${ann.title}
+                                </div>
+                                <span class="badge
+                                    ${ann.priority == 'urgent' ? 'badge-red' :
+                                      (ann.priority == 'high' ? 'badge-orange' :
+                                      (ann.priority == 'normal' ? 'badge-blue' : 'badge-gray'))}">
+
+                                        ${ann.priority == 'urgent' ? 'Urgente' :
+                                                (ann.priority == 'high' ? 'Alta' :
+                                                        (ann.priority == 'normal' ? 'Normal' : 'Baixa'))}
+                                </span>
+                            </div>
+                            <div class="text-xs text-gray">
+                                    ${ann.createdAt}
+                            </div>
                         </div>
-                        <div class="text-xs text-gray" th:text="${ann.createdAt}"></div>
-                    </div>
-                    <div th:if="${#lists.isEmpty(announcements)}" class="text-gray text-sm">Sem comunicados.</div>
+                    </c:forEach>
+
+                    <c:if test="${empty announcements}">
+                        <div class="text-gray text-sm">Sem comunicados.</div>
+                    </c:if>
                 </div>
             </div>
+
         </div>
 
     </main>
