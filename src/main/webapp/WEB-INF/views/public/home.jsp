@@ -22,14 +22,14 @@
         </div>
     </div></section>
 
-    <section style="background:white;padding:3rem 1.5rem"><div class="container">
+   <%-- <section style="background:white;padding:3rem 1.5rem"><div class="container">
         <div class="grid grid-4" style="gap:1.5rem">
             <div class="stat-card"><div class="stat-icon" style="background:#fff7ed"></div><div class="stat-value">150+</div><div class="stat-label">Gatos Resgatados</div></div>
             <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4"></div><div class="stat-value">98</div><div class="stat-label">Adoções Realizadas</div></div>
             <div class="stat-card"><div class="stat-icon" style="background:#eff6ff"></div><div class="stat-value">25</div><div class="stat-label">Voluntários Ativos</div></div>
             <div class="stat-card"><div class="stat-icon" style="background:#faf5ff"></div><div class="stat-value">8</div><div class="stat-label">Anos de Atividade</div></div>
         </div>
-    </div></section>
+    </div></section>--%>
 
     <section style="padding:4rem 1.5rem;background:white"><div class="container">
         <div class="text-center mb-8"><h2 style="font-size:2rem">Conheça Alguns dos Nossos Gatos</h2><p>Estes adoráveis felinos estão à espera do seu lar para sempre</p></div>
