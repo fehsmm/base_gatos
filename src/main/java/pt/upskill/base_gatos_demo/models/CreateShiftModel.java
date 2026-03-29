@@ -1,5 +1,6 @@
 package pt.upskill.base_gatos_demo.models;
 
+import pt.upskill.base_gatos_demo.entities.Schedule;
 import pt.upskill.base_gatos_demo.entities.Task;
 import pt.upskill.base_gatos_demo.entities.User;
 
@@ -10,10 +11,11 @@ import java.util.List;
 public class CreateShiftModel {
 
     private LocalDate date;
-    private List<User> volunteers;
+    private List<Long> volunteerIds;
     private List<Task> tasks;
     private LocalTime startTime;
     private LocalTime endTime;
+    private Schedule schedule;
 
     public LocalDate getDate() {
         return date;
@@ -39,14 +41,6 @@ public class CreateShiftModel {
         this.endTime = endTime;
     }
 
-    public List<User> getVolunteers() {
-        return volunteers;
-    }
-
-    public void setVolunteers(List<User> volunteers) {
-        this.volunteers = volunteers;
-    }
-
     public List<Task> getTasks() {
         return tasks;
     }
@@ -55,4 +49,19 @@ public class CreateShiftModel {
         this.tasks = tasks;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public List<Long> getVolunteerIds() {
+        return volunteerIds;
+    }
+
+    public void setVolunteerIds(List<Long> volunteerIds) {
+        this.volunteerIds = volunteerIds;
+    }
 }

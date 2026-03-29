@@ -76,4 +76,12 @@ public class Shift {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
 }

@@ -304,6 +304,19 @@ tr:hover td { background: #f9fafb; }
     padding: 1.75rem;
     margin: 1rem;
 }
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    color: black;
+    pointer-events: auto;
+    background-color: white;
+    background-clip: padding-box;
+    border-radius: 20px;
+    padding: 20px;
+    outline: 0;
+}
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .modal-close { background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #6b7280; }
 .modal-close:hover { color: #111827; }

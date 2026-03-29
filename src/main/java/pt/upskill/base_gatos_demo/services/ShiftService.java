@@ -3,11 +3,15 @@ package pt.upskill.base_gatos_demo.services;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pt.upskill.base_gatos_demo.entities.Schedule;
 import pt.upskill.base_gatos_demo.entities.Shift;
+import pt.upskill.base_gatos_demo.entities.Task;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.models.EditShiftModel;
+import pt.upskill.base_gatos_demo.repositories.ScheduleRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
+import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +25,12 @@ public class ShiftService {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    ScheduleRepository scheduleRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public List<Shift> getShifts(@Nullable LocalDate date) {
         User user = authService.getAuthenticatedUser();
@@ -47,8 +57,16 @@ public class ShiftService {
 
     public void createShift(CreateShiftModel shiftModel) {
         Shift  shift = new Shift();
-        shift.setVolunteers(shiftModel.getVolunteers());
-        shift.setTasks(shiftModel.getTasks());
+        Schedule schedule = scheduleRepository.findByDate(shiftModel.getDate());
+        shift.setSchedule(schedule);
+        List<User> volunteers = userRepository.findAllById(shiftModel.getVolunteerIds());
+        shift.setVolunteers(volunteers);
+        if (shiftModel.getTasks() != null) {
+            for (Task task : shiftModel.getTasks()) {
+                task.setShift(shift);
+            }
+            shift.setTasks(shiftModel.getTasks());
+        }
         shift.setDate(shiftModel.getDate());
         shift.setStartTime(shiftModel.getStartTime());
         shift.setEndTime(shiftModel.getEndTime());

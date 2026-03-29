@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pt.upskill.base_gatos_demo.entities.*;
+import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.repositories.*;
+import pt.upskill.base_gatos_demo.services.ScheduleService;
+import pt.upskill.base_gatos_demo.services.ShiftService;
 import pt.upskill.base_gatos_demo.services.StockService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -42,6 +46,14 @@ public class AdminController {
     @Autowired
     AnnouncementRepository announcementRepository;
 
+    @Autowired
+    ScheduleRepository scheduleRepository;
+
+    @Autowired
+    ScheduleService scheduleService;
+    @Autowired
+    private ShiftService shiftService;
+
     @GetMapping(value="/")
     public String admin(Model model){
         List<Cat> cats = catRepository.findAll();
@@ -60,10 +72,14 @@ public class AdminController {
 
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
+        List<Shift> shifts = shiftService.getShifts(LocalDate.now());
+        Schedule schedule = scheduleService.getSchedule(LocalDate.now());
+        //Map<String, List<Shift>> groupedShifts = scheduleService.groupShifts(schedule);
         List<User> volunteers = userRepository.findByRole("Volunteer");
-        List<Shift> shifts = shiftRepository.findAll();
-        model.addAttribute("volunteers", volunteers);
         model.addAttribute("shifts", shifts);
+        model.addAttribute("schedule", schedule);
+        //model.addAttribute("groupedShifts", groupedShifts);
+        model.addAttribute("volunteers", volunteers);
         return "admin/manage-schedule";
     }
 
@@ -101,45 +117,15 @@ public class AdminController {
     @GetMapping(value = "/view-shift-note")
     public String viewShiftNote(){return "admin/view-shift-note";}
 
-    /*@PostMapping(value = "/manage-schedule")
-    public String createShift(
-            @RequestParam("date") String date,
-            @RequestParam("startTime") String startTime,
-            @RequestParam("endTime") String endTime,
-            @RequestParam("volunteerIds") List<Long> volunteerIds,
-            @RequestParam(value = "taskDescriptions", required = false) List<String> taskDescriptions
-    ){
-        Shift shift = new Shift();
-        shift.setDate(LocalDate.parse(date));
-        shift.setStartTime(LocalTime.parse(startTime));
-        shift.setEndTime(LocalTime.parse(endTime));
-
-        // Associar voluntários
-        List<User> volunteers = userRepository.findAllById(volunteerIds);
-        shift.setVolunteers(volunteers);
-
-        shiftRepository.save(shift);
-
-        // Criar tarefas
-        if (taskDescriptions != null) {
-            for (String desc : taskDescriptions) {
-                if (desc != null && !desc.trim().isEmpty()) {
-                    Task task = new Task();
-                    task.setDescription(desc.trim());
-                    task.setShift(shift);
-                    taskRepository.save(task);
-                }
-            }
-        }
-
+    @PostMapping(value = "/create-shift")
+    public String createShift(CreateShiftModel model){
+        shiftService.createShift(model);
         return "redirect:/admin/manage-schedule";
-    }*/
+    }
 
     //post mapping add cat
     //post mapping edit cat
     //perguntat sobre eliminar gato
-
-    //post mapping criar escala
 
     //post mapping aceitar/rejeitar voluntarios
     //eliminar user

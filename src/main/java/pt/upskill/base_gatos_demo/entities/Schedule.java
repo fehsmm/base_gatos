@@ -16,8 +16,7 @@ public class Schedule {
 
     @OneToMany (mappedBy = "schedule") //relação gerida pelo schedule na classe shift
     private List<Shift> shifts;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDate date;
 
     public Long getId() {
         return id;
@@ -35,19 +34,11 @@ public class Schedule {
         this.shifts = shifts;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
