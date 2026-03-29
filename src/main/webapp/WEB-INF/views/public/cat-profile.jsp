@@ -13,50 +13,46 @@
 <body class="flex flex-col min-h-screen">
 <%@ include file="header.jsp" %>
 
-<main class="flex-1 page" style="padding: 2rem 0;">
+<main class="flex-1 page">
 
-    <div class="container-sm" style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
+    <div class="container-sm">
 
-        <a href="/public/cat-list" class="btn btn-ghost btn-sm mb-6" style="text-decoration: none; color: #6b7280;">← Voltar à Lista</a>
+        <a href="/public/cat-list" class="btn btn-ghost btn-sm mb-6">← Voltar à Lista</a>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start; margin-top: 1rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
 
             <div style="position:relative">
-                <img src="${not empty cat.image ? cat.image : '/images/default-cat.png'}"
-                     alt="${cat.name}"
-                     style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);"/>
+                <img src="${cat.image}" alt="${cat.name}"
+                     style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:.75rem"/>
 
-                <div style="position:absolute; top:1rem; right:1rem">
-                    <c:choose>
-                        <c:when test="${cat.status == 'Disponível'}">
-                            <span class="badge badge-green">${cat.status}</span>
-                        </c:when>
-                        <c:when test="${cat.status == 'Em Processo'}">
-                            <span class="badge badge-yellow">${cat.status}</span>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="badge badge-gray">${cat.status}</span>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+                <c:choose>
+                    <c:when test="${cat.status == 'Disponível'}">
+                        <span class="badge badge-green" style="position:absolute;top:1rem;right:1rem">${cat.status}</span>
+                    </c:when>
+                    <c:when test="${cat.status == 'Em Processo'}">
+                        <span class="badge badge-yellow" style="position:absolute;top:1rem;right:1rem">${cat.status}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="badge badge-gray" style="position:absolute;top:1rem;right:1rem">${cat.status}</span>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
             <div>
-                <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">${cat.name}</h1>
-
+                <h1>${cat.name}</h1>
                 <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem">
                     <c:forEach items="${cat.tags}" var="trait">
                         <span class="badge badge-outline">${trait}</span>
                     </c:forEach>
                 </div>
 
-                <div class="card mb-4" style="border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1.5rem;">
-                    <div class="card-header" style="background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+                <div class="card mb-4">
+                    <div class="card-header">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-280h80v-240h-80v240Zm68.5-331.5Q520-623 520-640t-11.5-28.5Q497-680 480-680t-28.5 11.5Q440-657 440-640t11.5 28.5Q463-600 480-600t28.5-11.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
                         <strong>Informação Básica</strong>
                     </div>
-                    <div class="card-body" style="padding: 1rem;">
-                        <table style="width:100%; border-collapse: collapse;">
+                    <div class="card-body">
+                        <table style="width:100%">
                             <tr><td style="color:#6b7280;padding:.4rem 0">Idade:</td>
                                 <td style="text-align:right;font-weight:500">${cat.estimatedAge}</td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Género:</td>
@@ -75,30 +71,28 @@
                                 </td>
                             </tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Data de Chegada:</td>
-                                <td style="text-align:right;font-weight:500">
-                                    <fmt:formatDate value="${cat.arrivalDate}" pattern="dd/MM/yyyy"/>
-                                </td>
+                                <td style="text-align:right;font-weight:500">${cat.arrivalDate}</td>
                             </tr>
                         </table>
                     </div>
                 </div>
 
-                <div class="card mb-4" style="border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1.5rem;">
-                    <div class="card-header" style="background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+                <div class="card mb-4">
+                    <div class="card-header">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm457-560 21-89-71-59 94-8 36-84 36 84 94 8-71 59 21 89-80-47-80 47ZM480-481Z"/></svg>
                         <strong>Sobre ${cat.name}</strong>
                     </div>
-                    <div class="card-body" style="padding: 1rem;">
-                        <p style="line-height: 1.6; color: #374151;">${cat.description}</p>
+                    <div class="card-body">
+                        <p>${cat.description}</p>
                     </div>
                 </div>
 
-                <div class="card mb-4" style="border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1.5rem;">
-                    <div class="card-header" style="background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+                <div class="card mb-4">
+                    <div class="card-header">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M300-840q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 5-.5 10t-.5 10h-80q1-5 1-10v-10q0-60-40-100t-100-40q-47 0-87 26.5T518-666h-76q-15-41-55-67.5T300-760q-60 0-100 40t-40 100v10q0 5 1 10H81q0-5-.5-10t-.5-10q0-94 63-157t157-63Zm-88 480h112q32 31 70 67t86 79q48-43 86-79t70-67h113q-38 42-90 91T538-158l-58 52-58-52q-69-62-120.5-111T212-360Zm230 40q13 0 22.5-7.5T478-347l54-163 35 52q5 8 14 13t19 5h320v-80H623l-69-102q-6-9-15.5-13.5T518-640q-13 0-22.5 7.5T482-613l-54 162-34-51q-5-8-14-13t-19-5H40v80h297l69 102q6 9 15.5 13.5T442-320Zm38-167Z"/></svg>
-                        <strong>Saúde e Cuidados</strong>
+                        <strong> Saúde</strong>
                     </div>
-                    <div class="card-body" style="padding: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div class="card-body">
                         <table style="width:100%">
                             <tr><td style="color:#6b7280;padding:.4rem 0">Vacinação:</td>
                                 <td style="text-align:right">
