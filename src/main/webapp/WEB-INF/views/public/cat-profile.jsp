@@ -17,7 +17,7 @@
 
     <div class="container-sm" style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
 
-        <a href="public/cat-list" class="btn btn-ghost btn-sm mb-6" style="text-decoration: none; color: #6b7280;">← Voltar à Lista</a>
+        <a href="/public/cat-list" class="btn btn-ghost btn-sm mb-6" style="text-decoration: none; color: #6b7280;">← Voltar à Lista</a>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start; margin-top: 1rem;">
 
