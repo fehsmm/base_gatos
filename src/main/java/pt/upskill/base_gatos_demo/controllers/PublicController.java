@@ -27,12 +27,21 @@ public class PublicController {
     @GetMapping(value = "/cat-list")
     public String catList(Model model,
                           @RequestParam(required = false, defaultValue = "all") String status,
-                          @RequestParam(required = false, defaultValue = "all") String gender) {
+                          @RequestParam(required = false, defaultValue = "all") String gender,
+                          //@RequestParam(required = false) String status,
+                          //@RequestParam(required = false) String gender,
+                          @RequestParam(required = false) boolean vaccination,
+                          @RequestParam(required = false) boolean sterilization,
+                          @RequestParam(required = false) boolean health) {
         List<Cat> cats = catService.listAllCats(status, gender);
+        //List<Cat> cats = catService.listCats(status, gender, vaccination, sterilization, health);
         model.addAttribute("cats", cats);
         model.addAttribute("totalResults", cats.size());
         model.addAttribute("selectedStatus", status);
         model.addAttribute("selectedGender", gender);
+        model.addAttribute("selectedVaccination", vaccination);
+        model.addAttribute("selectedSterilization", sterilization);
+        model.addAttribute("selectedHealth", health);
         return "public/cat-list";
     }
 
