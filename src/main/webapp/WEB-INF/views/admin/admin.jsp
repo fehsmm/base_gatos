@@ -204,6 +204,35 @@
                 </div>
             </div>
 
+            <c:if test="${pendingUsersCount > 0 || lowStockCount > 0}">
+                <div style="padding: 0 1.5rem; margin-top:1.5rem;">
+                    <div class="alert alert-warning">
+                        <strong>Atenção Necessária</strong>
+                        <ul style="margin-top:.5rem; padding-left:1.25rem;">
+
+                            <c:if test="${pendingUsersCount > 0}">
+                                <li>${pendingUsersCount} utilizador(es) pendente(s) de aprovação</li>
+                                <a href="/admin/manage-user">Ver</a>
+                            </c:if>
+
+                            <c:if test="${lowStockCount > 0}">
+                                <li>${lowStockCount} item(ns) com stock baixo</li>
+                                <a href="/admin/manage-stock">Ver</a>
+                            </c:if>
+
+                        </ul>
+                    </div>
+                </div>
+            </c:if>
+
+            <c:if test="${pendingUsersCount == 0 && lowStockCount == 0}">
+                <div style="padding: 0 1.5rem; margin-top:1.5rem;">
+                    <div class="alert alert-success">
+                        ✔ Tudo agendado no abrigo, sem ações necessárias.
+                    </div>
+                </div>
+            </c:if>
+
         </div>
 
     </main>
