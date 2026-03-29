@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pt.upskill.base_gatos_demo.entities.Cat;
@@ -40,8 +41,14 @@ public class PublicController {
         return "public/adoption";
     }
 
-    @GetMapping(value = "/cat-profile")
-    public String catProfile(){
+    @GetMapping(value="/cat-profile/{id}")
+    public String catProfile(@PathVariable("id") Long id, Model model) {
+        Cat cat = catService.getById(id);
+
+        if (cat == null) {
+            return "redirect:/public/cat-list";
+        }
+        model.addAttribute("cat", cat);
         return "public/cat-profile";
     }
 

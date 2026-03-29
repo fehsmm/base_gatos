@@ -47,7 +47,7 @@ public class CatService {
     }
 
     public Cat getById(Long id) {
-        return catRepository.getReferenceById(id);
+        return catRepository.findById(id).orElse(null);
     }
 
     public void createCat(CreateCatModel model) {
