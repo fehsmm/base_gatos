@@ -14,6 +14,8 @@ import pt.upskill.base_gatos_demo.services.StockService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +42,10 @@ public class AdminController {
     AnnouncementRepository announcementRepository;
 
     @Autowired
-    private ShiftService shiftService;
+    ShiftService shiftService;
+
+    @Autowired
+    ShiftRepository shiftRepository;
 
     @GetMapping(value="/")
     public String admin(Model model){
@@ -60,12 +65,29 @@ public class AdminController {
 
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
-        List<Shift> shifts = shiftService.getShifts(LocalDate.now());
-        Map<LocalDate, List<Shift>> groupedShifts = shiftService.getShiftsGroupedByDate();
+        LocalDate today = LocalDate.now();
+        Map<LocalDate, List<Shift>> shiftsByDay = new LinkedHashMap<>();
+        for (int i = 0; i < 7; i++) {
+            LocalDate date = today.plusDays(i);
+            List<Shift> shifts = shiftRepository.findByDate(date);
+            shiftsByDay.put(date, shifts);
+        }
+        List<Shift> shifts = shiftRepository.findAll();
         List<User> volunteers = userRepository.findByRole("Volunteer");
-        model.addAttribute("shifts", shifts);
-        model.addAttribute("groupedShifts", groupedShifts);
+        Map<Long, Integer> completedTasks = new HashMap<>();
+        Map<Long, Integer> totalTasks = new HashMap<>();
+        for (List<Shift> shiftList : shiftsByDay.values()) {
+            for (Shift shift : shiftList) {
+                completedTasks.put(shift.getId(), shiftService.getCompletedTasksCount(shift));
+                totalTasks.put(shift.getId(), shiftService.getTotalTasksCount(shift));
+            }
+        }
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("shiftsByDay", shiftsByDay);
         model.addAttribute("volunteers", volunteers);
+        model.addAttribute("shifts", shifts);
+        model.addAttribute("completedMap", completedTasks);
+        model.addAttribute("totalMap", totalTasks);
         return "admin/manage-schedule";
     }
 

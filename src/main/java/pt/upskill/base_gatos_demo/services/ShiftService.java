@@ -14,6 +14,7 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,13 +50,25 @@ public class ShiftService {
         return new ArrayList<>();
     }
 
-    public Map<LocalDate, List<Shift>> getShiftsGroupedByDate() {
-        List<Shift> shifts = shiftRepository.findAll();
-        return shifts.stream()
-                .collect(Collectors.groupingBy(Shift::getDate));
+    public int getCompletedTasksCount(Shift shift) {
+        int completedTasks = 0;
+        for (Task task : shift.getTasks()) {
+            if (task.isCompleted()) {
+                completedTasks++;
+            }
+        }
+        return completedTasks;
     }
 
-    private Shift getById(Long id) {
+    public int getTotalTasksCount(Shift shift) {
+        if (shift.getTasks() == null) {
+            return 0;
+        } else {
+            return shift.getTasks().size();
+        }
+    }
+
+    public Shift getById(Long id) {
         return  shiftRepository.getReferenceById(id);
     }
 

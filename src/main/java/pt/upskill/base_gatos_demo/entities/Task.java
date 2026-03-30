@@ -17,6 +17,7 @@ public class Task {
     private String title;
     private String description;
     private LocalTime time;
+    private boolean completed;
 
     public Long getId() {
         return id;
@@ -56,5 +57,13 @@ public class Task {
 
     public void setShift(Shift shift) {
         this.shift = shift;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

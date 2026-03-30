@@ -7,6 +7,7 @@ public class AddTaskModel {
     private String title;
     private String description;
     private LocalTime time;
+    private boolean completed;
 
     public String getTitle() {
         return title;
@@ -30,5 +31,13 @@ public class AddTaskModel {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
