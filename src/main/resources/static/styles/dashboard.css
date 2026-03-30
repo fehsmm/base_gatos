@@ -309,6 +309,7 @@ tr:hover td { background: #f9fafb; }
     display: flex;
     flex-direction: column;
     width: 60%;
+    height: 90%;
     color: black;
     pointer-events: auto;
     background-color: white;

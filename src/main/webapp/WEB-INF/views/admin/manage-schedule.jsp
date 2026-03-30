@@ -145,7 +145,7 @@
 
                         <div class="shift-card">
 
-                            <div class="d-flex justify-content-between mb-2">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
                                 <div>
 
                                     <strong>
@@ -160,6 +160,26 @@
                                         ${vol.name}<br/>
                                     </c:forEach>
                                 </span>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            onclick="editShift(${shift.id})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
+                                    </button>
+
+                                    <form action="/admin/delete-shift" method="POST"
+                                          onsubmit="return confirm('Tem a certeza que quer eliminar este turno?')">
+
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <input type="hidden" name="shiftId" value="${shift.id}"/>
+
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                        </button>
+
+                                    </form>
+
                                 </div>
                             </div>
 
@@ -234,7 +254,7 @@
             </button>
         </div>
 
-        <form action="/admin/create-shift" method="POST" style="overflow-y: scroll; scrollbar-width: thin; padding: 10px;">
+        <form action="/admin/create-shift" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
@@ -315,6 +335,10 @@
         document.getElementById("addShiftModal").classList.remove("open");
     }
 
+    /*function editShift(Long id) {
+
+    }*/
+
     /*let taskIndex = 0;
 
     function addTask() {
@@ -333,7 +357,8 @@
         div.innerHTML = `
         <div>
             <strong>${title}</strong>
-            <div style="font-size:12px">${desc || ''}</div>
+            <div style="font-size:12px">${desc ? desc : ''}</div>
+            <div style="font-size:12px">JH</div>
         </div>
         <button type="button" onclick="removeTask(this, ${taskIndex})">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
