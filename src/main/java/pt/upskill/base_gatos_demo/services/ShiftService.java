@@ -3,19 +3,20 @@ package pt.upskill.base_gatos_demo.services;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pt.upskill.base_gatos_demo.entities.Schedule;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.Task;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.AddTaskModel;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.models.EditShiftModel;
-import pt.upskill.base_gatos_demo.repositories.ScheduleRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ShiftService {
@@ -25,9 +26,6 @@ public class ShiftService {
 
     @Autowired
     AuthService authService;
-
-    @Autowired
-    ScheduleRepository scheduleRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -51,25 +49,34 @@ public class ShiftService {
         return new ArrayList<>();
     }
 
+    public Map<LocalDate, List<Shift>> getShiftsGroupedByDate() {
+        List<Shift> shifts = shiftRepository.findAll();
+        return shifts.stream()
+                .collect(Collectors.groupingBy(Shift::getDate));
+    }
+
     private Shift getById(Long id) {
         return  shiftRepository.getReferenceById(id);
     }
 
     public void createShift(CreateShiftModel shiftModel) {
         Shift  shift = new Shift();
-        Schedule schedule = scheduleRepository.findByDate(shiftModel.getDate());
-        shift.setSchedule(schedule);
         List<User> volunteers = userRepository.findAllById(shiftModel.getVolunteerIds());
         shift.setVolunteers(volunteers);
-        if (shiftModel.getTasks() != null) {
-            for (Task task : shiftModel.getTasks()) {
-                task.setShift(shift);
-            }
-            shift.setTasks(shiftModel.getTasks());
-        }
         shift.setDate(shiftModel.getDate());
         shift.setStartTime(shiftModel.getStartTime());
         shift.setEndTime(shiftModel.getEndTime());
+        List<Task> tasks = new ArrayList<>();
+        if (shiftModel.getTasks() != null) {
+            for (AddTaskModel t : shiftModel.getTasks()) {
+                Task task = new Task();
+                task.setTitle(t.getTitle());
+                task.setDescription(t.getDescription());
+                task.setShift(shift);
+                tasks.add(task);
+            }
+        }
+        shift.setTasks(tasks);
         shiftRepository.save(shift);
     }
 

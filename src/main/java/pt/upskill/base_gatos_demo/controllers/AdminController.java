@@ -6,18 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.repositories.*;
-import pt.upskill.base_gatos_demo.services.ScheduleService;
 import pt.upskill.base_gatos_demo.services.ShiftService;
 import pt.upskill.base_gatos_demo.services.StockService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +28,6 @@ public class AdminController {
     UserService userService;
 
     @Autowired
-    ShiftRepository shiftRepository;
-
-    @Autowired
     CatRepository catRepository;
 
     @Autowired
@@ -46,11 +39,6 @@ public class AdminController {
     @Autowired
     AnnouncementRepository announcementRepository;
 
-    @Autowired
-    ScheduleRepository scheduleRepository;
-
-    @Autowired
-    ScheduleService scheduleService;
     @Autowired
     private ShiftService shiftService;
 
@@ -73,12 +61,10 @@ public class AdminController {
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
         List<Shift> shifts = shiftService.getShifts(LocalDate.now());
-        Schedule schedule = scheduleService.getSchedule(LocalDate.now());
-        //Map<String, List<Shift>> groupedShifts = scheduleService.groupShifts(schedule);
+        Map<LocalDate, List<Shift>> groupedShifts = shiftService.getShiftsGroupedByDate();
         List<User> volunteers = userRepository.findByRole("Volunteer");
         model.addAttribute("shifts", shifts);
-        model.addAttribute("schedule", schedule);
-        //model.addAttribute("groupedShifts", groupedShifts);
+        model.addAttribute("groupedShifts", groupedShifts);
         model.addAttribute("volunteers", volunteers);
         return "admin/manage-schedule";
     }

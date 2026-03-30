@@ -211,7 +211,7 @@
             </button>
         </div>
 
-        <form action="/admin/create-shift" method="post" style="overflow-y: scroll; scrollbar-width: thin; padding: 10px;">
+        <form action="/admin/create-shift" method="POST" style="overflow-y: scroll; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
@@ -278,18 +278,53 @@
 </div>
 
 <script>
-    let taskIndex = 0;
+    /*let taskIndex = 0;
     function addTask() {
-        const container = document.getElementById('tasks-container');
-        const html = `
-        <div class="border p-2 mb-2 rounded">
-            <input type="text" name="tasks[${taskIndex}].title"
-                   placeholder="Título" class="form-control mb-1" required>
-            <input type="text" name="tasks[${taskIndex}].description"
-                   placeholder="Descrição" class="form-control">
-        </div>`;
-        container.insertAdjacentHTML('beforeend', html);
+        const titleInput = document.getElementById("taskTitleInput");
+        const descInput = document.getElementById("taskDescInput");
+        const title = titleInput.value.trim();
+        const desc = descInput.value.trim();
+        if (!title) {
+            alert("O título da tarefa é obrigatório");
+            return;
+        }
+        const taskList = document.getElementById("tasksList");
+        const taskItem = document.createElement("div");
+        taskItem.className = "border rounded p-2 mb-2 d-flex justify-content-between";
+        taskItem.innerHTML = `
+            <div style="flex:1">
+                <div style="font-weight:600">${title}</div>
+                <div style="font-size:12px;color:#6b7280">${desc || ''}</div>
+            </div>
+            <button type="button" onclick="removeTask(this, ${taskIndex})"
+                style="background:#ef4444;color:white;border:none;padding:4px 8px;border-radius:4px;">
+                X
+            </button>
+        `;
+        taskList.appendChild(taskItem);
+        const hiddenContainer = document.getElementById("taskHiddenInputs");
+        hiddenContainer.insertAdjacentHTML('beforeend', `
+        <input type="hidden" name="tasks[${taskIndex}].title" value="${title}">
+        <input type="hidden" name="tasks[${taskIndex}].description" value="${desc}">
+    `);
         taskIndex++;
+        titleInput.value = "";
+        descInput.value = "";
+    }
+
+    function removeTask(button, index) {
+        button.parentElement.remove();
+        const hiddenContainer = document.getElementById("taskHiddenInputs");
+        const inputs = hiddenContainer.querySelectorAll(`[name^="tasks[${index}]"]`);
+        inputs.forEach(i => i.remove());
+    }*/
+
+    function closeModal() {
+        document.getElementById('addShiftModal').classList.remove('open');
+        document.querySelector("#addShiftModal form").reset();
+        document.getElementById("tasksList").innerHTML = "";
+        document.getElementById("taskHiddenInputs").innerHTML = "";
+        taskIndex = 0;
     }
 </script>
 

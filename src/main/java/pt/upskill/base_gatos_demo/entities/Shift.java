@@ -12,9 +12,6 @@ public class Shift {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
     @ManyToMany
     @JoinTable(
             name = "shift_volunteers",
@@ -77,11 +74,4 @@ public class Shift {
         this.tasks = tasks;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
 }
