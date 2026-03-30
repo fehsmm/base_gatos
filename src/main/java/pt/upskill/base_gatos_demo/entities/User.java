@@ -90,7 +90,7 @@ public class User {
     }
 
     public boolean isAdmin() {
-        if(role == "Admin") {
+        if(role.equals("ADMIN")) {
             return true;
         } else {
             return false;
@@ -98,7 +98,7 @@ public class User {
     }
 
     public boolean isVolunteer() {
-        if(role == "Volunteer"){
+        if(role.equals("VOLUNTEER")){
             return true;
         } else {
             return false;
@@ -106,7 +106,7 @@ public class User {
     }
 
     public boolean isAdopter() {
-        if(role == "Adopter"){
+        if(role.equals("ADOPTER")){
             return true;
         } else {
             return false;

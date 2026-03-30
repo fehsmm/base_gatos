@@ -40,9 +40,9 @@ public class AuthController {
     public String dashboardPage() {
         User user = authService.getAuthenticatedUser();
 
-        if (user.getRole().equals("volunteer")) {
+        if (user.getRole().equals("VOLUNTEER")) {
             return "redirect:/volunteer/";
-        } else if (user.getRole().equals("admin")) {
+        } else if (user.getRole().equals("ADMIN")) {
             return "redirect:/admin/";
         } else {
             return "redirect:/adopter/";

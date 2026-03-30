@@ -10,14 +10,12 @@ import pt.upskill.base_gatos_demo.models.AddTaskModel;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.models.EditShiftModel;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
+import pt.upskill.base_gatos_demo.repositories.TaskRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class ShiftService {
@@ -30,6 +28,9 @@ public class ShiftService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
 
     public List<Shift> getShifts(@Nullable LocalDate date) {
         User user = authService.getAuthenticatedUser();
@@ -74,11 +75,14 @@ public class ShiftService {
 
     public void createShift(CreateShiftModel shiftModel) {
         Shift  shift = new Shift();
-        List<User> volunteers = userRepository.findAllById(shiftModel.getVolunteerIds());
-        shift.setVolunteers(volunteers);
         shift.setDate(shiftModel.getDate());
         shift.setStartTime(shiftModel.getStartTime());
         shift.setEndTime(shiftModel.getEndTime());
+
+        List<User> volunteers = userRepository.findAllById(shiftModel.getVolunteerIds());
+        shift.setVolunteers(volunteers);
+        shiftRepository.save(shift);
+
         List<Task> tasks = new ArrayList<>();
         if (shiftModel.getTasks() != null) {
             for (AddTaskModel t : shiftModel.getTasks()) {
@@ -87,6 +91,7 @@ public class ShiftService {
                 task.setDescription(t.getDescription());
                 task.setShift(shift);
                 tasks.add(task);
+                taskRepository.save(task);
             }
         }
         shift.setTasks(tasks);

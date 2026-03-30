@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pt.upskill.base_gatos_demo.entities.*;
@@ -76,7 +77,7 @@ public class AdminController {
             shiftsByDay.put(formattedDate, shifts);
         }
         List<Shift> shifts = shiftRepository.findAll();
-        List<User> volunteers = userRepository.findByRole("Volunteer");
+        List<User> volunteers = userRepository.findByRole("VOLUNTEER");
         Map<Long, Integer> completedTasks = new HashMap<>();
         Map<Long, Integer> totalTasks = new HashMap<>();
         for (List<Shift> shiftList : shiftsByDay.values()) {
@@ -135,7 +136,7 @@ public class AdminController {
     public String viewShiftNote(){return "admin/view-shift-note";}
 
     @PostMapping(value = "/create-shift")
-    public String createShift(CreateShiftModel model){
+    public String createShift(@ModelAttribute CreateShiftModel model){
         shiftService.createShift(model);
         return "redirect:/admin/manage-schedule";
     }

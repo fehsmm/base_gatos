@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,9 @@ public class Shift {
             joinColumns = @JoinColumn(name = "shift_id"), //coluna deste lado
             inverseJoinColumns = @JoinColumn(name = "user_id") //inverso - coluna do outro lado
     )
-    private List<User> volunteers;
+    private List<User> volunteers = new ArrayList<>();
     @OneToMany (mappedBy = "shift") //relação gerida pelo shift na classe task
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     private LocalDate date;
     private LocalTime startTime;

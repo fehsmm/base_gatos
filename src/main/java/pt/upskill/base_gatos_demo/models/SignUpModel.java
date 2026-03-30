@@ -59,7 +59,7 @@ public class SignUpModel {
     }
 
     public boolean isAdmin() {
-        if(role == "Admin") {
+        if(role.equals("ADMIN")) {
             return true;
         } else {
             return false;
@@ -67,7 +67,7 @@ public class SignUpModel {
     }
 
     public boolean isVolunteer() {
-        if(role == "Volunteer"){
+        if(role.equals("VOLUNTEER")){
             return true;
         } else {
             return false;
@@ -75,7 +75,7 @@ public class SignUpModel {
     }
 
     public boolean isAdopter() {
-        if(role == "Adopter"){
+        if(role.equals("ADOPTER")) {
             return true;
         } else {
             return false;

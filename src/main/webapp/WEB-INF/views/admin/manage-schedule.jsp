@@ -105,7 +105,7 @@
                 ${fn:length(shifts)} turnos agendados.
             </p>
 
-            <button class="btn btn-dark position-absolute top-0 end-0" onclick="document.getElementById('addShiftModal').classList.add('open')">
+            <button class="btn btn-dark position-absolute top-0 end-0" onclick="openModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                 Criar Turno
             </button>
@@ -147,7 +147,7 @@
 
                             <div class="d-flex justify-content-between mb-2">
                                 <div>
-                                    ${entry.value}
+
                                     <strong>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M582-298 440-440v-200h80v167l118 118-56 57ZM440-720v-80h80v80h-80Zm280 280v-80h80v80h-80ZM440-160v-80h80v80h-80ZM160-440v-80h80v80h-80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
                                             ${shift.startTime} - ${shift.endTime}</strong>
@@ -226,12 +226,10 @@
 
 <div id="addShiftModal" class="modal-overlay">
 
-    <div class="modal-content" style="height: 95%">
-        <div class="modal-header">
-            <h2 style="margin:0">
-                Criar Novo Turno
-            </h2>
-            <button class="modal-close" onclick="document.getElementById('addShiftModal').classList.remove('open')">
+    <div class="modal-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Criar Novo Turno</h4>
+            <button class="modal-close" onclick="closeModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
             </button>
         </div>
@@ -246,49 +244,55 @@
                 <input type="date" name="date" class="form-control" required>
             </div>
 
-            <div class="grid grid-2" style="gap:1rem">
-                <div class="form-group">
+            <div class="row">
+                <div class="col">
                     <label>Hora de Início</label>
-                    <input type="time" name="startTime" required/>
+                    <input type="time" name="startTime" class="form-control" required/>
                 </div>
-                <div class="form-group">
+                <div class="col">
                     <label>Hora de Fim</label>
-                    <input type="time" name="endTime" required/>
+                    <input type="time" name="endTime" class="form-control" required/>
                 </div>
             </div>
 
-            <div style="border-top:1px solid #f3f4f6;padding-top:1.25rem;margin-top:.5rem">
-                <label>Voluntários</label>
-                <select name="volunteerIds" class="form-control" multiple>
-                    <c:forEach var="user" items="${volunteers}">
-                        <option value="${user.id}">
-                                ${user.name}
-                        </option>
-                    </c:forEach>
-                </select>
+            <div class="mt-3">
+                <label>
+                    Voluntários
+                    <select name="volunteerIds" class="form-control" multiple required>
+                        <c:forEach var="user" items="${volunteers}">
+                            <option value="${user.id}">
+                                    ${user.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </label>
             </div>
 
-            <div style="border-top:1px solid #f3f4f6;padding-top:1.25rem;margin-top:.5rem">
-                <h3 class="mb-4">Tarefas</h3>
+            <div class="mt-4">
+                <h5>Tarefas</h5>
                 <div id="tasksList"></div>
-                <div class="form-group">
-                    <label>Título da Tarefa</label>
-                    <input type="text" id="taskTitleInput" placeholder="Ex: Alimentar os gatos"/>
-                </div>
-                <div class="form-group">
-                    <label>Descrição (opcional)</label>
-                    <textarea id="taskDescInput" rows="2" placeholder="Detalhes..."></textarea>
-                </div>
-                <button type="button" onclick="addTask()" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb">
+
+                    <label>
+                        Título da Tarefa
+                        <input type="text" id="taskTitle" class="form-control mb-2" placeholder="Ex: Alimentar os gatos"/>
+                    </label>
+
+                    <label>
+                        Descrição (opcional)
+                        <input type="text" id="taskDesc" class="form-control mb-2" placeholder="Ex: Gato Mike deve receber ração de sénior."/>
+                    </label>
+
+                <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTask()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                     Adicionar Tarefa
                 </button>
+
                 <div id="taskHiddenInputs"></div>
+
             </div>
 
-            <div class="d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-secondary" style="background-color:#9ca3af"
-                        onclick="closeModal()">
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" style="background-color:#9ca3af" onclick="closeModal()">
                     Cancelar
                 </button>
 
@@ -303,54 +307,60 @@
 </div>
 
 <script>
+    function openModal() {
+        document.getElementById("addShiftModal").classList.add("open");
+    }
+
+    function closeModal() {
+        document.getElementById("addShiftModal").classList.remove("open");
+    }
+
     /*let taskIndex = 0;
+
     function addTask() {
-        const titleInput = document.getElementById("taskTitleInput");
-        const descInput = document.getElementById("taskDescInput");
-        const title = titleInput.value.trim();
-        const desc = descInput.value.trim();
+        const title = document.getElementById("taskTitle").value.trim();
+        const desc = document.getElementById("taskDesc").value.trim();
+
         if (!title) {
-            alert("O título da tarefa é obrigatório");
+            alert("Título obrigatório");
             return;
         }
+
         const taskList = document.getElementById("tasksList");
-        const taskItem = document.createElement("div");
-        taskItem.className = "border rounded p-2 mb-2 d-flex justify-content-between";
-        taskItem.innerHTML = `
-            <div style="flex:1">
-                <div style="font-weight:600">${title}</div>
-                <div style="font-size:12px;color:#6b7280">${desc || ''}</div>
-            </div>
-            <button type="button" onclick="removeTask(this, ${taskIndex})"
-                style="background:#ef4444;color:white;border:none;padding:4px 8px;border-radius:4px;">
-                X
-            </button>
-        `;
-        taskList.appendChild(taskItem);
-        const hiddenContainer = document.getElementById("taskHiddenInputs");
-        hiddenContainer.insertAdjacentHTML('beforeend', `
+        const div = document.createElement("div");
+        div.className = "border p-2 mb-2 d-flex justify-content-between";
+
+        div.innerHTML = `
+        <div>
+            <strong>${title}</strong>
+            <div style="font-size:12px">${desc || ''}</div>
+        </div>
+        <button type="button" onclick="removeTask(this, ${taskIndex})">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+        </button>
+    `;
+
+        taskList.appendChild(div);
+
+        const hidden = document.getElementById("taskHiddenInputs");
+
+        hidden.insertAdjacentHTML("beforeend", `
         <input type="hidden" name="tasks[${taskIndex}].title" value="${title}">
         <input type="hidden" name="tasks[${taskIndex}].description" value="${desc}">
     `);
+
         taskIndex++;
-        titleInput.value = "";
-        descInput.value = "";
+
+        document.getElementById("taskTitle").value = "";
+        document.getElementById("taskDesc").value = "";
     }
 
     function removeTask(button, index) {
         button.parentElement.remove();
-        const hiddenContainer = document.getElementById("taskHiddenInputs");
-        const inputs = hiddenContainer.querySelectorAll(`[name^="tasks[${index}]"]`);
+        const hidden = document.getElementById("taskHiddenInputs");
+        const inputs = hidden.querySelectorAll(`[name^="tasks[${index}]"]`);
         inputs.forEach(i => i.remove());
     }*/
-
-    function closeModal() {
-        document.getElementById('addShiftModal').classList.remove('open');
-        document.querySelector("#addShiftModal form").reset();
-        document.getElementById("tasksList").innerHTML = "";
-        document.getElementById("taskHiddenInputs").innerHTML = "";
-        taskIndex = 0;
-    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">

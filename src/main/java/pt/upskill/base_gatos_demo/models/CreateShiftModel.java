@@ -2,13 +2,14 @@ package pt.upskill.base_gatos_demo.models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateShiftModel {
 
     private LocalDate date;
-    private List<Long> volunteerIds;
-    private List<AddTaskModel> tasks;
+    private List<Long> volunteerIds = new ArrayList<>();
+    private List<AddTaskModel> tasks = new ArrayList<>();
     private LocalTime startTime;
     private LocalTime endTime;
 
