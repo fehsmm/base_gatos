@@ -8,7 +8,10 @@ import org.springframework.stereotype.Component;
 import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.repositories.*;
 
+import java.time.LocalDate;   // NOVO
 import java.time.LocalDateTime;
+import java.time.LocalTime;   // NOVO
+import java.util.ArrayList;   // NOVO
 import java.util.List;
 
 @Component
@@ -23,6 +26,9 @@ public class DataInitializer {
     private AnnouncementRepository annRepo;
     @Autowired
     private StockRepository stockRepo;
+
+    @Autowired                          // NOVO
+    private ShiftRepository shiftRepo;  // NOVO
 
 
     @PostConstruct
@@ -39,12 +45,8 @@ public class DataInitializer {
             );
 
             for (User user : users) {
-                //se existir user, devolve null
                 if (userRepository.getUserByUsername(user.getUsername()) == null) {
-
-                    //Encripta a password antes de guardar
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
-
                     userRepository.save(user);
                 }
             }
@@ -71,11 +73,34 @@ public class DataInitializer {
             return;
         }
 
+        // NOVO — dados de teste para turnos
+        if (shiftRepo.count() == 0) {
+            User joao = userRepository.getUserByUsername("joao.vol");
+            User pedro = userRepository.getUserByUsername("pedro.vol");
 
+            Shift s1 = new Shift();
+            s1.setDate(LocalDate.now().plusDays(3));
+            s1.setStartTime(LocalTime.of(9, 0));
+            s1.setEndTime(LocalTime.of(13, 0));
+            s1.setVolunteers(List.of(joao, pedro));
+            s1.setTasks(new ArrayList<>());
+            shiftRepo.save(s1);
 
+            Shift s2 = new Shift();
+            s2.setDate(LocalDate.now().plusDays(7));
+            s2.setStartTime(LocalTime.of(14, 0));
+            s2.setEndTime(LocalTime.of(18, 0));
+            s2.setVolunteers(List.of(joao));
+            s2.setTasks(new ArrayList<>());
+            shiftRepo.save(s2);
 
-
-
-
-}
+            Shift s3 = new Shift();
+            s3.setDate(LocalDate.now().minusDays(5));
+            s3.setStartTime(LocalTime.of(9, 0));
+            s3.setEndTime(LocalTime.of(13, 0));
+            s3.setVolunteers(List.of(joao));
+            s3.setTasks(new ArrayList<>());
+            shiftRepo.save(s3);
+        }
+    }
 }
