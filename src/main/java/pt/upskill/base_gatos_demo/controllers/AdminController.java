@@ -14,10 +14,8 @@ import pt.upskill.base_gatos_demo.services.StockService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -66,11 +64,16 @@ public class AdminController {
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
         LocalDate today = LocalDate.now();
-        Map<LocalDate, List<Shift>> shiftsByDay = new LinkedHashMap<>();
+        Map<String, List<Shift>> shiftsByDay = new LinkedHashMap<>();
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("EEE, dd MMM", new Locale("pt", "PT"));
         for (int i = 0; i < 7; i++) {
             LocalDate date = today.plusDays(i);
             List<Shift> shifts = shiftRepository.findByDate(date);
-            shiftsByDay.put(date, shifts);
+            shifts.sort(Comparator.comparing(Shift::getStartTime)); //usa o getStartTime de cada Shift para comparar
+            String formattedDate = date.format(formatter);
+            formattedDate = formattedDate.substring(0,1).toUpperCase() + formattedDate.substring(1);
+            shiftsByDay.put(formattedDate, shifts);
         }
         List<Shift> shifts = shiftRepository.findAll();
         List<User> volunteers = userRepository.findByRole("Volunteer");
@@ -88,6 +91,12 @@ public class AdminController {
         model.addAttribute("shifts", shifts);
         model.addAttribute("completedMap", completedTasks);
         model.addAttribute("totalMap", totalTasks);
+        String todayFormatted = LocalDate.now().format(formatter);
+        todayFormatted = todayFormatted.substring(0,1).toUpperCase() + todayFormatted.substring(1);
+        String tomorrowFormatted = LocalDate.now().plusDays(1).format(formatter);
+        tomorrowFormatted =  tomorrowFormatted.substring(0,1).toUpperCase() + tomorrowFormatted.substring(1);
+        model.addAttribute("todayFormatted", todayFormatted);
+        model.addAttribute("tomorrowFormatted", tomorrowFormatted);
         return "admin/manage-schedule";
     }
 
