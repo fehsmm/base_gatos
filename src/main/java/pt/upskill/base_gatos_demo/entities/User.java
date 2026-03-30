@@ -18,6 +18,21 @@ public class User {
     private String address;
     private boolean approved;
 
+    //Construtores para DataInitializer
+    public User(String name, String username,String password, String role, long telephone,String address, boolean approved) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.telephone = telephone;
+        this.address = address;
+        this.approved = approved;
+    }
+
+    public User() {
+
+    }
+
     public Long getId() {
         return id;
     }
