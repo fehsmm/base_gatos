@@ -56,7 +56,7 @@
                             <tr><td style="color:#6b7280;padding:.4rem 0">Idade:</td>
                                 <td style="text-align:right;font-weight:500">${cat.estimatedAge}</td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Género:</td>
-                                <td style="text-align:right;font-weight:500">${cat.gender}</td></tr>
+                                <td style="text-align:right;font-weight:500">${cat.gender ? "Macho" : "Fêmea"}</td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Raça:</td>
                                 <td style="text-align:right;font-weight:500">${cat.breed}</td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Estado:</td>
