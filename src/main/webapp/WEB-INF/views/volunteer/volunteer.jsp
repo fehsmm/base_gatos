@@ -101,38 +101,87 @@
                      style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
                     Área do Voluntário
                 </div>
-                <p>
-                <div style="font-weight:normal;">Bem-vindo à tua área de trabalho.</div>
-                <div class="panel">
-                    <p><div style="font-weight:normal;">Nesta área podes consultar as tuas escalas, ver o teu turno atual, acompanhar comunicados,
-                        pedir
-                    stock e deixar notas do turno.</div></p>
+                <div style="font-weight:normal; margin-bottom: 1.5rem;">
+                    Bem-vindo, <strong>${user.name}</strong>. Acesso rápido às tuas áreas.
                 </div>
 
-                <div class="card border-success mb-3" style="max-width: 30rem;">
-                    <div class="card-body text-success">
-                        <h5 class="card-title">Próximas Escalas</h5>
-                        <p class="card-text">Sei la contandor de qntas escalas faltam para o mes acabar</p>
-                    </div>
-                    <button type="button" class="btn btn-primary">Colocar Link p/ Escalas</button>
-                </div>
+                <div class="row g-3">
 
-                <div class="card border-success mb-3" style="max-width: 25rem;">
-                    <div class="card-body text-success">
-                        <h5 class="card-title">Success card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/view-schedule" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📅</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">As Minhas Escalas</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Consulta os teus turnos agendados e anteriores.
+                                </div>
+                                <div style="margin-top:0.75rem; color:#f97316; font-size:0.85rem; font-weight:600;">
+                                    ${upcomingCount} turnos próximos
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <button type="button" class="btn btn-primary">Guardar Notas</button>
-                </div>
 
-                <div class="card border-success mb-3" style="max-width: 25rem;">
-                    <div class="card-body text-success">
-                        <h5 class="card-title">Success card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/view-shift" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">✅</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Turno Atual</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Vê as tarefas do turno em curso e marca as concluídas.
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <button type="button" class="btn btn-primary">Guardar Notas</button>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/view-announcement" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📢</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Comunicados</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Acompanha os avisos e informações importantes do MEG.
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/request-stock" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📦</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Pedido de Stock</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Regista materiais em falta para reposição.
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/leave-shift-note" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📝</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Notas do Turno</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Deixa observações para o próximo voluntário.
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/volunteer/manage-cat" style="text-decoration:none;">
+                            <div class="panel h-100" style="cursor:pointer;">
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">🐱</div>
+                                <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Gatos</div>
+                                <div style="color:#9ca3af; font-size:0.85rem;">
+                                    Consulta a lista de gatos.
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
