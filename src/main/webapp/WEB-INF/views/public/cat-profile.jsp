@@ -159,7 +159,7 @@
                     <div class="bg-orange-50 mb-4">
                         <h3>Interessado em adotar ${cat.name}?</h3>
                         <p style="margin-bottom:1rem">Preencha o formulário de candidatura e a nossa equipa entrará em contacto consigo.</p>
-                        <a href="public/adoption" class="btn btn-primary">Candidatar-me à Adoção!</a>
+                        <a href="/public/adoption" class="btn btn-primary">Candidatar-me à Adoção!</a>
                     </div>
                 </c:if>
 
@@ -167,7 +167,7 @@
                     <div class="bg-yellow-50 mb-4">
                         <h3>Processo de Adoção em Curso</h3>
                         <p>${cat.name} está atualmente em processo de adoção.</p>
-                        <a href="public/cat-list" class="btn btn-primary">Explore outros gatos disponíveis.</a>
+                        <a href="/public/cat-list" class="btn btn-primary">Explore outros gatos disponíveis.</a>
                     </div>
                 </c:if>
 
@@ -175,7 +175,7 @@
                     <div class="bg-gray-50 mb-4">
                         <h3>Adotado com Sucesso! 🎉</h3>
                         <p>${cat.name} já encontrou o seu lar para sempre. Estamos muito felizes!</p>
-                        <a href="public/cat-list" class="btn btn-primary">Explore outros gatos disponíveis.</a>
+                        <a href="/public/cat-list" class="btn btn-primary">Explore outros gatos disponíveis.</a>
                     </div>
                 </c:if>
             </div>
