@@ -42,7 +42,8 @@
             <a href="/volunteer/manage-cat">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                      fill="#adb5bd">
-                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
+                </svg>
                 Gatos</a>
             <a href="/volunteer/leave-shift-note">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -94,45 +95,98 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <div class="container-fluid px-4 py-4">
+        <div class="container-fluid px-3 py-3">
             <div class="mb-4">
                 <div class="page-title"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
+                     style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
                     Turno Atual
                 </div>
-                <div class="page-subtitle"
-                     style="text-align: left; font-size: 1rem; margin-bottom: 1.5rem;">
+                <div class="page-subtitle" style="margin-bottom: 1.5rem;">
                     Resumo do turno em curso.
                 </div>
 
-                <div class="shift-card" style="max-width: 900px; font-weight:bolder;">
-                    <div class="shift-date">quarta-feira, 18 de março de 2026 - 10:00 - 14:00</div>
+                <c:choose>
+                    <c:when test="${todayShift == null}">
+                        <div class="panel text-center">
+                            <div style="font-size:2rem; margin-bottom:0.5rem;">📅</div>
+                            <div style="font-weight:600; margin-bottom:0.25rem;">Sem turno hoje</div>
+                            <div style="color:#9ca3af; font-size:0.9rem;">
+                                Não tens nenhum turno agendado para hoje.
+                            </div>
+                            <a href="/volunteer/view-schedule" class="btn btn-primary btn-sm"
+                               style="margin-top:1rem;">
+                                Ver as minhas escalas
+                            </a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
 
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Trocar água
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Limpar Jaulas
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Limpar casa de banho gerais
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Varredura e organização
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Observar gato em recuperação
-                        </li>
-                        <textarea class="form-textarea-custom" placeholder="Tarefas Não Listadas"></textarea>
+                        <div class="panel" style="margin-bottom:1rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                <div>
+                                    <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
+                                        📅 ${todayShift.date}
+                                    </div>
+                                    <div style="color:#9ca3af; font-size:0.9rem;">
+                                        🕐 ${todayShift.startTime} — ${todayShift.endTime}
+                                    </div>
+                                </div>
+                                <span style="background:#dcfce7; color:#16a34a; padding:0.25rem 0.75rem;
+                                         border-radius:999px; font-size:0.8rem; font-weight:600;">
+                                Em curso
+                            </span>
+                            </div>
 
-                    </ul>
-                </div>
+                            <c:if test="${not empty todayShift.volunteers}">
+                                <div style="margin-top:0.75rem; font-size:0.85rem; color:#9ca3af;">
+                                    Voluntários:
+                                    <c:forEach var="vol" items="${todayShift.volunteers}" varStatus="s">
+                                        <strong style="color:#e5e7eb;">${vol.name}</strong><c:if
+                                            test="${!s.last}">, </c:if>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
+                        </div>
+
+                        <div class="section-title">Tarefas</div>
+
+                        <c:choose>
+                            <c:when test="${empty todayShift.tasks}">
+                                <div class="panel text-center" style="color:#9ca3af;">
+                                    Não há tarefas registadas para este turno.
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="panel">
+                                    <c:forEach var="task" items="${todayShift.tasks}" varStatus="s">
+                                        <div style="display:flex; align-items:flex-start; gap:0.75rem;
+                                                padding:0.75rem 0;
+                                                ${!s.last ? 'border-bottom:1px solid #1f2937;' : ''}">
+                                            <input type="checkbox"
+                                                   style="margin-top:3px; accent-color:#f97316; width:16px; height:16px; cursor:pointer;">
+                                            <div>
+                                                <div style="font-weight:600; font-size:0.95rem;">${task.title}</div>
+                                                <c:if test="${not empty task.description}">
+                                                    <div style="color:#9ca3af; font-size:0.85rem;">${task.description}</div>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <div class="section-title" style="margin-top:1.5rem;">Observações do turno</div>
+                        <div class="panel">
+                        <textarea class="form-textarea-custom"
+                                  placeholder="Regista aqui qualquer ocorrência ou observação para o próximo voluntário..."></textarea>
+                            <button type="button" class="btn btn-primary" style="margin-top:0.75rem;">
+                                Guardar Observação
+                            </button>
+                        </div>
+
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </main>

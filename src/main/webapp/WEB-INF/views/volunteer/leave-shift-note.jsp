@@ -42,7 +42,8 @@
             <a href="/volunteer/manage-cat">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                      fill="#adb5bd">
-                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
+                </svg>
                 Gatos</a>
             <a href="/volunteer/leave-shift-note" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -96,27 +97,75 @@
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                <div class="page-title"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
-                    Notas do Turno
+
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
+                    <div class="page-title" style="font-size: 2rem; font-weight: bold;">
+                        Notas Entre Turnos
+                    </div>
+                    <button type="button" class="btn btn-primary">+ Nova Nota</button>
+                </div>
+                <div class="page-subtitle" style="margin-bottom:1.5rem;">
+                    Comunicação e observações importantes entre voluntários.
                 </div>
 
-                <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
-                <p></p>
+                <div class="panel" id="formNovaNota" style="display:none; margin-bottom:1.5rem;">
+                    <div style="font-weight:600; margin-bottom:1rem;">Nova Nota</div>
 
-                <div class="panel">
+                    <label class="form-label">Prioridade</label>
+                    <select class="form-select mb-3">
+                        <option value="Normal">Normal</option>
+                        <option value="Importante">Importante</option>
+                        <option value="Urgente">Urgente</option>
+                    </select>
+
                     <label class="form-label">Resumo do turno</label>
-                    <textarea class="form-textarea-custom"
+                    <textarea class="form-textarea-custom mb-3"
                               placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
 
                     <label class="form-label">Ocorrências importantes</label>
-                    <textarea class="form-textarea-custom"
+                    <textarea class="form-textarea-custom mb-3"
                               placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
 
-                    <button type="button" class="btn btn-primary">Guardar Notas</button>
+                    <div style="display:flex; gap:0.5rem;">
+                        <button type="button" class="btn btn-primary">Guardar Nota</button>
+                        <button type="button" class="btn btn-secondary"
+                                onclick="document.getElementById('formNovaNota').style.display='none'">
+                            Cancelar
+                        </button>
+                    </div>
                 </div>
+
+                <div class="panel" style="background:#f0f9ff; border-left: 4px solid #3b82f6; margin-bottom:1rem;">
+                    <div style="color:#1e40af; font-size:0.85rem;">
+                        ℹ️ FALTA FAZER O NOTE REPOSITORY E SERVICE.
+                    </div>
+                </div>
+
+                <div class="panel" style="border-left: 4px solid #f97316;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+                        <strong>${user.name}</strong>
+                        <span class="badge badge-yellow">Importante</span>
+                        <span class="badge badge-green">Nova</span>
+                    </div>
+                    <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:0.75rem;">
+                        09:00-13:00 &nbsp;•&nbsp; hoje
+                    </div>
+                    <div style="font-size:0.95rem; margin-bottom:0.75rem;">
+                        Exemplo de nota — AR CONDICIONADO — Estava ligado, não sabemos se não terá ficado ligado a noite toda.
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm">Marcar como Lida</button>
+                </div>
+
             </div>
         </div>
+    </main>
+
+    <script>
+        document.querySelector('.btn-primary').addEventListener('click', function () {
+            const form = document.getElementById('formNovaNota');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
     </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

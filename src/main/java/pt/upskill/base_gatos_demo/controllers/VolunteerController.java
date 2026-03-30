@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.repositories.AnnouncementRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
@@ -25,6 +26,7 @@ public class VolunteerController {
     @Autowired UserRepository userRepository;
     @Autowired ShiftRepository shiftRepository;
     @Autowired CatRepository catRepository;
+    @Autowired AnnouncementRepository announcementRepository;
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
         if (authentication != null) {
@@ -37,6 +39,22 @@ public class VolunteerController {
     @GetMapping("/")
     public String volunteer(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
+
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+
+        if (user == null) {
+            return "redirect:/auth/login";
+        }
+
+        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
+        LocalDate today = LocalDate.now();
+
+        long upcomingCount = allShifts.stream()
+                .filter(s -> !s.getDate().isBefore(today))
+                .count();
+
+        model.addAttribute("upcomingCount", upcomingCount);
         return "volunteer/volunteer";
     }
 
@@ -68,6 +86,17 @@ public class VolunteerController {
     @GetMapping("/view-shift")
     public String viewShift(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
+
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+
+        LocalDate today = LocalDate.now();
+        List<Shift> todayShifts = shiftRepository.findByVolunteers_Id(user.getId())
+                .stream()
+                .filter(s -> s.getDate().equals(today))
+                .collect(Collectors.toList());
+
+        model.addAttribute("todayShift", todayShifts.isEmpty() ? null : todayShifts.get(0));
         return "volunteer/view-shift";
     }
 
@@ -87,6 +116,7 @@ public class VolunteerController {
     @GetMapping("/view-announcement")
     public String viewAnnouncement(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
+        model.addAttribute("announcements", announcementRepository.findAll());
         return "volunteer/view-announcement";
     }
 

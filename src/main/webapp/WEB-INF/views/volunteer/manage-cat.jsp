@@ -128,9 +128,11 @@
                                                 <c:when test="${cat.gender}">Macho</c:when>
                                                 <c:otherwise>Fêmea</c:otherwise>
                                             </c:choose>
-                                            &nbsp;•&nbsp; ${cat.status}
+                                            &nbsp;•&nbsp;
+                                            <span class="badge ${cat.status == 'Disponível' ? 'badge-green' : (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
+                                                    ${cat.status}
+                                            </span>
                                         </div>
-                                            <%-- Usa a página pública do colega, não precisas criar nada --%>
                                         <a href="/public/cat-profile/${cat.id}" class="btn btn-primary btn-sm">
                                             Ver Perfil
                                         </a>

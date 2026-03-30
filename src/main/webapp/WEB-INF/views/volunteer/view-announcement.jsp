@@ -24,6 +24,7 @@
                         MEG
                     </div>
                     <div style="font-size:.7rem;color:#9ca3af">
+
                         Voluntário
                     </div>
                 </div>
@@ -96,26 +97,43 @@
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                <div style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem;">
-                    <div class="page-title">Comunicados</div>
-                    <p>
-                    <div class="page-subtitle">Informações importantes para os voluntários.</div>
-                    </p>
-                    <div class="panel">
-                        <strong>Atualização de rotina</strong>
-                        <p>A medicação do gato Thor passa a ser administrada duas vezes por dia.</p>
-                    </div>
-
-                    <div class="panel">
-                        <strong>Falta de stock</strong>
-                        <p>Estamos com pouco stock de ração húmida. Registar pedidos quando necessário.</p>
-                    </div>
-
-                    <div class="panel">
-                        <strong>Limpeza de sábado</strong>
-                        <p>No próximo sábado haverá limpeza geral da área externa do abrigo.</p>
-                    </div>
+                <div class="page-title"
+                     style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
+                    Comunicados
                 </div>
+                <div class="page-subtitle" style="margin-bottom: 1.5rem;">
+                    Informações importantes para os voluntários.
+                </div>
+
+                <c:choose>
+                    <c:when test="${empty announcements}">
+                        <div class="panel text-center">
+                            Não há comunicados de momento.
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="ann" items="${announcements}">
+                            <div class="panel" style="margin-bottom: 1rem; border-left: 4px solid
+                                ${ann.priority == 'Alta' ? '#f97316' :
+                                        (ann.priority == 'Média' ? '#eab308' : '#6b7280')};">
+
+                                <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+                                    <strong>${ann.title}</strong>
+                                    <span class="badge ${ann.priority == 'Alta' ? 'badge-yellow' :
+                                    (ann.priority == 'Média' ? 'badge-yellow' : 'badge-gray')}">
+                                            ${ann.priority}
+                                    </span>
+                                </div>
+
+                                <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:0.75rem;">
+                                        ${ann.createdAt}
+                                </div>
+
+                                <p style="font-size:0.95rem; margin:0;">${ann.description}</p>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </main>

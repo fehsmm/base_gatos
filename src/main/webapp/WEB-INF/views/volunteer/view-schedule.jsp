@@ -38,7 +38,8 @@
             <a href="/volunteer/manage-cat">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                      fill="#adb5bd">
-                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
+                </svg>
                 Gatos</a>
             <a href="/volunteer/leave-shift-note">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -95,100 +96,137 @@
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
                 <div class="page-title"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
+                     style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
                     As Minhas Escalas
                 </div>
-                <div class="info-line">${user.username} &nbsp;•&nbsp; ${user.role}</div>
-
-                <%-- Cards de estatísticas --%>
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div class="stat-number orange">${upcomingCount}</div>
-                        <div>Turnos Próximos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number green">${pastShifts.size()}</div>
-                        <div>Turnos Completos</div>
-                    </div>
+                <div class="info-line" style="margin-bottom: 1.5rem;">
+                    ${user.name} &nbsp;•&nbsp; ${upcomingCount} turnos próximos
                 </div>
 
-                <%-- Próximos Turnos --%>
+                <div class="section-title">Próximos Turnos</div>
                 <c:choose>
                     <c:when test="${empty upcomingShifts}">
-                        <div class="panel text-center">
+                        <div class="panel text-center" style="margin-bottom:1.5rem;">
                             Não tem turnos agendados proximamente.
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div class="section-title">Próximos Turnos</div>
-                        <c:forEach var="shift" items="${upcomingShifts}">
-                            <div class="shift-card">
-                                <div class="shift-header">
-                                    <div>
-                                        <div class="shift-date">
+                        <div style="overflow-x:auto; margin-bottom:2rem;">
+                            <table class="table table-bordered" style="background:white; font-size:0.9rem;">
+                                <thead>
+                                <tr style="background:#1f2937; color:white; text-align:center;">
+                                    <th>Data</th>
+                                    <th>Dia da Semana</th>
+                                    <th>Voluntários</th>
+                                    <th>Horário</th>
+                                    <th>Tarefas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="shift" items="${upcomingShifts}">
+                                    <tr>
+                                        <td style="text-align:center; white-space:nowrap;">
                                                 ${shift.date}
-                                        </div>
-                                        <div class="shift-time">
+                                        </td>
+                                        <td style="text-align:center;">
+
+                                            <c:set var="dow" value="${shift.date.dayOfWeek}"/>
+                                            <c:choose>
+                                                <c:when test="${dow == 'MONDAY'}">Segunda-feira</c:when>
+                                                <c:when test="${dow == 'TUESDAY'}">Terça-feira</c:when>
+                                                <c:when test="${dow == 'WEDNESDAY'}">Quarta-feira</c:when>
+                                                <c:when test="${dow == 'THURSDAY'}">Quinta-feira</c:when>
+                                                <c:when test="${dow == 'FRIDAY'}">Sexta-feira</c:when>
+                                                <c:when test="${dow == 'SATURDAY'}">Sábado</c:when>
+                                                <c:when test="${dow == 'SUNDAY'}">Domingo</c:when>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:forEach var="vol" items="${shift.volunteers}" varStatus="s">
+                                                ${vol.name}<c:if test="${!s.last}"> / </c:if>
+                                            </c:forEach>
+                                        </td>
+                                        <td style="text-align:center; white-space:nowrap;">
                                                 ${shift.startTime} - ${shift.endTime}
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:if test="${not empty shift.tasks}">
-                                    <div class="task-list">
-                                        <c:forEach var="task" items="${shift.tasks}">
-                                            <div class="task-item">
-                                                <input type="checkbox" disabled>
-                                                <div>
-                                                    <div class="task-title">${task.description}</div>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
-                                </c:if>
-                            </div>
-                        </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${empty shift.tasks}">
+                                                    <span style="color:#9ca3af;">—</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach var="task" items="${shift.tasks}" varStatus="s">
+                                                        ${task.title}<c:if test="${!s.last}">, </c:if>
+                                                    </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </c:otherwise>
                 </c:choose>
 
-                <%-- Turnos Anteriores --%>
                 <c:if test="${not empty pastShifts}">
                     <div class="section-title">Turnos Anteriores</div>
-                    <c:forEach var="shift" items="${pastShifts}">
-                        <div class="shift-card">
-                            <div class="shift-header">
-                                <div>
-                                    <div class="shift-date">
+                    <div style="overflow-x:auto;">
+                        <table class="table table-bordered" style="background:white; font-size:0.9rem;">
+                            <thead>
+                            <tr style="background:#374151; color:white; text-align:center;">
+                                <th>Data</th>
+                                <th>Dia da Semana</th>
+                                <th>Voluntários</th>
+                                <th>Horário</th>
+                                <th>Tarefas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="shift" items="${pastShifts}">
+                                <tr style="color:#9ca3af;">
+                                    <td style="text-align:center; white-space:nowrap;">
                                             ${shift.date}
-                                    </div>
-                                    <div class="shift-time">
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <c:set var="dow" value="${shift.date.dayOfWeek}"/>
+                                        <c:choose>
+                                            <c:when test="${dow == 'MONDAY'}">Segunda-feira</c:when>
+                                            <c:when test="${dow == 'TUESDAY'}">Terça-feira</c:when>
+                                            <c:when test="${dow == 'WEDNESDAY'}">Quarta-feira</c:when>
+                                            <c:when test="${dow == 'THURSDAY'}">Quinta-feira</c:when>
+                                            <c:when test="${dow == 'FRIDAY'}">Sexta-feira</c:when>
+                                            <c:when test="${dow == 'SATURDAY'}">Sábado</c:when>
+                                            <c:when test="${dow == 'SUNDAY'}">Domingo</c:when>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:forEach var="vol" items="${shift.volunteers}" varStatus="s">
+                                            ${vol.name}<c:if test="${!s.last}"> / </c:if>
+                                        </c:forEach>
+                                    </td>
+                                    <td style="text-align:center; white-space:nowrap;">
                                             ${shift.startTime} - ${shift.endTime}
-                                    </div>
-                                </div>
-                            </div>
-                            <c:if test="${not empty shift.tasks}">
-                                <div class="task-list">
-                                    <c:forEach var="task" items="${shift.tasks}">
-                                        <div class="task-item">
-                                            <input type="checkbox" disabled>
-                                            <div>
-                                                <div class="task-title">${task.description}</div>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </c:if>
-                        </div>
-                    </c:forEach>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${empty shift.tasks}">
+                                                <span style="color:#9ca3af;">—</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach var="task" items="${shift.tasks}" varStatus="s">
+                                                    ${task.title}<c:if test="${!s.last}">, </c:if>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </c:if>
 
-                <div class="alert-panel">
-                    <strong>Informação Importante</strong>
-                    <ul class="simple-list" style="margin-top:10px;">
-                        <li>Se não puder comparecer a um turno, avise com antecedência</li>
-                        <li>Em caso de emergência, contacte: +351 912 345 678</li>
-                        <li>Consulte o manual do voluntário na área comum do abrigo</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </main>
