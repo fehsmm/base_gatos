@@ -96,25 +96,24 @@
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-                    <div class="page-title"
-                         style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
-                        Notas do Turno
-                    </div>
+                <div class="page-title"
+                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
+                    Notas do Turno
+                </div>
 
-                    <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
-                    <p></p>
+                <div class="page-subtitle">Registe observações para o próximo voluntário.</div>
+                <p></p>
 
-                    <div class="panel">
-                        <label class="form-label">Resumo do turno</label>
-                        <textarea class="form-textarea-custom"
-                                  placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
+                <div class="panel">
+                    <label class="form-label">Resumo do turno</label>
+                    <textarea class="form-textarea-custom"
+                              placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
 
-                        <label class="form-label">Ocorrências importantes</label>
-                        <textarea class="form-textarea-custom"
-                                  placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
+                    <label class="form-label">Ocorrências importantes</label>
+                    <textarea class="form-textarea-custom"
+                              placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
 
-                        <button type="button" class="btn btn-primary">Guardar Notas</button>
-                    </div>
+                    <button type="button" class="btn btn-primary">Guardar Notas</button>
                 </div>
             </div>
         </div>

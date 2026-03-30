@@ -71,7 +71,7 @@ public class VolunteerController {
         return "volunteer/view-shift";
     }
 
-    @GetMapping(value = "/manage-cat")
+    @GetMapping("/manage-cat")
     public String manageCat(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
         List<Cat> cats = catRepository.findAll();
@@ -79,16 +79,9 @@ public class VolunteerController {
         return "volunteer/manage-cat";
     }
 
-    @GetMapping(value = "/cat-profile/{id}")
-    public String catProfile(@PathVariable("id") Long id,
-                             Authentication authentication, Model model) {
-        addLoggedUserToModel(authentication, model);
-        Cat cat = catRepository.findById(id).orElse(null);
-        if (cat == null) {
-            return "redirect:/volunteer/manage-cat";
-        }
-        model.addAttribute("cat", cat);
-        return "volunteer/cat-profile";
+    @GetMapping("/cat-profile/{id}")
+    public String catProfile(@PathVariable("id") Long id) {
+        return "redirect:/public/cat-profile/" + id;
     }
 
     @GetMapping("/view-announcement")
