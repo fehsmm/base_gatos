@@ -3,10 +3,7 @@ package pt.upskill.base_gatos_demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.repositories.*;
@@ -138,6 +135,12 @@ public class AdminController {
     @PostMapping(value = "/create-shift")
     public String createShift(@ModelAttribute CreateShiftModel model){
         shiftService.createShift(model);
+        return "redirect:/admin/manage-schedule";
+    }
+
+    @PostMapping(value = "/delete-shift")
+    public String deleteShift(@RequestParam("shiftId") Long shiftId) {
+        shiftService.deleteShift(shiftId);
         return "redirect:/admin/manage-schedule";
     }
 
