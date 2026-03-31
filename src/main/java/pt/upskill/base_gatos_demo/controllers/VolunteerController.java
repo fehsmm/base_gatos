@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
@@ -14,8 +12,10 @@ import pt.upskill.base_gatos_demo.repositories.AnnouncementRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.services.NoteService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +27,8 @@ public class VolunteerController {
     @Autowired ShiftRepository shiftRepository;
     @Autowired CatRepository catRepository;
     @Autowired AnnouncementRepository announcementRepository;
+    @Autowired NoteService noteService;
+
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
         if (authentication != null) {
@@ -130,6 +132,29 @@ public class VolunteerController {
     public String leaveShiftNote(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
         return "volunteer/leave-shift-note";
+    }
+
+    @PostMapping("/start-shift/{id}")
+    public String startShift(@PathVariable Long id) {
+        Shift shift = shiftRepository.findById(id).orElse(null);
+        if (shift != null && shift.getStartedAt() == null) {
+            shift.setStartedAt(LocalDateTime.now());
+            shiftRepository.save(shift);
+        }
+        return "redirect:/volunteer/view-shift";
+    }
+
+    @PostMapping("/save-note/{id}")
+    public String saveNote(@PathVariable Long id,
+                           @RequestParam String resumo,
+                           @RequestParam String ocorrencias) {
+        Shift shift = shiftRepository.findById(id).orElse(null);
+        if (shift != null) {
+            shift.setEndedAt(LocalDateTime.now());
+            shiftRepository.save(shift);
+            noteService.saveNote(shift, resumo, ocorrencias);
+        }
+        return "redirect:/volunteer/view-shift";
     }
 }
     //marcar tarefas como concluidas

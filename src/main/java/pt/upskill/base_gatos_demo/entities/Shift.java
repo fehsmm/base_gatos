@@ -3,6 +3,7 @@ package pt.upskill.base_gatos_demo.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class Shift {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
+    private LocalDateTime startedAt;
+    private LocalDateTime endedAt;
 
     public Long getId() {
         return id;
@@ -75,4 +78,19 @@ public class Shift {
         this.tasks = tasks;
     }
 
+    public LocalDateTime getEndedAt() {
+        return endedAt;
+    }
+
+    public void setEndedAt(LocalDateTime endedAt) {
+        this.endedAt = endedAt;
+    }
+
+    public LocalDateTime getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(LocalDateTime startedAt) {
+        this.startedAt = startedAt;
+    }
 }
