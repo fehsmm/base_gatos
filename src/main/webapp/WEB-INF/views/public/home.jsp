@@ -71,7 +71,8 @@
     </div></section>--%>
 
     <section style="padding:4rem 1.5rem;background:white"><div class="container">
-        <div class="text-center mb-8"><h2 style="font-size:2rem">Conheça o seu próximo gatinho!</h2><p>Estes adoráveis felinos estão à espera de um lar.</p></div>
+        <div class="text-center mb-8"><h2 style="font-size:2rem">Conheça o seu próximo gatinho!</h2><p>Estes fofinhos estão à espera de um lar.</p></div>
+        <img src="/images/cat-smile.gif" class="cat_gif" alt="cat gif">
         <div class="grid grid-3" style="gap:1.5rem">
             <c:forEach items="${featuredCats}" var="cat">
                 <div class="card cat-card">
