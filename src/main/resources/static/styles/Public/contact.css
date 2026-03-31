@@ -361,3 +361,18 @@ tr:hover td { background: #f9fafb; }
 .priority-high { border-color:#fdba74; background:#fffbf5; }
 .user-row { display:flex; align-items:center; justify-content:space-between; padding:.85rem 1rem; background:#f9fafb; border-radius:.5rem; margin-bottom:.5rem; flex-wrap:wrap; gap:.75rem; }
 .vet-stat { display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.25rem; }
+
+.contact-btn {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: #ea6c0a;
+}
