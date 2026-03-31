@@ -395,10 +395,6 @@
         document.getElementById("deleteModal").classList.remove("open");
     }
 
-    /*function editShift(Long id) {
-
-    }*/
-
     /*let taskIndex = 0;
 
     function addTask() {
@@ -410,23 +406,21 @@
             return;
         }
 
-        const taskList = document.getElementById("tasksList");
+        const list = document.getElementById("tasksList");
         const div = document.createElement("div");
         div.className = "border p-2 mb-2 d-flex justify-content-between";
 
         div.innerHTML = `
         <div>
             <strong>${title}</strong>
-            <div style="font-size:12px">${desc ? desc : ''}</div>
-            <div style="font-size:12px">JH</div>
+            <div style="font-size:12px">${desc}</div>
         </div>
         <button type="button" onclick="removeTask(this, ${taskIndex})">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
         </button>
     `;
 
-        taskList.appendChild(div);
-
+        list.appendChild(div);
         const hidden = document.getElementById("taskHiddenInputs");
 
         hidden.insertAdjacentHTML("beforeend", `
@@ -438,9 +432,9 @@
 
         document.getElementById("taskTitle").value = "";
         document.getElementById("taskDesc").value = "";
-    }
+    }*/
 
-    function removeTask(button, index) {
+    /*function removeTask(button, index) {
         button.parentElement.remove();
         const hidden = document.getElementById("taskHiddenInputs");
         const inputs = hidden.querySelectorAll(`[name^="tasks[${index}]"]`);

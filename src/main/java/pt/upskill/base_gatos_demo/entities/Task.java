@@ -16,7 +16,6 @@ public class Task {
 
     private String title;
     private String description;
-    private LocalTime time;
     private boolean completed;
 
     public Long getId() {
@@ -41,14 +40,6 @@ public class Task {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
     }
 
     public Shift getShift() {

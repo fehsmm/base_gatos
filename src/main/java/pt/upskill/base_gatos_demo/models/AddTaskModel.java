@@ -6,7 +6,6 @@ public class AddTaskModel {
 
     private String title;
     private String description;
-    private LocalTime time;
     private boolean completed;
 
     public String getTitle() {
@@ -23,14 +22,6 @@ public class AddTaskModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
     }
 
     public boolean isCompleted() {

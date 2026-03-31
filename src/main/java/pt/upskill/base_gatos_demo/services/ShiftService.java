@@ -106,7 +106,6 @@ public class ShiftService {
 
         List<User> volunteers = userRepository.findAllById(model.getVolunteerIds());
         shift.setVolunteers(volunteers);
-        shiftRepository.save(shift);
 
         List<Task> tasks = new ArrayList<>();
         if (model.getTasks() != null) {
