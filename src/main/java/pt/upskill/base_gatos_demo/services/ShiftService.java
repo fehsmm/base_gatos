@@ -100,11 +100,26 @@ public class ShiftService {
 
     public void updateShift(EditShiftModel model) {
         Shift shift = getById(model.getId());
-        shift.setVolunteers(model.getVolunteers());
-        shift.setTasks(model.getTasks());
         shift.setDate(model.getDate());
         shift.setStartTime(model.getStartTime());
         shift.setEndTime(model.getEndTime());
+
+        List<User> volunteers = userRepository.findAllById(model.getVolunteerIds());
+        shift.setVolunteers(volunteers);
+        shiftRepository.save(shift);
+
+        List<Task> tasks = new ArrayList<>();
+        if (model.getTasks() != null) {
+            for (AddTaskModel t : model.getTasks()) {
+                Task task = new Task();
+                task.setTitle(t.getTitle());
+                task.setDescription(t.getDescription());
+                task.setShift(shift);
+                tasks.add(task);
+                taskRepository.save(task);
+            }
+        }
+        shift.setTasks(tasks);
         shiftRepository.save(shift);
     }
 

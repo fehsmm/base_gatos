@@ -164,7 +164,11 @@
 
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-sm btn-outline-primary"
-                                            onclick="editShift(${shift.id})">
+                                            onclick="editShift(this)"
+                                            data-id="${shift.id}"
+                                            data-date="${shift.date}"
+                                            data-start="${shift.startTime}"
+                                            data-end="${shift.endTime}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
                                     </button>
 
@@ -257,6 +261,7 @@
         <form action="/admin/create-shift" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="id"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
 
             <div class="mb-3">
@@ -333,6 +338,27 @@
 
     function closeModal() {
         document.getElementById("addShiftModal").classList.remove("open");
+        const form = document.querySelector("#addShiftModal form");
+        form.reset();
+        form.action = "/admin/create-shift";
+        document.getElementById("shiftId").value = "";
+    }
+
+    function editShift(button) {
+        const id = button.getAttribute("data-id");
+        const date = button.getAttribute("data-date");
+        const start = button.getAttribute("data-start");
+        const end = button.getAttribute("data-end");
+
+        openModal();
+
+        document.querySelector("input[name='id']").value = id;
+        document.querySelector("input[name='date']").value = date;
+        document.querySelector("input[name='startTime']").value = start;
+        document.querySelector("input[name='endTime']").value = end;
+
+        const form = document.querySelector("#addShiftModal form");
+        form.action = "/admin/update-shift";
     }
 
     /*function editShift(Long id) {
