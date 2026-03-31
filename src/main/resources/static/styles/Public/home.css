@@ -455,3 +455,17 @@ tr:hover td { background: #f9fafb; }
     height: auto;
     width: 65px;
 }
+.btn-hero {
+    background: #E76F51;
+    color: #111827 !important;
+    border: 2px solid white !important;
+    padding: 1rem 2.25rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+}
+.btn-hero:hover {
+    background: white !important;
+    color: #111827 !important;
+}
