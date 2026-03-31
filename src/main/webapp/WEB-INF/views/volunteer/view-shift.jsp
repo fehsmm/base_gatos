@@ -175,14 +175,62 @@
                                 </div>
                             </c:otherwise>
                         </c:choose>
+                                <c:choose>
+                                    <c:when test="${todayShift.startedAt == null}">
+                                        <form action="/volunteer/start-shift/${todayShift.id}" method="POST">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                            <button type="submit" class="btn btn-primary">
+                                                ▶ Iniciar Turno
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div style="color:#16a34a; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+                                            ✅ Turno iniciado às ${todayShift.startedAt}
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
 
-                        <div class="section-title" style="margin-top:1.5rem;">Observações do turno</div>
-                        <div class="panel">
-                        <textarea class="form-textarea-custom"
-                                  placeholder="Regista aqui qualquer ocorrência ou observação para o próximo voluntário..."></textarea>
-                            <button type="button" class="btn btn-primary" style="margin-top:0.75rem;">
-                                Guardar Observação
-                            </button>
+                                <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
+                                    <button type="button" class="btn btn-secondary"
+                                            onclick="document.getElementById('modalNota').style.display='flex'">
+                                        ⏹ Terminar Turno
+                                    </button>
+                                </c:if>
+
+                                <div id="modalNota"
+                                     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; align-items:center; justify-content:center;">
+                                    <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem;">
+                                        <div style="font-weight:600; font-size:1.2rem; margin-bottom:1.5rem;">
+                                            Terminar Turno — Preenche as notas
+                                        </div>
+
+                                        <form action="/volunteer/save-note/${todayShift.id}" method="POST">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                                            <label class="form-label">Resumo do turno</label>
+                                            <textarea name="resumo" class="form-textarea-custom"
+                                                      style="margin-bottom:1rem;"
+                                                      placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa..."></textarea>
+
+                                            <label class="form-label">Ocorrências importantes</label>
+                                            <textarea name="ocorrencias" class="form-textarea-custom"
+                                                      style="margin-bottom:1.5rem;"
+                                                      placeholder="Ex: Gato isolado, medicação administrada..."></textarea>
+
+                                            <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+                                                <button type="button" class="btn btn-secondary"
+                                                        onclick="document.getElementById('modalNota').style.display='none'">
+                                                    Cancelar
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Guardar e Terminar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </c:otherwise>
