@@ -69,46 +69,48 @@ public class DataInitializer {
                 s.setLowStock(s.isLowStock());
                 stockRepo.save(s);
             }
+        }else if(shiftRepo.count() == 0){
+            // NOVO — dados de teste para turnos
+            if (shiftRepo.count() == 0) {
+                User joao = userRepository.getUserByUsername("joao.vol");
+                User pedro = userRepository.getUserByUsername("pedro.vol");
+
+                Shift s1 = new Shift();
+                s1.setDate(LocalDate.now().plusDays(3));
+                s1.setStartTime(LocalTime.of(9, 0));
+                s1.setEndTime(LocalTime.of(13, 0));
+                s1.setVolunteers(List.of(joao, pedro));
+                s1.setTasks(new ArrayList<>());
+                shiftRepo.save(s1);
+
+                Shift s2 = new Shift();
+                s2.setDate(LocalDate.now().plusDays(7));
+                s2.setStartTime(LocalTime.of(14, 0));
+                s2.setEndTime(LocalTime.of(18, 0));
+                s2.setVolunteers(List.of(joao));
+                s2.setTasks(new ArrayList<>());
+                shiftRepo.save(s2);
+
+                Shift s3 = new Shift();
+                s3.setDate(LocalDate.now().minusDays(5));
+                s3.setStartTime(LocalTime.of(9, 0));
+                s3.setEndTime(LocalTime.of(13, 0));
+                s3.setVolunteers(List.of(joao));
+                s3.setTasks(new ArrayList<>());
+                shiftRepo.save(s3);
+
+                Shift s4 = new Shift();
+                s4.setDate(LocalDate.now());
+                s4.setStartTime(LocalTime.of(9, 0));
+                s4.setEndTime(LocalTime.of(13, 0));
+                s4.setVolunteers(List.of(joao));
+                s4.setTasks(new ArrayList<>());
+                shiftRepo.save(s4);
+            }
         }else{
             return;
         }
 
-        // NOVO — dados de teste para turnos
-        if (shiftRepo.count() == 0) {
-            User joao = userRepository.getUserByUsername("joao.vol");
-            User pedro = userRepository.getUserByUsername("pedro.vol");
 
-            Shift s1 = new Shift();
-            s1.setDate(LocalDate.now().plusDays(3));
-            s1.setStartTime(LocalTime.of(9, 0));
-            s1.setEndTime(LocalTime.of(13, 0));
-            s1.setVolunteers(List.of(joao, pedro));
-            s1.setTasks(new ArrayList<>());
-            shiftRepo.save(s1);
-
-            Shift s2 = new Shift();
-            s2.setDate(LocalDate.now().plusDays(7));
-            s2.setStartTime(LocalTime.of(14, 0));
-            s2.setEndTime(LocalTime.of(18, 0));
-            s2.setVolunteers(List.of(joao));
-            s2.setTasks(new ArrayList<>());
-            shiftRepo.save(s2);
-
-            Shift s3 = new Shift();
-            s3.setDate(LocalDate.now().minusDays(5));
-            s3.setStartTime(LocalTime.of(9, 0));
-            s3.setEndTime(LocalTime.of(13, 0));
-            s3.setVolunteers(List.of(joao));
-            s3.setTasks(new ArrayList<>());
-            shiftRepo.save(s3);
-
-            Shift s4 = new Shift();
-            s4.setDate(LocalDate.now());
-            s4.setStartTime(LocalTime.of(9, 0));
-            s4.setEndTime(LocalTime.of(13, 0));
-            s4.setVolunteers(List.of(joao));
-            s4.setTasks(new ArrayList<>());
-            shiftRepo.save(s4);
-        }
     }
 }
