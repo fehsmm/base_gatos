@@ -85,7 +85,7 @@
             <div><h3>Alimentação</h3><p class="text-sm">Ração de qualidade para todos os gatos</p><p class="text-sm text-orange" style="font-weight:600">€500/mês</p></div>
         </div></div>
         <div class="card"><div class="card-body" style="display:flex;gap:1rem">
-            <div style="width:3rem;height:3rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem">🩺</div>
+            <div style="width:3rem;height:3rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem"></div>
             <div><h3>Cuidados Veterinários</h3><p class="text-sm">Consultas, vacinas e tratamentos</p><p class="text-sm text-orange" style="font-weight:600">€800/mês</p></div>
         </div></div>
         <div class="card"><div class="card-body" style="display:flex;gap:1rem">
@@ -111,7 +111,7 @@
             <h3>Doações em Espécie</h3>
             <p class="text-sm mb-4">Também aceitamos doações de ração, areia para gatos, brinquedos, camas, mantas e outros itens essenciais. Contacte-nos para coordenar a entrega.</p>
             <h3>Voluntariado</h3>
-            <p class="text-sm">O seu tempo também é valioso! Se prefere contribuir com o seu tempo e dedicação, considere tornar-se voluntário.</p>
+            <p class="text-sm">O seu tempo também é valioso! Se prefere contribuir com o seu tempo e dedicação, considere tornar-se voluntário!</p>
         </div>
     </div>
 </div>
