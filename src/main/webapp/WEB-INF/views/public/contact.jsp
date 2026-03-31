@@ -45,7 +45,7 @@
                     <div><h3>Telefone</h3><a href="tel:+351912345678" style="color:#f97316;font-size:.875rem">+351 912 345 678</a></div>
                 </div></div>
                 <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
-                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">️</div>
+                    <div style="width:2.5rem;height:2.5rem;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg></div>
                     <div><h3>Email</h3><a href="mailto:info@abrigofelino.pt" style="color:#f97316;font-size:.875rem">info@abrigofelino.pt</a></div>
                 </div></div>
                 <div class="card"><div class="card-body" style="display:flex;gap:.75rem">
