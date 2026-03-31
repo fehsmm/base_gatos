@@ -68,7 +68,7 @@
                     <label>Método de Pagamento</label>
                     <div style="display:flex;flex-direction:column;gap:.5rem">
                         <button type="button" class="btn btn-outline" style="justify-content:flex-start;gap:.75rem">💳 Cartão de Crédito/Débito</button>
-                        <button type="button" class="btn btn-outline" style="justify-content:flex-start;gap:.75rem"> Transferência Bancária</button>
+                        <button type="button" class="btn btn-outline" style="justify-content:flex-start;gap:.75rem">🏦 Transferência Bancária</button>
                     </div>
                 </div>
                 <button type="submit" id="donateBtn" class="btn btn-primary btn-lg w-full" disabled>Fazer Donativo</button>
