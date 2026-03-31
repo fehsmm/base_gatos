@@ -138,7 +138,7 @@ public class AdminController {
     public String createShift(@ModelAttribute CreateShiftModel model,
                               RedirectAttributes redirectAttributes) {
         shiftService.createShift(model);
-        redirectAttributes.addFlashAttribute("success", "Turno atualizado com sucesso!");
+        redirectAttributes.addFlashAttribute("success", "Turno criado com sucesso!");
         return "redirect:/admin/manage-schedule";
     }
 
@@ -146,7 +146,7 @@ public class AdminController {
     public String deleteShift(@RequestParam("shiftId") Long shiftId,
                               RedirectAttributes redirectAttributes) {
         shiftService.deleteShift(shiftId);
-        redirectAttributes.addFlashAttribute("success", "Turno atualizado com sucesso!");
+        redirectAttributes.addFlashAttribute("success", "Turno eliminado com sucesso!");
         return "redirect:/admin/manage-schedule";
     }
 

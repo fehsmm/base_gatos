@@ -87,7 +87,7 @@
                 <h1 style="margin-bottom:.25rem">
                     Gestão de Escalas
                 </h1>
-                <p>Organização dos turnos e tarefas dos voluntários.</p>
+                <p>Organização dos turnos e tarefas dos voluntários</p>
 
             </div>
 
@@ -172,17 +172,10 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
                                     </button>
 
-                                    <form action="/admin/delete-shift" method="POST"
-                                          onsubmit="return confirm('Tem a certeza que quer eliminar este turno?')">
-
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <input type="hidden" name="shiftId" value="${shift.id}"/>
-
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-                                        </button>
-
-                                    </form>
+                                    <button class="btn btn-sm btn-outline-danger"
+                                            onclick="openDeleteModal(${shift.id})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                    </button>
 
                                 </div>
                             </div>
@@ -331,6 +324,37 @@
 
 </div>
 
+<div id="deleteModal" class="modal-overlay">
+
+    <div class="modal-content" style="max-width:400px">
+
+        <h5 class="mb-3">Eliminar Turno</h5>
+
+        <p class="text-muted">
+            Tens a certeza que queres eliminar este turno?
+        </p>
+
+        <form id="deleteForm" method="POST" action="/admin/delete-shift">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="shiftId" id="deleteShiftId"/>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-danger">
+                    Eliminar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 <script>
     function openModal() {
         document.getElementById("addShiftModal").classList.add("open");
@@ -359,6 +383,16 @@
 
         const form = document.querySelector("#addShiftModal form");
         form.action = "/admin/update-shift";
+    }
+
+    function openDeleteModal(id) {
+        console.log("abrir modal", id); // debug
+        document.getElementById("deleteShiftId").value = id;
+        document.getElementById("deleteModal").classList.add("open");
+    }
+
+    function closeDeleteModal() {
+        document.getElementById("deleteModal").classList.remove("open");
     }
 
     /*function editShift(Long id) {

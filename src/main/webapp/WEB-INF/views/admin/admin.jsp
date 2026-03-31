@@ -93,22 +93,44 @@
         </c:if>
 
         <c:if test="${pendingUserCount > 0 || lowStockCount > 0}">
-            <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
 
                 <c:if test="${pendingUsersCount > 0}">
-                    <div class="alert alert-warning" style="flex:1;min-width:200px">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
-                        ${pendingUsersCount} conta(s) pendente(s) de aprovação —
-                        <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver agora</a>
-                    </div>
+                    <c:choose>
+                        <c:when test="${pendingUsersCount == 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#854d0e"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                    ${pendingUsersCount} conta pendente de aprovação —
+                                <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver agora</a>
+                            </div>
+                        </c:when>
+                        <c:when test="${pendingUsersCount > 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#854d0e"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                    ${pendingUsersCount} contas pendentes de aprovação —
+                                <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver agora</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </c:if>
 
                 <c:if test="${lowStockCount > 0}">
-                    <div class="alert alert-error" style="flex:1;min-width:200px">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="inherit"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg>
-                        ${lowStockCount} item(ns) de stock abaixo do mínimo —
-                        <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver agora</a>
-                    </div>
+                    <c:choose>
+                        <c:when test="${lowStockCount == 1}">
+                            <div class="alert alert-error" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#991b1b"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg>
+                                    ${lowStockCount} item de stock abaixo do mínimo —
+                                <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver agora</a>
+                            </div>
+                        </c:when>
+                        <c:when test="${lowStockCount > 1}">
+                            <div class="alert alert-error" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#991b1b"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg>
+                                    ${lowStockCount} itens de stock abaixo do mínimo —
+                                <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver agora</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </c:if>
 
             </div>
@@ -214,13 +236,33 @@
                     <ul style="margin-top:.5rem; padding-left:1.25rem;">
 
                         <c:if test="${pendingUsersCount > 0}">
-                            <li>${pendingUsersCount} utilizador(es) pendente(s) de aprovação</li>
-                            <a href="/admin/manage-user">Ver</a>
+                            <c:choose>
+                                <c:when test="${pendingUsersCount == 1}">
+                                    <li>${pendingUsersCount} utilizador pendente de aprovação
+                                        <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver</a>
+                                    </li>
+                                </c:when>
+                                <c:when test="${pendingUsersCount > 1}">
+                                    <li>${pendingUsersCount} utilizadores pendentes de aprovação
+                                        <a href="/admin/manage-user" style="color:inherit;font-weight:600">Ver</a>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                         </c:if>
 
                         <c:if test="${lowStockCount > 0}">
-                            <li>${lowStockCount} item(ns) com stock baixo</li>
-                            <a href="/admin/manage-stock">Ver</a>
+                            <c:choose>
+                                <c:when test="${pendingUsersCount == 1}">
+                                    <li>${lowStockCount} item com stock baixo
+                                        <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver</a>
+                                    </li>
+                                </c:when>
+                                <c:when test="${pendingUsersCount > 1}">
+                                    <li>${lowStockCount} itens com stock baixo
+                                        <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver</a>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                         </c:if>
 
                     </ul>
@@ -230,7 +272,7 @@
 
         <c:if test="${pendingUsersCount == 0 && lowStockCount == 0}">
             <div style="padding: 0 1.5rem; margin-top:1.5rem;">
-                <div class="alert alert-success">
+                <div class="alert alert-success" style="margin-bottom: 1.5rem">
                     ✔ Tudo agendado no abrigo, sem ações necessárias.
                 </div>
             </div>

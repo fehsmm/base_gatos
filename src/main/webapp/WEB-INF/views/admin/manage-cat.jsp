@@ -76,8 +76,54 @@
 
     </aside>
 
-    <main>
+    <main class="admin-main">
 
+        <div style="padding:1.5rem">
+
+        <div class="mb-8">
+            <h1 style="margin-bottom:.25rem">
+                Gestão de Gatos
+            </h1>
+            <p>Visualização e gestão dos gatos do abrigo</p>
+        </div>
+
+        <c:if test="${success != null}">
+            <div class="alert alert-success">${success}</div>
+        </c:if>
+
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                        <strong>Gatos Resgatados</strong>
+                        <button class="btn btn-dark position-absolute top-0 end-0" onclick="openModal()" style="margin-top: 12px; margin-right: 12px">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                            Adicionar Gato
+                        </button>
+                    </div>
+
+                    <div class="card-body">
+                        <c:forEach var="cat" items="${cats}">
+                            <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
+                                <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
+                                <div style="flex:1">
+                                    <div style="font-weight:500">${cat.name}</div>
+                                    <div class="text-sm text-gray">${cat.breed}</div>
+                                </div>
+                                <span class="badge
+                                    ${cat.status == 'Disponível' ? 'badge-green' :
+                                    (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
+                                        ${cat.status}
+                                </span>
+                            </div>
+                        </c:forEach>
+
+                        <c:if test="${empty cats}">
+                            <div class="text-gray text-sm">Sem gatos resgatados.</div>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 </div>
