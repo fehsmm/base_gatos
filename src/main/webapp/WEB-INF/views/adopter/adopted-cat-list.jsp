@@ -56,7 +56,8 @@
 
     </aside>
 
-    <div class="container-fluid">
+    <div class="container">
+    <div class="container-fluid p-4">
 
         <!-- HEADER -->
         <div class="d-flex align-items-center mb-4">
@@ -138,6 +139,7 @@
         </c:if>
 
     </div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
