@@ -30,6 +30,7 @@ public class AuthController {
     public String forgotPasswordPage(){
         return "auth/forgot-password";
     }
+
     @PostMapping(value = "/signUpAction")
     public String signUpAction(SignUpModel signUp) {
         User user = authService.register(signUp);

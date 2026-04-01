@@ -101,4 +101,32 @@ public class CatService {
         return catRepository.findByStatus(effectiveStatus);
     }
 
+    public int countAvailableCats() {
+        int catCount = 0;
+        for (Cat cat : catRepository.findAll()) {
+            if(cat.getStatus().equals("Disponível")) {
+                catCount++;
+            }
+        }
+        return catCount;
+    }
+
+    public int countAdoptedCats() {
+        int catCount = 0;
+        for (Cat cat : catRepository.findAll()) {
+            if(cat.getStatus().equals("Adotado")) {
+                catCount++;
+            }
+        }
+        return catCount;
+    }
+
+    public int countAllCats() {
+        int catCount = 0;
+        for (Cat cat : catRepository.findAll()) {
+            catCount++;
+        }
+        return catCount;
+    }
+
 }

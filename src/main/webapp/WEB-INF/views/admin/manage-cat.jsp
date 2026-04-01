@@ -82,6 +82,7 @@
 
         <div class="mb-8">
             <h1 style="margin-bottom:.25rem">
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
                 Gestão de Gatos
             </h1>
             <p>Visualização e gestão dos gatos do abrigo</p>
@@ -90,6 +91,27 @@
         <c:if test="${success != null}">
             <div class="alert alert-success">${success}</div>
         </c:if>
+
+            <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
+                <div class="card" style="flex:1; text-align:center; padding:1rem;">
+                    <h3>${allCats}</h3>
+                    <p class="text-muted">Total de Gatos</p>
+                </div>
+
+                <div class="card" style="flex:1; text-align:center; padding:1rem;">
+                    <h3>
+                        <c:out value="${availableCats}" />
+                    </h3>
+                    <p class="text-muted">Disponíveis</p>
+                </div>
+
+                <div class="card" style="flex:1; text-align:center; padding:1rem;">
+                    <h3>
+                        <c:out value="${adoptedCats}" />
+                    </h3>
+                    <p class="text-muted">Adotados</p>
+                </div>
+            </div>
 
             <div class="card-body">
                 <div class="card">
@@ -104,16 +126,54 @@
                     <div class="card-body">
                         <c:forEach var="cat" items="${cats}">
                             <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
-                                <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
-                                <div style="flex:1">
-                                    <div style="font-weight:500">${cat.name}</div>
-                                    <div class="text-sm text-gray">${cat.breed}</div>
+
+                                <div style="flex:2; display:flex; align-items:center; gap:.75rem;">
+                                    <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
+                                    <div style="flex:1">
+                                        <div style="font-weight:500">${cat.name}</div>
+                                        <div class="text-sm text-gray">${cat.breed}</div>
+                                    </div>
                                 </div>
-                                <span class="badge
-                                    ${cat.status == 'Disponível' ? 'badge-green' :
-                                    (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
-                                        ${cat.status}
-                                </span>
+
+                                <div style="flex:2;">
+                                        ${cat.age} anos • ${cat.gender}
+                                </div>
+
+                                <div style="flex:1;">
+                                    <span class="badge
+                                        ${cat.status == 'Disponível' ? 'badge-green' :
+                                        (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
+                                            ${cat.status}
+                                    </span>
+                                </div>
+
+                                <div style="flex:1;">
+                                        ${cat.arrivalDate}
+                                </div>
+
+                                <!-- AÇÕES -->
+                                <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
+
+                                    <!-- EDIT -->
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            onclick="editCat(${cat.id})">
+                                        ✏️
+                                    </button>
+
+                                    <!-- DELETE -->
+                                    <form action="/admin/delete-cat" method="POST"
+                                          onsubmit="return confirm('Eliminar este gato?')">
+
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <input type="hidden" name="catId" value="${cat.id}"/>
+
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            🗑️
+                                        </button>
+                                    </form>
+
+                                </div>
+
                             </div>
                         </c:forEach>
 

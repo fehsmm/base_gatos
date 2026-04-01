@@ -85,6 +85,7 @@
         <div style="padding:1.5rem">
             <div class="mb-8">
                 <h1 style="margin-bottom:.25rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-188.5-11.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5ZM640-400q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-188.5-11.5Q280-263 280-280t11.5-28.5Q303-320 320-320t28.5 11.5Q360-297 360-280t-11.5 28.5Q337-240 320-240t-28.5-11.5ZM640-240q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
                     Gestão de Escalas
                 </h1>
                 <p>Organização dos turnos e tarefas dos voluntários</p>
@@ -102,7 +103,7 @@
                 Escalas dos próximos dias.
             </h4>
             <p class="text-muted">
-                ${fn:length(shifts)} turnos agendados.
+                ${shiftCount} turnos agendados.
             </p>
 
             <button class="btn btn-dark position-absolute top-0 end-0" onclick="openModal()">
@@ -289,22 +290,24 @@
                 <h5>Tarefas</h5>
                 <div id="tasksList"></div>
 
-                    <label>
-                        Título da Tarefa
-                        <input type="text" id="taskTitle" class="form-control mb-2" placeholder="Ex: Alimentar os gatos"/>
-                    </label>
+                <form method="POST" action="/admin/addTaskAction" class="row gx-5 gy-4">
+                    for
 
-                    <label>
-                        Descrição (opcional)
-                        <input type="text" id="taskDesc" class="form-control mb-2" placeholder="Ex: Gato Mike deve receber ração de sénior."/>
-                    </label>
+                    <label class="form-label">
+                            Título da Tarefa
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Ex: Alimentar os gatos">
+                        </label>
 
-                <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTask()">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                    Adicionar Tarefa
-                </button>
+                        <label class="form-label">
+                            Desrição da Tarefa (opcional)
+                        </label>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Ex: Gato Mike deve receber ração de sénior.">
 
-                <div id="taskHiddenInputs"></div>
+                    <button type="submit" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb; margin-top:20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                        Adicionar Tarefa
+                    </button>
+                </form>
 
             </div>
 
@@ -393,52 +396,6 @@
     function closeDeleteModal() {
         document.getElementById("deleteModal").classList.remove("open");
     }
-
-    /*let taskIndex = 0;
-
-    function addTask() {
-        const title = document.getElementById("taskTitle").value.trim();
-        const desc = document.getElementById("taskDesc").value.trim();
-
-        if (!title) {
-            alert("Título obrigatório");
-            return;
-        }
-
-        const list = document.getElementById("tasksList");
-        const div = document.createElement("div");
-        div.className = "border p-2 mb-2 d-flex justify-content-between";
-
-        div.innerHTML = `
-        <div>
-            <strong>${title}</strong>
-            <div style="font-size:12px">${desc}</div>
-        </div>
-        <button type="button" onclick="removeTask(this, ${taskIndex})">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
-        </button>
-    `;
-
-        list.appendChild(div);
-        const hidden = document.getElementById("taskHiddenInputs");
-
-        hidden.insertAdjacentHTML("beforeend", `
-        <input type="hidden" name="tasks[${taskIndex}].title" value="${title}">
-        <input type="hidden" name="tasks[${taskIndex}].description" value="${desc}">
-    `);
-
-        taskIndex++;
-
-        document.getElementById("taskTitle").value = "";
-        document.getElementById("taskDesc").value = "";
-    }*/
-
-    /*function removeTask(button, index) {
-        button.parentElement.remove();
-        const hidden = document.getElementById("taskHiddenInputs");
-        const inputs = hidden.querySelectorAll(`[name^="tasks[${index}]"]`);
-        inputs.forEach(i => i.remove());
-    }*/
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">

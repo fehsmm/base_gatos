@@ -75,7 +75,23 @@
 
     </aside>
 
-    <main>
+    <main class="admin-main">
+
+        <div style="padding:1.5rem">
+            <div class="mb-8">
+                <h1 style="margin-bottom:.25rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+                    Notas de Turno
+                </h1>
+                <p>Visualização de observações dos voluntários</p>
+
+            </div>
+
+            <c:if test="${success != null}">
+                <div class="alert alert-success">${success}</div>
+            </c:if>
+
+        </div>
 
     </main>
 

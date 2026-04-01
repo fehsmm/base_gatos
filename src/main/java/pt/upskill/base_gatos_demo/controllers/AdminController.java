@@ -6,12 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.*;
+import pt.upskill.base_gatos_demo.models.AddTaskModel;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.models.EditShiftModel;
+import pt.upskill.base_gatos_demo.models.SignUpModel;
 import pt.upskill.base_gatos_demo.repositories.*;
-import pt.upskill.base_gatos_demo.services.ShiftService;
-import pt.upskill.base_gatos_demo.services.StockService;
-import pt.upskill.base_gatos_demo.services.UserService;
+import pt.upskill.base_gatos_demo.services.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +45,12 @@ public class AdminController {
     @Autowired
     ShiftRepository shiftRepository;
 
+    @Autowired
+    TaskService taskService;
+
+    @Autowired
+    CatService catService;
+
     @GetMapping(value="/")
     public String admin(Model model){
         List<Cat> cats = catRepository.findAll();
@@ -75,8 +81,9 @@ public class AdminController {
             formattedDate = formattedDate.substring(0,1).toUpperCase() + formattedDate.substring(1);
             shiftsByDay.put(formattedDate, shifts);
         }
-        List<Shift> shifts = shiftRepository.findAll();
+        int shiftCount = shiftService.getTotalShiftsForWeek(today);
         List<User> volunteers = userRepository.findByRole("VOLUNTEER");
+        List<Task> tasks = new ArrayList<>();
         Map<Long, Integer> completedTasks = new HashMap<>();
         Map<Long, Integer> totalTasks = new HashMap<>();
         for (List<Shift> shiftList : shiftsByDay.values()) {
@@ -88,7 +95,7 @@ public class AdminController {
         model.addAttribute("today", LocalDate.now());
         model.addAttribute("shiftsByDay", shiftsByDay);
         model.addAttribute("volunteers", volunteers);
-        model.addAttribute("shifts", shifts);
+        model.addAttribute("shiftCount", shiftCount);
         model.addAttribute("completedMap", completedTasks);
         model.addAttribute("totalMap", totalTasks);
         String todayFormatted = LocalDate.now().format(formatter);
@@ -97,6 +104,7 @@ public class AdminController {
         tomorrowFormatted =  tomorrowFormatted.substring(0,1).toUpperCase() + tomorrowFormatted.substring(1);
         model.addAttribute("todayFormatted", todayFormatted);
         model.addAttribute("tomorrowFormatted", tomorrowFormatted);
+        model.addAttribute("tasks", LocalDate.now());
         return "admin/manage-schedule";
     }
 
@@ -127,7 +135,13 @@ public class AdminController {
     @GetMapping(value = "/manage-cat")
     public String manageCat(Model model){
         List<Cat> cats = catRepository.findAll();
+        int availableCats = catService.countAvailableCats();
+        int adoptedCats = catService.countAdoptedCats();
+        int allCats = catService.countAllCats();
         model.addAttribute("cats", cats);
+        model.addAttribute("availableCats", availableCats);
+        model.addAttribute("adoptedCats", adoptedCats);
+        model.addAttribute("allCats", allCats);
         return "admin/manage-cat";
     }
 
@@ -156,6 +170,12 @@ public class AdminController {
         shiftService.updateShift(model);
         redirectAttributes.addFlashAttribute("success", "Turno atualizado com sucesso!");
         return "redirect:/admin/manage-schedule";
+    }
+
+    @PostMapping(value = "/addTaskAction")
+    public String addTaskAction(AddTaskModel model) {
+        Task task = taskService.createTask(model);
+        return "redirect:/admin/create-shift";
     }
 
     //post mapping add cat

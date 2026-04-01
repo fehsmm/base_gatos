@@ -15,6 +15,7 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class ShiftService {
     @Autowired
     TaskRepository taskRepository;
 
-    public List<Shift> getShifts(@Nullable LocalDate date) {
+    public List<Shift> getShifts (@Nullable LocalDate date) {
         User user = authService.getAuthenticatedUser();
         if (user.isVolunteer()) {
             if(date == null) {
@@ -49,6 +50,16 @@ public class ShiftService {
             }
         }
         return new ArrayList<>();
+    }
+
+    public int getTotalShiftsForWeek (LocalDate date) {
+        int shiftCount = 0;
+        for (int i = 0; i < 7; i++) {
+            date = date.plusDays(i);
+            List<Shift> shifts = shiftRepository.findByDate(date);
+            shiftCount = shiftCount + shifts.size();
+        }
+        return shiftCount;
     }
 
     public int getCompletedTasksCount(Shift shift) {
