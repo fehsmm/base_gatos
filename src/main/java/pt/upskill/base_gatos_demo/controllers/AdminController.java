@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.*;
-import pt.upskill.base_gatos_demo.models.AddTaskModel;
-import pt.upskill.base_gatos_demo.models.CreateShiftModel;
-import pt.upskill.base_gatos_demo.models.EditShiftModel;
-import pt.upskill.base_gatos_demo.models.SignUpModel;
+import pt.upskill.base_gatos_demo.models.*;
 import pt.upskill.base_gatos_demo.repositories.*;
 import pt.upskill.base_gatos_demo.services.*;
 
@@ -83,7 +80,7 @@ public class AdminController {
         }
         int shiftCount = shiftService.getTotalShiftsForWeek(today);
         List<User> volunteers = userRepository.findByRole("VOLUNTEER");
-        List<Task> tasks = new ArrayList<>();
+        List<AddTaskModel> tasks = new ArrayList<>();
         Map<Long, Integer> completedTasks = new HashMap<>();
         Map<Long, Integer> totalTasks = new HashMap<>();
         for (List<Shift> shiftList : shiftsByDay.values()) {
@@ -104,7 +101,7 @@ public class AdminController {
         tomorrowFormatted =  tomorrowFormatted.substring(0,1).toUpperCase() + tomorrowFormatted.substring(1);
         model.addAttribute("todayFormatted", todayFormatted);
         model.addAttribute("tomorrowFormatted", tomorrowFormatted);
-        model.addAttribute("tasks", LocalDate.now());
+        model.addAttribute("tasks", tasks);
         return "admin/manage-schedule";
     }
 
@@ -172,15 +169,37 @@ public class AdminController {
         return "redirect:/admin/manage-schedule";
     }
 
-    @PostMapping(value = "/addTaskAction")
-    public String addTaskAction(AddTaskModel model) {
+    /*@PostMapping(value = "/addTaskAction")
+    public List<Task> addTaskAction(AddTaskModel model, List<Task> tasks) {
         Task task = taskService.createTask(model);
-        return "redirect:/admin/create-shift";
+        tasks.add(task);
+        return tasks;
+    }*/
+
+    @PostMapping(value = "/create-cat")
+    public String createCat(@ModelAttribute CreateCatModel model, RedirectAttributes redirectAttributes) {
+        catService.createCat(model);
+        redirectAttributes.addFlashAttribute("success", "Gato registado com sucesso!");
+        return "redirect:/admin/manage-cat";
     }
 
-    //post mapping add cat
-    //post mapping edit cat
-    //perguntat sobre eliminar gato
+    @PostMapping(value = "/delete-catt")
+    public String deleteCat(@RequestParam("catId") Long catId,
+                              RedirectAttributes redirectAttributes) {
+        catService.deleteCat(catId);
+        redirectAttributes.addFlashAttribute("success", "Gato eliminado com sucesso!");
+        return "redirect:/admin/manage-cat";
+    }
+
+    @PostMapping("/update-cat")
+    public String updateCat(@ModelAttribute EditCatModel model,
+                              RedirectAttributes redirectAttributes) {
+        catService.updateCat(model);
+        redirectAttributes.addFlashAttribute("success", "Gato atualizado com sucesso!");
+        return "redirect:/admin/manage-cat";
+    }
+
+    //ADICIONAR GATO - LISTA DE TAGS (ver como a das tarefas)
 
     //post mapping aceitar/rejeitar voluntarios
     //eliminar user

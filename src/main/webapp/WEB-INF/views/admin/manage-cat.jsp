@@ -136,7 +136,7 @@
                                 </div>
 
                                 <div style="flex:2;">
-                                        ${cat.age} anos • ${cat.gender}
+                                        ${cat.estimatedAge} anos • ${cat.gender}
                                 </div>
 
                                 <div style="flex:1;">
@@ -151,26 +151,35 @@
                                         ${cat.arrivalDate}
                                 </div>
 
-                                <!-- AÇÕES -->
                                 <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
 
-                                    <!-- EDIT -->
-                                    <button class="btn btn-sm btn-outline-primary"
-                                            onclick="editCat(${cat.id})">
-                                        ✏️
-                                    </button>
-
-                                    <!-- DELETE -->
-                                    <form action="/admin/delete-cat" method="POST"
-                                          onsubmit="return confirm('Eliminar este gato?')">
-
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <input type="hidden" name="catId" value="${cat.id}"/>
-
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            🗑️
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                onclick="editCat(this)"
+                                                data-id="${cat.id}"
+                                                data-image="${cat.image}"
+                                                data-name="${cat.name}"
+                                                data-estimatedAge="${cat.estimatedAge}"
+                                                data-gender="${cat.gender}"
+                                                data-breed="${cat.breed}"
+                                                data-status="${cat.status}"
+                                                data-arrivalDate="${cat.arrivalDate}"
+                                                data-description="${cat.description}"
+                                                data-tags="${cat.tags}"
+                                                data-fiv="${cat.fiv}"
+                                                data-felv="${cat.felv}"
+                                                data-vaccination="${cat.vaccination}"
+                                                data-parasiteControl="${cat.parasiteControl}"
+                                                data-sterilization="${cat.sterilization}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
                                         </button>
-                                    </form>
+
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                onclick="openDeleteModal(${cat.id})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                        </button>
+
+                                    </div>
 
                                 </div>
 
@@ -187,6 +196,218 @@
     </main>
 
 </div>
+
+<div id="addCatModal" class="modal-overlay">
+
+    <div class="modal-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Registar Novo Gato</h4>
+            <button class="modal-close" onclick="closeModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
+        </div>
+
+        <form action="/admin/create-cat" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="id"/>
+            <h3 class="mb-4">Detalhes do Gato</h3>
+
+            <div class="row">
+                <div class="col">
+                    <label>Nome</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Insira o nome do gato" required/>
+                </div>
+                <div class="col">
+                    <label>Idade Estimada</label>
+                    <input type="text" name="estimatedAge" class="form-control" id="estimatedAge" placeholder="Ex: 1 ano / 4-5 meses" required/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Raça</label>
+                    <input type="text" name="breed" class="form-control" id="breed" placeholder="Ex: Gato laranja"/>
+                </div>
+                <div class="col">
+                    <label>Género</label>
+                    <select class="form-control" name="gender" id="gender" required>
+                        <option disabled selected> Selecione o sexo do gato </option>
+                        <option>Macho</option>
+                        <option>Fêmea</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Estado de Adoção</label>
+                    <select class="form-control" name="status" id="status" required>
+                        <option disabled selected> Selecione o estado do gato </option>
+                        <option>Disponível</option>
+                        <option>Em Processo</option>
+                        <option>Adotado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Data de Entrada</label>
+                    <input type="date" name="date" id="date" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Descrição</label>
+                <input type="text" name="description" id="description" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Foto</label>
+                <input type="file" name="image" id="image" class="form-control-file" required>
+            </div>
+
+            <!-- FALTA A LISTA DE TAGS
+            <div class="mt-4">
+                <h5>Traços de Personalidade</h5>
+                <div id="tagList">
+
+                    <label class="form-label">
+                        Traço de Personalidade
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="Ex: Carinhoso">
+                    </label>
+
+                    <label class="form-label">
+                        Descrição da Tarefa (opcional)
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Ex: Gato Mike deve receber ração de sénior.">
+                    </label>
+
+                    <button type="button" class="modal-close" onclick="addTask()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                        Adicionar Tarefa
+                    </button>
+
+
+                    <c:forEach var="task" items="${tasks}">
+                        <div>
+                                ${task.title}
+                        </div>
+
+                        <c:if test="${not empty task.description}">
+                            <small class="text-muted">
+                                    ${task.description}
+                            </small>
+                        </c:if>
+                    </c:forEach>
+
+                </div>
+
+            </div> -->
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" style="background-color:#9ca3af" onclick="closeModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-dark" style="background-color:#f97316; color:white">
+                    Registar Gato
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<div id="deleteModal" class="modal-overlay">
+
+    <div class="modal-content" style="max-width:400px">
+
+        <h5 class="mb-3">Eliminar Gato</h5>
+
+        <p class="text-muted">
+            Tens a certeza que queres eliminar este gato?
+        </p>
+
+        <form id="deleteForm" method="POST" action="/admin/delete-cat">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="catId" id="deleteCatId"/>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-danger">
+                    Eliminar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById("addCatModal").classList.add("open");
+    }
+
+    function closeModal() {
+        document.getElementById("addCatModal").classList.remove("open");
+        const form = document.querySelector("#addCatModal form");
+        form.reset();
+        form.action = "/admin/create-cat";
+        document.getElementById("catId").value = "";
+    }
+
+    function editCat(button) {
+        const id = button.getAttribute("data-id");
+        const image = button.getAttribute("data-image");
+        const name = button.getAttribute("data-name");
+        const estimatedAge = button.getAttribute("data-estimatedAge");
+        const breed = button.getAttribute("data-breed");
+        const status = button.getAttribute("data-status");
+        const arrivalDate = button.getAttribute("data-arrivalDate");
+        const description = button.getAttribute("data-description");
+        const tags = button.getAttribute("data-tags");
+        const fiv = button.getAttribute("data-fiv");
+        const felv = button.getAttribute("data-felv");
+        const vaccination = button.getAttribute("data-vaccination");
+        const parasiteControl = button.getAttribute("data-parasiteControl");
+        const sterilization = button.getAttribute("data-sterilization");
+
+        openModal();
+
+        document.querySelector("input[name='id']").value = id;
+        document.querySelector("input[name='image']").value = image;
+        document.querySelector("input[name='name']").value = name;
+        document.querySelector("input[name='estimatedAge']").value = estimatedAge;
+        document.querySelector("input[name= 'breed']").value = breed;
+        document.querySelector("input[name= 'status']").value = status;
+        document.querySelector("input[name= 'arrivalDate']").value = arrivalDate;
+        document.querySelector("input[name= 'description']").value = description;
+        document.querySelector("input[name= 'tags']").value = tags;
+        document.querySelector("input[name= 'fiv']").value = fiv;
+        document.querySelector("input[name= 'felv']").value = felv;
+        document.querySelector("input[name= 'vaccination']").value = vaccination;
+        document.querySelector("input[name= 'parasiteControl']").value = parasiteControl;
+        document.querySelector("input[name= 'sterilization']").value = sterilization;
+
+        const form = document.querySelector("#addCatModal form");
+        form.action = "/admin/update-cat";
+    }
+
+    function openDeleteModal(id) {
+        console.log("abrir modal", id); // debug
+        document.getElementById("deleteCatId").value = id;
+        document.getElementById("deleteModal").classList.add("open");
+    }
+
+    function closeDeleteModal() {
+        document.getElementById("deleteModal").classList.remove("open");
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

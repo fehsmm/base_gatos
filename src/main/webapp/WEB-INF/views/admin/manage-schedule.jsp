@@ -168,7 +168,9 @@
                                             data-id="${shift.id}"
                                             data-date="${shift.date}"
                                             data-start="${shift.startTime}"
-                                            data-end="${shift.endTime}">
+                                            data-end="${shift.endTime}"
+                                            data-volunteers="${shift.volunteers}"
+                                            data-tasks="${shift.tasks}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
                                     </button>
 
@@ -193,35 +195,31 @@
                                     <span>
                                         <c:choose>
                                             <c:when test="${task.completed}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#16a34a"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
                                             </c:when>
                                             <c:otherwise>
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#adb5bd"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
                                             </c:otherwise>
                                         </c:choose>
                                     </span>
 
                                         <div>
-                                            <div>
-                                                    ${task.title}
-                                            </div>
+                                            <strong>${task.title}</strong>
 
                                             <c:if test="${not empty task.description}">
-                                                <small class="text-muted">
-                                                        ${task.description}
-                                                </small>
+                                                <small class="text-muted"> ${task.description}</small>
                                             </c:if>
 
-                                            <c:if test="${empty shift.tasks}">
-                                                <div class="text-muted text-center p-3">
-                                                    Sem tarefas para este turno.
-                                                </div>
-                                            </c:if>
+
                                         </div>
 
                                     </div>
                                 </c:forEach>
-
+                                <c:if test="${empty shift.tasks}">
+                                    <div class="text-muted text-center p-3">
+                                        Sem tarefas para este turno.
+                                    </div>
+                                </c:if>
                             </div>
 
                         </div>
@@ -288,27 +286,25 @@
 
             <div class="mt-4">
                 <h5>Tarefas</h5>
-                <div id="tasksList"></div>
 
-                <form method="POST" action="/admin/addTaskAction" class="row gx-5 gy-4">
-                    for
+                <div id="tasksList" class="mb-3"></div>
 
-                    <label class="form-label">
-                            Título da Tarefa
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Ex: Alimentar os gatos">
-                        </label>
+                <label>
+                    Título da Tarefa
+                    <input type="text" name="title" id="taskTitle" class="form-control mb-2" placeholder="Ex: Alimentar os gatos">
+                </label>
 
-                        <label class="form-label">
-                            Desrição da Tarefa (opcional)
-                        </label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Ex: Gato Mike deve receber ração de sénior.">
+                <label>
+                    Descrição da Tarefa (opcional)
+                    <input type="text" name="description" id="taskDesc" class="form-control mb-2" placeholder="Ex: Gato Mike deve receber ração de sénior.">
+                </label>
 
-                    <button type="submit" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb; margin-top:20px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                        Adicionar Tarefa
-                    </button>
-                </form>
+                <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTask()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                    Adicionar Tarefa
+                </button>
 
+                <div id="taskHiddenInputs"></div>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
@@ -328,7 +324,7 @@
 
 <div id="deleteModal" class="modal-overlay">
 
-    <div class="modal-content" style="max-width:400px">
+    <div class="modal-content" style="max-width:400px; max-height: fit-content">
 
         <h5 class="mb-3">Eliminar Turno</h5>
 
@@ -375,6 +371,8 @@
         const date = button.getAttribute("data-date");
         const start = button.getAttribute("data-start");
         const end = button.getAttribute("data-end");
+        const volunteers = button.getAttribute("data-volunteers");
+        const tasks = button.getAttribute("data-tasks")
 
         openModal();
 
@@ -382,6 +380,8 @@
         document.querySelector("input[name='date']").value = date;
         document.querySelector("input[name='startTime']").value = start;
         document.querySelector("input[name='endTime']").value = end;
+        document.querySelector("input[name='volunteers']").value = volunteers;
+        document.querySelector("input[name='tasks']").value = tasks;
 
         const form = document.querySelector("#addShiftModal form");
         form.action = "/admin/update-shift";
@@ -395,6 +395,57 @@
 
     function closeDeleteModal() {
         document.getElementById("deleteModal").classList.remove("open");
+    }
+
+    let taskIndex = 0;
+
+    function addTask() {
+        const titleInput = document.getElementById("taskTitle");
+        const descInput = document.getElementById("taskDesc");
+
+        const title = titleInput.value.trim();
+        const description = descInput.value.trim();
+
+        if (!title) {
+            alert("Título obrigatório");
+            return;
+        }
+
+        const list = document.getElementById("tasksList");
+        const div = document.createElement("div");
+        div.className = "border rounded p-2 mb-2 d-flex justify-content-between align-items-center";
+
+        div.innerHTML = `
+        <div>
+            <strong>\${title}</strong>
+            <small>\${description || ''}</small>
+        </div>
+        <button type="button" onclick="removeTask(this, ${taskIndex})" class="btn btn-sm btn-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+        </button>
+    `;
+
+        list.prepend(div);
+
+        const hiddenContainer = document.getElementById("taskHiddenInputs");
+
+        hiddenContainer.insertAdjacentHTML('beforeend', `
+        <input type="hidden" name="tasks[\${taskIndex}].title" value="\${title}">
+        <input type="hidden" name="tasks[\${taskIndex}].description" value="\${description}">
+    `);
+
+        taskIndex++;
+
+        // document.getElementById("taskTitle").value = "";
+        // document.getElementById("taskDesc").value = "";
+    }
+
+    function removeTask(button, index) {
+        button.parentElement.remove();
+        const hidden = document.getElementById("task-hidden-" + index);
+        if(hidden) {
+            hidden.remove();
+        }
     }
 </script>
 
