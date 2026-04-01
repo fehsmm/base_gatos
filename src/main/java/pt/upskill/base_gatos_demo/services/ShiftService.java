@@ -89,6 +89,7 @@ public class ShiftService {
                 Task task = new Task();
                 task.setTitle(t.getTitle());
                 task.setDescription(t.getDescription());
+                task.setCompleted(false);
                 task.setShift(shift);
                 tasks.add(task);
                 taskRepository.save(task);
