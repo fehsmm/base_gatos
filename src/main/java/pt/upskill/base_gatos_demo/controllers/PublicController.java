@@ -1,14 +1,19 @@
 package pt.upskill.base_gatos_demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pt.upskill.base_gatos_demo.entities.Adoption;
 import pt.upskill.base_gatos_demo.entities.Cat;
+import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
+import pt.upskill.base_gatos_demo.repositories.CatRepository;
+import pt.upskill.base_gatos_demo.repositories.UserRepository;
 import pt.upskill.base_gatos_demo.services.CatService;
+import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.util.List;
 
@@ -18,6 +23,13 @@ public class PublicController {
 
     @Autowired
     private CatService catService;
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CatRepository catRepository;
+    @Autowired
+    private AdoptionRepository adoptionRepository;
 
     @GetMapping(value = "/home")
     public String homePage(){
@@ -68,6 +80,37 @@ public class PublicController {
     public String donate(){ return "public/donate";}
 
     //post mapping para o formulario de adocao
+    @PostMapping("/adocao")
+    public String processAdoption(@RequestParam Long catId,
+                                  @RequestParam String applicantName,
+                                  @RequestParam String email,
+                                  @RequestParam String phone,
+                                  @RequestParam String address,
+                                  @RequestParam String reason,
+                                  @RequestParam String experience,
+                                  Authentication authentication,
+                                  RedirectAttributes redirectAttributes) {
+
+        Adoption adoption = new Adoption();
+
+        Cat cat = catRepository.findById(catId).orElse(null);
+        adoption.setCat(cat);
+
+        User user = userRepository.getUserByUsername(authentication.getName());
+        adoption.setUser(user);
+
+        adoption.setApplicantName(applicantName);
+        adoption.setEmail(email);
+        adoption.setPhone(phone);
+        adoption.setAddress(address);
+        adoption.setReason(reason);
+        adoption.setExperience(experience);
+
+        adoptionRepository.save(adoption);
+
+        redirectAttributes.addFlashAttribute("success", "Candidatura enviada com sucesso! Aguarde o nosso contacto.");
+        return "redirect:/adocao";
+    }
 
     //post mapping para formulario de doacao
 

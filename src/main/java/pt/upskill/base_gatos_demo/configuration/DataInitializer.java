@@ -30,11 +30,16 @@ public class DataInitializer {
     @Autowired                          // NOVO
     private ShiftRepository shiftRepo;  // NOVO
 
+    @Autowired
+    private CatRepository catRepo;
+    @Autowired
+    private AdoptionRepository adoptRepo;
+
 
     @PostConstruct
     public void init() {
 
-        if(userRepository.count() == 0) {
+        if (userRepository.count() == 0) {
             // lista de dados
             List<User> users = List.of(
                     new User("AdminSistema", "admin", "123", "admin", 910000001L, "Rua Central, 1", true),
@@ -50,7 +55,9 @@ public class DataInitializer {
                     userRepository.save(user);
                 }
             }
-        }else if(annRepo.count() == 0) {
+        }
+
+        if (annRepo.count() == 0) {
             for (int i = 1; i <= 5; i++) {
                 Announcement a = new Announcement();
                 a.setTitle("Aviso " + i);
@@ -59,7 +66,9 @@ public class DataInitializer {
                 a.setCreatedAt(LocalDateTime.now());
                 annRepo.save(a);
             }
-        }else if(stockRepo.count() == 0) {
+        }
+
+        if (stockRepo.count() == 0) {
             for (int i = 1; i <= 5; i++) {
                 Stock s = new Stock();
                 s.setName("Item " + i);
@@ -69,7 +78,9 @@ public class DataInitializer {
                 s.setLowStock(s.isLowStock());
                 stockRepo.save(s);
             }
-        }else if(shiftRepo.count() == 0){
+        }
+
+        if (shiftRepo.count() == 0) {
             // NOVO — dados de teste para turnos
             if (shiftRepo.count() == 0) {
                 User joao = userRepository.getUserByUsername("joao.vol");
@@ -107,10 +118,64 @@ public class DataInitializer {
                 s4.setTasks(new ArrayList<>());
                 shiftRepo.save(s4);
             }
-        }else{
-            return;
         }
 
+        if (adoptRepo.count() == 0) {
 
+            User maria = userRepository.getUserByUsername("maria.adop");
+
+            if (maria != null &&
+                    adoptRepo.findByUserAndStatus(maria, "Aprovada").isEmpty()) {
+
+                List<Cat> cats = catRepo.findByStatus("Disponível");
+
+                System.out.println("AVAILABLE CATS: " + cats.size());
+
+                if (cats.size() >= 2) {
+
+                    Cat cat1 = cats.get(0);
+                    Cat cat2 = cats.get(1);
+
+                    System.out.println("A criar adoções para: " + maria.getUsername());
+
+                    Adoption a1 = new Adoption();
+                    a1.setUser(maria);
+                    a1.setCat(cat1);
+                    a1.setStatus("APROVADA");
+                    a1.setApplicantName(maria.getName());
+                    a1.setEmail(maria.getUsername());
+                    a1.setPhone(String.valueOf(maria.getTelephone()));
+                    a1.setAddress(maria.getAddress());
+                    a1.setReason("Adoro gatos");
+                    a1.setExperience("Tenho experiência com animais");
+                    a1.setAdoptionDate(LocalDate.now());
+                    adoptRepo.save(a1);
+
+                    Adoption a2 = new Adoption();
+                    a2.setUser(maria);
+                    a2.setCat(cat2);
+                    a2.setStatus("APROVADA");
+                    a2.setApplicantName(maria.getName());
+                    a2.setEmail(maria.getUsername());
+                    a2.setPhone(String.valueOf(maria.getTelephone()));
+                    a2.setAddress(maria.getAddress());
+                    a2.setReason("Adoro gatos");
+                    a2.setExperience("Tenho experiência com gatinhos");
+                    a2.setAdoptionDate(LocalDate.now());
+                    adoptRepo.save(a2);
+
+                    // atualizar estado
+                    cat1.setStatus("ADOPTED");
+                    cat2.setStatus("ADOPTED");
+                    catRepo.save(cat1);
+                    catRepo.save(cat2);
+
+                    System.out.println("ADOÇÕES CRIADAS!");
+                } else {
+                    System.out.println("Não há gatos suficientes disponíveis!");
+                }
+
+            }
+        }
     }
 }

@@ -56,104 +56,150 @@
 
     </aside>
     <div class="container">
-    <main class="main-content">
-        <div class="topbar d-flex justify-content-between align-items-center">
-            <div>
-                <h4 class="mb-1 fw-bold">Área do Adotante</h4>
-            </div>
-        </div>
+        <div class="container-fluid p-4">
 
-
-        <div class="content-area">
+            <!-- HEADER -->
             <div class="mb-4">
-                <p class="">Acompanhe os seus gatos adotados</p>
+                <h2 class="fw-bold">
+                    Bem-vindo(a), ${user.name}!
+                </h2>
+                <p class="text-muted">
+                    Acompanhe os seus gatos adotados
+                </p>
             </div>
 
-            <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="stats-card">
-
-                        <div>
-                            <div class="">Gatos Adotados</div>
-                        </div>
-                    </div>
-                </div>
+            <!-- STATS -->
+            <div class="row g-4 mb-4">
 
                 <div class="col-md-4">
-                    <div class="stats-card">
-                        <div>
-                            <div class="">Relatório Pendente</div>
-                        </div>
-                    </div>
-                </div>
+                    <div class="card p-3 shadow-sm border-0 rounded-4">
+                        <div class="d-flex align-items-center">
 
-                <div class="col-md-4">
-                    <div class="stats-card">
-                        <div>
-                            <div class="">Taxa de Felicidade</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <section class="section-card mb-4">
-                <h3 class="bold mb-4">
-                    Os Meus Gatos
-                </h3>
-
-                <div class="row g-3">
-                    <div class="col-lg-6">
-                        <div class="cat-card">
-                            <img src="#" alt=""/>
                             <div>
-                                <h4 class="mb-2">Gato 1</h4>
-                                <span class="badge-soft-success">Adotado</span>
-                                <p class="mt-3 mb-1 text-muted">Adotado em: xx/xx/xxxx</p>
-                                <p class="mb-0 text-muted">Próxima consulta: xx/xx/xxxx</p>
+                                <h4 class="mb-0">${adoptions.size()}</h4>
+                                <small class="text-muted">Gatos Adotados</small>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-6">
-                        <div class="cat-card">
-                            <img src="#" alt=""/>
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm border-0 rounded-4">
+                        <div class="d-flex align-items-center">
+
                             <div>
+                                <h4 class="mb-0">0</h4>
+                                <small class="text-muted">Relatório Pendente</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm border-0 rounded-4">
+                        <div class="d-flex align-items-center">
+
+                            <div>
+                                <h4 class="mb-0">100%</h4>
+                                <small class="text-muted">Taxa de Felicidade</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ALERTA -->
+            <div class="card border-warning bg-warning-subtle p-4 rounded-4 mb-4">
+                <h5 class="fw-bold mb-2">
+                    Relatório Mensal Pendente
+                </h5>
+                <p class="text-muted mb-3">
+                    É hora de partilhar como estão os seus gatinhos!
+                </p>
+
+                <a href="/adopter/post-adoption" class="btn btn-dark">
+                    Preencher Relatório
+                </a>
+            </div>
+
+            <!-- MEUS GATOS -->
+            <div class="card p-4 shadow-sm border-0 rounded-4 mb-4">
+
+                <h5 class="fw-bold mb-3">Os Meus Gatos</h5>
+
+                <div class="row g-3">
+
+                    <c:forEach items="${adoptions}" var="adoption">
+
+                        <div class="col-md-6">
+
+                            <div class="d-flex align-items-center p-3 border rounded-4">
+
+                                <!-- IMG -->
+                                <img src="${adoption.cat.image != null ? adoption.cat.image : '/images/default-cat.jpg'}"
+                                     style="width:80px; height:80px; object-fit:cover; border-radius:10px;"
+                                     class="me-3">
+
+                                <!-- INFO -->
                                 <div>
-                                    <h4 class="mb-2">Gato 2</h4>
-                                    <span class="badge-soft-success">Adotado</span>
-                                    <p class="mt-3 mb-1 text-muted">Adotado em: xx/xx/xxxx</p>
-                                    <p class="mb-0 text-muted">Próxima consulta: xx/xx/xxxx</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                                    <h6 class="fw-bold mb-1">
+                                            ${adoption.cat.name}
+                                    </h6>
 
-            <section class="section-card">
-                <h3 class="fw-bold mb-4">Ações Rápidas</h3>
+                                    <span class="badge bg-success-subtle text-success">
+                                Adotado
+                            </span>
+
+                                    <p class="text-muted mb-0">
+                                        Adotado em: ${adoption.adoptionDate}
+                                    </p>
+
+                                    <p class="text-muted mb-0">
+                                        Próxima consulta: 01/06/2026
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </c:forEach>
+
+                </div>
+
+            </div>
+
+
+            <div class="card p-4 shadow-sm border-0 rounded-4">
+
+                <h5 class="fw-bold mb-3">Ações Rápidas</h5>
+
                 <div class="row g-3">
+
                     <div class="col-md-4">
-                        <button class="btn btn-primary p-4">
+                        <a href="/adopter/adopted-cat-list" class="btn btn-outline-dark w-100">
                             Ver Todos os Meus Gatos
-                        </button>
+                        </a>
                     </div>
+
                     <div class="col-md-4">
-                        <button class="btn btn-primary p-4">
+                        <a href="/adopter/post-adoption" class="btn btn-outline-dark w-100">
                             Preencher Relatório
-                        </button>
+                        </a>
                     </div>
+
                     <div class="col-md-4">
-                        <button class="btn btn-primary p-4">
+                        <button class="btn btn-outline-dark w-100">
                             Agendar Consulta
                         </button>
                     </div>
+
                 </div>
-            </section>
+
+            </div>
+
         </div>
-    </main>
-</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

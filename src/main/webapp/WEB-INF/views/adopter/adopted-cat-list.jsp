@@ -56,12 +56,88 @@
 
     </aside>
 
-    <main class="container">
-        <div class="card">
-            <div class="card-header"><h1>Bem-vindo à !</h1></div>
-            <div class="card-body"><p>Ajude-nos a ajudar os gatinhos da comunidade.</p></div>
+    <div class="container-fluid">
+
+        <!-- HEADER -->
+        <div class="d-flex align-items-center mb-4">
+            <a href="/adopter/" class="btn btn-light me-3">
+                ← Voltar
+            </a>
+
+            <div>
+                <h2 class="fw-bold mb-0">Os Meus Gatos</h2>
+                <small class="text-muted">
+                    ${adoptions.size()} gatos adotados
+                </small>
+            </div>
         </div>
-    </main>
+
+        <!-- GRID -->
+        <div class="row g-4">
+
+            <c:forEach items="${adoptions}" var="adoption">
+
+                <div class="col-md-6 col-lg-5">
+
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                        <!-- IMAGEM -->
+                        <img
+                                src="${adoption.cat.image != null ? adoption.cat.image: '/images/default-cat.jpg'}"
+                                class="card-img-top rounded-top-4"
+                                style="height: 250px; object-fit: cover;"
+                        >
+
+                        <!-- BODY -->
+                        <div class="card-body">
+
+                            <!-- NOME + STATUS -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="fw-bold mb-0">
+                                        ${adoption.cat.name}
+                                </h5>
+
+                                <span class="badge bg-success px-3 py-2">
+                                Adotado
+                            </span>
+                            </div>
+
+                            <!-- INFO -->
+                            <p class="text-muted mt-2 mb-1">
+                                    ${adoption.cat.estimatedAge} anos • ${adoption.cat.breed}
+                            </p>
+
+                            <p class="text-muted mb-1">
+                                <strong>Adotado em:</strong> ${adoption.adoptionDate}
+                            </p>
+
+                            <p class="text-muted">
+                                <strong>Última consulta:</strong> 01/03/2026
+                            </p>
+
+                            <!-- BOTÃO -->
+                            <a href="/public/cat-profile/${adoption.cat.id}"
+                               class="btn btn-dark w-100 mt-3 rounded-3">
+                                Ver Perfil Completo
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </c:forEach>
+
+        </div>
+
+        <!-- EMPTY STATE -->
+        <c:if test="${empty adoptions}">
+            <div class="text-center mt-5">
+                <p class="text-muted">Ainda não tens gatos adotados 🐾</p>
+            </div>
+        </c:if>
+
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
