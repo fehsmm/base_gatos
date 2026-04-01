@@ -252,12 +252,12 @@
 
                         <c:if test="${lowStockCount > 0}">
                             <c:choose>
-                                <c:when test="${pendingUsersCount == 1}">
+                                <c:when test="${lowStockCount == 1}">
                                     <li>${lowStockCount} item com stock baixo
                                         <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver</a>
                                     </li>
                                 </c:when>
-                                <c:when test="${pendingUsersCount > 1}">
+                                <c:when test="${lowStockCount > 1}">
                                     <li>${lowStockCount} itens com stock baixo
                                         <a href="/admin/manage-stock" style="color:inherit;font-weight:600">Ver</a>
                                     </li>
