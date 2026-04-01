@@ -1,8 +1,5 @@
 package pt.upskill.base_gatos_demo.models;
 
-import pt.upskill.base_gatos_demo.entities.Task;
-import pt.upskill.base_gatos_demo.entities.User;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;

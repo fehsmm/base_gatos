@@ -20,7 +20,7 @@ public class Shift {
             inverseJoinColumns = @JoinColumn(name = "user_id") //inverso - coluna do outro lado
     )
     private List<User> volunteers = new ArrayList<>();
-    @OneToMany (mappedBy = "shift") //relação gerida pelo shift na classe task
+    @OneToMany (mappedBy = "shift", cascade = CascadeType.ALL) //relação gerida pelo shift na classe task
     private List<Task> tasks = new ArrayList<>();
 
     private LocalDate date;

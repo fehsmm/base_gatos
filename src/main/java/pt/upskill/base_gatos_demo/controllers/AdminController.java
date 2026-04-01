@@ -93,8 +93,8 @@ public class AdminController {
         model.addAttribute("shiftsByDay", shiftsByDay);
         model.addAttribute("volunteers", volunteers);
         model.addAttribute("shiftCount", shiftCount);
-        model.addAttribute("completedMap", completedTasks);
-        model.addAttribute("totalMap", totalTasks);
+        model.addAttribute("completedTasks", completedTasks);
+        model.addAttribute("totalTasks", totalTasks);
         String todayFormatted = LocalDate.now().format(formatter);
         todayFormatted = todayFormatted.substring(0,1).toUpperCase() + todayFormatted.substring(1);
         String tomorrowFormatted = LocalDate.now().plusDays(1).format(formatter);
@@ -168,13 +168,6 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("success", "Turno atualizado com sucesso!");
         return "redirect:/admin/manage-schedule";
     }
-
-    /*@PostMapping(value = "/addTaskAction")
-    public List<Task> addTaskAction(AddTaskModel model, List<Task> tasks) {
-        Task task = taskService.createTask(model);
-        tasks.add(task);
-        return tasks;
-    }*/
 
     @PostMapping(value = "/create-cat")
     public String createCat(@ModelAttribute CreateCatModel model, RedirectAttributes redirectAttributes) {

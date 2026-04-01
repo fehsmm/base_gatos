@@ -257,17 +257,17 @@
 
             <div class="mb-3">
                 <label>Data</label>
-                <input type="date" name="date" class="form-control" required>
+                <input type="date" name="date" id="date" class="form-control" required>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label>Hora de Início</label>
-                    <input type="time" name="startTime" class="form-control" required/>
+                    <input type="time" name="startTime" id="startTime" class="form-control" required/>
                 </div>
                 <div class="col">
                     <label>Hora de Fim</label>
-                    <input type="time" name="endTime" class="form-control" required/>
+                    <input type="time" name="endTime" id="endTime" class="form-control" required/>
                 </div>
             </div>
 
@@ -372,7 +372,7 @@
         const start = button.getAttribute("data-start");
         const end = button.getAttribute("data-end");
         const volunteers = button.getAttribute("data-volunteers");
-        const tasks = button.getAttribute("data-tasks")
+        const tasks = button.getAttribute("data-tasks");
 
         openModal();
 
@@ -380,7 +380,7 @@
         document.querySelector("input[name='date']").value = date;
         document.querySelector("input[name='startTime']").value = start;
         document.querySelector("input[name='endTime']").value = end;
-        document.querySelector("input[name='volunteers']").value = volunteers;
+        document.querySelector("select[name='volunteerIds']").value = volunteers;
         document.querySelector("input[name='tasks']").value = tasks;
 
         const form = document.querySelector("#addShiftModal form");
@@ -436,8 +436,8 @@
 
         taskIndex++;
 
-        // document.getElementById("taskTitle").value = "";
-        // document.getElementById("taskDesc").value = "";
+        document.getElementById("taskTitle").value = "";
+        document.getElementById("taskDesc").value = "";
     }
 
     function removeTask(button, index) {
