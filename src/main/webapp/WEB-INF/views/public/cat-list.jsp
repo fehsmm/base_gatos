@@ -22,7 +22,7 @@
 
         <!-- FILTERS -->
         <form action="/public/cat-list" method="get" style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
-            <div style="flex:1;min-width:200px">
+            <!-- <div style="flex:1;min-width:200px">
                 <label>Estado de Adoção</label>
                 <select name="status" onchange="this.form.submit()">
                     <option value="all" ${selectedStatus == 'all' ? 'selected' : ''}>Todos</option>
@@ -30,7 +30,7 @@
                     <option value="Em Processo" ${selectedStatus == 'Em Processo' ? 'selected' : ''}>Em Processo</option>
                     <option value="Adotado" ${selectedStatus == 'Adotado' ? 'selected' : ''}>Adotado</option>
                 </select>
-            </div>
+            </div> -->
             <div style="flex:1;min-width:200px">
                 <label>Género</label>
                 <select name="gender" onchange="this.form.submit()">
