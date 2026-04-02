@@ -70,6 +70,19 @@ public class PublicController {
             return "redirect:/public/cat-list";
         }
         model.addAttribute("cat", cat);
+
+        List<Cat> cats = catService.listAllCats("all", "all");
+
+        int index = -1;
+        for (int i = 0; i < cats.size(); i++) {
+            if (cats.get(i).getId().equals(id)) {
+                index = i;
+                break;
+            }
+        }
+        model.addAttribute("prevId", index > 0 ? cats.get(index - 1).getId() : null);
+        model.addAttribute("nextId", index < cats.size() - 1 ? cats.get(index + 1).getId() : null);
+
         return "public/cat-profile";
     }
 
