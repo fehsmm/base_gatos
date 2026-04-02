@@ -15,7 +15,24 @@
 <main class="flex-1 page">
     <div class="container-sm">
 
-        <a href="/public/cat-list" class="btn btn-ghost btn-sm mb-6">← Voltar à Lista</a>
+        <a href="/public/cat-list" class="btn btn-ghost btn-sm mb-6">← Voltar à Lista</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <c:choose>
+            <c:when test="${prevId != null}">
+                <a href="/public/cat-profile/${prevId}" class="btn btn-ghost btn-sm mb-6">← Anterior</a>
+            </c:when>
+            <c:otherwise>
+                <span class="btn btn-ghost btn-sm mb-6" style="opacity:0.4;cursor:not-allowed">← Anterior</span>
+            </c:otherwise>
+        </c:choose>
+
+        <c:choose>
+            <c:when test="${nextId != null}">
+                <a href="/public/cat-profile/${nextId}" class="btn btn-ghost btn-sm mb-6">Próximo →</a>
+            </c:when>
+            <c:otherwise>
+                <span class="btn btn-ghost btn-sm mb-6" style="opacity:0.4;cursor:not-allowed">Próximo →</span>
+            </c:otherwise>
+        </c:choose>
 
         <div class="profile-grid">
 
