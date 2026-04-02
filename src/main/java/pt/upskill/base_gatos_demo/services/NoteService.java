@@ -30,4 +30,8 @@ public class NoteService {
         note.setUpdatedAt(LocalDateTime.now());
         noteRepository.save(note);
     }
+
+    public void saveExistingNote(Note note) {
+        noteRepository.save(note);
+    }
 }

@@ -107,12 +107,24 @@ public class VolunteerController {
 
         String username = authentication.getName();
         User user = userRepository.getUserByUsername(username);
-
         LocalDate today = LocalDate.now();
-        List<Shift> todayShifts = shiftRepository.findByVolunteers_Id(user.getId())
-                .stream()
+
+        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
+
+        List<Shift> todayShifts = allShifts.stream()
                 .filter(s -> s.getDate().equals(today))
                 .collect(Collectors.toList());
+
+        Optional<Shift> previousShift = allShifts.stream()
+                .filter(s -> s.getDate().isBefore(today))
+                .max((a, b) -> a.getDate().compareTo(b.getDate()));
+
+        if (previousShift.isPresent()) {
+            Note previousNote = noteService.getOrCreateNote(previousShift.get());
+            if (!previousNote.isRead()) {
+                model.addAttribute("previousNote", previousNote);
+            }
+        }
 
         model.addAttribute("todayShift", todayShifts.isEmpty() ? null : todayShifts.get(0));
         return "volunteer/view-shift";
@@ -152,6 +164,17 @@ public class VolunteerController {
     public String leaveShiftNote(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
         return "volunteer/leave-shift-note";
+    }
+
+    @PostMapping("/read-note/{id}")
+    public String readNote(@PathVariable Long id) {
+        Shift shift = shiftRepository.findById(id).orElse(null);
+        if (shift != null) {
+            Note note = noteService.getOrCreateNote(shift);
+            note.setRead(true);
+            noteService.saveExistingNote(note);
+        }
+        return "redirect:/volunteer/view-shift";
     }
 
     @PostMapping("/start-shift/{id}")
