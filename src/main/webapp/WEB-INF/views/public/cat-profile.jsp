@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -166,7 +167,7 @@
                                     </c:choose>
                                 </td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Data de Chegada:</td>
-                                <td style="text-align:right;font-weight:500">${cat.arrivalDate}</td></tr>
+                                <td style="text-align:right;font-weight:500"><fmt:formatDate value="${cat.arrivalDate}" pattern="dd/MM/yyyy"/></td></tr>
                         </table>
                     </div>
                 </div>
