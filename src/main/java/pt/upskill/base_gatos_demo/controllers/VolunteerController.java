@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pt.upskill.base_gatos_demo.entities.Cat;
+import pt.upskill.base_gatos_demo.entities.Note;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.repositories.AnnouncementRepository;
@@ -17,17 +18,23 @@ import pt.upskill.base_gatos_demo.services.NoteService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/volunteer")
 public class VolunteerController {
 
-    @Autowired UserRepository userRepository;
-    @Autowired ShiftRepository shiftRepository;
-    @Autowired CatRepository catRepository;
-    @Autowired AnnouncementRepository announcementRepository;
-    @Autowired NoteService noteService;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    ShiftRepository shiftRepository;
+    @Autowired
+    CatRepository catRepository;
+    @Autowired
+    AnnouncementRepository announcementRepository;
+    @Autowired
+    NoteService noteService;
 
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
@@ -49,12 +56,21 @@ public class VolunteerController {
             return "redirect:/auth/login";
         }
 
-        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
         LocalDate today = LocalDate.now();
+        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
 
         long upcomingCount = allShifts.stream()
                 .filter(s -> !s.getDate().isBefore(today))
                 .count();
+
+        Optional<Shift> previousShift = allShifts.stream()
+                .filter(s -> s.getDate().isBefore(today))
+                .max((a, b) -> a.getDate().compareTo(b.getDate()));
+
+        if (previousShift.isPresent()) {
+            Note previousNote = noteService.getOrCreateNote(previousShift.get());
+            model.addAttribute("previousNote", previousNote);
+        }
 
         model.addAttribute("upcomingCount", upcomingCount);
         return "volunteer/volunteer";
@@ -110,9 +126,13 @@ public class VolunteerController {
         return "volunteer/manage-cat";
     }
 
-    @GetMapping("/cat-profile/{id}")
-    public String catProfile(@PathVariable("id") Long id) {
-        return "redirect:/public/cat-profile/" + id;
+    @GetMapping("/cat-profile/{name}")
+    public String catProfile(@PathVariable("name") String name) {
+        List<Cat> cats = catRepository.findByName(name);
+        if (cats.isEmpty()) {
+            return "redirect:/volunteer/manage-cat";
+        }
+        return "redirect:/public/cat-profile/" + cats.get(0).getId();
     }
 
     @GetMapping("/view-announcement")
@@ -157,10 +177,10 @@ public class VolunteerController {
         return "redirect:/volunteer/view-shift";
     }
 }
-    //marcar tarefas como concluidas
-    //nota de horario / comentario
+//marcar tarefas como concluidas
+//nota de horario / comentario
 
-    //post mapping pedido de stock
+//post mapping pedido de stock
 
-    //post mapping deixar notas de turno
+//post mapping deixar notas de turno
 
