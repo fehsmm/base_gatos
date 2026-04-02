@@ -13,7 +13,8 @@
 <footer>
     <footer class="footer"><div class="container">
         <div class="grid grid-3" style="gap:2rem">
-            <div><div class="logo" style="color:white;margin-bottom:1rem"><div class="logo-icon"></div><span>Meg</span></div><p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p></div>
+            <div><div class="logo" style="color:white;margin-bottom:1rem">
+                <div class="logo-icon"><img src="/images/logo.svg" alt="Logo MEG" class="logo-icon"></div><span>Meg</span></div><p style="color:#9ca3af;font-size:.875rem">Dedicados a cuidar e encontrar lares amorosos para gatos abandonados.</p></div>
             <div><h3>Links Rápidos</h3><ul class="footer-links"><li><a href="/public/cat-list">Gatos para Adoção</a></li>
                 <li><a href="/public/adoption">Processo de Adoção</a></li>
                 <li><a href="/public/donate">Fazer Donativo</a></li>
