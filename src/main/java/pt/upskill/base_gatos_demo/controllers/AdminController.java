@@ -8,6 +8,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.models.*;
 import pt.upskill.base_gatos_demo.repositories.*;
+import pt.upskill.base_gatos_demo.services.AdoptionService;
+import pt.upskill.base_gatos_demo.services.ShiftService;
+import pt.upskill.base_gatos_demo.services.StockService;
+import pt.upskill.base_gatos_demo.services.UserService;
 import pt.upskill.base_gatos_demo.services.*;
 
 import java.time.LocalDate;
@@ -23,6 +27,9 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AdoptionService adoptionService;
 
     @Autowired
     CatRepository catRepository;
@@ -41,6 +48,9 @@ public class AdminController {
 
     @Autowired
     ShiftRepository shiftRepository;
+
+    @Autowired
+    AdoptionRepository adoptionRepository;
 
     @Autowired
     TaskService taskService;
@@ -62,7 +72,26 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-application")
-    public String manageApplication(){ return "admin/manage-application";}
+    public String manageApplication(Model model){
+
+            List<Adoption> adoptions = adoptionRepository.findByStatus("Pendente");
+
+            model.addAttribute("adoptions", adoptions);
+
+            return "admin/manage-application";
+    }
+
+    @PostMapping("/adoptions/{id}/approve")
+    public String approve(@PathVariable Long id) {
+        adoptionService.approveAdoption(id);
+        return "redirect:/admin/manage-application";
+    }
+
+    @PostMapping("/adoptions/{id}/reject")
+    public String reject(@PathVariable Long id) {
+        adoptionService.rejectAdoption(id, "Rejeitado");
+        return "redirect:/admin/manage-application";
+    }
 
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){

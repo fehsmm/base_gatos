@@ -58,7 +58,9 @@ public class PublicController {
     }
 
     @GetMapping(value = "/adoption")
-    public String adoption(){
+    public String adoption(Model model, Authentication authentication){
+        List<Cat> availableCats = catRepository.findByStatus("Disponível");
+        model.addAttribute("availableCats", availableCats);
         return "public/adoption";
     }
 
@@ -93,7 +95,7 @@ public class PublicController {
     public String donate(){ return "public/donate";}
 
     //post mapping para o formulario de adocao
-    @PostMapping("/adocao")
+    @PostMapping("/adoptions")
     public String processAdoption(@RequestParam Long catId,
                                   @RequestParam String applicantName,
                                   @RequestParam String email,
@@ -104,13 +106,19 @@ public class PublicController {
                                   Authentication authentication,
                                   RedirectAttributes redirectAttributes) {
 
-        Adoption adoption = new Adoption();
+
 
         Cat cat = catRepository.findById(catId).orElse(null);
-        adoption.setCat(cat);
 
-        User user = userRepository.getUserByUsername(authentication.getName());
-        adoption.setUser(user);
+        if (cat == null) {
+            redirectAttributes.addFlashAttribute("error", "Gato não encontrado.");
+            return "redirect:/public/adoption";
+        }
+
+
+        Adoption adoption = new Adoption();
+
+        adoption.setCat(cat);
 
         adoption.setApplicantName(applicantName);
         adoption.setEmail(email);
@@ -118,11 +126,14 @@ public class PublicController {
         adoption.setAddress(address);
         adoption.setReason(reason);
         adoption.setExperience(experience);
+        adoption.setStatus("Pendente");
 
         adoptionRepository.save(adoption);
 
-        redirectAttributes.addFlashAttribute("success", "Candidatura enviada com sucesso! Aguarde o nosso contacto.");
-        return "redirect:/adocao";
+        redirectAttributes.addFlashAttribute("success",
+                "Candidatura enviada com sucesso para o gato " + cat.getName() + "!");
+
+        return "redirect:/public/adoption";
     }
 
     //post mapping para formulario de doacao

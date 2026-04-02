@@ -120,7 +120,7 @@ public class DataInitializer {
             }
         }
 
-        if (adoptRepo.count() == 0) {
+        /*if (adoptRepo.count() == 0) {
 
             User maria = userRepository.getUserByUsername("maria.adop");
 
@@ -141,7 +141,7 @@ public class DataInitializer {
                     Adoption a1 = new Adoption();
                     a1.setUser(maria);
                     a1.setCat(cat1);
-                    a1.setStatus("APROVADA");
+                    a1.setStatus("Aprovada");
                     a1.setApplicantName(maria.getName());
                     a1.setEmail(maria.getUsername());
                     a1.setPhone(String.valueOf(maria.getTelephone()));
@@ -154,7 +154,7 @@ public class DataInitializer {
                     Adoption a2 = new Adoption();
                     a2.setUser(maria);
                     a2.setCat(cat2);
-                    a2.setStatus("APROVADA");
+                    a2.setStatus("Aprovada");
                     a2.setApplicantName(maria.getName());
                     a2.setEmail(maria.getUsername());
                     a2.setPhone(String.valueOf(maria.getTelephone()));
@@ -165,8 +165,8 @@ public class DataInitializer {
                     adoptRepo.save(a2);
 
                     // atualizar estado
-                    cat1.setStatus("ADOPTED");
-                    cat2.setStatus("ADOPTED");
+                    cat1.setStatus("Adotado");
+                    cat2.setStatus("Adotado");
                     catRepo.save(cat1);
                     catRepo.save(cat2);
 
@@ -176,6 +176,6 @@ public class DataInitializer {
                 }
 
             }
-        }
+        }*/
     }
 }

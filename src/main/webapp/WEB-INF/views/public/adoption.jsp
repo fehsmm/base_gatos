@@ -20,8 +20,10 @@
         </div>
 
 
-        <c:if test="${success != null}">
-            <div class="alert alert-success">${success}</div>
+        <c:if test="${not empty success}">
+            <script>
+                alert("${success}");
+            </script>
         </c:if>
 
 
@@ -64,7 +66,7 @@
         <div class="card mb-6">
             <div class="card-header"><strong> Formulário de Candidatura</strong></div>
             <div class="card-body">
-                <form action="/adocao" method="post">
+                <form action="/public/adoptions" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                     <div class="form-group">
@@ -73,7 +75,7 @@
                             <option value="">Selecione um gato</option>
                             <option value="any">Qualquer gato disponível</option>
                             <c:forEach items="${availableCats}" var="cat">
-                                <option value="${cat.id}">${cat.name} - ${cat.breed}, ${cat.formattedAge}</option>
+                                <option value="${cat.id}">${cat.name} - ${cat.breed}, ${cat.estimatedAge}</option>
                             </c:forEach>
                         </select>
                     </div>

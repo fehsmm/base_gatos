@@ -76,6 +76,34 @@
 
     </aside>
 
+<main>
+    <div class="container mt-4">
+
+        <h2 class="fw-bold mb-4">📋 Gestão de Candidaturas</h2>
+
+        <c:forEach items="${adoptions}" var="adoption">
+
+            <div class="card">
+                <h3>Name: ${adoption.applicantName}</h3>
+                <p> Email: ${adoption.email}</p>
+                <p> Reason: ${adoption.reason}</p>
+                <p> Experience: ${adoption.experience}</p>
+
+                <!-- BOTÕES -->
+                <form action="/admin/adoptions/${adoption.id}/approve" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button class="btn btn-success">Aprovar</button>
+                </form>
+
+                <form action="/admin/adoptions/${adoption.id}/reject" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button class="btn btn-danger">Rejeitar</button>
+                </form>
+
+            </div>
+
+        </c:forEach>
+
 <main class="admin-main">
 
     <div style="padding:1.5rem">

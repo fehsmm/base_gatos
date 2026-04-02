@@ -18,7 +18,6 @@ public class Adoption {
     @JoinColumn(name = "cat_id")
     private Cat cat;
 
-    // Relacionamento com o Utilizador logado
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -36,9 +35,10 @@ public class Adoption {
     private String experience;
 
     // Controlo do Processo
-    private String status = "PENDENTE"; // Valor inicial por defeito
+    private String status = "Pendente"; // Valor inicial por defeito
     private LocalDateTime requestDate = LocalDateTime.now();
     private LocalDate adoptionDate;
+    private LocalDateTime ReviewDate;
 
 
     public Long getId() {
@@ -65,13 +65,6 @@ public class Adoption {
         this.applicantName = applicantName;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getEmail() {
         return email;
@@ -135,5 +128,21 @@ public class Adoption {
 
     public void setAdoptionDate(LocalDate adoptionDate) {
         this.adoptionDate = adoptionDate;
+    }
+
+    public LocalDateTime getReviewDate() {
+        return ReviewDate;
+    }
+
+    public void setReviewDate(LocalDateTime reviewDate) {
+        ReviewDate = reviewDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
