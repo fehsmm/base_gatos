@@ -124,7 +124,7 @@
                 </form>
             </div>
         </div>
-            </c:if>
+        </c:if>
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
                 <div class="page-title"
@@ -136,138 +136,153 @@
                 </div>
 
                 <c:choose>
-                    <c:when test="${todayShift == null}">
-                        <div class="panel text-center">
-                            <div style="font-size:2rem; margin-bottom:0.5rem;">📅</div>
-                            <div style="font-weight:600; margin-bottom:0.25rem;">Sem turno hoje</div>
-                            <div style="color:#9ca3af; font-size:0.9rem;">
-                                Não tens nenhum turno agendado para hoje.
+                <c:when test="${todayShift == null}">
+                    <div class="panel text-center">
+                        <div style="font-size:2rem; margin-bottom:0.5rem;">📅</div>
+                        <div style="font-weight:600; margin-bottom:0.25rem;">Sem turno hoje</div>
+                        <div style="color:#9ca3af; font-size:0.9rem;">
+                            Não tens nenhum turno agendado para hoje.
+                        </div>
+                        <a href="/volunteer/view-schedule" class="btn btn-primary btn-sm"
+                           style="margin-top:1rem;">
+                            Ver as minhas escalas
+                        </a>
+                    </div>
+                </c:when>
+                <c:otherwise>
+
+                <div class="panel" style="margin-bottom:1rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
+                                📅 ${todayShift.date}
                             </div>
-                            <a href="/volunteer/view-schedule" class="btn btn-primary btn-sm"
-                               style="margin-top:1rem;">
-                                Ver as minhas escalas
-                            </a>
+                            <div style="color:#9ca3af; font-size:0.9rem;">
+                                🕐 ${todayShift.startTime} — ${todayShift.endTime}
+                            </div>
+                        </div>
+                        <c:choose>
+                            <c:when test="${todayShift.endedAt != null}">
+        <span style="background:#f3f4f6; color:#6b7280; padding:0.25rem 0.75rem; border-radius:999px; font-size:0.8rem; font-weight:600;">
+            Terminado
+        </span>
+                            </c:when>
+                            <c:when test="${todayShift.startedAt != null}">
+        <span style="background:#dcfce7; color:#16a34a; padding:0.25rem 0.75rem;
+                 border-radius:999px; font-size:0.8rem; font-weight:600;">
+            Em curso
+        </span>
+                            </c:when>
+                            <c:otherwise>
+        <span style="background:#fef9c3; color:#ca8a04; padding:0.25rem 0.75rem;
+                 border-radius:999px; font-size:0.8rem; font-weight:600;">
+            Agendado
+        </span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <c:if test="${not empty todayShift.volunteers}">
+                        <div style="margin-top:0.75rem; font-size:0.85rem; color:#9ca3af;">
+                            Voluntários:
+                            <c:forEach var="vol" items="${todayShift.volunteers}" varStatus="s">
+                                <strong style="color:#e5e7eb;">${vol.name}</strong><c:if
+                                    test="${!s.last}">, </c:if>
+                            </c:forEach>
+                        </div>
+                    </c:if>
+                </div>
+
+                <div class="section-title">Tarefas</div>
+
+                <c:choose>
+                    <c:when test="${empty todayShift.tasks}">
+                        <div class="panel text-center" style="color:#9ca3af;">
+                            Não há tarefas registadas para este turno.
                         </div>
                     </c:when>
                     <c:otherwise>
-
-                        <div class="panel" style="margin-bottom:1rem;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-                                <div>
-                                    <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
-                                        📅 ${todayShift.date}
-                                    </div>
-                                    <div style="color:#9ca3af; font-size:0.9rem;">
-                                        🕐 ${todayShift.startTime} — ${todayShift.endTime}
-                                    </div>
-                                </div>
-                                <span style="background:#dcfce7; color:#16a34a; padding:0.25rem 0.75rem;
-                                         border-radius:999px; font-size:0.8rem; font-weight:600;">
-                                Em curso
-                            </span>
-                            </div>
-
-                            <c:if test="${not empty todayShift.volunteers}">
-                                <div style="margin-top:0.75rem; font-size:0.85rem; color:#9ca3af;">
-                                    Voluntários:
-                                    <c:forEach var="vol" items="${todayShift.volunteers}" varStatus="s">
-                                        <strong style="color:#e5e7eb;">${vol.name}</strong><c:if
-                                            test="${!s.last}">, </c:if>
-                                    </c:forEach>
-                                </div>
-                            </c:if>
-                        </div>
-
-                        <div class="section-title">Tarefas</div>
-
-                        <c:choose>
-                            <c:when test="${empty todayShift.tasks}">
-                                <div class="panel text-center" style="color:#9ca3af;">
-                                    Não há tarefas registadas para este turno.
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="panel">
-                                    <c:forEach var="task" items="${todayShift.tasks}" varStatus="s">
-                                        <div style="display:flex; align-items:flex-start; gap:0.75rem;
+                        <div class="panel">
+                            <c:forEach var="task" items="${todayShift.tasks}" varStatus="s">
+                                <div style="display:flex; align-items:flex-start; gap:0.75rem;
                                                 padding:0.75rem 0;
                                                 ${!s.last ? 'border-bottom:1px solid #1f2937;' : ''}">
-                                            <input type="checkbox"
-                                                   style="margin-top:3px; accent-color:#f97316; width:16px; height:16px; cursor:pointer;">
-                                            <div>
-                                                <div style="font-weight:600; font-size:0.95rem;">${task.title}</div>
-                                                <c:if test="${not empty task.description}">
-                                                    <div style="color:#9ca3af; font-size:0.85rem;">${task.description}</div>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
-                                <c:choose>
-                                    <c:when test="${todayShift.startedAt == null}">
-                                        <form action="/volunteer/start-shift/${todayShift.id}" method="POST">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                            <button type="submit" class="btn btn-primary">
-                                                ▶ Iniciar Turno
-                                            </button>
-                                        </form>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div style="color:#16a34a; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
-                                            ✅ Turno iniciado às ${todayShift.startedAt}
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
-                                    <button type="button" class="btn btn-secondary"
-                                            onclick="document.getElementById('modalNota').style.display='flex'">
-                                        ⏹ Terminar Turno
-                                    </button>
-                                </c:if>
-
-                                <div id="modalNota"
-                                     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; align-items:center; justify-content:center;">
-                                    <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem;">
-                                        <div style="font-weight:600; font-size:1.2rem; margin-bottom:1.5rem;">
-                                            Terminar Turno — Preenche as notas
-                                        </div>
-
-                                        <form action="/volunteer/save-note/${todayShift.id}" method="POST">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-                                            <label class="form-label">Resumo do turno</label>
-                                            <textarea name="resumo" class="form-textarea-custom"
-                                                      style="margin-bottom:1rem;"
-                                                      placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa..."></textarea>
-
-                                            <label class="form-label">Ocorrências importantes</label>
-                                            <textarea name="ocorrencias" class="form-textarea-custom"
-                                                      style="margin-bottom:1.5rem;"
-                                                      placeholder="Ex: Gato isolado, medicação administrada..."></textarea>
-
-                                            <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
-                                                <button type="button" class="btn btn-secondary"
-                                                        onclick="document.getElementById('modalNota').style.display='none'">
-                                                    Cancelar
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    Guardar e Terminar
-                                                </button>
-                                            </div>
-                                        </form>
+                                    <input type="checkbox"
+                                           style="margin-top:3px; accent-color:#f97316; width:16px; height:16px; cursor:pointer;">
+                                    <div>
+                                        <div style="font-weight:600; font-size:0.95rem;">${task.title}</div>
+                                        <c:if test="${not empty task.description}">
+                                            <div style="color:#9ca3af; font-size:0.85rem;">${task.description}</div>
+                                        </c:if>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
-
                     </c:otherwise>
                 </c:choose>
+                <c:choose>
+                    <c:when test="${todayShift.startedAt == null}">
+                        <form action="/volunteer/start-shift/${todayShift.id}" method="POST">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn-primary">
+                                ▶ Iniciar Turno
+                            </button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <div style="color:#16a34a; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+                            ✅ Turno iniciado às ${todayShift.startedAt}
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
+                    <button type="button" class="btn btn-secondary"
+                            onclick="document.getElementById('modalNota').style.display='flex'">
+                        ⏹ Terminar Turno
+                    </button>
+                </c:if>
+
+                <div id="modalNota"
+                     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; align-items:center; justify-content:center;">
+                    <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem;">
+                        <div style="font-weight:600; font-size:1.2rem; margin-bottom:1.5rem;">
+                            Terminar Turno — Preenche as notas
+                        </div>
+
+                        <form action="/volunteer/save-note/${todayShift.id}" method="POST">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                            <label class="form-label">Resumo do turno</label>
+                            <textarea name="resumo" class="form-textarea-custom"
+                                      style="margin-bottom:1rem;"
+                                      placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa..."></textarea>
+
+                            <label class="form-label">Ocorrências importantes</label>
+                            <textarea name="ocorrencias" class="form-textarea-custom"
+                                      style="margin-bottom:1.5rem;"
+                                      placeholder="Ex: Gato isolado, medicação administrada..."></textarea>
+
+                            <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+                                <button type="button" class="btn btn-secondary"
+                                        onclick="document.getElementById('modalNota').style.display='none'">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar e Terminar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+
+        </c:otherwise>
+        </c:choose>
+</div>
+</div>
+</main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

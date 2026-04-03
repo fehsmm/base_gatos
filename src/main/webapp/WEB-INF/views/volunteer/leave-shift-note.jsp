@@ -113,28 +113,83 @@
                     </c:when>
                     <c:otherwise>
                         <div class="panel">
-                            <div style="font-weight:600; margin-bottom:1rem;">
-                                Turno de hoje — ${shift.startTime} - ${shift.endTime}
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                                <div style="font-weight:600;">
+                                    Turno de hoje — ${shift.startTime} - ${shift.endTime}
+                                </div>
+                                <c:if test="${not empty note.updatedAt}">
+                                <span style="background:#dcfce7; color:#16a34a; padding:0.25rem 0.75rem;
+                                     border-radius:999px; font-size:0.8rem; font-weight:600;">
+                                    ✅ Guardado
+                                </span>
+                                </c:if>
                             </div>
 
-                            <form action="/volunteer/save-note/${shift.id}" method="POST">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <%-- Modo leitura --%>
+                            <div id="modoLeitura">
+                                <c:choose>
+                                    <c:when test="${empty note.resumo && empty note.ocorrencias}">
+                                        <div style="color:#9ca3af; font-size:0.9rem; margin-bottom:1rem;">
+                                            Ainda não há notas para este turno.
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:if test="${not empty note.resumo}">
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">
+                                                Resumo:
+                                            </div>
+                                            <div class="panel"
+                                                 style="margin-bottom:1rem; font-size:0.9rem; background:#f9fafb;">
+                                                    ${note.resumo}
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty note.ocorrencias}">
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">
+                                                Ocorrências:
+                                            </div>
+                                            <div class="panel"
+                                                 style="margin-bottom:1rem; font-size:0.9rem; background:#f9fafb;">
+                                                    ${note.ocorrencias}
+                                            </div>
+                                        </c:if>
+                                    </c:otherwise>
+                                </c:choose>
 
-                                <label class="form-label">Resumo do turno</label>
-                                <textarea name="resumo" class="form-textarea-custom"
-                                          style="margin-bottom:1rem;"
-                                          placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa...">${note.resumo}</textarea>
+                                <button type="button" class="btn btn-secondary"
+                                        onclick="document.getElementById('modoLeitura').style.display='none';
+                                             document.getElementById('modoEdicao').style.display='block';">
+                                    ✏️ Editar Nota
+                                </button>
+                            </div>
 
-                                <label class="form-label">Ocorrências importantes</label>
-                                <textarea name="ocorrencias" class="form-textarea-custom"
-                                          style="margin-bottom:1rem;"
-                                          placeholder="Ex: Gato isolado, medicação administrada...">${note.ocorrencias}</textarea>
+                                <%-- Modo edição --%>
+                            <div id="modoEdicao" style="display:none;">
+                                <form action="/volunteer/save-note/${shift.id}" method="POST">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                                <button type="submit" class="btn btn-primary">Guardar Nota</button>
-                            </form>
+                                    <label class="form-label">Resumo do turno</label>
+                                    <textarea name="resumo" class="form-textarea-custom"
+                                              style="margin-bottom:1rem;"
+                                              placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa...">${note.resumo}</textarea>
+
+                                    <label class="form-label">Ocorrências importantes</label>
+                                    <textarea name="ocorrencias" class="form-textarea-custom"
+                                              style="margin-bottom:1rem;"
+                                              placeholder="Ex: Gato isolado, medicação administrada...">${note.ocorrencias}</textarea>
+
+                                    <div style="display:flex; gap:0.75rem;">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                                onclick="document.getElementById('modoEdicao').style.display='none';
+                                                     document.getElementById('modoLeitura').style.display='block';">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
 
                             <c:if test="${not empty note.updatedAt}">
-                                <div style="color:#9ca3af; font-size:0.8rem; margin-top:1rem;">
+                                <div style="color:#9ca3af; font-size:0.75rem; margin-top:1rem;">
                                     Última atualização: ${note.updatedAt}
                                 </div>
                             </c:if>
