@@ -16,6 +16,8 @@ public class Note {
     private String resumo;
     private String ocorrencias;
     private LocalDateTime updatedAt;
+
+    @Column(name = "is_read")
     private boolean read = false;
 
     public Long getId() { return id; }
