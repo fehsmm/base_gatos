@@ -97,65 +97,50 @@
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">
             <div class="mb-4">
-
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
-                    <div class="page-title" style="font-size: 2rem; font-weight: bold;">
-                        Notas Entre Turnos
-                    </div>
-                    <button type="button" class="btn btn-primary">+ Nova Nota</button>
+                <div class="page-title"
+                     style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
+                    Notas Entre Turnos
                 </div>
-                <div class="page-subtitle" style="margin-bottom:1.5rem;">
+                <div class="page-subtitle" style="margin-bottom: 1.5rem;">
                     Comunicação e observações importantes entre voluntários.
                 </div>
 
-                <div class="panel" id="formNovaNota" style="display:none; margin-bottom:1.5rem;">
-                    <div style="font-weight:600; margin-bottom:1rem;">Nova Nota</div>
+                <c:choose>
+                    <c:when test="${shift == null}">
+                        <div class="panel text-center" style="color:#9ca3af;">
+                            Não tens nenhum turno hoje para deixar notas.
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="panel">
+                            <div style="font-weight:600; margin-bottom:1rem;">
+                                Turno de hoje — ${shift.startTime} - ${shift.endTime}
+                            </div>
 
-                    <label class="form-label">Prioridade</label>
-                    <select class="form-select mb-3">
-                        <option value="Normal">Normal</option>
-                        <option value="Importante">Importante</option>
-                        <option value="Urgente">Urgente</option>
-                    </select>
+                            <form action="/volunteer/save-note/${shift.id}" method="POST">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                    <label class="form-label">Resumo do turno</label>
-                    <textarea class="form-textarea-custom mb-3"
-                              placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa, faltam sacos de areia..."></textarea>
+                                <label class="form-label">Resumo do turno</label>
+                                <textarea name="resumo" class="form-textarea-custom"
+                                          style="margin-bottom:1rem;"
+                                          placeholder="Ex: O Thor comeu pouco, a Luna estava mais ativa...">${note.resumo}</textarea>
 
-                    <label class="form-label">Ocorrências importantes</label>
-                    <textarea class="form-textarea-custom mb-3"
-                              placeholder="Ex: Gato isolado, medicação administrada, limpeza pendente..."></textarea>
+                                <label class="form-label">Ocorrências importantes</label>
+                                <textarea name="ocorrencias" class="form-textarea-custom"
+                                          style="margin-bottom:1rem;"
+                                          placeholder="Ex: Gato isolado, medicação administrada...">${note.ocorrencias}</textarea>
 
-                    <div style="display:flex; gap:0.5rem;">
-                        <button type="button" class="btn btn-primary">Guardar Nota</button>
-                        <button type="button" class="btn btn-secondary"
-                                onclick="document.getElementById('formNovaNota').style.display='none'">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
+                                <button type="submit" class="btn btn-primary">Guardar Nota</button>
+                            </form>
 
-                <div class="panel" style="background:#f0f9ff; border-left: 4px solid #3b82f6; margin-bottom:1rem;">
-                    <div style="color:#1e40af; font-size:0.85rem;">
-                        ℹ️ FALTA FAZER O NOTE REPOSITORY E SERVICE.
-                    </div>
-                </div>
-
-                <div class="panel" style="border-left: 4px solid #f97316;">
-                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
-                        <strong>${user.name}</strong>
-                        <span class="badge badge-yellow">Importante</span>
-                        <span class="badge badge-green">Nova</span>
-                    </div>
-                    <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:0.75rem;">
-                        09:00-13:00 &nbsp;•&nbsp; hoje
-                    </div>
-                    <div style="font-size:0.95rem; margin-bottom:0.75rem;">
-                        Exemplo de nota — AR CONDICIONADO — Estava ligado, não sabemos se não terá ficado ligado a noite toda.
-                    </div>
-                    <button type="button" class="btn btn-secondary btn-sm">Marcar como Lida</button>
-                </div>
-
+                            <c:if test="${not empty note.updatedAt}">
+                                <div style="color:#9ca3af; font-size:0.8rem; margin-top:1rem;">
+                                    Última atualização: ${note.updatedAt}
+                                </div>
+                            </c:if>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </main>

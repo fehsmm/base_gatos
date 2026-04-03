@@ -163,6 +163,22 @@ public class VolunteerController {
     @GetMapping("/leave-shift-note")
     public String leaveShiftNote(Authentication authentication, Model model) {
         addLoggedUserToModel(authentication, model);
+
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        LocalDate today = LocalDate.now();
+
+        List<Shift> todayShifts = shiftRepository.findByVolunteers_Id(user.getId())
+                .stream()
+                .filter(s -> s.getDate().equals(today))
+                .collect(Collectors.toList());
+
+        if (!todayShifts.isEmpty()) {
+            Note note = noteService.getOrCreateNote(todayShifts.get(0));
+            model.addAttribute("note", note);
+            model.addAttribute("shift", todayShifts.get(0));
+        }
+
         return "volunteer/leave-shift-note";
     }
 
