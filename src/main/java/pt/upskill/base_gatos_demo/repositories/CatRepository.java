@@ -14,6 +14,8 @@ public interface CatRepository extends JpaRepository<Cat,Long> {
     List<Cat> findByStatus(String status);
     List<Cat> findByStatusAndGender(String status, boolean gender);
 
+    List<Cat> findTop8ByOrderByArrivalDateDesc();
+
     List<Cat> findByGender(boolean gender);
 
     List<Cat> findByHealth(boolean health);

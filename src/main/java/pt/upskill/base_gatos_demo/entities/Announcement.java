@@ -1,8 +1,8 @@
 package pt.upskill.base_gatos_demo.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
@@ -10,19 +10,21 @@ import java.time.LocalDateTime;
 @Entity
 public class Announcement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue
+    private Long id;
 
     private String title;
     private String priority;
     private String description;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

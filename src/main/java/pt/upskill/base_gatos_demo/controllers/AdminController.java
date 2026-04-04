@@ -60,10 +60,10 @@ public class AdminController {
 
     @GetMapping(value="/")
     public String admin(Model model){
-        List<Cat> cats = catRepository.findAll();
+        List<Cat> cats = catRepository.findTop8ByOrderByArrivalDateDesc();
         int pendingApproval = userService.countPendingApproval();
         int lowStock = stockService.countLowStockItems();
-        List<Announcement> announcements = announcementRepository.findAll();
+        List<Announcement> announcements = announcementRepository.findTop6ByOrderByCreatedAtDesc();
         model.addAttribute("cats", cats);
         model.addAttribute("pendingUsersCount", pendingApproval);
         model.addAttribute("lowStockCount", lowStock);

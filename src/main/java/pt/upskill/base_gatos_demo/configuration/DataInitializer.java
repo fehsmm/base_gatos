@@ -45,7 +45,7 @@ public class DataInitializer {
                     new User("AdminSistema", "admin", "123", "admin", 910000001L, "Rua Central, 1", true),
                     new User("JoãoV", "joao.vol", "123", "volunteer", 910000002L, "Avenida da Liberdade, 10", true),
                     new User("MariaA", "maria.adop", "123", "adopter", 910000003L, "Rua das Flores, 5", true),
-                    new User("PedroV", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", false),
+                    new User("PedroV", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", true),
                     new User("AnaA", "ana.adop", "123", "adopter", 910000005L, "Praceta do Sol, 3", true),
                     new User("CatarinaV", "catarina.vol", "123", "volunteer", 910000004L, "Praça do Chile, 15", false)
             );

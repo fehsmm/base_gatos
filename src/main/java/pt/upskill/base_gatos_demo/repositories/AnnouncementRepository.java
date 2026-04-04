@@ -10,4 +10,6 @@ import java.util.List;
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
 
     List<Announcement> findByPriority(String priority);
+
+    List<Announcement> findTop6ByOrderByCreatedAtDesc();
 }
