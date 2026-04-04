@@ -457,7 +457,7 @@ tr:hover td { background: #f9fafb; }
 }
 .btn-hero {
     background: #E76F51;
-    color: #111827 !important;
+    color: white !important;
     border: 2px solid white !important;
     padding: 1rem 2.25rem;
     font-size: 1.2rem;
@@ -467,5 +467,5 @@ tr:hover td { background: #f9fafb; }
 }
 .btn-hero:hover {
     background: white !important;
-    color: #111827 !important;
+    color: #f97316 !important;
 }
