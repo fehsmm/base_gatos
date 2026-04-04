@@ -5,11 +5,6 @@
     margin-bottom: 10px;
 }
 
-/*.header img {
-    height: 60px;
-}*/
-
-
 .top-logo {
     width: 300px;
     height: 180px;
@@ -18,17 +13,16 @@
 }
 
 .top-title {
-    font-size: 1.4rem;
+    font-size: 2.2rem;
     font-weight: 1000;
     color: #f97316;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
     line-height: 1;
     margin: 0;
 }
 
 .top-subtitle {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: #9ca3af;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -78,4 +72,8 @@
     gap: 0.4rem;
     transition: all 0.15s;
     background-color: #ea6c00;
+}
+.header-links button:hover {
+    background-color: darkorange;
+    cursor: pointer;
 }
