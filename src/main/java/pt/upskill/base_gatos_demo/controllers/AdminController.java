@@ -81,18 +81,6 @@ public class AdminController {
             return "admin/manage-application";
     }
 
-    @PostMapping("/adoptions/{id}/approve")
-    public String approve(@PathVariable Long id) {
-        adoptionService.approveAdoption(id);
-        return "redirect:/admin/manage-application";
-    }
-
-    @PostMapping("/adoptions/{id}/reject")
-    public String reject(@PathVariable Long id) {
-        adoptionService.rejectAdoption(id, "Rejeitado");
-        return "redirect:/admin/manage-application";
-    }
-
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
         LocalDate today = LocalDate.now();
@@ -219,6 +207,18 @@ public class AdminController {
         catService.updateCat(model);
         redirectAttributes.addFlashAttribute("success", "Gato atualizado com sucesso!");
         return "redirect:/admin/manage-cat";
+    }
+
+    @PostMapping("/adoptions/{id}/approve")
+    public String approve(@PathVariable Long id) {
+        adoptionService.approveAdoption(id);
+        return "redirect:/admin/manage-application";
+    }
+
+    @PostMapping("/adoptions/{id}/reject")
+    public String reject(@PathVariable Long id) {
+        adoptionService.rejectAdoption(id, "Rejeitado");
+        return "redirect:/admin/manage-application";
     }
 
     //ADICIONAR GATO - LISTA DE TAGS (ver como a das tarefas)

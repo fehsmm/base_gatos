@@ -367,7 +367,7 @@
 
 <div id="deleteModal" class="modal-overlay">
 
-    <div class="modal-content" style="max-width:400px">
+    <div class="modal-content" style="max-width:400px; max-height: fit-content">
 
         <h5 class="mb-3">Eliminar Gato</h5>
 
@@ -409,6 +409,18 @@
         document.getElementById("catId").value = "";
     }
 
+    function openEditModal() {
+        document.getElementById("editCatModal").classList.add("open");
+    }
+
+    function closeEditModal() {
+        document.getElementById("editCaftModal").classList.remove("open");
+        const form = document.querySelector("#editCatModal form");
+        form.reset();
+        form.action = "/admin/update-cat";
+        document.getElementById("editCatId").value = "";
+    }
+
     function editCat(button) {
         const id = button.getAttribute("data-id");
         const image = button.getAttribute("data-image");
@@ -418,32 +430,33 @@
         const status = button.getAttribute("data-status");
         const arrivalDate = button.getAttribute("data-arrivalDate");
         const description = button.getAttribute("data-description");
-        const tags = button.getAttribute("data-tags");
+        //const tags = button.getAttribute("data-tags").split(",");
         const fiv = button.getAttribute("data-fiv");
         const felv = button.getAttribute("data-felv");
         const vaccination = button.getAttribute("data-vaccination");
         const parasiteControl = button.getAttribute("data-parasiteControl");
         const sterilization = button.getAttribute("data-sterilization");
 
-        openModal();
+        openEditModal();
 
-        document.querySelector("input[name='id']").value = id;
-        document.querySelector("input[name='image']").value = image;
-        document.querySelector("input[name='name']").value = name;
-        document.querySelector("input[name='estimatedAge']").value = estimatedAge;
-        document.querySelector("input[name= 'breed']").value = breed;
-        document.querySelector("input[name= 'status']").value = status;
-        document.querySelector("input[name= 'arrivalDate']").value = arrivalDate;
-        document.querySelector("input[name= 'description']").value = description;
-        document.querySelector("input[name= 'tags']").value = tags;
-        document.querySelector("input[name= 'fiv']").value = fiv;
-        document.querySelector("input[name= 'felv']").value = felv;
-        document.querySelector("input[name= 'vaccination']").value = vaccination;
-        document.querySelector("input[name= 'parasiteControl']").value = parasiteControl;
-        document.querySelector("input[name= 'sterilization']").value = sterilization;
+        //document.getElementById("editTagsList").innerHTML = ""; //reset tags list
+        //document.getElementById("editTagHiddenInputs").innerHTML = ""; //reset tags lists hidden inputs
 
-        const form = document.querySelector("#addCatModal form");
-        form.action = "/admin/update-cat";
+        document.getElementById("editCatId").value = id;
+        document.getElementById("editImage").value = image;
+        document.getElementById("editName").value = name;
+        document.getElementById("editEstimatedAge").value = estimatedAge;
+        document.getElementById("editBreed").value = breed;
+        document.getElementById("editStatus").value = status;
+        document.getElementById("editArrivalDate").value = arrivalDate;
+        document.getElementById("editDescription").value = description;
+        //document.getElementById("editTags").value = tags;
+        document.getElementById("editFiv").value = fiv;
+        document.getElementById("editFelv").value = felv;
+        document.getElementById("editVaccination").value = vaccination;
+        document.getElementById("editParasiteControl").value = parasiteControl;
+        document.getElementById("editSterilization").value = sterilization;
+
     }
 
     function openDeleteModal(id) {
@@ -455,6 +468,12 @@
     function closeDeleteModal() {
         document.getElementById("deleteModal").classList.remove("open");
     }
+
+    //addTag
+    //removeTag
+    //addTagEdit
+    //removeTagEdit
+    //addTagEditModal
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
