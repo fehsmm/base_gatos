@@ -115,8 +115,11 @@
 
             <div class="card-body">
                 <div class="card">
-                    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
-                        <strong>Gatos Resgatados</strong>
+                    <div class="card-header" style="display:flex;align-items:center;">
+                        <strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="black"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                            Gatos Resgatados
+                        </strong>
                         <button class="btn btn-dark position-absolute top-0 end-0" onclick="openModal()" style="margin-top: 12px; margin-right: 12px">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                             Adicionar Gato
@@ -211,9 +214,18 @@
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id"/>
-            <h3 class="mb-4">Detalhes do Gato</h3>
 
-            <div class="row">
+            <div class="mb-4">
+                <h5 style="font-weight:600;">Informação Básica</h5>
+                <hr style="margin-top:4px;">
+            </div>
+
+            <!--<div class="mb-3">
+                <label>Foto</label>
+                <input type="file" name="image" id="image" class="form-control-file" required>
+            </div>-->
+
+            <div class="row" style="margin-bottom:10px;">
                 <div class="col">
                     <label>Nome</label>
                     <input type="text" name="name" class="form-control" id="name" placeholder="Insira o nome do gato" required/>
@@ -224,7 +236,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="margin-bottom:10px;">
                 <div class="col">
                     <label>Raça</label>
                     <input type="text" name="breed" class="form-control" id="breed" placeholder="Ex: Gato laranja"/>
@@ -239,7 +251,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="margin-bottom:10px;">
                 <div class="col">
                     <label>Estado de Adoção</label>
                     <select class="form-control" name="status" id="status" required>
@@ -258,11 +270,6 @@
             <div class="mb-3">
                 <label>Descrição</label>
                 <input type="text" name="description" id="description" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
-            </div>
-
-            <div class="mb-3">
-                <label>Foto</label>
-                <input type="file" name="image" id="image" class="form-control-file" required>
             </div>
 
             <!-- FALTA A LISTA DE TAGS
@@ -286,21 +293,62 @@
                     </button>
 
 
-                    <c:forEach var="task" items="${tasks}">
+                    <c:forEach var="tag" items="${tags}">
                         <div>
-                                ${task.title}
+                                ${tag}
                         </div>
-
-                        <c:if test="${not empty task.description}">
-                            <small class="text-muted">
-                                    ${task.description}
-                            </small>
-                        </c:if>
                     </c:forEach>
 
                 </div>
 
             </div> -->
+
+            <div class="mt-4 mb-3">
+                <h5 style="font-weight:600;">Saúde</h5>
+                <hr style="margin-top:4px;">
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Teste FIV</label>
+                    <select class="form-control" name="fiv" id="fiv" required>
+                        <option disabled selected> Selecione o resultado do teste FIV </option>
+                        <option>Positivo</option>
+                        <option>Negativo</option>
+                        <option>Não Testado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Teste FELV</label>
+                    <select class="form-control" name="felv" id="felv" required>
+                        <option disabled selected> Selecione o resultado do teste FELV </option>
+                        <option>Positivo</option>
+                        <option>Negativo</option>
+                        <option>Não Testado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Vacinação</label>
+                    <select class="form-control" name="vaccination" id="vaccination" required>
+                        <option disabled selected> Selecione o estado de vacinação </option>
+                        <option>Vacinado</option>
+                        <option>Não Vacinado</option>
+                        <option>Sem Informação</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Esterilização/Castração</label>
+                    <select class="form-control" name="sterilization" id="sterilization" required>
+                        <option disabled selected> Selecione o estado de esterilização/castração </option>
+                        <option>Esterilizado/Castrado</option>
+                        <option>Não Esterilizado/Castrado</option>
+                        <option>Sem Informação</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <button type="button" class="btn btn-secondary" style="background-color:#9ca3af" onclick="closeModal()">

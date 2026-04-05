@@ -169,8 +169,10 @@
                                             data-date="${shift.date}"
                                             data-start="${shift.startTime}"
                                             data-end="${shift.endTime}"
-                                            data-volunteers="${shift.volunteers}"
-                                            data-tasks="${shift.tasks}">
+                                            data-volunteers="<c:forEach var='v' items='${shift.volunteers}' varStatus='s'>
+                                                            ${v.id} <c:if test='${!s.last}'>,</c:if></c:forEach>"
+                                            data-tasks="<c:forEach var='t' items='${shift.tasks}' varStatus='s'>
+                                                            ${t.title}|${t.description}<c:if test='${!s.last}'>;</c:if></c:forEach>">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
                                     </button>
 
@@ -322,6 +324,89 @@
 
 </div>
 
+<div id="editShiftModal" class="modal-overlay">
+
+    <div class="modal-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Editar Turno</h4>
+            <button class="modal-close" onclick="closeEditModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
+        </div>
+
+        <form action="/admin/update-shift" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="id" id="editShiftId"/>
+            <h3 class="mb-4">Detalhes do Turno</h3>
+
+            <div class="mb-3">
+                <label>Data</label>
+                <input type="date" name="date" id="editDate" class="form-control" required>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Hora de Início</label>
+                    <input type="time" name="startTime" id="editStartTime" class="form-control" required/>
+                </div>
+                <div class="col">
+                    <label>Hora de Fim</label>
+                    <input type="time" name="endTime" id="editEndTime" class="form-control" required/>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label>
+                    Voluntários
+                    <select name="volunteerIds" class="form-control" id="editVolunteerIds" multiple required>
+                        <c:forEach var="user" items="${volunteers}">
+                            <option value="${user.id}">
+                                    ${user.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </label>
+            </div>
+
+            <div class="mt-4">
+                <h5>Tarefas</h5>
+
+                <div id="editTasksList" class="mb-3"></div>
+
+                <label>
+                    Título da Tarefa
+                    <input type="text" name="title" id="editTaskTitle" class="form-control mb-2" placeholder="Ex: Alimentar os gatos">
+                </label>
+
+                <label>
+                    Descrição da Tarefa (opcional)
+                    <input type="text" name="description" id="editTaskDesc" class="form-control mb-2" placeholder="Ex: Gato Mike deve receber ração de sénior.">
+                </label>
+
+                <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTaskEdit()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                    Adicionar Tarefa
+                </button>
+
+                <div id="editTaskHiddenInputs"></div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" style="background-color:#9ca3af" onclick="closeEditModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-dark" style="background-color:#f97316; color:white">
+                    Guardar Alterações
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
 <div id="deleteModal" class="modal-overlay">
 
     <div class="modal-content" style="max-width:400px; max-height: fit-content">
@@ -366,25 +451,49 @@
         document.getElementById("shiftId").value = "";
     }
 
+    function openEditModal() {
+        document.getElementById("editShiftModal").classList.add("open");
+    }
+
+    function closeEditModal() {
+        document.getElementById("editShiftModal").classList.remove("open");
+        const form = document.querySelector("#editShiftModal form");
+        form.reset();
+        form.action = "/admin/update-shift";
+        document.getElementById("editShiftId").value = "";
+    }
+
     function editShift(button) {
         const id = button.getAttribute("data-id");
         const date = button.getAttribute("data-date");
         const start = button.getAttribute("data-start");
         const end = button.getAttribute("data-end");
-        const volunteers = button.getAttribute("data-volunteers");
-        const tasks = button.getAttribute("data-tasks");
+        const volunteerIds = button.getAttribute("data-volunteers").split(",").map(id => id.trim());
+        const tasksAttr = button.getAttribute("data-tasks");
+        const tasksData = tasksAttr ? tasksAttr.split(";") : [];
 
-        openModal();
+        openEditModal();
 
-        document.querySelector("input[name='id']").value = id;
-        document.querySelector("input[name='date']").value = date;
-        document.querySelector("input[name='startTime']").value = start;
-        document.querySelector("input[name='endTime']").value = end;
-        document.querySelector("select[name='volunteerIds']").value = volunteers;
-        document.querySelector("input[name='tasks']").value = tasks;
+        document.getElementById("editTasksList").innerHTML = ""; //reset tasks list
+        document.getElementById("editTaskHiddenInputs").innerHTML = ""; //reset tasks lists hidden inputs
 
-        const form = document.querySelector("#addShiftModal form");
-        form.action = "/admin/update-shift";
+        document.getElementById("editShiftId").value = id;
+        document.getElementById("editDate").value = date;
+        document.getElementById("editStartTime").value = start;
+        document.getElementById("editEndTime").value = end;
+
+        const select = document.getElementById("editVolunteerIds");
+        for (let option of select.options) {
+            option.selected = volunteerIds.includes(option.value);
+        }
+
+        console.log(tasksAttr);
+        console.log(tasksData);
+
+        tasksData.forEach(task => {
+            const [title, description] = task.split("|");
+            addTaskToEdit(title, description);
+        });
     }
 
     function openDeleteModal(id) {
@@ -446,6 +555,49 @@
         if(hidden) {
             hidden.remove();
         }
+    }
+
+    function addTaskEdit() {
+        const titleInput = document.getElementById("editTaskTitle");
+        const descInput = document.getElementById("editTaskDesc");
+        const title = titleInput.value.trim();
+        const description = descInput.value.trim();
+
+        if (!title) {
+            alert("Título obrigatório");
+            return;
+        }
+
+        addTaskToEditModal(title, description);
+
+        titleInput.value = "";
+        descInput.value = "";
+    }
+
+    function addTaskToEditModal(title, description) {
+        const list = document.getElementById("editTasksList");
+        const hidden = document.getElementById("editTaskHiddenInputs");
+        const index = hidden.children.length;
+
+        const taskDiv = document.createElement("div");
+        taskDiv.className = "task-item d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
+
+        taskDiv.innerHTML = `
+        <div>
+            <strong>\${title}</strong>
+            <small class="text-muted"> \${description || ''}</small>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger" onclick="removeTaskEdit(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+        </button>
+    `;
+
+        list.appendChild(taskDiv);
+
+        hidden.innerHTML += `
+        <input type="hidden" name="tasks[\${index}].title" value="\${title}">
+        <input type="hidden" name="tasks[\${index}].description" value="\${description}">
+    `;
     }
 </script>
 
