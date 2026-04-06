@@ -51,7 +51,7 @@
         <div class="card mb-6">
             <div class="card-header"><strong>✅ Requisitos para Adoção</strong></div>
             <div class="card-body">
-                <div class="grid grid-2" style="gap:.5rem">
+                <div class="requirements-grid">
                     <div style="display:flex;gap:.5rem;align-items:flex-start"><span style="color:#16a34a">✔</span><span>Ser maior de 18 anos</span></div>
                     <div style="display:flex;gap:.5rem;align-items:flex-start"><span style="color:#16a34a">✔</span><span>Ter condições adequadas para acolher um gato</span></div>
                     <div style="display:flex;gap:.5rem;align-items:flex-start"><span style="color:#16a34a">✔</span><span>Disponibilidade para cuidar do animal</span></div>
