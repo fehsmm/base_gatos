@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div style="flex:2;">
-                                        ${cat.estimatedAge} anos • ${cat.gender ? 'Macho' : 'Fêmea'}
+                                        ${cat.estimatedAge} • ${cat.gender ? 'Macho' : 'Fêmea'}
                                 </div>
 
                                 <div style="flex:1;">

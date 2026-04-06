@@ -60,7 +60,7 @@ public class CatService {
         cat.setStatus(model.getStatus());
         cat.setArrivalDate(model.getArrivalDate());
         cat.setDescription(model.getDescription());
-        cat.setTags(model.getTags() != null ? String.join(",", model.getTags()) : null);
+        cat.setTags(model.getTags());
         cat.setFiv(model.isFiv());
         cat.setFelv(model.isFelv());
         cat.setParasiteControl(model.isParasiteControl());
@@ -83,7 +83,7 @@ public class CatService {
         cat.setStatus(model.getStatus());
         cat.setArrivalDate(model.getArrivalDate());
         cat.setDescription(model.getDescription());
-        cat.setTags(model.getTags() != null ? String.join(",", model.getTags()) : null);
+        cat.setTags(model.getTags());
         cat.setFiv(model.isFiv());
         cat.setFelv(model.isFelv());
         cat.setParasiteControl(model.isParasiteControl());

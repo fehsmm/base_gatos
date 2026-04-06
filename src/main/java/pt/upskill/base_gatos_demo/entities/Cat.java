@@ -20,7 +20,7 @@ public class Cat {
     private String status;
     private Date arrivalDate;
     private String description;
-    private String tags;
+    private List<String> tags;
 
     private boolean fiv;
     private boolean felv;
@@ -101,14 +101,6 @@ public class Cat {
         this.description = description;
     }
 
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     public boolean isFiv() {
         return fiv;
     }
@@ -155,5 +147,13 @@ public class Cat {
         } else {
             return false;
         }
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }
