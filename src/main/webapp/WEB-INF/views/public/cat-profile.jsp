@@ -114,6 +114,14 @@
                                         <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
                                     </c:choose>
                                 </td></tr>
+                            <tr><td style="color:#6b7280;padding:.4rem 0">Desparasitação:</td>
+                                <td style="text-align:right">
+                                    <c:choose>
+                                        <c:when test="${cat.parasiteControl == true}"><span class="badge badge-green">Desparasitado.</span></c:when>
+                                        <c:when test="${cat.parasiteControl == false}"><span class="badge badge-yellow">Não desparasitado.</span></c:when>
+                                        <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
+                                    </c:choose>
+                                </td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Teste FIV:</td>
                                 <td style="text-align:right">
                                     <c:choose>
