@@ -100,7 +100,7 @@ p { color: #4b5563; }
     border: 1px solid #e5e7eb;
     overflow: hidden;
 }
-.card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f3f4f6; }
+.card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f3f4f6; background-color: #fafafa }
 .card-body { padding: 1.5rem; }
 .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 
