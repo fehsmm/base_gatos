@@ -126,7 +126,15 @@ public class VolunteerController {
             }
         }
 
-        model.addAttribute("todayShift", todayShifts.isEmpty() ? null : todayShifts.get(0));
+        if (!todayShifts.isEmpty()) {
+            Shift todayShift = todayShifts.get(0);
+            model.addAttribute("todayShift", todayShift);
+            Note todayNote = noteService.getOrCreateNote(todayShift);
+            model.addAttribute("todayNote", todayNote);
+        } else {
+            model.addAttribute("todayShift", null);
+        }
+
         return "volunteer/view-shift";
     }
 
@@ -182,6 +190,47 @@ public class VolunteerController {
         return "volunteer/leave-shift-note";
     }
 
+    @GetMapping("/shift-report")
+    public String shiftReport(Authentication authentication, Model model,
+                              @RequestParam(required = false) String search) {
+        addLoggedUserToModel(authentication, model);
+
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        LocalDate today = LocalDate.now();
+
+        List<Shift> allPastShifts = shiftRepository.findByVolunteers_Id(user.getId())
+                .stream()
+                .filter(s -> s.getDate().isBefore(today))
+                .filter(s -> s.getEndedAt() != null)
+                .sorted((a, b) -> b.getDate().compareTo(a.getDate()))
+                .collect(Collectors.toList());
+
+        List<Shift> displayShifts;
+
+        if (search != null && !search.isEmpty()) {
+            displayShifts = allPastShifts.stream()
+                    .filter(s -> s.getDate().toString().contains(search))
+                    .collect(Collectors.toList());
+        } else {
+            displayShifts = allPastShifts.stream()
+                    .filter(s -> s.getDate().getMonth() == today.getMonth()
+                            && s.getDate().getYear() == today.getYear())
+                    .collect(Collectors.toList());
+        }
+
+        java.util.Map<Long, Note> notes = new java.util.HashMap<>();
+        for (Shift s : displayShifts) {
+            Note note = noteService.getOrCreateNote(s);
+            notes.put(s.getId(), note);
+        }
+
+        model.addAttribute("shifts", displayShifts);
+        model.addAttribute("notes", notes);
+        model.addAttribute("search", search);
+        return "volunteer/shift-report";
+    }
+
     @PostMapping("/read-note/{id}")
     public String readNote(@PathVariable Long id) {
         Shift shift = shiftRepository.findById(id).orElse(null);
@@ -214,6 +263,17 @@ public class VolunteerController {
             noteService.saveNote(shift, resumo, ocorrencias);
         }
         return "redirect:/volunteer/view-shift";
+    }
+
+    @PostMapping("/update-note/{id}")
+    public String updateNote(@PathVariable Long id,
+                             @RequestParam String resumo,
+                             @RequestParam String ocorrencias) {
+        Shift shift = shiftRepository.findById(id).orElse(null);
+        if (shift != null) {
+            noteService.saveNote(shift, resumo, ocorrencias);
+        }
+        return "redirect:/volunteer/leave-shift-note";
     }
 }
 //marcar tarefas como concluidas
