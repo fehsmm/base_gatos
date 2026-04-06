@@ -58,6 +58,9 @@ public class AdminController {
     @Autowired
     CatService catService;
 
+    @Autowired
+    NoteRepository noteRepository;
+
     @GetMapping(value="/")
     public String admin(Model model){
         List<Cat> cats = catRepository.findTop8ByOrderByArrivalDateDesc();
@@ -160,7 +163,11 @@ public class AdminController {
     }
 
     @GetMapping(value = "/view-shift-note")
-    public String viewShiftNote(){return "admin/view-shift-note";}
+    public String viewShiftNote(Model model){
+        List<Note> shiftNotes = noteRepository.findAll();
+        model.addAttribute("shiftNotes", shiftNotes);
+        return "admin/view-shift-note";
+    }
 
     @PostMapping(value = "/create-shift")
     public String createShift(@ModelAttribute CreateShiftModel model,
@@ -193,7 +200,7 @@ public class AdminController {
         return "redirect:/admin/manage-cat";
     }
 
-    @PostMapping(value = "/delete-catt")
+    @PostMapping(value = "/delete-cat")
     public String deleteCat(@RequestParam("catId") Long catId,
                               RedirectAttributes redirectAttributes) {
         catService.deleteCat(catId);

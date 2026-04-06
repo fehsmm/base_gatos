@@ -71,7 +71,11 @@ public class CatService {
 
     public void updateCat(EditCatModel model) {
         Cat cat = getById(model.getId());
-        cat.setImage(model.getImage());
+        if (model.getImage() == null || model.getImage().isEmpty()) {
+            cat.setImage(cat.getImage());
+        } else {
+            cat.setImage(model.getImage());
+        }
         cat.setName(model.getName());
         cat.setEstimatedAge(model.getEstimatedAge());
         cat.setGender(model.isGender());

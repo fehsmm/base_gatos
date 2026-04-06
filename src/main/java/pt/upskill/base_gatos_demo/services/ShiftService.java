@@ -15,7 +15,6 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service

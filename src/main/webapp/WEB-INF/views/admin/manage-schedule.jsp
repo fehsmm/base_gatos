@@ -326,7 +326,7 @@
 
     <div class="modal-content">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4>Editar Turno</h4>
+            <h4>Alterar Detalhes do Turno</h4>
             <button class="modal-close" onclick="closeEditModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
             </button>

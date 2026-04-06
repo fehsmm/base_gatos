@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div style="flex:2;">
-                                        ${cat.estimatedAge} anos • ${cat.gender}
+                                        ${cat.estimatedAge} anos • ${cat.gender ? 'Macho' : 'Fêmea'}
                                 </div>
 
                                 <div style="flex:1;">
@@ -220,10 +220,10 @@
                 <hr style="margin-top:4px;">
             </div>
 
-            <!--<div class="mb-3">
+            <div class="mb-3">
                 <label>Foto</label>
-                <input type="file" name="image" id="image" class="form-control-file" required>
-            </div>-->
+                <input type="file" name="image" id="image" class="form-control-file">
+            </div>
 
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
@@ -245,8 +245,8 @@
                     <label>Género</label>
                     <select class="form-control" name="gender" id="gender" required>
                         <option disabled selected> Selecione o sexo do gato </option>
-                        <option>Macho</option>
-                        <option>Fêmea</option>
+                        <option value="true">Macho</option>
+                        <option value="false">Fêmea</option>
                     </select>
                 </div>
             </div>
@@ -263,7 +263,7 @@
                 </div>
                 <div class="col">
                     <label>Data de Entrada</label>
-                    <input type="date" name="date" id="date" class="form-control" required>
+                    <input type="date" name="arrivalDate" id="arrivalDate" class="form-control" required>
                 </div>
             </div>
 
@@ -272,36 +272,22 @@
                 <input type="text" name="description" id="description" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
             </div>
 
-            <!-- FALTA A LISTA DE TAGS
             <div class="mt-4">
                 <h5>Traços de Personalidade</h5>
-                <div id="tagList">
+                <div id="tagList" class="mb-3"></div>
 
                     <label class="form-label">
                         Traço de Personalidade
-                        <input type="text" class="form-control" id="tag" name="tag" placeholder="Ex: Carinhoso">
+                        <input type="text" class="form-control mb-2" id="tag" name="tag" placeholder="Ex: Carinhoso">
                     </label>
 
-                    <label class="form-label">
-                        Descrição da Tarefa (opcional)
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Ex: Gato Mike deve receber ração de sénior.">
-                    </label>
-
-                    <button type="button" class="modal-close" onclick="addTask()">
+                    <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTag()">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                        Adicionar Tarefa
+                        Adicionar Traço de Personalidade
                     </button>
 
-
-                    <c:forEach var="tag" items="${tags}">
-                        <div>
-                                ${tag}
-                        </div>
-                    </c:forEach>
-
-                </div>
-
-            </div> -->
+                    <div id="tagHiddenInputs"></div>
+            </div>
 
             <div class="mt-4 mb-3">
                 <h5 style="font-weight:600;">Saúde</h5>
@@ -311,20 +297,18 @@
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
                     <label>Teste FIV</label>
-                    <select class="form-control" name="fiv" id="fiv" required>
+                    <select class="form-control" name="fiv" id="fiv">
                         <option disabled selected> Selecione o resultado do teste FIV </option>
-                        <option>Positivo</option>
-                        <option>Negativo</option>
-                        <option>Não Testado</option>
+                        <option value="true">Positivo</option>
+                        <option value="false">Negativo</option>
                     </select>
                 </div>
                 <div class="col">
                     <label>Teste FELV</label>
-                    <select class="form-control" name="felv" id="felv" required>
+                    <select class="form-control" name="felv" id="felv">
                         <option disabled selected> Selecione o resultado do teste FELV </option>
-                        <option>Positivo</option>
-                        <option>Negativo</option>
-                        <option>Não Testado</option>
+                        <option value="true">Positivo</option>
+                        <option value="false">Negativo</option>
                     </select>
                 </div>
             </div>
@@ -332,20 +316,26 @@
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
                     <label>Vacinação</label>
-                    <select class="form-control" name="vaccination" id="vaccination" required>
+                    <select class="form-control" name="vaccination" id="vaccination">
                         <option disabled selected> Selecione o estado de vacinação </option>
-                        <option>Vacinado</option>
-                        <option>Não Vacinado</option>
-                        <option>Sem Informação</option>
+                        <option value="true">Vacinado</option>
+                        <option value="false">Não Vacinado</option>
                     </select>
                 </div>
                 <div class="col">
                     <label>Esterilização/Castração</label>
-                    <select class="form-control" name="sterilization" id="sterilization" required>
+                    <select class="form-control" name="sterilization" id="sterilization">
                         <option disabled selected> Selecione o estado de esterilização/castração </option>
-                        <option>Esterilizado/Castrado</option>
-                        <option>Não Esterilizado/Castrado</option>
-                        <option>Sem Informação</option>
+                        <option value="true">Esterilizado/Castrado</option>
+                        <option value="false">Não Esterilizado/Castrado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Desparasitação</label>
+                    <select class="form-control" name="parasiteControl" id="parasiteControl">
+                        <option disabled selected> Selecione o estado de desparasitação </option>
+                        <option value="true">Desparasitado</option>
+                        <option value="false">Não desparasitado</option>
                     </select>
                 </div>
             </div>
@@ -357,6 +347,162 @@
 
                 <button type="submit" class="btn btn-dark" style="background-color:#f97316; color:white">
                     Registar Gato
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<div id="editCatModal" class="modal-overlay">
+
+    <div class="modal-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Alterar Detalhes do Gato</h4>
+            <button class="modal-close" onclick="closeEditModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
+        </div>
+
+        <form action="/admin/update-cat" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="id" id="editCatId"/>
+            <input type="hidden" name="existingImage" id="existingImage"/>
+
+            <div class="mb-4">
+                <h5 style="font-weight:600;">Informação Básica</h5>
+                <hr style="margin-top:4px;">
+            </div>
+
+            <div class="mb-3">
+                <label>Foto</label>
+                <input type="file" name="image" id="editImage" class="form-control-file">
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Nome</label>
+                    <input type="text" name="name" class="form-control" id="editName" placeholder="Insira o nome do gato" required/>
+                </div>
+                <div class="col">
+                    <label>Idade Estimada</label>
+                    <input type="text" name="estimatedAge" class="form-control" id="editEstimatedAge" placeholder="Ex: 1 ano / 4-5 meses" required/>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Raça</label>
+                    <input type="text" name="breed" class="form-control" id="editBreed" placeholder="Ex: Gato laranja"/>
+                </div>
+                <div class="col">
+                    <label>Género</label>
+                    <select class="form-control" name="gender" id="editGender" required>
+                        <option disabled selected> Selecione o sexo do gato </option>
+                        <option value="true">Macho</option>
+                        <option value="false">Fêmea</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Estado de Adoção</label>
+                    <select class="form-control" name="status" id="editStatus" required>
+                        <option disabled selected> Selecione o estado do gato </option>
+                        <option>Disponível</option>
+                        <option>Em Processo</option>
+                        <option>Adotado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Data de Entrada</label>
+                    <input type="date" name="arrivalDate" id="editArrivalDate" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Descrição</label>
+                <input type="text" name="description" id="editDescription" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
+            </div>
+
+            <div class="mt-4">
+                <h5>Traços de Personalidade</h5>
+                <div id="editTagList" class="mb-3"></div>
+
+                <label class="form-label">
+                    Traço de Personalidade
+                    <input type="text" class="form-control mb-2" id="editTag" name="tag" placeholder="Ex: Carinhoso">
+                </label>
+
+                <button type="button" class="btn btn-outline w-full mb-4" style="background-color:#e5e7eb" onclick="addTagEdit()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                    Adicionar Traço de Personalidade
+                </button>
+
+                <div id="editTagHiddenInputs"></div>
+            </div>
+
+            <div class="mt-4 mb-3">
+                <h5 style="font-weight:600;">Saúde</h5>
+                <hr style="margin-top:4px;">
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Teste FIV</label>
+                    <select class="form-control" name="fiv" id="editFiv">
+                        <option disabled selected> Selecione o resultado do teste FIV </option>
+                        <option value="true">Positivo</option>
+                        <option value="false">Negativo</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Teste FELV</label>
+                    <select class="form-control" name="felv" id="editFelv">
+                        <option disabled selected> Selecione o resultado do teste FELV </option>
+                        <option value="true">Positivo</option>
+                        <option value="false">Negativo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col">
+                    <label>Vacinação</label>
+                    <select class="form-control" name="vaccination" id="editVaccination">
+                        <option disabled selected> Selecione o estado de vacinação </option>
+                        <option value="true">Vacinado</option>
+                        <option value="false">Não Vacinado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Esterilização/Castração</label>
+                    <select class="form-control" name="sterilization" id="editSterilization">
+                        <option disabled selected> Selecione o estado de esterilização/castração </option>
+                        <option value="true">Esterilizado/Castrado</option>
+                        <option value="false">Não Esterilizado/Castrado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Desparasitação</label>
+                    <select class="form-control" name="parasiteControl" id="editParasiteControl">
+                        <option disabled selected> Selecione o estado de desparasitação </option>
+                        <option value="true">Desparasitado</option>
+                        <option value="false">Não desparasitado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" style="background-color:#9ca3af" onclick="closeEditModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-dark" style="background-color:#f97316; color:white">
+                    Guardar Alterações
                 </button>
             </div>
 
@@ -405,8 +551,9 @@
         document.getElementById("addCatModal").classList.remove("open");
         const form = document.querySelector("#addCatModal form");
         form.reset();
-        form.action = "/admin/create-cat";
-        document.getElementById("catId").value = "";
+        document.getElementById("tagList").innerHTML = "";
+        document.getElementById("tagHiddenInputs").innerHTML = "";
+        tagIndex = 0;
     }
 
     function openEditModal() {
@@ -414,11 +561,12 @@
     }
 
     function closeEditModal() {
-        document.getElementById("editCaftModal").classList.remove("open");
+        document.getElementById("editCatModal").classList.remove("open");
         const form = document.querySelector("#editCatModal form");
         form.reset();
-        form.action = "/admin/update-cat";
-        document.getElementById("editCatId").value = "";
+        document.getElementById("editTagList").innerHTML = "";
+        document.getElementById("editTagHiddenInputs").innerHTML = "";
+        tagIndex = 0;
     }
 
     function editCat(button) {
@@ -426,36 +574,44 @@
         const image = button.getAttribute("data-image");
         const name = button.getAttribute("data-name");
         const estimatedAge = button.getAttribute("data-estimatedAge");
+        const gender = button.getAttribute("data-gender");
         const breed = button.getAttribute("data-breed");
         const status = button.getAttribute("data-status");
         const arrivalDate = button.getAttribute("data-arrivalDate");
         const description = button.getAttribute("data-description");
-        //const tags = button.getAttribute("data-tags").split(",");
+        const tagsAttr = button.getAttribute("data-tags");
+        const tags = tagsAttr ? tagsAttr.split(",") : [];
         const fiv = button.getAttribute("data-fiv");
         const felv = button.getAttribute("data-felv");
         const vaccination = button.getAttribute("data-vaccination");
         const parasiteControl = button.getAttribute("data-parasiteControl");
         const sterilization = button.getAttribute("data-sterilization");
 
+        document.getElementById("editTagList").innerHTML = ""; //reset tags list
+        document.getElementById("editTagHiddenInputs").innerHTML = ""; //reset tags lists hidden inputs
+
         openEditModal();
 
-        //document.getElementById("editTagsList").innerHTML = ""; //reset tags list
-        //document.getElementById("editTagHiddenInputs").innerHTML = ""; //reset tags lists hidden inputs
-
         document.getElementById("editCatId").value = id;
-        document.getElementById("editImage").value = image;
+        document.getElementById("existingImage").value = image;
         document.getElementById("editName").value = name;
         document.getElementById("editEstimatedAge").value = estimatedAge;
+        document.getElementById("editGender").value = gender;
         document.getElementById("editBreed").value = breed;
         document.getElementById("editStatus").value = status;
         document.getElementById("editArrivalDate").value = arrivalDate;
         document.getElementById("editDescription").value = description;
-        //document.getElementById("editTags").value = tags;
         document.getElementById("editFiv").value = fiv;
         document.getElementById("editFelv").value = felv;
         document.getElementById("editVaccination").value = vaccination;
         document.getElementById("editParasiteControl").value = parasiteControl;
         document.getElementById("editSterilization").value = sterilization;
+
+        tags.forEach(tag => {
+            const cleanTag = tag.trim();
+            if (!cleanTag) return;
+            addTagToEditModal(cleanTag);
+        });
 
     }
 
@@ -469,11 +625,110 @@
         document.getElementById("deleteModal").classList.remove("open");
     }
 
-    //addTag
-    //removeTag
-    //addTagEdit
-    //removeTagEdit
-    //addTagEditModal
+    let tagIndex = 0;
+
+    function addTag() {
+        const input = document.getElementById("tag");
+        const tag = input.value.trim();
+
+        if (!tag) {
+            alert("Insira um tag antes de adicionar");
+            return;
+        }
+
+        const list = document.getElementById("tagList");
+        const hidden = document.getElementById("tagHiddenInputs");
+
+        const tagDiv = document.createElement("div");
+        tagDiv.className = "tag-item d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
+
+        tagDiv.innerHTML = `
+        <span>\${tag}</span>
+        <button type="button" onclick="removeTag(this)" class="btn btn-sm btn-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+        </button>
+    `;
+
+        list.appendChild(tagDiv);
+
+        hidden.innerHTML += `
+        <input type="hidden" name="tags[\${tagIndex}]" value="\${tag}">
+    `;
+
+        tagIndex++;
+
+        input.value = "";
+    }
+
+    function removeTag(button) {
+        const tagDiv = button.closest(".tag-item");
+        tagDiv.remove();
+        const hidden = document.getElementById("tagHiddenInputs");
+        const tags = document.querySelectorAll("#tagList .tag-item");
+
+        hidden.innerHTML = "";
+        tags.forEach((tagEl, index) => {
+            const tag = tagEl.querySelector("span").innerText;
+
+            hidden.innerHTML += `
+            <input type="hidden" name="tags[\${index}]" value="\${tag}">
+        `;
+        });
+
+        tagIndex = tags.length;
+    }
+
+    function addTagEdit() {
+        const input = document.getElementById("editTag");
+        const tag = input.value.trim();
+
+        if (!tag) {
+            alert("Insira um tag antes de adicionar");
+            return;
+        }
+
+        addTagToEditModal(tag);
+        input.value = "";
+    }
+
+    function addTagToEditModal(tag) {
+        const list = document.getElementById("editTagList");
+        const hidden = document.getElementById("editTagHiddenInputs");
+        const index = hidden.children.length;
+
+        const tagDiv = document.createElement("div");
+        tagDiv.className = "tag-item d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
+
+        tagDiv.innerHTML = `
+        <span>\${tag}</span>
+        <button type="button" class="btn btn-sm btn-danger" onclick="removeTagEdit(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+        </button>
+    `;
+
+        list.appendChild(tagDiv);
+
+        hidden.innerHTML += `
+        <input type="hidden" name="tags[\${index}]" value="\${tag}">
+    `;
+    }
+
+    function removeTagEdit(button) {
+        const tagDiv = button.closest(".tag-item");
+        tagDiv.remove();
+        const hidden = document.getElementById("editTagHiddenInputs");
+        const tags = document.querySelectorAll("#editTagList .tag-item");
+
+        hidden.innerHTML = "";
+        tags.forEach((tagEl, index) => {
+            const tag = tagEl.querySelector("span").innerText;
+
+            hidden.innerHTML += `
+            <input type="hidden" name="tags[\${index}]" value="\${tag}">
+        `;
+        });
+    }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
