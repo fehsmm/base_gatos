@@ -362,11 +362,25 @@ tr:hover td { background: #f9fafb; }
 .vet-stat { display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.25rem; }
 
 .card-body {
+    padding: 1.5rem;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+flex-direction: column;
+height: 100%;}
 
 .card-body .btn-primary {
     margin-top: auto;
+    margin-bottom: 0.5rem;
 }
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.step-1 { background: #fff7ed; border-color: #fed7aa; }
+.step-2 { background: #eff6ff; border-color: #bfdbfe; }
+.step-3 { background: #f0fdf4; border-color: #bbf7d0; }
+.step-4 { background: #faf5ff; border-color: #e9d5ff; }
