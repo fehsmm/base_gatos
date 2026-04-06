@@ -109,7 +109,7 @@
                 <strong>NIF:</strong> 123456789</p>
             </div>
             <h3>Doações em Espécie</h3>
-            <p class="text-sm mb-4">Também aceitamos doações de ração, areia para gatos, brinquedos, camas, mantas e outros itens essenciais. <a href="contact.jsp">Contacte-nos</a> para coordenar a entrega.</p>
+            <p class="text-sm mb-4">Também aceitamos doações de ração, areia para gatos, brinquedos, camas, mantas e outros itens essenciais. <a href="/public/contact">Contacte-nos</a> para coordenar a entrega.</p>
             <h3>Voluntariado</h3>
             <p class="text-sm">O seu tempo também é valioso! Se prefere contribuir com o seu tempo e dedicação, considere tornar-se voluntário!</p>
         </div>
