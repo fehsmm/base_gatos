@@ -119,9 +119,15 @@ public class ShiftService {
         List<User> volunteers = userRepository.findAllById(model.getVolunteerIds());
         shift.setVolunteers(volunteers);
 
-        if (shift.getTasks() != null) {
-            taskRepository.deleteAll(shift.getTasks());
+        for (Task task : shift.getTasks()) {
+            task.setShift(null);
+            taskRepository.save(task);
         }
+//        shift.getTasks().forEach(task -> {
+//            task.setShift(null);
+//            taskRepository.save(task);
+//        });
+
         List<Task> tasks = new ArrayList<>();
         if (model.getTasks() != null) {
             for (AddTaskModel t : model.getTasks()) {
@@ -137,6 +143,7 @@ public class ShiftService {
                 taskRepository.save(task);
             }
         }
+
         shift.setTasks(tasks);
         shiftRepository.save(shift);
     }

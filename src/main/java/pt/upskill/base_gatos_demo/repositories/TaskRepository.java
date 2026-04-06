@@ -6,7 +6,7 @@ import pt.upskill.base_gatos_demo.entities.Task;
 
 import java.util.List;
 
-@Repository
+@Repository()
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByShiftId(Long id);

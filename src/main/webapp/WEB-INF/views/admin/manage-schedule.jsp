@@ -470,10 +470,10 @@
         const tasksAttr = button.getAttribute("data-tasks");
         const tasksData = tasksAttr ? tasksAttr.split(";") : [];
 
-        openEditModal();
-
         document.getElementById("editTasksList").innerHTML = ""; //reset tasks list
         document.getElementById("editTaskHiddenInputs").innerHTML = ""; //reset tasks lists hidden inputs
+
+        openEditModal();
 
         document.getElementById("editShiftId").value = id;
         document.getElementById("editDate").value = date;
@@ -547,11 +547,21 @@
     }
 
     function removeTask(button, index) {
-        button.parentElement.remove();
-        const hidden = document.getElementById("task-hidden-" + index);
-        if(hidden) {
-            hidden.remove();
-        }
+        const taskDiv = button.closest("div.border");
+        taskDiv.remove();
+        const hiddenContainer = document.getElementById("taskHiddenInputs");
+        const tasks = document.querySelectorAll("#tasksList > div");
+
+        hiddenContainer.innerHTML = "";
+        tasks.forEach((task, index) => {
+            const title = task.querySelector("strong").innerText;
+            const description = task.querySelector("small")?.innerText || "";
+
+            hiddenContainer.innerHTML += `
+            <input type="hidden" name="tasks[\${index}].title" value="\${title}">
+            <input type="hidden" name="tasks[\${index}].description" value="\${description}">
+        `;
+        });
     }
 
     function addTaskEdit() {
