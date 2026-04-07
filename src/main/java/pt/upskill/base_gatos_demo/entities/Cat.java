@@ -20,6 +20,7 @@ public class Cat {
     private String status;
     private Date arrivalDate;
     private String description;
+    @ElementCollection
     private List<String> tags;
 
     private boolean fiv;

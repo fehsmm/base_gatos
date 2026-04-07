@@ -168,7 +168,7 @@
                                                 data-status="${cat.status}"
                                                 data-arrivalDate="${cat.arrivalDate}"
                                                 data-description="${cat.description}"
-                                                data-tags="${cat.tags}"
+                                                data-tags="<c:forEach var='tag' items='${empty cat.tags ? {} : cat.tags}' varStatus='s'>${tag}<c:if test='${!s.last}'>,</c:if></c:forEach>"
                                                 data-fiv="${cat.fiv}"
                                                 data-felv="${cat.felv}"
                                                 data-vaccination="${cat.vaccination}"
@@ -580,7 +580,7 @@
         const arrivalDate = button.getAttribute("data-arrivalDate");
         const description = button.getAttribute("data-description");
         const tagsAttr = button.getAttribute("data-tags");
-        const tags = tagsAttr ? tagsAttr.split(",") : [];
+        const tags = tagsAttr ? tagsAttr.split(",").map(t => t.trim()) : [];
         const fiv = button.getAttribute("data-fiv");
         const felv = button.getAttribute("data-felv");
         const vaccination = button.getAttribute("data-vaccination");
