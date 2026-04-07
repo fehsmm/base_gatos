@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Note;
 import pt.upskill.base_gatos_demo.entities.Shift;
+import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.repositories.NoteRepository;
 
 import java.time.LocalDateTime;
@@ -33,5 +34,15 @@ public class NoteService {
 
     public void saveExistingNote(Note note) {
         noteRepository.save(note);
+    }
+
+    public int countUnreadNotes() {
+        int unreadNotes = 0;
+        for(Note note : noteRepository.findAll()) {
+            if(!note.isRead()) {
+                unreadNotes++;
+            }
+        }
+        return unreadNotes;
     }
 }

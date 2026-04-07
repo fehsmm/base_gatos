@@ -61,6 +61,9 @@ public class AdminController {
     @Autowired
     NoteRepository noteRepository;
 
+    @Autowired
+    NoteService noteService;
+
     @GetMapping(value="/")
     public String admin(Model model){
         List<Cat> cats = catRepository.findTop8ByOrderByArrivalDateDesc();
@@ -165,7 +168,9 @@ public class AdminController {
     @GetMapping(value = "/view-shift-note")
     public String viewShiftNote(Model model){
         List<Note> shiftNotes = noteRepository.findAll();
+        int unreadNotes = noteService.countUnreadNotes();
         model.addAttribute("shiftNotes", shiftNotes);
+        model.addAttribute("unreadNotesCount", unreadNotes);
         return "admin/view-shift-note";
     }
 

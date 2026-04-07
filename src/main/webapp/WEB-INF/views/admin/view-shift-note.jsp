@@ -91,6 +91,23 @@
                 <div class="alert alert-success">${success}</div>
             </c:if>
 
+            <c:if test="${unreadNotesCount > 0}">
+                <div style="padding: 0 1.5rem; margin-top:1.5rem;">
+                        <c:choose>
+                            <c:when test="${unreadNotesCount == 1}">
+                                <div class="alert alert-info" style="flex:1;min-width:200px">
+                                    <strong>${unreadNotesCount} nota não lida</strong>
+                                </div>
+                            </c:when>
+                            <c:when test="${unreadNotesCount > 1}">
+                                <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                    <strong>${unreadNotesCount} notas não lidas</strong>
+                                </div>
+                            </c:when>
+                        </c:choose>
+                </div>
+            </c:if>
+
             <div style="gap:1rem; margin-bottom:1.5rem;">
                 <div class="card">
                     <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
@@ -101,6 +118,7 @@
                     </div>
 
                     <div class="card-body">
+
                         <c:forEach var="note" items="${shiftNotes}">
                             <div class="shift-card"
                                  style="${note.priority == 'urgent' ? 'border-color:#fca5a5' :
@@ -108,26 +126,46 @@
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
                                     <div style="font-weight:500;font-size:.9rem">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M582-298 440-440v-200h80v167l118 118-56 57ZM440-720v-80h80v80h-80Zm280 280v-80h80v80h-80ZM440-160v-80h80v80h-80ZM160-440v-80h80v80h-80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                                        ${note.updatedAt}
+                                        ${note.shift.date}
                                     </div>
-                                    <span class="badge
-                                    ${ann.priority == 'urgent' ? 'badge-red' :
-                                      (ann.priority == 'high' ? 'badge-orange' :
-                                      (ann.priority == 'normal' ? 'badge-blue' : 'badge-gray'))}">
 
-                                            ${ann.priority == 'urgent' ? 'Urgente' :
-                                                    (ann.priority == 'high' ? 'Alta' :
-                                                            (ann.priority == 'normal' ? 'Normal' : 'Baixa'))}
+                                    <span class="badge
+                                    ${note.priority == 'urgent' ? 'badge-red' :
+                                      (note.priority == 'high' ? 'badge-orange' :
+                                      (note.priority == 'normal' ? 'badge-blue' : 'badge-gray'))}">
+
+                                            ${note.priority == 'urgent' ? 'Urgente' :
+                                                    (note.priority == 'high' ? 'Alta' :
+                                                            (note.priority == 'normal' ? 'Normal' : 'Baixa'))}
                                     </span>
                                 </div>
-                                <div class="text-xs text-gray">
-                                        ${ann.createdAt}
+
+                                <div style="font-size:.9rem; margin-bottom:.5rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M582-298 440-440v-200h80v167l118 118-56 57ZM440-720v-80h80v80h-80Zm280 280v-80h80v80h-80ZM440-160v-80h80v80h-80ZM160-440v-80h80v80h-80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                    ${note.shift.startTime} - ${note.shift.endTime} •
+
+                                    <span class="ms-3 text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M367-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q560-607 560-640t-23.5-56.5Q513-720 480-720t-56.5 23.5Q400-673 400-640t23.5 56.5Q447-560 480-560t56.5-23.5ZM480-640Zm0 400Z"/></svg>
+                                        <c:forEach var="vol" items="${note.shift.volunteers}" varStatus="s">
+                                            ${vol.name}<c:if test="${!s.last}">, </c:if>
+                                        </c:forEach>
+                                    </span>
                                 </div>
+
+                                <div style="margin-top:.5rem;">
+                                        ${note.resumo}
+                                </div>
+
+                                <c:if test="${not empty note.ocorrencias}">
+                                    <div style="margin-top:.5rem;">
+                                        <strong>Ocorrências:</strong> ${note.ocorrencias}
+                                    </div>
+                                </c:if>
                             </div>
                         </c:forEach>
 
-                        <c:if test="${empty announcements}">
-                            <div class="text-gray text-sm">Sem comunicados.</div>
+                        <c:if test="${empty shiftNotes}">
+                            <div class="text-gray text-sm">Sem notas de turno.</div>
                         </c:if>
                     </div>
                 </div>
