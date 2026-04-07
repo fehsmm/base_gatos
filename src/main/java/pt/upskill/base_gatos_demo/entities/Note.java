@@ -16,6 +16,7 @@ public class Note {
     private String resumo;
     private String ocorrencias;
     private LocalDateTime updatedAt;
+    private String priority;
 
     @Column(name = "is_read")
     private boolean read = false;

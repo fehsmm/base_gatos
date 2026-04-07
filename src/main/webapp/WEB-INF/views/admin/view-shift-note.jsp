@@ -80,16 +80,58 @@
         <div style="padding:1.5rem">
             <div class="mb-8">
                 <h1 style="margin-bottom:.25rem">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="black"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
                     Notas de Turno
                 </h1>
-                <p>Visualização de observações dos voluntários</p>
+                <p>Comunicação e observações importantes dos voluntários</p>
 
             </div>
 
             <c:if test="${success != null}">
                 <div class="alert alert-success">${success}</div>
             </c:if>
+
+            <div style="gap:1rem; margin-bottom:1.5rem;">
+                <div class="card">
+                    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                        <strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black"><path d="M720-440v-80h160v80H720Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM200-200v-160h-40q-33 0-56.5-23.5T80-440v-80q0-33 23.5-56.5T160-600h160l200-120v480L320-360h-40v160h-80Zm240-182v-196l-98 58H160v80h182l98 58Zm120 36v-268q27 24 43.5 58.5T620-480q0 41-16.5 75.5T560-346ZM300-480Z"/></svg>
+                            Observações de Turnos
+                        </strong>
+                    </div>
+
+                    <div class="card-body">
+                        <c:forEach var="note" items="${shiftNotes}">
+                            <div class="shift-card"
+                                 style="${note.priority == 'urgent' ? 'border-color:#fca5a5' :
+                             (note.priority == 'high' ? 'border-color:#fdba74' : '')}">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
+                                    <div style="font-weight:500;font-size:.9rem">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M582-298 440-440v-200h80v167l118 118-56 57ZM440-720v-80h80v80h-80Zm280 280v-80h80v80h-80ZM440-160v-80h80v80h-80ZM160-440v-80h80v80h-80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                        ${note.updatedAt}
+                                    </div>
+                                    <span class="badge
+                                    ${ann.priority == 'urgent' ? 'badge-red' :
+                                      (ann.priority == 'high' ? 'badge-orange' :
+                                      (ann.priority == 'normal' ? 'badge-blue' : 'badge-gray'))}">
+
+                                            ${ann.priority == 'urgent' ? 'Urgente' :
+                                                    (ann.priority == 'high' ? 'Alta' :
+                                                            (ann.priority == 'normal' ? 'Normal' : 'Baixa'))}
+                                    </span>
+                                </div>
+                                <div class="text-xs text-gray">
+                                        ${ann.createdAt}
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                        <c:if test="${empty announcements}">
+                            <div class="text-gray text-sm">Sem comunicados.</div>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
