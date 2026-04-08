@@ -96,9 +96,18 @@ p { color: #4b5563; }
     border-radius: 0.75rem;
     border: 1px solid #e5e7eb;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.card-body { padding: 1.5rem; }
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 
 /* ---- Badges ---- */
@@ -157,7 +166,7 @@ input:focus, select:focus, textarea:focus {
 
 
 /* ---- Cat Card ---- */
-.cat-card { transition: box-shadow 0.2s; }
+.cat-card { transition: box-shadow 0.2s; height: 100% }
 .cat-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .cat-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .cat-card-img-wrapper { position: relative; overflow: hidden; }
@@ -189,7 +198,7 @@ input:focus, select:focus, textarea:focus {
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
     .hide-mobile { display: none !important; }
-    .grid-3 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; align-items: stretch; }
     .mobile-nav-bar {
         background: #111827;
         padding: 0.75rem 1rem;
