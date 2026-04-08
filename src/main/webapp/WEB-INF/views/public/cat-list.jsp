@@ -15,7 +15,7 @@
 
 <main class="flex-1 page">
     <div class="container">
-        <div class="mb-8">
+        <div class="mb-8 text-center">
             <h1>Gatos Disponíveis para Adoção</h1>
             <p>Conheça os nossos adoráveis gatos que estão à procura de um lar amoroso</p>
         </div>

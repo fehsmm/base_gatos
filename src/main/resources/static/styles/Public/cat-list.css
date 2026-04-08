@@ -19,7 +19,7 @@ body {
 
 /* ---- Typography ---- */
 h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
-h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; -webkit-font-smoothing: antialiased;}
 p { color: #4b5563; }
 
 /* ---- Navbar ---- */
@@ -125,13 +125,14 @@ p { color: #4b5563; }
 
 /* ---- Forms ---- */
 
-label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.35rem; }
+label { display: block; font-size: 0.98rem; font-weight: 500; color: #374151; margin-bottom: 0.35rem; }
 input, select, textarea {
     width: 31.7%;
+    height: 80%;
     padding: 0.55rem 0.85rem;
     border: 1.5px solid #d1d5db;
     border-radius: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #111827;
     background: white;
     transition: border-color 0.15s;
