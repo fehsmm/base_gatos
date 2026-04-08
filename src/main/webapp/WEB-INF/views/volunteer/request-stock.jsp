@@ -123,7 +123,7 @@
                     <input type="number" class="form-control-custom" placeholder="Ex: 5">
 
                     <label class="form-label">Observações</label>
-                    <textarea class="form-textarea-custom" placeholder="Explique o motivo do pedido"></textarea>
+                    <textarea class="form-textarea-custom" placeholder="Exemplo: Ração Renal"></textarea>
 
                     <button type="button" class="btn btn-success">Enviar Pedido</button>
                 </div>

@@ -203,7 +203,7 @@
                             </c:if>
                         </div>
 
-                        <c:if test="${todayShift.startedAt != null}">
+                        <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
                             <div class="section-title">Tarefas</div>
                             <c:choose>
                                 <c:when test="${empty todayShift.tasks}">
