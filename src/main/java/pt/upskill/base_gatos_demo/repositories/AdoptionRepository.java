@@ -13,5 +13,8 @@ public interface AdoptionRepository extends JpaRepository<Adoption,Long> {
 
         List<Adoption> findByUserAndStatus(User user,String status);
         List<Adoption> findByStatus(String status);
+        List<Adoption> findByEmail(String email);
+        List<Adoption> findByEmailAndStatus(String email, String status);
+
 
 }

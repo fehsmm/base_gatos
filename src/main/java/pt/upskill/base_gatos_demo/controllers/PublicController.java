@@ -15,6 +15,7 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 import pt.upskill.base_gatos_demo.services.CatService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -103,23 +104,27 @@ public class PublicController {
                                   @RequestParam String address,
                                   @RequestParam String reason,
                                   @RequestParam String experience,
-                                  Authentication authentication,
+                                  Principal principal,
                                   RedirectAttributes redirectAttributes) {
 
 
 
-        Cat cat = catRepository.findById(catId).orElse(null);
 
-        if (cat == null) {
-            redirectAttributes.addFlashAttribute("error", "Gato não encontrado.");
+
+
+        if (principal == null) {
+            redirectAttributes.addFlashAttribute("error",
+                    "⚠️ Tem de iniciar sessão antes de submeter.");
             return "redirect:/public/adoption";
         }
 
+        User user = userRepository.getUserByUsername(principal.getName());
+        Cat cat = catRepository.findById(catId).orElse(null);
+
 
         Adoption adoption = new Adoption();
-
+        adoption.setUser(user);
         adoption.setCat(cat);
-
         adoption.setApplicantName(applicantName);
         adoption.setEmail(email);
         adoption.setPhone(phone);
@@ -130,8 +135,7 @@ public class PublicController {
 
         adoptionRepository.save(adoption);
 
-        redirectAttributes.addFlashAttribute("success",
-                "Candidatura enviada com sucesso para o gato " + cat.getName() + "!");
+        redirectAttributes.addFlashAttribute("success","Candidatura enviada com sucesso para o gato " + cat.getName() + "!");
 
         return "redirect:/public/adoption";
     }

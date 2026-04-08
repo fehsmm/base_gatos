@@ -20,6 +20,11 @@
         </div>
 
 
+        <c:if test="${not empty error}">
+            <script>
+                alert("${error}");
+            </script>
+        </c:if>
         <c:if test="${not empty success}">
             <script>
                 alert("${success}");
@@ -46,6 +51,18 @@
                 <div><h3>4. Leve para Casa</h3><p class="text-sm">Após aprovação, pode levar o seu novo amigo felino para casa!</p></div>
             </div></div>
         </div>
+
+        <c:if test="${empty pageContext.request.userPrincipal}">
+            <div class="alert alert-warning text-center mb-4">
+                ⚠️ Para submeter uma candidatura de adoção,
+                precisa de ter uma conta.
+
+                <div style="margin-top:10px;">
+                    <a href="/auth/login" class="btn btn-primary btn-sm">Iniciar Sessão</a>
+                    <a href="/auth/signup" class="btn btn-outline-secondary btn-sm">Criar Conta</a>
+                </div>
+            </div>
+        </c:if>
 
         <!-- REQUIREMENTS -->
         <div class="card mb-6">
@@ -116,7 +133,7 @@
                         <p class="text-sm">Ao enviar este formulário, você concorda que a nossa equipa entre em contacto consigo e que possamos realizar uma visita domiciliária como parte do processo de adoção.</p>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-lg w-full">Enviar Candidatura</button>
+                    <button type="submit" class="btn btn-primary btn-lg w-full" onsubmit="return checkLogin()">Enviar Candidatura</button>
                 </form>
             </div>
         </div>
@@ -129,6 +146,21 @@
         </div>
     </div>
 </main>
+
+<script>
+    function checkLogin() {
+
+        var isLoggedIn = ${pageContext.request.userPrincipal != null ? 'true' : 'false'};
+
+        if (!isLoggedIn) {
+            alert("⚠️ Tem de iniciar sessão antes de submeter.");
+            window.location.href = "/auth/login";
+            return false;
+        }
+
+        return true;
+    }
+</script>
 
 <%@ include file="footer.jsp" %>
 

@@ -22,9 +22,6 @@ public class AdoptionService {
     UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
     CatRepository catRepository;
 
 
@@ -37,7 +34,6 @@ public class AdoptionService {
             user = new User();
             user.setName(adoption.getApplicantName());
             user.setUsername(adoption.getApplicantName()); //Temporário pode ser o email?!
-            user.setPassword(passwordEncoder.encode("123")); //Password Temporária
             user.setRole("adopter");
             user.setTelephone(Long.parseLong(adoption.getPhone()));
             user.setAddress(adoption.getAddress());
@@ -50,7 +46,6 @@ public class AdoptionService {
         adoption.setStatus("Aprovada");
         adoption.setReviewDate(LocalDateTime.now());
         adoption.setAdoptionDate(LocalDate.now());
-        adoptionRepository.save(adoption);
 
         Cat cat = adoption.getCat();
         cat.setStatus("Adotado");
