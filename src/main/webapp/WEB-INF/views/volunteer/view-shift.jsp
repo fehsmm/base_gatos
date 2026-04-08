@@ -100,19 +100,19 @@
         </div>
     </aside>
     <main class="flex-1 page">
-        <c:if test="${previousNote != null && !previousNote.read && (not empty previousNote.resumo || not empty previousNote.ocorrencias)}">
+        <c:if test="${previousNote != null && !previousNote.read && (not empty previousNote.summary || not empty previousNote.importantObservations)}">
             <div id="modalNoteAnterior" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%;
              background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center;">
                 <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem; max-height:80vh; overflow-y:auto;">
                     <div style="font-weight:600; font-size:1.2rem; margin-bottom:0.25rem;">📋 Nota do turno anterior</div>
                     <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:1.5rem;">Lê antes de iniciar o teu turno</div>
-                    <c:if test="${not empty previousNote.resumo}">
-                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo:</div>
-                        <div class="panel" style="margin-bottom:1rem; font-size:0.9rem;">${previousNote.resumo}</div>
+                    <c:if test="${not empty previousNote.summary}">
+                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo do Turno:</div>
+                        <div class="panel" style="margin-bottom:1rem; font-size:0.9rem;">${previousNote.summary}</div>
                     </c:if>
-                    <c:if test="${not empty previousNote.ocorrencias}">
-                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Ocorrências:</div>
-                        <div class="panel" style="margin-bottom:1.5rem; font-size:0.9rem;">${previousNote.ocorrencias}</div>
+                    <c:if test="${not empty previousNote.importantObservations}">
+                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Observações Importantes:</div>
+                        <div class="panel" style="margin-bottom:1.5rem; font-size:0.9rem;">${previousNote.importantObservations}</div>
                     </c:if>
                     <form action="/volunteer/read-note/${previousNote.shift.id}" method="POST">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -246,11 +246,11 @@
                 <form action="/volunteer/save-note/${todayShift.id}" method="POST">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <label class="form-label">Resumo do turno</label>
-                    <textarea name="resumo" class="form-textarea-custom" style="margin-bottom:1rem;"
-                              placeholder="Ex: O Thor comeu pouco...">${todayNote.resumo}</textarea>
-                    <label class="form-label">Ocorrências importantes</label>
-                    <textarea name="ocorrencias" class="form-textarea-custom" style="margin-bottom:1.5rem;"
-                              placeholder="Ex: Gato isolado...">${todayNote.ocorrencias}</textarea>
+                    <textarea name="summary" class="form-textarea-custom" style="margin-bottom:1rem;"
+                              placeholder="Ex: O Thor comeu pouco...">${todayNote.summary}</textarea>
+                    <label class="form-label">Observações Importantes</label>
+                    <textarea name="importantObservations" class="form-textarea-custom" style="margin-bottom:1.5rem;"
+                              placeholder="Ex: Gato isolado...">${todayNote.importantObservations}</textarea>
                     <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
                         <button type="button" class="btn btn-secondary"
                                 onclick="document.getElementById('modalNota').style.display='none'">

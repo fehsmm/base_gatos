@@ -112,8 +112,8 @@ public class DataInitializer {
 
             Shift s4 = new Shift();
             s4.setDate(LocalDate.now());
-            s4.setStartTime(LocalTime.of(0, 0));
-            s4.setEndTime(LocalTime.of(13, 0));
+            s4.setStartTime(LocalTime.of(11, 0));
+            s4.setEndTime(LocalTime.of(0, 0));
             s4.setVolunteers(List.of(joao));
             s4.setTasks(new ArrayList<>());
             shiftRepo.save(s4);

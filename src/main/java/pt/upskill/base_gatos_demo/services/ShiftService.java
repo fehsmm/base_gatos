@@ -36,9 +36,9 @@ public class ShiftService {
         User user = authService.getAuthenticatedUser();
         if (user.isVolunteer()) {
             if(date == null) {
-                return shiftRepository.findByVolunteers_Id(user.getId());
+                return shiftRepository.findByVolunteersContains(user);
             } else {
-                return shiftRepository.findByVolunteers_IdAndDate(user.getId(), date);
+                return shiftRepository.findByVolunteersContainsAndDate(user, date);
             }
         }
         if (user.isAdmin()) {

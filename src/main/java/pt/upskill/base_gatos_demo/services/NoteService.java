@@ -6,6 +6,7 @@ import pt.upskill.base_gatos_demo.entities.Note;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.repositories.NoteRepository;
+import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 
 import java.time.LocalDateTime;
 
@@ -14,22 +15,19 @@ public class NoteService {
 
     @Autowired
     NoteRepository noteRepository;
+    @Autowired
+    ShiftRepository shiftRepository;
 
-    public Note getOrCreateNote(Shift shift) {
-        Note note = noteRepository.findByShift(shift);
-        if (note == null) {
-            note = new Note();
-            note.setShift(shift);
-        }
-        return note;
-    }
-
-    public void saveNote(Shift shift, String resumo, String ocorrencias) {
-        Note note = getOrCreateNote(shift);
-        note.setResumo(resumo);
-        note.setOcorrencias(ocorrencias);
+    public void saveNote(Shift shift, String summary , String importantObservations) {
+        Note note = new Note();
+        note.setSummary(summary);
+        note.setImportantObservations(importantObservations);
         note.setUpdatedAt(LocalDateTime.now());
         noteRepository.save(note);
+
+        shift.getNotes().add(note);
+        shiftRepository.save(shift);
+
     }
 
     public void saveExistingNote(Note note) {

@@ -161,22 +161,14 @@
                                 </div>
 
                                 <div id="report-${shift.id}" style="display:none; margin-top:1rem; border-top:1px solid #e5e7eb; padding-top:1rem;">
-                                    <c:set var="note" value="${notes[shift.id]}"/>
-                                    <c:choose>
-                                        <c:when test="${note != null && (not empty note.resumo || not empty note.ocorrencias)}">
-                                            <c:if test="${not empty note.resumo}">
-                                                <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo:</div>
-                                                <div style="font-size:0.9rem; margin-bottom:0.75rem; white-space:pre-wrap;">${note.resumo}</div>
-                                            </c:if>
-                                            <c:if test="${not empty note.ocorrencias}">
-                                                <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Ocorrências:</div>
-                                                <div style="font-size:0.9rem; white-space:pre-wrap;">${note.ocorrencias}</div>
-                                            </c:if>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div style="color:#9ca3af; font-size:0.9rem;">Sem notas para este turno.</div>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:forEach items="${shift.getNotes()}" var="note">
+                                        <div class="shift-note">
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Summary:</div>
+                                            <div style="font-size:0.9rem; margin-bottom:0.75rem; white-space:pre-wrap;">${note.summary}</div>
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Important Observations:</div>
+                                            <div style="font-size:0.9rem; white-space:pre-wrap;">${note.importantObservations}</div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </c:forEach>

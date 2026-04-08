@@ -7,7 +7,6 @@ import pt.upskill.base_gatos_demo.entities.Shift;
 
 @Repository
 public interface NoteRepository extends JpaRepository<Note,Long> {
-    Note findByShift(Shift shift);
 
 }
 

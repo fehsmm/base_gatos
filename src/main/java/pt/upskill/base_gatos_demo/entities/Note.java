@@ -11,10 +11,6 @@ public class Note {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "shift_id")
-    private Shift shift;
-
     @Column(columnDefinition = "LONGTEXT")
     private String summary;
 
@@ -22,16 +18,13 @@ public class Note {
     private String importantObservations;
     private LocalDateTime updatedAt;
     private String priority;
-    private List<Task> tasks;
+
 
     @Column(name = "is_read")
     private boolean read = false;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Shift getShift() { return shift; }
-    public void setShift(Shift shift) { this.shift = shift; }
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
@@ -45,14 +38,6 @@ public class Note {
 
     public void setPriority(String priority) {
         this.priority = priority;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
     public String getSummary() {

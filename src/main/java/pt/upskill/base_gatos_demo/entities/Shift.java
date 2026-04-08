@@ -30,6 +30,12 @@ public class Shift {
     private LocalDateTime startedAt;
     private LocalDateTime endedAt;
 
+    @ManyToOne
+    private User currentVolunteer;
+
+    @OneToMany
+    private List<Note> notes = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -92,5 +98,21 @@ public class Shift {
 
     public void setStartedAt(LocalDateTime startedAt) {
         this.startedAt = startedAt;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public User getCurrentVolunteer() {
+        return currentVolunteer;
+    }
+
+    public void setCurrentVolunteer(User currentVolunteer) {
+        this.currentVolunteer = currentVolunteer;
     }
 }

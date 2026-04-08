@@ -13,10 +13,12 @@ import pt.upskill.base_gatos_demo.repositories.AnnouncementRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.NoteService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,6 +37,8 @@ public class VolunteerController {
     AnnouncementRepository announcementRepository;
     @Autowired
     NoteService noteService;
+    @Autowired
+    private AuthService authService;
 
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
@@ -57,7 +61,7 @@ public class VolunteerController {
         }
 
         LocalDate today = LocalDate.now();
-        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
+        List<Shift> allShifts = shiftRepository.findByVolunteersContains(user);
 
         long upcomingCount = allShifts.stream()
                 .filter(s -> !s.getDate().isBefore(today))
@@ -68,8 +72,7 @@ public class VolunteerController {
                 .max((a, b) -> a.getDate().compareTo(b.getDate()));
 
         if (previousShift.isPresent()) {
-            Note previousNote = noteService.getOrCreateNote(previousShift.get());
-            model.addAttribute("previousNote", previousNote);
+            model.addAttribute("previousNotes", previousShift.get().getNotes());
         }
 
         model.addAttribute("upcomingCount", upcomingCount);
@@ -82,7 +85,7 @@ public class VolunteerController {
 
         String username = authentication.getName();
         User user = userRepository.getUserByUsername(username);
-        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
+        List<Shift> allShifts = shiftRepository.findByVolunteersContains(user);
         LocalDate today = LocalDate.now();
 
         List<Shift> upcomingShifts = allShifts.stream()
@@ -107,32 +110,27 @@ public class VolunteerController {
 
         String username = authentication.getName();
         User user = userRepository.getUserByUsername(username);
-        LocalDate today = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
 
-        List<Shift> allShifts = shiftRepository.findByVolunteers_Id(user.getId());
+        List<Shift> allShifts = shiftRepository.findByVolunteersContains(user);
 
         List<Shift> todayShifts = allShifts.stream()
-                .filter(s -> s.getDate().equals(today))
+                .filter(s -> s.getDate().equals(now.toLocalDate()) &&
+                        s.getStartTime().isBefore(now.toLocalTime()) &&
+                        s.getEndTime().isAfter(now.toLocalTime()))
                 .collect(Collectors.toList());
 
         Optional<Shift> previousShift = allShifts.stream()
-                .filter(s -> s.getDate().isBefore(today))
-                .max((a, b) -> a.getDate().compareTo(b.getDate()));
+                .filter(s -> s.getEndedAt() != null && s.getEndedAt().isBefore(now))
+                .max(Comparator.comparing(Shift::getEndedAt));
 
         if (previousShift.isPresent()) {
-            Note previousNote = noteService.getOrCreateNote(previousShift.get());
-            if (!previousNote.isRead()) {
-                model.addAttribute("previousNote", previousNote);
-            }
+            model.addAttribute("previousShift", previousShift.get());
         }
 
         if (!todayShifts.isEmpty()) {
             Shift todayShift = todayShifts.get(0);
             model.addAttribute("todayShift", todayShift);
-            Note todayNote = noteService.getOrCreateNote(todayShift);
-            model.addAttribute("todayNote", todayNote);
-        } else {
-            model.addAttribute("todayShift", null);
         }
 
         return "volunteer/view-shift";
@@ -176,14 +174,12 @@ public class VolunteerController {
         User user = userRepository.getUserByUsername(username);
         LocalDate today = LocalDate.now();
 
-        List<Shift> todayShifts = shiftRepository.findByVolunteers_Id(user.getId())
+        List<Shift> todayShifts = shiftRepository.findByVolunteersContains(user)
                 .stream()
                 .filter(s -> s.getDate().equals(today))
                 .collect(Collectors.toList());
 
         if (!todayShifts.isEmpty()) {
-            Note note = noteService.getOrCreateNote(todayShifts.get(0));
-            model.addAttribute("note", note);
             model.addAttribute("shift", todayShifts.get(0));
         }
 
@@ -199,7 +195,7 @@ public class VolunteerController {
         User user = userRepository.getUserByUsername(username);
         LocalDate today = LocalDate.now();
 
-        List<Shift> allPastShifts = shiftRepository.findByVolunteers_Id(user.getId())
+        List<Shift> allPastShifts = shiftRepository.findByVolunteersContains(user)
                 .stream()
                 .filter(s -> s.getDate().isBefore(today))
                 .filter(s -> s.getEndedAt() != null)
@@ -219,25 +215,19 @@ public class VolunteerController {
                     .collect(Collectors.toList());
         }
 
-        java.util.Map<Long, Note> notes = new java.util.HashMap<>();
-        for (Shift s : displayShifts) {
-            Note note = noteService.getOrCreateNote(s);
-            notes.put(s.getId(), note);
-        }
-
         model.addAttribute("shifts", displayShifts);
-        model.addAttribute("notes", notes);
         model.addAttribute("search", search);
         return "volunteer/shift-report";
     }
 
-    @PostMapping("/read-note/{id}")
+    @PostMapping("/read-notes/{id}")
     public String readNote(@PathVariable Long id) {
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null) {
-            Note note = noteService.getOrCreateNote(shift);
-            note.setRead(true);
-            noteService.saveExistingNote(note);
+            for(Note note : shift.getNotes()) {
+                note.setRead(true);
+                noteService.saveExistingNote(note);
+            }
         }
         return "redirect:/volunteer/view-shift";
     }
@@ -247,6 +237,7 @@ public class VolunteerController {
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null && shift.getStartedAt() == null) {
             shift.setStartedAt(LocalDateTime.now());
+            shift.setCurrentVolunteer(authService.getAuthenticatedUser());
             shiftRepository.save(shift);
         }
         return "redirect:/volunteer/view-shift";
@@ -259,6 +250,7 @@ public class VolunteerController {
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null) {
             shift.setEndedAt(LocalDateTime.now());
+            shift.setCurrentVolunteer(null);
             shiftRepository.save(shift);
             noteService.saveNote(shift, resumo, ocorrencias);
         }
