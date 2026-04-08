@@ -2,6 +2,7 @@ package pt.upskill.base_gatos_demo.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import jakarta.persistence.Column;
 import java.util.List;
 
 @Entity
@@ -14,11 +15,14 @@ public class Note {
     @JoinColumn(name = "shift_id")
     private Shift shift;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String summary;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String importantObservations;
     private LocalDateTime updatedAt;
     private String priority;
     private List<Task> tasks;
-    private String summary;
-    private String importantObservations;
 
     @Column(name = "is_read")
     private boolean read = false;
