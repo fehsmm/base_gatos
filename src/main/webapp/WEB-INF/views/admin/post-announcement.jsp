@@ -109,9 +109,9 @@
 
                 <div class="card-body">
                     <c:forEach var="ann" items="${announcements}">
-                        <div class="shift-card"
-                             style="${ann.priority == 'urgent' ? 'border-color:#fca5a5' :
-                             (ann.priority == 'high' ? 'border-color:#fdba74' : '')}">
+                        <div class="shift-card
+                             ${ann.priority == 'urgent' ? 'error-announcement' :
+                             (ann.priority == 'high' ? 'warning-announcement' : '')}">
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
                                 <div style="font-weight:500;font-size:1rem">
                                         ${ann.title}
@@ -143,14 +143,14 @@
                                 </div>
                             </div>
 
-                            <div class="text-xs text-gray" style="margin-bottom: 10px">
+                            <div class="text-sm text-gray" style="margin-bottom: 10px">
                                     Por ${ann.createdBy} • ${ann.createdAt}
                             </div style="margin-bottom:10px">
                                 ${ann.description}
                             <div>
 
                             <c:if test="${ann.updatedAt != null}">
-                                <div class="text-gray text-sm">Atualizado por ${ann.lastUpdatedBy} • ${ann.updatedAt}</div>
+                                <div class="text-gray text-xs" style="margin-top: 10px">Atualizado por ${ann.lastUpdatedBy} • ${ann.updatedAt}</div>
                             </c:if>
 
                             </div>
@@ -245,10 +245,10 @@
                 <label>Nível de Prioridade</label>
                 <select name="priority" id="editPriority" class="form-control" required>
                     <option disabled selected> Selecione o nível de prioridade do comunicado </option>
-                    <option>Urgente</option>
-                    <option>Alta</option>
-                    <option>Normal</option>
-                    <option>Baixa</option>
+                    <option value="urgent">Urgente</option>
+                    <option value="high">Alta</option>
+                    <option value="normal">Normal</option>
+                    <option value="low">Baixa</option>
                 </select>
             </div>
 
@@ -337,9 +337,9 @@
         openEditModal();
 
         document.getElementById("editAnnouncementId").value = id;
-        document.getElementById("editTitle").value = date;
-        document.getElementById("editDescription").value = start;
-        document.getElementById("editPriority").value = end;
+        document.getElementById("editTitle").value = title;
+        document.getElementById("editDescription").value = description;
+        document.getElementById("editPriority").value = priority;
     }
 
     function openDeleteModal(id) {

@@ -205,9 +205,9 @@
 
                 <div class="card-body">
                     <c:forEach var="ann" items="${announcements}">
-                        <div class="shift-card"
-                             style="${ann.priority == 'urgent' ? 'border-color:#fca5a5' :
-                             (ann.priority == 'high' ? 'border-color:#fdba74' : '')}">
+                        <div class="shift-card
+                             ${ann.priority == 'urgent' ? 'error-announcement' :
+                             (ann.priority == 'high' ? 'warning-announcement' : '')}">
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
                                 <div style="font-weight:500;font-size:.9rem">
                                         ${ann.title}
