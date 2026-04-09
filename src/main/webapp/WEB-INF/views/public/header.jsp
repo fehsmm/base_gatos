@@ -11,11 +11,22 @@
 
 <header class="top-header">
     <c:if test="${currentUser != null}">
-        <div style="position:absolute;top: 2rem;right:1.5rem;left:auto;font-size: 1.2rem;color:#f97316;font-weight:600">
-            Olá, ${currentUser.name}!
+        <div style="position:absolute;top: 1.2rem;right:2rem;left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:0.15rem">
+            <span style="font-size: 1.7rem;color:#f97316;font-weight:600"> Olá, ${currentUser.name}!</span>
+            <c:choose>
+                <c:when test="${currentUser.admin}">
+                    <a href="/admin/" style="font-size:0.9rem;color:#f97316">Área de Gestão</a>
+                </c:when>
+                <c:when test="${currentUser.volunteer}">
+                    <a href="/volunteer/" style="font-size:0.9rem;color:#f97316">Área de Gestão</a>
+                </c:when>
+                <c:when test="${currentUser.adopter}">
+                    <a href="/adopter/" style="font-size:0.9rem;color:#f97316">Minha Área Pessoal</a>
+                </c:when>
+            </c:choose>
         </div>
     </c:if>
-    </div>
+
     <div class="top-header-left">
         <img src="/images/logo.svg" alt="Logo MEG" class="top-logo">
         <div>
@@ -36,6 +47,7 @@
         <li><a href="/public/contact"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
         </svg>Contacto</a></li>
         <c:choose>
+
             <c:when test="${currentUser != null}">
                 <li><a href="/logout"><button>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
@@ -48,6 +60,7 @@
                 </button></a></li>
             </c:otherwise>
         </c:choose>
+
     </ul>
     </div>
 
