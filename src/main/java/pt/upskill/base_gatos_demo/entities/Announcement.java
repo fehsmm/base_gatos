@@ -16,6 +16,9 @@ public class Announcement {
     private String title;
     private String priority;
     private String description;
+    private LocalDateTime updatedAt;
+    private String createdBy;
+    private String lastUpdatedBy;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -58,5 +61,33 @@ public class Announcement {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

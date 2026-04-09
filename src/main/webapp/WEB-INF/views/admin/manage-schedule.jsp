@@ -493,7 +493,7 @@
     }
 
     function openDeleteModal(id) {
-        console.log("abrir modal", id); // debug
+        console.log("abrir modal", id);
         document.getElementById("deleteShiftId").value = id;
         document.getElementById("deleteModal").classList.add("open");
     }

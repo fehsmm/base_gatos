@@ -143,11 +143,15 @@
                                 </div>
                             </div>
 
-                            <div class="text-xs text-gray">
-                                    ${ann.createdAt}
-                            </div>
+                            <div class="text-xs text-gray" style="margin-bottom: 10px">
+                                    Por ${ann.createdBy} • ${ann.createdAt}
+                            </div style="margin-bottom:10px">
                                 ${ann.description}
                             <div>
+
+                            <c:if test="${ann.updatedAt != null}">
+                                <div class="text-gray text-sm">Atualizado por ${ann.lastUpdatedBy} • ${ann.updatedAt}</div>
+                            </c:if>
 
                             </div>
                         </div>
@@ -189,10 +193,10 @@
                 <label>Nível de Prioridade</label>
                 <select name="priority" id="priority" class="form-control" required>
                     <option disabled selected> Selecione o nível de prioridade do comunicado </option>
-                    <option>Urgente</option>
-                    <option>Alta</option>
-                    <option>Normal</option>
-                    <option>Baixa</option>
+                    <option value="urgent">Urgente</option>
+                    <option value="high">Alta</option>
+                    <option value="normal">Normal</option>
+                    <option value="low">Baixa</option>
                 </select>
             </div>
 
@@ -207,7 +211,7 @@
                 </button>
 
                 <button type="submit" class="btn btn-dark" style="background-color:#f97316; color:white">
-                    Criar Turno
+                    Publicar Comunicado
                 </button>
             </div>
 
@@ -216,30 +220,30 @@
 
 </div>
 
-<div id="editShiftModal" class="modal-overlay">
+<div id="editAnnouncementModal" class="modal-overlay">
 
     <div class="modal-content">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4>Alterar Detalhes do Turno</h4>
+            <h4>Alterar Detalhes do Comunicado</h4>
             <button class="modal-close" onclick="closeEditModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
             </button>
         </div>
 
-        <form action="/admin/update-shift" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+        <form action="/admin/update-announcement" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="id" id="editShiftId"/>
+            <input type="hidden" name="id" id="editAnnouncementId"/>
             <h3 class="mb-4">Detalhes do Comunicado</h3>
 
             <div class="mb-3">
                 <label>Título</label>
-                <input type="text" name="title" id="title" class="form-control" required>
+                <input type="text" name="title" id="editTitle" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label>Nível de Prioridade</label>
-                <select name="priority" id="priority" class="form-control" required>
+                <select name="priority" id="editPriority" class="form-control" required>
                     <option disabled selected> Selecione o nível de prioridade do comunicado </option>
                     <option>Urgente</option>
                     <option>Alta</option>
@@ -250,7 +254,7 @@
 
             <div class="mb-3">
                 <label>Descrição</label>
-                <input type="text" name="description" id="description" class="form-control" required>
+                <input type="text" name="description" id="editDescription" class="form-control" required>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
@@ -272,16 +276,16 @@
 
     <div class="modal-content" style="max-width:400px; max-height: fit-content">
 
-        <h5 class="mb-3">Eliminar Turno</h5>
+        <h5 class="mb-3">Eliminar Comunicado</h5>
 
         <p class="text-muted">
-            Tens a certeza que queres eliminar este turno?
+            Tens a certeza que queres eliminar este comunicado?
         </p>
 
-        <form id="deleteForm" method="POST" action="/admin/delete-shift">
+        <form id="deleteForm" method="POST" action="/admin/delete-announcement">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="shiftId" id="deleteShiftId"/>
+            <input type="hidden" name="announcementId" id="deleteAnnouncementId"/>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">
@@ -322,6 +326,30 @@
         form.reset();
         form.action = "/admin/update-announcement";
         document.getElementById("editAnnouncementId").value = "";
+    }
+
+    function editAnnouncement(button) {
+        const id = button.getAttribute("data-id");
+        const title = button.getAttribute("data-title");
+        const description = button.getAttribute("data-description");
+        const priority = button.getAttribute("data-priority");
+
+        openEditModal();
+
+        document.getElementById("editAnnouncementId").value = id;
+        document.getElementById("editTitle").value = date;
+        document.getElementById("editDescription").value = start;
+        document.getElementById("editPriority").value = end;
+    }
+
+    function openDeleteModal(id) {
+        console.log("abrir modal", id);
+        document.getElementById("deleteAnnouncementId").value = id;
+        document.getElementById("deleteModal").classList.add("open");
+    }
+
+    function closeDeleteModal() {
+        document.getElementById("deleteModal").classList.remove("open");
     }
 </script>
 

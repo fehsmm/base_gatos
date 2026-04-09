@@ -63,6 +63,10 @@ public class AdminController {
 
     @Autowired
     NoteService noteService;
+    @Autowired
+    private AnnouncementService announcementService;
+    @Autowired
+    private AuthService authService;
 
     @GetMapping(value="/")
     public String admin(Model model){
@@ -144,8 +148,10 @@ public class AdminController {
 
     @GetMapping(value = "/post-announcement")
     public String postAnnouncement(Model model){
+        User user = authService.getAuthenticatedUser();
         List<Announcement> announcements = announcementRepository.findAll();
         model.addAttribute("announcements", announcements);
+        model.addAttribute("user", user);
         return "admin/post-announcement";
     }
 
@@ -219,6 +225,29 @@ public class AdminController {
         catService.updateCat(model);
         redirectAttributes.addFlashAttribute("success", "Gato atualizado com sucesso!");
         return "redirect:/admin/manage-cat";
+    }
+
+    @PostMapping(value = "/create-announcement")
+    public String createAnnouncement(@ModelAttribute CreateAnnouncementModel model, RedirectAttributes redirectAttributes) {
+        announcementService.createAnnouncement(model);
+        redirectAttributes.addFlashAttribute("success", "Comunicado partilhado com sucesso!");
+        return "redirect:/admin/post-announcement";
+    }
+
+    @PostMapping(value = "/delete-announcement")
+    public String deleteAnnouncement(@RequestParam("announcementId") Long announcementId,
+                            RedirectAttributes redirectAttributes) {
+        announcementService.deleteAnnouncement(announcementId);
+        redirectAttributes.addFlashAttribute("success", "Comunicado eliminado com sucesso!");
+        return "redirect:/admin/post-announcement";
+    }
+
+    @PostMapping("/update-announcement")
+    public String updateAnnouncement(@ModelAttribute EditAnnouncementModel model,
+                            RedirectAttributes redirectAttributes) {
+        announcementService.updateAnnouncement(model);
+        redirectAttributes.addFlashAttribute("success", "Comunicado atualizado com sucesso!");
+        return "redirect:/admin/post-announcement";
     }
 
     @PostMapping("/adoptions/{id}/approve")

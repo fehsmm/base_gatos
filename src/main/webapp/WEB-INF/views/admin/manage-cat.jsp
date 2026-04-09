@@ -616,7 +616,7 @@
     }
 
     function openDeleteModal(id) {
-        console.log("abrir modal", id); // debug
+        console.log("abrir modal", id);
         document.getElementById("deleteCatId").value = id;
         document.getElementById("deleteModal").classList.add("open");
     }

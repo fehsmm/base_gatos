@@ -1,14 +1,14 @@
 package pt.upskill.base_gatos_demo.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class PostAnnouncementModel {
+public class CreateAnnouncementModel {
 
     private String title;
     private String priority;
     private String description;
     private LocalDateTime createdAt;
+    private String createdBy;
 
     public String getTitle() {
         return title;
