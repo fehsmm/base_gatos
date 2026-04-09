@@ -8,6 +8,7 @@ import pt.upskill.base_gatos_demo.models.EditAnnouncementModel;
 import pt.upskill.base_gatos_demo.repositories.AnnouncementRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AnnouncementService {
@@ -16,6 +17,10 @@ public class AnnouncementService {
     AnnouncementRepository announcementRepository;
     @Autowired
     private AuthService authService;
+
+    public List<Announcement> findAll() {
+        return announcementRepository.findAll();
+    }
 
     private Announcement getById(Long id) {
         return announcementRepository.findById(id).orElse(null);
