@@ -97,27 +97,28 @@
                         </select>
                     </div>
 
-                    <div class="grid grid-2" style="gap:1rem">
+                    <div class="grid grid-2" style="gap:1rem; grid-template-columns: 1fr;">
                         <div class="form-group">
                             <label>Nome Completo *</label>
                             <input type="text" name="applicantName" required placeholder="O seu nome"/>
                         </div>
-                        <div class="form-group">
+                    </div>
+                        <!--<div class="form-group">
                             <label>Email *</label>
                             <input type="email" name="email" required placeholder="seu@email.com"/>
                         </div>
-                    </div>
+                    </div>-->
 
-                    <div class="grid grid-2" style="gap:1rem">
+                    <!--<div class="grid grid-2" style="gap:1rem">
                         <div class="form-group">
                             <label>Telefone *</label>
                             <input type="tel" name="phone" required placeholder="912 345 678"/>
-                        </div>
-                        <div class="form-group">
+                        </div>-->
+                        <!-- <div class="form-group">
                             <label>Morada *</label>
                             <input type="text" name="address" required placeholder="Cidade, Concelho"/>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label>Por que quer adotar um gato? *</label>
