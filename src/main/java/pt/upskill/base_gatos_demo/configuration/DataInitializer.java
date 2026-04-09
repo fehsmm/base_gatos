@@ -62,7 +62,7 @@ public class DataInitializer {
             for (int i = 1; i <= 5; i++) {
                 Announcement a = new Announcement();
                 a.setTitle("Aviso " + i);
-                a.setPriority(i % 2 == 0 ? "Alta" : "Média");
+                a.setPriority(i % 5 == 0 ? "Alta" : "Média");
                 a.setDescription("Descrição do anúncio " + i);
                 a.setCreatedAt(LocalDateTime.now());
                 annRepo.save(a);

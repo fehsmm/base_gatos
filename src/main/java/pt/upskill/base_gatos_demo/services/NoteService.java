@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Note;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.CreateNoteModel;
+import pt.upskill.base_gatos_demo.models.EditNoteModel;
 import pt.upskill.base_gatos_demo.repositories.NoteRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 
@@ -33,6 +35,28 @@ public class NoteService {
     public void saveExistingNote(Note note) {
         noteRepository.save(note);
     }
+
+    /*public void createNote(CreateNoteModel model) {
+        Note note = new Note();
+        note.setPriority(model.getPriority());
+        note.setUpdatedAt(LocalDateTime.now());
+        note.setRead(false);
+        note.setSummary(model.getSummary());
+        note.setImportantObservations(model.getImportantObservations());
+        noteRepository.save(note);
+    }
+
+    public void editNote(EditNoteModel model) {
+        for (Note note : noteRepository.findAll()) {
+            if(note.getShift().equals(model.getShift())) {
+                note.setUpdatedAt(LocalDateTime.now());
+                note.setRead(false);
+                note.setSummary(model.getSummary());
+                note.setImportantObservations(model.getImportantObservations());
+
+            }
+        }
+    }*/
 
     public int countUnreadNotes() {
         int unreadNotes = 0;
