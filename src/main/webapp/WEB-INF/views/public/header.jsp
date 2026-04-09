@@ -10,6 +10,12 @@
 <body>
 
 <header class="top-header">
+    <c:if test="${currentUser != null}">
+        <div style="position:absolute;top: 2rem;right:1.5rem;left:auto;font-size: 1.2rem;color:#f97316;font-weight:600">
+            Olá, ${currentUser.name}!
+        </div>
+    </c:if>
+    </div>
     <div class="top-header-left">
         <img src="/images/logo.svg" alt="Logo MEG" class="top-logo">
         <div>
@@ -18,10 +24,6 @@
         </div>
     </div>
 
-    <div class="top-header-right">
-        <span>${user.username}</span>
-
-    </div>
     <div><ul class="header-links">
         <li><a href="/public/home"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
         </svg>Início</a></li>
@@ -33,10 +35,19 @@
         </svg>Donativos</a></li>
         <li><a href="/public/contact"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
         </svg>Contacto</a></li>
-        <li><a href="/auth/login"><button><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/>
-        </svg>Login
-        </button></a></li>
-
+        <c:choose>
+            <c:when test="${currentUser != null}">
+                <li><a href="/logout"><button>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+                    </svg>Logout
+                </button></a></li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="/auth/login"><button><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/>
+                </svg>Login
+                </button></a></li>
+            </c:otherwise>
+        </c:choose>
     </ul>
     </div>
 

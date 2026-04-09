@@ -12,6 +12,7 @@ import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.CatService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
@@ -31,9 +32,12 @@ public class PublicController {
     private CatRepository catRepository;
     @Autowired
     private AdoptionRepository adoptionRepository;
+    @Autowired
+    private AuthService authService;
 
     @GetMapping(value = "/home")
-    public String homePage(){
+    public String homePage(Model model){
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
         return "public/home";
     }
 
@@ -55,6 +59,7 @@ public class PublicController {
         model.addAttribute("selectedVaccination", vaccination);
         model.addAttribute("selectedSterilization", sterilization);
         model.addAttribute("selectedHealth", health);
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
         return "public/cat-list";
     }
 
@@ -62,6 +67,7 @@ public class PublicController {
     public String adoption(Model model, Authentication authentication){
         List<Cat> availableCats = catRepository.findByStatus("Disponível");
         model.addAttribute("availableCats", availableCats);
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
         return "public/adoption";
     }
 
@@ -73,6 +79,7 @@ public class PublicController {
             return "redirect:/public/cat-list";
         }
         model.addAttribute("cat", cat);
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
 
         List<Cat> cats = catService.listAllCats("all", "all");
 
@@ -90,10 +97,14 @@ public class PublicController {
     }
 
     @GetMapping(value = "/contact")
-    public String contact(){ return "public/contact";}
+    public String contact(Model model){
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
+        return "public/contact";}
 
     @GetMapping(value = "/donate")
-    public String donate(){ return "public/donate";}
+    public String donate(Model model){
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
+        return "public/donate";}
 
     //post mapping para o formulario de adocao
     @PostMapping("/adoptions")
