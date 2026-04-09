@@ -47,7 +47,6 @@ public class AdopterController {
             return "redirect:/auth/login";
         }
         List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Aprovada");
-
         model.addAttribute("adoptions", adoptions);
         return "adopter/adopter";
     }
@@ -59,11 +58,8 @@ public class AdopterController {
         }
 
         String username = authentication.getName();
-
         User user = userRepository.getUserByUsername(username);
-
         List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Aprovada");
-
         model.addAttribute("adoptions", adoptions);
         model.addAttribute("user", user);
 

@@ -20,8 +20,12 @@
         <div class="card-body">
             <form method="POST" action="/auth/signUpAction" class="row gx-5 gy-4">
                 <div class="col-md-4">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="O seu username">
+                </div>
+                <div class="col-md-4">
                     <label class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="O seu nome completo">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="O seu nome completo">
                 </div>
 
                 <div class="col-md-4">

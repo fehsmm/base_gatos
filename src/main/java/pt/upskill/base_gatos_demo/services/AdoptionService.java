@@ -26,41 +26,25 @@ public class AdoptionService {
 
 
     public void approveAdoption(Long adoptionId) {
-        Adoption adoption = adoptionRepository.findById(adoptionId).orElse(null);
-        User user = userRepository.getUserByUsername(adoption.getEmail());
+        Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow();
 
-
-        if(user == null){
-            user = new User();
-            user.setName(adoption.getApplicantName());
-            user.setUsername(adoption.getApplicantName()); //Temporário pode ser o email?!
-            user.setRole("adopter");
-            user.setTelephone(Long.parseLong(adoption.getPhone()));
-            user.setAddress(adoption.getAddress());
-            user.setApproved(true);
-
-            userRepository.save(user);
-        }
-
-        adoption.setUser(user);
         adoption.setStatus("Aprovada");
         adoption.setReviewDate(LocalDateTime.now());
         adoption.setAdoptionDate(LocalDate.now());
+        adoptionRepository.save(adoption);
 
         Cat cat = adoption.getCat();
         cat.setStatus("Adotado");
         catRepository.save(cat);
-        adoptionRepository.save(adoption);
 
 
     }
 
     public void rejectAdoption(Long adoptionId, String reason) {
-        Adoption adoption = adoptionRepository.findById(adoptionId).orElse(null);
+        Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow();
 
         adoption.setStatus("Rejeitada");
         adoption.setReviewDate(LocalDateTime.now());
-        adoption.setAdoptionDate(LocalDate.now());
         adoption.setReason(reason);
 
         adoptionRepository.save(adoption);
