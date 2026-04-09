@@ -3,6 +3,8 @@ package pt.upskill.base_gatos_demo.services;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
@@ -10,6 +12,7 @@ import pt.upskill.base_gatos_demo.models.CreateCatModel;
 import pt.upskill.base_gatos_demo.models.EditCatModel;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +23,9 @@ public class CatService {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    AdoptionService adoptionService;
 
     public List<Cat> listCats(@Nullable String status, @Nullable boolean gender, @Nullable boolean vaccination,
                               @Nullable boolean sterilization, @Nullable boolean health){
@@ -97,13 +103,42 @@ public class CatService {
     }
 
     public List<Cat> listAllCats(String status, String gender) {
-        String effectiveStatus = (status != null && !status.equals("all")) ? status : "Disponível";
+        User user = null;
+        try {
+            User tempUser = authService.getAuthenticatedUser();
+            if (tempUser != null) {
+                user = tempUser;
+            }
+        } catch (Exception e) {
+        }
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal().equals("anonymousUser")) {
+            user = null;
+        }
+
+        List<Cat> cats;
+
+        if (user != null && (user.isAdmin() || user.isVolunteer())) {
+            cats = catRepository.findAll();
+        }
+        else if (user != null && user.isAdopter()) {
+            List<Cat> available = catRepository.findByStatus("Disponível");
+            List<Cat> adopted = adoptionService.getAdoptedCatsByUser(user);
+            cats = new ArrayList<>(available);
+            cats.addAll(adopted);
+        } else {
+            cats = catRepository.findByStatus("Disponível");
+        }
 
         if (gender != null && !gender.equals("all")) {
-            return catRepository.findByStatusAndGender(effectiveStatus, gender.equals("Macho"));
+            boolean isMale = gender.equals("Macho");
+            cats = cats.stream()
+                    .filter(c -> c.isGender() == isMale)
+                    .toList();
         }
-        return catRepository.findByStatus(effectiveStatus);
-    }
+        return cats;
+        }
 
     public int countAvailableCats() {
         int catCount = 0;

@@ -12,6 +12,7 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AdoptionService {
@@ -48,5 +49,12 @@ public class AdoptionService {
         adoption.setReason(reason);
 
         adoptionRepository.save(adoption);
+    }
+
+    public List<Cat> getAdoptedCatsByUser(User user) {
+        List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Adotado");
+        return adoptions.stream()
+                .map(Adoption::getCat)
+                .toList();
     }
 }
