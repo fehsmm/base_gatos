@@ -85,19 +85,29 @@
 }
 
 
-.header-links:has(button:hover) button {
+.header-links button.nav-menu-button {
+    background-color: transparent;
+    color: #f97316;
+}
+.header-links button.nav-menu-button svg {
+    fill: #1a1a1a;
+}
+
+
+.header-links button.nav-menu-button.active {
+    background-color: #f97316;
+    color: white;
+}
+.header-links button.nav-menu-button.active svg {
+    fill: white;
+}
+
+
+.header-links button.nav-menu-button:not(.active):hover {
     background-color: #e5e7eb;
     color: #9ca3af;
 }
-.header-links:has(button:hover) button svg {
+.header-links button.nav-menu-button:not(.active):hover svg {
     fill: #9ca3af;
-}
 
-/* ...except the one being hovered, keep it orange */
-.header-links button:hover {
-    background-color: #f97316 !important;
-    color: white !important;
-}
-.header-links button:hover svg {
-    fill: white !important;
 }
