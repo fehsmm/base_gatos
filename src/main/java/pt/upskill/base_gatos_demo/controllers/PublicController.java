@@ -110,9 +110,9 @@ public class PublicController {
     @PostMapping("/adoptions")
     public String processAdoption(@RequestParam Long catId,
                                   @RequestParam String applicantName,
-                                  @RequestParam String email,
-                                  @RequestParam String phone,
-                                  @RequestParam String address,
+                                  //@RequestParam String email,
+                                  //@RequestParam String phone,
+                                  //@RequestParam String address,
                                   @RequestParam String reason,
                                   @RequestParam String experience,
                                   Principal principal,
@@ -137,9 +137,9 @@ public class PublicController {
         adoption.setUser(user);
         adoption.setCat(cat);
         adoption.setApplicantName(applicantName);
-        adoption.setEmail(email);
-        adoption.setPhone(phone);
-        adoption.setAddress(address);
+        //adoption.setEmail(email);
+        //adoption.setPhone(phone);
+        //adoption.setAddress(address);
         adoption.setReason(reason);
         adoption.setExperience(experience);
         adoption.setStatus("Pendente");
