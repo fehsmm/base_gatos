@@ -76,33 +76,6 @@
 
     </aside>
 
-<main>
-    <div class="container mt-4">
-
-        <h2 class="fw-bold mb-4">📋 Gestão de Candidaturas</h2>
-
-        <c:forEach items="${adoptions}" var="adoption">
-
-            <div class="card">
-                <h3>Name: ${adoption.applicantName}</h3>
-                <p> Email: ${adoption.email}</p>
-                <p> Reason: ${adoption.reason}</p>
-                <p> Experience: ${adoption.experience}</p>
-
-                <!-- BOTÕES -->
-                <form action="/admin/adoptions/${adoption.id}/approve" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button class="btn btn-success">Aprovar</button>
-                </form>
-
-                <form action="/admin/adoptions/${adoption.id}/reject" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button class="btn btn-danger">Rejeitar</button>
-                </form>
-
-            </div>
-
-        </c:forEach>
 
 <main class="admin-main">
 
@@ -123,8 +96,36 @@
     </div>
 
     <div class="container">
-        <h2>Hello World</h2>
-        <p>Lorem ipsum etc etc etc</p>
+        <c:forEach items="${adoptions}" var="adoption">
+                <div class="card shadow-sm border-0 rounded-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="fw-bold mb-0">
+                                    ${adoption.applicantName}
+                            </h2>
+                            <h2>Name: ${adoption.applicantName}</h2>
+                            <p>Reason: ${adoption.reason}</p>
+
+                            <p> Email: ${adoption.email}</p>
+                            <p> Experience: ${adoption.experience}</p>
+
+                            <form action="/admin/adoptions/${adoption.id}/approve" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button class="btn btn-success">Aprovar</button>
+                            </form>
+
+                            <form action="/admin/adoptions/${adoption.id}/reject" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button class="btn btn-danger">Rejeitar</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            </c:forEach>
     </div>
     <div class="container">
         <h2>Header 2</h2>
