@@ -28,4 +28,9 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public void markCompelted(Task task) {
+        task.setCompleted(true);
+        taskRepository.save(task);
+    }
+
 }

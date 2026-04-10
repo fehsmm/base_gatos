@@ -64,9 +64,6 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-
-
-
     /*public void createNote(CreateNoteModel model) {
         Note note = new Note();
         note.setPriority(model.getPriority());
@@ -88,6 +85,16 @@ public class NoteService {
             }
         }
     }*/
+
+    public int countUnreadNotes() {
+        int unreadNotes = 0;
+        for(Note note : noteRepository.findAll()) {
+            if(!note.isRead()) {
+                unreadNotes++;
+            }
+        }
+        return unreadNotes;
+    }
 
 
 }
