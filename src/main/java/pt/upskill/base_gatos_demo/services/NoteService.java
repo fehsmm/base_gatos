@@ -12,6 +12,7 @@ import pt.upskill.base_gatos_demo.repositories.NoteRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class NoteService {
@@ -94,6 +95,10 @@ public class NoteService {
             }
         }
         return unreadNotes;
+    }
+
+    public List<Note> getNotes () {
+        return noteRepository.findAll();
     }
 
 

@@ -91,6 +91,29 @@
             <div class="alert alert-success">${success}</div>
         </c:if>
 
+        <div>
+            <h3>Filtrar comunicados</h3>
+        </div>
+
+        <form method="GET" action="/admin/post-announcement" style="display:flex; gap:1rem; margin-bottom:1rem;">
+
+            <select name="priorityFilter" class="form-control">
+                <option value="">Todas as prioridades</option>
+                <option value="urgent">Urgente</option>
+                <option value="high">Alta</option>
+                <option value="normal">Normal</option>
+                <option value="low">Baixa</option>
+            </select>
+
+            <input type="date" name="dateStartFilter" id="dateStartFilter" class="form-control" placeholder="Data de início"/>
+            <input type="date" name="dateEndFilter" id="dateEndFilter" class="form-control" placeholder="Dia de fim (opcional)"/>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="/admin/post-announcement" class="btn btn-secondary">Limpar</a>
+
+        </form>
+
+
         <div style="gap:1rem; margin-bottom:1.5rem;">
             <div class="card">
 
@@ -144,13 +167,13 @@
                             </div>
 
                             <div class="text-sm text-gray" style="margin-bottom: 10px">
-                                    Por ${ann.createdBy} • ${ann.createdAt}
+                                    Por ${ann.createdBy} • ${ann.formattedCreatedAt}
                             </div style="margin-bottom:10px">
                                 ${ann.description}
                             <div>
 
                             <c:if test="${ann.updatedAt != null}">
-                                <div class="text-gray text-xs" style="margin-top: 10px">Atualizado por ${ann.lastUpdatedBy} • ${ann.updatedAt}</div>
+                                <div class="text-gray text-xs" style="margin-top: 10px">Atualizado por ${ann.lastUpdatedBy} • ${ann.formattedUpdatedAt}</div>
                             </c:if>
 
                             </div>

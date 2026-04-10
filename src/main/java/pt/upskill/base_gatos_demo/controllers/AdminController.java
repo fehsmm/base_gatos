@@ -15,6 +15,7 @@ import pt.upskill.base_gatos_demo.services.UserService;
 import pt.upskill.base_gatos_demo.services.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -73,7 +74,7 @@ public class AdminController {
         List<Cat> cats = catRepository.findTop8ByOrderByArrivalDateDesc();
         int pendingApproval = userService.countPendingApproval();
         int lowStock = stockService.countLowStockItems();
-        List<Announcement> announcements = announcementRepository.findTop6ByOrderByCreatedAtDesc();
+        List<Announcement> announcements = announcementService.getRecentAnnouncements();
         model.addAttribute("cats", cats);
         model.addAttribute("pendingUsersCount", pendingApproval);
         model.addAttribute("lowStockCount", lowStock);
@@ -147,9 +148,12 @@ public class AdminController {
     }
 
     @GetMapping(value = "/post-announcement")
-    public String postAnnouncement(Model model){
+    public String postAnnouncement(Model model,
+                                   @RequestParam (required = false) LocalDate dateStartFilter,
+                                   @RequestParam (required = false) LocalDate dateEndFilter,
+                                   @RequestParam (required = false) String priorityFilter){
         User user = authService.getAuthenticatedUser();
-        List<Announcement> announcements = announcementRepository.findAll();
+        List<Announcement> announcements = announcementService.getAnnouncements(dateStartFilter, dateEndFilter, priorityFilter);
         model.addAttribute("announcements", announcements);
         model.addAttribute("user", user);
         return "admin/post-announcement";
@@ -159,8 +163,13 @@ public class AdminController {
     public String viewClinicalInformation(){ return "admin/vet";}
 
     @GetMapping(value = "/manage-cat")
-    public String manageCat(Model model){
-        List<Cat> cats = catRepository.findAll();
+    public String manageCat(Model model,
+                            @RequestParam (required = false) String name,
+                            @RequestParam (required = false) boolean gender,
+                            @RequestParam (required = false) String status,
+                            @RequestParam (required = false) boolean health,
+                            @RequestParam (required = false) boolean sterilization){
+        List<Cat> cats = catService.getRecentCats();
         int availableCats = catService.countAvailableCats();
         int adoptedCats = catService.countAdoptedCats();
         int allCats = catService.countAllCats();
@@ -173,7 +182,7 @@ public class AdminController {
 
     @GetMapping(value = "/view-shift-note")
     public String viewShiftNote(Model model){
-        List<Note> shiftNotes = noteRepository.findAll();
+        List<Note> shiftNotes = noteService.getNotes();
         int unreadNotes = noteService.countUnreadNotes();
         model.addAttribute("shiftNotes", shiftNotes);
         model.addAttribute("unreadNotesCount", unreadNotes);
@@ -262,8 +271,6 @@ public class AdminController {
         return "redirect:/admin/manage-application";
     }
 
-    //ADICIONAR GATO - LISTA DE TAGS (ver como a das tarefas)
-
     //post mapping aceitar/rejeitar voluntarios
     //eliminar user
     //filtros na pagina de manage users
@@ -275,7 +282,4 @@ public class AdminController {
     //put para atualizar
     //delete para excluir
     //calcular baixo stock
-
-    //post mapping postar comunicado
-    //delete comunicado
 }

@@ -1,11 +1,9 @@
 package pt.upskill.base_gatos_demo.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Announcement {
@@ -59,6 +57,11 @@ public class Announcement {
         return createdAt;
     }
 
+    public String getFormattedCreatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+        return formatter.format(createdAt);
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -69,6 +72,11 @@ public class Announcement {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getFormattedUpdatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+        return formatter.format(updatedAt);
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
@@ -90,4 +98,6 @@ public class Announcement {
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
+
+
 }

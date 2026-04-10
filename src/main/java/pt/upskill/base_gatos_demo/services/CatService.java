@@ -168,4 +168,8 @@ public class CatService {
         return catCount;
     }
 
+    public List<Cat> getRecentCats() {
+        return catRepository.findTop8ByOrderByArrivalDateDesc();
+    }
+
 }
