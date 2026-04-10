@@ -104,15 +104,21 @@
             <div id="modalNoteAnterior" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%;
              background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center;">
                 <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem; max-height:80vh; overflow-y:auto;">
-                    <div style="font-weight:600; font-size:1.2rem; margin-bottom:0.25rem;">📋 Nota do turno anterior</div>
-                    <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:1.5rem;">Lê antes de iniciar o teu turno</div>
+                    <div style="font-weight:600; font-size:1.2rem; margin-bottom:0.25rem;">📋 Nota do turno anterior
+                    </div>
+                    <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:1.5rem;">Lê antes de iniciar o teu
+                        turno
+                    </div>
                     <c:if test="${not empty previousNote.summary}">
                         <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo do Turno:</div>
                         <div class="panel" style="margin-bottom:1rem; font-size:0.9rem;">${previousNote.summary}</div>
                     </c:if>
                     <c:if test="${not empty previousNote.importantObservations}">
-                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Observações Importantes:</div>
-                        <div class="panel" style="margin-bottom:1.5rem; font-size:0.9rem;">${previousNote.importantObservations}</div>
+                        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Observações
+                            Importantes:
+                        </div>
+                        <div class="panel"
+                             style="margin-bottom:1.5rem; font-size:0.9rem;">${previousNote.importantObservations}</div>
                     </c:if>
                     <form action="/volunteer/read-note/${previousNote.shift.id}" method="POST">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -138,7 +144,8 @@
                         <div class="panel text-center">
                             <div style="font-size:2rem; margin-bottom:0.5rem;">📅</div>
                             <div style="font-weight:600; margin-bottom:0.25rem;">Sem turno hoje</div>
-                            <div style="color:#9ca3af; font-size:0.9rem;">Não tens nenhum turno agendado para hoje.</div>
+                            <div style="color:#9ca3af; font-size:0.9rem;">Não tens nenhum turno agendado para hoje.
+                            </div>
                             <a href="/volunteer/view-schedule" class="btn btn-primary btn-sm" style="margin-top:1rem;">
                                 Ver as minhas escalas
                             </a>
@@ -149,8 +156,10 @@
                         <div class="panel" style="margin-bottom:1rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
                                 <div>
-                                    <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">📅 ${todayShift.date}</div>
-                                    <div style="color:#9ca3af; font-size:0.9rem;">🕐 ${todayShift.startTime} — ${todayShift.endTime}</div>
+                                    <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
+                                        📅 ${todayShift.date}</div>
+                                    <div style="color:#9ca3af; font-size:0.9rem;">🕐 ${todayShift.startTime}
+                                        — ${todayShift.endTime}</div>
                                 </div>
                                 <c:choose>
                                     <c:when test="${todayShift.endedAt != null}">
@@ -168,7 +177,8 @@
                                 <div style="margin-top:0.75rem; font-size:0.85rem; color:#9ca3af;">
                                     Voluntários:
                                     <c:forEach var="vol" items="${todayShift.volunteers}" varStatus="s">
-                                        <strong style="color:#e5e7eb;">${vol.name}</strong><c:if test="${!s.last}">, </c:if>
+                                        <strong style="color:#e5e7eb;">${vol.name}</strong><c:if
+                                            test="${!s.last}">, </c:if>
                                     </c:forEach>
                                 </div>
                             </c:if>
@@ -217,8 +227,15 @@
                                             <div style="display:flex; align-items:flex-start; gap:0.75rem;
                                                     padding:0.75rem 0;
                                                     ${!s.last ? 'border-bottom:1px solid #1f2937;' : ''}">
-                                                <input type="checkbox"
-                                                       style="margin-top:3px; accent-color:#f97316; width:16px; height:16px; cursor:pointer;">
+                                                <form action="/volunteer/complete-task/${task.id}" method="POST"
+                                                      style="display:inline;">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                           value="${_csrf.token}"/>
+                                                    <input type="checkbox"
+                                                           style="margin-top:3px; accent-color:#f97316; width:16px; height:16px; cursor:pointer;"
+                                                        ${task.completed ? 'checked' : ''}
+                                                           onchange="this.form.submit()">
+                                                </form>
                                                 <div>
                                                     <div style="font-weight:600; font-size:0.95rem;">${task.title}</div>
                                                     <c:if test="${not empty task.description}">

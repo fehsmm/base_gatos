@@ -35,6 +35,9 @@ public class DataInitializer {
     @Autowired
     private AdoptionRepository adoptRepo;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
 
     @PostConstruct
     public void init() {
@@ -113,10 +116,31 @@ public class DataInitializer {
             Shift s4 = new Shift();
             s4.setDate(LocalDate.now());
             s4.setStartTime(LocalTime.of(11, 0));
-            s4.setEndTime(LocalTime.of(0, 0));
+            s4.setEndTime(LocalTime.of(23, 59));
             s4.setVolunteers(List.of(joao));
             s4.setTasks(new ArrayList<>());
             shiftRepo.save(s4);
+
+            Task t1 = new Task();
+            t1.setTitle("Alimentar os gatos");
+            t1.setDescription("Dar ração seca e húmida");
+            t1.setCompleted(false);
+            t1.setShift(s4);
+            taskRepository.save(t1);
+
+            Task t2 = new Task();
+            t2.setTitle("Limpar jaulas");
+            t2.setDescription("Limpar todas as jaulas");
+            t2.setCompleted(false);
+            t2.setShift(s4);
+            taskRepository.save(t2);
+
+            Task t3 = new Task();
+            t3.setTitle("Trocar água");
+            t3.setDescription("Mudar a água de todos os bebedouros");
+            t3.setCompleted(false);
+            t3.setShift(s4);
+            taskRepository.save(t3);
         }
     }
 

@@ -33,4 +33,12 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public void markCompleted(Long id) { // tarefas do Voluntário
+        Task task = taskRepository.findById(id).orElse(null);
+        if (task != null) {
+            task.setCompleted(true);
+            taskRepository.save(task);
+        }
+    }
+
 }

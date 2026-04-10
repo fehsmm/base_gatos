@@ -36,6 +36,8 @@ public class VolunteerController {
     UserRepository userRepository;
     @Autowired
     CatRepository catRepository;
+    @Autowired
+    TaskService taskService;
 
     @GetMapping("/")
     public String volunteer(Model model) {
@@ -203,6 +205,12 @@ public class VolunteerController {
             noteService.saveNote(shift, summary, importantObservations);
         }
         return "redirect:/volunteer/leave-shift-note";
+    }
+
+    @PostMapping("/complete-task/{id}")
+    public String completeTask(@PathVariable Long id) {
+        taskService.markCompleted(id);
+        return "redirect:/volunteer/view-shift";
     }
 }
 
