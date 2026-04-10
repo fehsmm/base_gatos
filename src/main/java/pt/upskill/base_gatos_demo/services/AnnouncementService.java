@@ -55,15 +55,15 @@ public class AnnouncementService {
         announcementRepository.deleteById(id);
     }
 
-    public List<Announcement> getAnnouncements (LocalDate dateStartFilter, LocalDate dateEndFilter, String priorityFilter) {
+    public List<Announcement> getAnnouncements (LocalDate dateStartFilter, LocalDate dateEndFilter,      String priorityFilter) {
         List<Announcement> announcements = new ArrayList<>();
-        if(dateStartFilter == null && priorityFilter == null) {
+        if(dateStartFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
             announcements = announcementRepository.findTop6ByOrderByCreatedAtDesc();
-        } else if(dateStartFilter == null && priorityFilter != null) {
+        } else if(dateStartFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
             announcements = announcementRepository.findByPriority(priorityFilter);
-        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter == null) {
-            announcements = announcementRepository.findByCreatedAtBetween(dateStartFilter.atStartOfDay(), dateStartFilter.atTime(23,59,59));
-        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null) {
+        } else if(dateStartFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
+            announcements = announcementRepository.findByCreatedAtBetween(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59));
+        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
             announcements = announcementRepository.findByCreatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
         }
         return announcements;

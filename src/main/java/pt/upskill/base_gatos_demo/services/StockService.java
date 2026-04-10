@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Stock;
 import pt.upskill.base_gatos_demo.repositories.StockRepository;
 
+import java.util.List;
+
 @Service
 public class StockService {
 
@@ -23,6 +25,10 @@ public class StockService {
             }
         }
         return lowStockItems;
+    }
+
+    public List<Stock> getAllProducts() {
+        return stockRepository.findAll();
     }
 
     /*public void updateStock(UpdateStockModel model) {

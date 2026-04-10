@@ -1,5 +1,6 @@
 package pt.upskill.base_gatos_demo.controllers;
 
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,6 +96,10 @@ public class AdminController {
     @GetMapping(value = "/manage-schedule")
     public String manageSchedule(Model model){
         LocalDate today = LocalDate.now();
+        List<User> volunteers = userService.getVolunteers();
+        int shiftCount = shiftService.getTotalShiftsForWeek(today);
+        List<AddTaskModel> tasks = new ArrayList<>();
+
         Map<String, List<Shift>> shiftsByDay = new LinkedHashMap<>();
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("EEE, dd MMM", new Locale("pt", "PT"));
@@ -106,9 +111,6 @@ public class AdminController {
             formattedDate = formattedDate.substring(0,1).toUpperCase() + formattedDate.substring(1);
             shiftsByDay.put(formattedDate, shifts);
         }
-        int shiftCount = shiftService.getTotalShiftsForWeek(today);
-        List<User> volunteers = userRepository.findByRole("VOLUNTEER");
-        List<AddTaskModel> tasks = new ArrayList<>();
         Map<Long, Integer> completedTasks = new HashMap<>();
         Map<Long, Integer> totalTasks = new HashMap<>();
         for (List<Shift> shiftList : shiftsByDay.values()) {
@@ -135,7 +137,7 @@ public class AdminController {
 
     @GetMapping(value = "/manage-stock")
     public String manageStock(Model model){
-        List<Stock> stockList = stockRepository.findAll();
+        List<Stock> stockList = stockService.getAllProducts();
         model.addAttribute("stockList", stockList);
         return "admin/manage-stock";
     }
@@ -151,7 +153,7 @@ public class AdminController {
     public String postAnnouncement(Model model,
                                    @RequestParam (required = false) LocalDate dateStartFilter,
                                    @RequestParam (required = false) LocalDate dateEndFilter,
-                                   @RequestParam (required = false) String priorityFilter){
+                                   @RequestParam (required = false) @Nullable String priorityFilter){
         User user = authService.getAuthenticatedUser();
         List<Announcement> announcements = announcementService.getAnnouncements(dateStartFilter, dateEndFilter, priorityFilter);
         model.addAttribute("announcements", announcements);

@@ -40,4 +40,8 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public List<User> getVolunteers() {
+        return userRepository.findByRole("volunteer");
+    }
 }
