@@ -20,6 +20,9 @@ public class AuthService {
     public User register(SignUpModel signUpModel) {
         User user = new User();
         user.setUsername(signUpModel.getUsername());
+        user.setAddress(signUpModel.getAddress());
+        user.setTelephone(signUpModel.getTelephone());
+        user.setName(signUpModel.getName());
 
         String encodedPassword = passwordEncoder.encode(signUpModel.getPassword());
         user.setPassword(encodedPassword);

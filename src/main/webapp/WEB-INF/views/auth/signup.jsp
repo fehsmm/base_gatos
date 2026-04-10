@@ -35,8 +35,14 @@
 
                 <div class="col-md-4">
                     <label class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="9XX XXX XXX">
+                    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="9XX XXX XXX">
                 </div>
+
+                <div class="col-md-4">
+                            <label class="form-label">Morada</label>
+                            <input type="text" class="form-control" name="address" required placeholder="Cidade, Concelho"/>
+                </div>
+
 
 
                 <div class="col-12 mt-4">

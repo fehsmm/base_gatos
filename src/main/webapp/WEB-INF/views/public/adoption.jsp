@@ -20,16 +20,7 @@
         </div>
 
 
-        <c:if test="${not empty error}">
-            <script>
-                alert("${error}");
-            </script>
-        </c:if>
-        <c:if test="${not empty success}">
-            <script>
-                alert("${success}");
-            </script>
-        </c:if>
+
 
 
         <h2 class="text-center mb-6">Como Funciona</h2>
@@ -139,6 +130,17 @@
             </div>
         </div>
 </c:if>
+
+        <c:if test="${not empty error}">
+            <script>
+                alert("${error}");
+            </script>
+        </c:if>
+        <c:if test="${not empty success}">
+            <script>
+                alert("${success}");
+            </script>
+        </c:if>
 
         <div class="bg-orange-50">
             <h3>Precisa de Ajuda?</h3>
