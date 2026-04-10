@@ -79,7 +79,7 @@
             </div>
         </div>
 
-
+<c:if test="${not empty pageContext.request.userPrincipal}">
         <div class="card mb-6">
             <div class="card-header"><strong> Formulário de Candidatura</strong></div>
             <div class="card-body">
@@ -138,6 +138,7 @@
                 </form>
             </div>
         </div>
+</c:if>
 
         <div class="bg-orange-50">
             <h3>Precisa de Ajuda?</h3>
