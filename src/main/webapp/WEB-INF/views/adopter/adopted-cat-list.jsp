@@ -59,7 +59,7 @@
     <div class="container">
     <div class="container-fluid p-4">
 
-        <!-- HEADER -->
+
         <div class="d-flex align-items-center mb-4">
             <a href="/adopter/" class="btn btn-light me-3">
                 ← Voltar
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <!-- GRID -->
+
         <div class="row g-4">
 
             <c:forEach items="${adoptions}" var="adoption">
@@ -82,17 +82,17 @@
 
                     <div class="card shadow-sm border-0 rounded-4 h-100">
 
-                        <!-- IMAGEM -->
+
                         <img
                                 src="${adoption.cat.image != null ? adoption.cat.image: '/images/default-cat.jpg'}"
                                 class="card-img-top rounded-top-4"
                                 style="height: 250px; object-fit: cover;"
                         >
 
-                        <!-- BODY -->
+
                         <div class="card-body">
 
-                            <!-- NOME + STATUS -->
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="fw-bold mb-0">
                                         ${adoption.cat.name}
@@ -103,7 +103,7 @@
                             </span>
                             </div>
 
-                            <!-- INFO -->
+
                             <p class="text-muted mt-2 mb-1">
                                     ${adoption.cat.estimatedAge} anos • ${adoption.cat.breed}
                             </p>
@@ -116,7 +116,7 @@
                                 <strong>Última consulta:</strong> 01/03/2026
                             </p>
 
-                            <!-- BOTÃO -->
+
                             <a href="/public/cat-profile/${adoption.cat.id}"
                                class="btn btn-dark w-100 mt-3 rounded-3">
                                 Ver Perfil Completo
@@ -131,7 +131,6 @@
 
         </div>
 
-        <!-- EMPTY STATE -->
         <c:if test="${empty adoptions}">
             <div class="text-center mt-5">
                 <p class="text-muted">Ainda não tens gatos adotados 🐾</p>

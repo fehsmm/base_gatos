@@ -94,6 +94,7 @@
                             <input type="text" name="applicantName" required placeholder="O seu nome"/>
                         </div>
                     </div>
+                    <!--APAGAR?-->
                         <!--<div class="form-group">
                             <label>Email *</label>
                             <input type="email" name="email" required placeholder="seu@email.com"/>
@@ -131,15 +132,22 @@
         </div>
 </c:if>
 
-        <c:if test="${not empty error}">
+        <c:if test="${not empty success}">
+            <div class="custom-alert success">
+                    ${success}
+            </div>
+            <!--Mostra alerta, espera 4 segundos e esconde...-->
             <script>
-                alert("${error}");
+                setTimeout(() => {
+                    document.querySelector('.custom-alert').style.display = 'none';
+                }, 4000);
             </script>
         </c:if>
-        <c:if test="${not empty success}">
-            <script>
-                alert("${success}");
-            </script>
+
+        <c:if test="${not empty error}">
+            <div class="custom-alert error">
+                    ${error}
+            </div>
         </c:if>
 
         <div class="bg-orange-50">
