@@ -56,6 +56,9 @@
 
 .header-links a {
     color: #f97316;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .header-links button {
@@ -65,14 +68,36 @@
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
-    text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
     transition: all 0.15s;
-    background-color: #ea6c00;
+    background-color: white;
+    color: #f97316;
 }
-.header-links button:hover {
+
+.header-links button.btn-login {
+    background-color: #ea6c00;
+    color: #fff;
+}
+.header-links button.btn-login:hover {
     background-color: darkorange;
-    cursor: pointer;
+}
+
+
+.header-links:has(button:hover) button {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+}
+.header-links:has(button:hover) button svg {
+    fill: #9ca3af;
+}
+
+/* ...except the one being hovered, keep it orange */
+.header-links button:hover {
+    background-color: #f97316 !important;
+    color: white !important;
+}
+.header-links button:hover svg {
+    fill: white !important;
 }
