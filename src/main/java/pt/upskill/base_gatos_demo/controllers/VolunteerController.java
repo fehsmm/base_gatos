@@ -135,18 +135,6 @@ public class VolunteerController {
         return "volunteer/request-stock";
     }
 
-    @GetMapping("/leave-shift-note")
-    public String leaveShiftNote(Model model) {
-        User user = authService.getAuthenticatedUser();
-        model.addAttribute("user", user);
-        LocalDate today = LocalDate.now();
-        shiftService.getShifts(null).stream()
-                .filter(s -> s.getDate().equals(today))
-                .findFirst()
-                .ifPresent(s -> model.addAttribute("shift", s));
-        return "volunteer/leave-shift-note";
-    }
-
     @GetMapping("/shift-report")
     public String shiftReport(Model model,
                               @RequestParam(required = false) String search) {
@@ -194,17 +182,6 @@ public class VolunteerController {
                            @RequestParam String importantObservations) {
         noteService.saveNote(id, summary, importantObservations);
         return "redirect:/volunteer/view-shift";
-    }
-
-    @PostMapping("/update-note/{id}")
-    public String updateNote(@PathVariable Long id,
-                             @RequestParam String summary,
-                             @RequestParam String importantObservations) {
-        Shift shift = shiftService.getById(id);
-        if (shift != null) {
-            noteService.saveNote(shift, summary, importantObservations);
-        }
-        return "redirect:/volunteer/leave-shift-note";
     }
 
     @PostMapping("/complete-task/{id}")
