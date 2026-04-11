@@ -98,35 +98,40 @@
     <div class="container">
         <c:forEach items="${adoptions}" var="adoption">
                 <div class="card shadow-sm border-0 rounded-4 h-100">
+                    <div class="card-header"><h2 class="fw-bold mb-0">${adoption.applicantName}</h2></div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="fw-bold mb-0">
-                                    ${adoption.applicantName}
-                            </h2>
-                            <h2>Name: ${adoption.applicantName}</h2>
-                            <p>Reason: ${adoption.reason}</p>
+                        <div class="row text-center">
+                            <div class="col-md-6 mb-3">
+                                <p><b>Razão</b></p>
+                                <p>${adoption.reason}</p>
+                            </div>
 
-                            <p> Email: ${adoption.email}</p>
-                            <p> Experience: ${adoption.experience}</p>
+                            <div class="col-md-6 mb-3">
+                                <p><b>Experiência</b></p>
+                                <p>${adoption.experience}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 mt-3">
 
                             <form action="/admin/adoptions/${adoption.id}/approve" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <button class="btn btn-success">Aprovar</button>
+                                <button class="btn btn-success px-4">Aprovar</button>
                             </form>
 
                             <form action="/admin/adoptions/${adoption.id}/reject" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <button class="btn btn-danger">Rejeitar</button>
+                                <button class="btn btn-danger px-4">Rejeitar</button>
                             </form>
+
                         </div>
 
                     </div>
                 </div>
-
             </div>
-
-            </c:forEach>
-    </div>
+        </c:forEach>
+</div>
     <div class="container">
         <h2>Header 2</h2>
         <p>Lorem ipsum etc etc etc</p>

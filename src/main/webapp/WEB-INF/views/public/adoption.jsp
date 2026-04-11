@@ -110,7 +110,7 @@
                             <label>Morada *</label>
                             <input type="text" name="address" required placeholder="Cidade, Concelho"/>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <label>Por que quer adotar um gato? *</label>
