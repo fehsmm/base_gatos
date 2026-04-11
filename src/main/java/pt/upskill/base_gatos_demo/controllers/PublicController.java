@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.Adoption;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.AdoptionForm;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
@@ -108,13 +109,7 @@ public class PublicController {
 
     //post mapping para o formulario de adocao
     @PostMapping("/adoptions")
-    public String processAdoption(@RequestParam Long catId,
-                                  @RequestParam String applicantName,
-                                  //@RequestParam String email,
-                                  //@RequestParam String phone,
-                                  //@RequestParam String address,
-                                  @RequestParam String reason,
-                                  @RequestParam String experience,
+    public String processAdoption(@ModelAttribute AdoptionForm adoptionForm,
                                   Principal principal,
                                   RedirectAttributes redirectAttributes) {
 
@@ -130,18 +125,18 @@ public class PublicController {
         }
 
         User user = userRepository.getUserByUsername(principal.getName());
-        Cat cat = catRepository.findById(catId).orElse(null);
+        Cat cat = catRepository.findById(adoptionForm.getCatId()).orElse(null);
 
 
         Adoption adoption = new Adoption();
         adoption.setUser(user);
         adoption.setCat(cat);
-        adoption.setApplicantName(applicantName);
+        adoption.setApplicantName(adoptionForm.getApplicantName());
         //adoption.setEmail(email);
         //adoption.setPhone(phone);
         //adoption.setAddress(address);
-        adoption.setReason(reason);
-        adoption.setExperience(experience);
+        adoption.setReason(adoptionForm.getReason());
+        adoption.setExperience(adoptionForm.getExperience());
         adoption.setStatus("Pendente");
 
         adoptionRepository.save(adoption);
