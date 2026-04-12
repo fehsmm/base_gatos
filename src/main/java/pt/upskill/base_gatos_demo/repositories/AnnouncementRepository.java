@@ -18,4 +18,12 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
     List<Announcement> findByCreatedAtBetween(LocalDateTime date1, LocalDateTime date2);
 
     List<Announcement> findByCreatedAtBetweenAndPriority(LocalDateTime date1, LocalDateTime date2, String priority);
+
+    List<Announcement> findByCreatedAtAfter(LocalDateTime date1);
+
+    List<Announcement> findByCreatedAtAfterAndPriority(LocalDateTime date1, String priority);
+
+    List<Announcement> findByCreatedAtBefore(LocalDateTime date1);
+
+    List<Announcement> findByCreatedAtBeforeAndPriority(LocalDateTime date1, String priority);
 }

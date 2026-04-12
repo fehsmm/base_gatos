@@ -57,13 +57,29 @@ public class AnnouncementService {
 
     public List<Announcement> getAnnouncements (LocalDate dateStartFilter, LocalDate dateEndFilter,      String priorityFilter) {
         List<Announcement> announcements = new ArrayList<>();
-        if(dateStartFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
+        if(dateStartFilter == null && dateEndFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
+            //não tem datas nem prioridade
             announcements = announcementRepository.findTop6ByOrderByCreatedAtDesc();
-        } else if(dateStartFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+        } else if(dateStartFilter == null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //tem só prioridade
             announcements = announcementRepository.findByPriority(priorityFilter);
-        } else if(dateStartFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
+        } else if(dateStartFilter != null && dateEndFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
+            //tem só data de inicio
+            announcements = announcementRepository.findByCreatedAtAfter(dateStartFilter.atStartOfDay());
+        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //tem data de início e prioridade
+            announcements = announcementRepository.findByCreatedAtAfterAndPriority(dateStartFilter.atStartOfDay(), priorityFilter);
+        } else if(dateStartFilter == null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
+            //tem só data de fim
+            announcements = announcementRepository.findByCreatedAtBefore(dateEndFilter.atTime(23,59,59));
+        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //tem só data de fim e prioridade
+            announcements = announcementRepository.findByCreatedAtBeforeAndPriority(dateEndFilter.atTime(23,59,59), priorityFilter);
+        } else if(dateStartFilter != null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
+            //tem ambas as datas sem prioridade
             announcements = announcementRepository.findByCreatedAtBetween(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59));
         } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //tem ambas as datas com prioridade
             announcements = announcementRepository.findByCreatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
         }
         return announcements;
