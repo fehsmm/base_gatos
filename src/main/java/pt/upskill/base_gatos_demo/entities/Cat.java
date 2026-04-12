@@ -2,6 +2,8 @@ package pt.upskill.base_gatos_demo.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Cat {
     private boolean gender;
     private String breed; //pelagem
     private String status;
-    private Date arrivalDate;
+    private LocalDate arrivalDate;
     private String description;
     @ElementCollection
     private List<String> tags;
@@ -86,12 +88,21 @@ public class Cat {
         this.status = status;
     }
 
-    public Date getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public String getFormattedArrivalDate() {
+        if(arrivalDate == null) {
+            return "--/--/----";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return arrivalDate.format(formatter);
+        }
     }
 
     public String getDescription() {

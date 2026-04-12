@@ -58,8 +58,12 @@ public class Announcement {
     }
 
     public String getFormattedCreatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
-        return formatter.format(createdAt);
+        if(createdAt == null) {
+            return "--/--/----";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return createdAt.format(formatter);
+        }
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -75,8 +79,12 @@ public class Announcement {
     }
 
     public String getFormattedUpdatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
-        return formatter.format(updatedAt);
+        if(updatedAt == null) {
+            return "--/--/----";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return updatedAt.format(formatter);
+        }
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {

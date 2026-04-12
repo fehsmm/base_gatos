@@ -1,5 +1,6 @@
 package pt.upskill.base_gatos_demo.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class EditCatModel {
     private boolean gender;
     private String breed; //pelagem
     private String status;
-    private Date arrivalDate;
+    private LocalDate arrivalDate;
     private String description;
     private List<String> tags;
 
@@ -79,11 +80,11 @@ public class EditCatModel {
         this.status = status;
     }
 
-    public Date getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 

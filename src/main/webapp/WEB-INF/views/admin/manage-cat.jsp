@@ -172,7 +172,7 @@
                                 </div>
 
                                 <div style="flex:1;">
-                                        ${cat.arrivalDate}
+                                        ${cat.formattedArrivalDate}
                                 </div>
 
                                 <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
