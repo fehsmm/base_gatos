@@ -55,7 +55,7 @@ public class AnnouncementService {
         announcementRepository.deleteById(id);
     }
 
-    public List<Announcement> getAnnouncements (LocalDate dateStartFilter, LocalDate dateEndFilter,      String priorityFilter) {
+    public List<Announcement> getAnnouncements (LocalDate dateStartFilter, LocalDate dateEndFilter, String priorityFilter) {
         List<Announcement> announcements = new ArrayList<>();
         if(dateStartFilter == null && dateEndFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
             //não tem datas nem prioridade

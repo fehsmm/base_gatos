@@ -92,6 +92,27 @@
             <div class="alert alert-success">${success}</div>
         </c:if>
 
+            <div>
+                <h3>Filtrar Gatos</h3>
+            </div>
+
+            <form method="GET" action="/admin/manage-cat" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:center;">
+
+                <input type="text" name="nameFilter" id="nameFilter" class="form-control" placeholder="Nome do gato"
+                value="${param.nameFilter}">
+
+                <select name="statusFilter" id="statusFilter" class="form-control">
+                    <option value="">Qualquer estado</option>
+                    <option value="Disponível">Disponível</option>
+                    <option value="Em Processo">Em Processo</option>
+                    <option value="Adotado">Adotado</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a href="/admin/manage-cat" class="btn btn-secondary">Limpar</a>
+
+            </form>
+
             <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
                 <div class="card" style="flex:1; text-align:center; padding:1rem;">
                     <h3>${allCats}</h3>

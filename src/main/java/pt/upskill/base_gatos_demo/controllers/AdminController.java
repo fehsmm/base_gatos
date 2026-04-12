@@ -166,12 +166,9 @@ public class AdminController {
 
     @GetMapping(value = "/manage-cat")
     public String manageCat(Model model,
-                            @RequestParam (required = false) String name,
-                            @RequestParam (required = false) boolean gender,
-                            @RequestParam (required = false) String status,
-                            @RequestParam (required = false) boolean health,
-                            @RequestParam (required = false) boolean sterilization){
-        List<Cat> cats = catService.getRecentCats();
+                            @RequestParam (required = false) String nameFilter,
+                            @RequestParam (required = false) String statusFilter){
+        List<Cat> cats = catService.listCats(nameFilter, statusFilter);
         int availableCats = catService.countAvailableCats();
         int adoptedCats = catService.countAdoptedCats();
         int allCats = catService.countAllCats();

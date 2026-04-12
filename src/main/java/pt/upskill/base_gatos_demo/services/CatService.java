@@ -3,6 +3,7 @@ package pt.upskill.base_gatos_demo.services;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,29 +28,22 @@ public class CatService {
     @Autowired
     AdoptionService adoptionService;
 
-    public List<Cat> listCats(@Nullable String status, @Nullable boolean gender, @Nullable boolean vaccination,
-                              @Nullable boolean sterilization, @Nullable boolean health){
-        User user = authService.getAuthenticatedUser();
-        Cat filter = new Cat();
-        if ((!user.isAdmin() && !user.isVolunteer()) || status == "Disponível") {
-            filter.setStatus("Disponível");
-        } else if (status != null) {
-            filter.setStatus(status);
+    public List<Cat> listCats(String nameFilter, String statusFilter){
+        List<Cat> cats = new ArrayList<>();
+        if ((nameFilter == null || nameFilter.isEmpty()) && (statusFilter == null || statusFilter.isEmpty())) {
+            //nenhum selecionado
+            cats = catRepository.findTop8ByOrderByArrivalDateDesc();
+        } else if ((statusFilter != null && !statusFilter.isEmpty()) && (nameFilter == null ||  nameFilter.isEmpty())) {
+            //só status selecionado
+            cats = catRepository.findByStatus(statusFilter);
+        } else if ((nameFilter != null && !nameFilter.isEmpty()) && (statusFilter == null || statusFilter.isEmpty())) {
+            //só nome selecionado
+            cats = catRepository.findByNameContainingIgnoreCase(nameFilter);
+        } else if((nameFilter != null && !nameFilter.isEmpty()) && (statusFilter != null && !statusFilter.isEmpty())) {
+            //ambos selecionados
+            cats = catRepository.findByStatusAndNameContainingIgnoreCase(statusFilter, nameFilter);
         }
-        if (gender) {
-            filter.setGender(gender);
-        }
-        if(vaccination) {
-            filter.setVaccination(true);
-        }
-        if(sterilization) {
-            filter.setSterilization(true);
-        }
-        if(health) {
-            filter.setFiv(false);
-            filter.setFelv(false);
-        }
-        return catRepository.findAll(Example.of(filter));
+        return cats;
     }
 
     public Cat getById(Long id) {

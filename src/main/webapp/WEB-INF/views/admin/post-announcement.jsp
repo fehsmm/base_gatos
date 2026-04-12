@@ -97,7 +97,7 @@
 
         <form method="GET" action="/admin/post-announcement" style="display:flex; gap:1rem; margin-bottom:1rem;">
 
-            <select name="priorityFilter" class="form-control">
+            <select name="priorityFilter" id="priorityFilter" class="form-control">
                 <option value="">Todas as prioridades</option>
                 <option value="urgent">Urgente</option>
                 <option value="high">Alta</option>

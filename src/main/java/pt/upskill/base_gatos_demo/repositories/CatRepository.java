@@ -11,7 +11,10 @@ import java.util.List;
 public interface CatRepository extends JpaRepository<Cat,Long> {
 
     List<Cat> findByName(String name);
+    List<Cat> findByNameContainingIgnoreCase(String name);
     List<Cat> findByStatus(String status);
+    List<Cat> findByStatusAndNameContainingIgnoreCase(String status, String name);
+
     List<Cat> findByStatusAndGender(String status, boolean gender);
 
     List<Cat> findTop8ByOrderByArrivalDateDesc();
@@ -23,4 +26,8 @@ public interface CatRepository extends JpaRepository<Cat,Long> {
     List<Cat> findByVaccination(boolean vaccination);
 
     List<Cat> findBySterilization(boolean sterilization);
+
+    List<Cat> findAllByStatusAndGender(String status, boolean gender);
+
+
 }
