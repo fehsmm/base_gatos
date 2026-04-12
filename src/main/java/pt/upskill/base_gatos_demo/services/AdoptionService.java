@@ -57,4 +57,8 @@ public class AdoptionService {
                 .map(Adoption::getCat)
                 .toList();
     }
+
+    public List<Adoption> getPendingAdoptions() {
+        return  adoptionRepository.findByStatus("Pendente");
+    }
 }

@@ -151,4 +151,8 @@ public class ShiftService {
         shiftRepository.deleteById(id);
     }
 
+    public List<Shift>  getShiftsByDate(LocalDate date) {
+        return shiftRepository.findByDate(date);
+    }
+
 }

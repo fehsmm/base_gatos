@@ -28,11 +28,6 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public void markCompelted(Task task) {
-        task.setCompleted(true);
-        taskRepository.save(task);
-    }
-
     public void markCompleted(Long id) { // tarefas do Voluntário
         Task task = taskRepository.findById(id).orElse(null);
         if (task != null) {

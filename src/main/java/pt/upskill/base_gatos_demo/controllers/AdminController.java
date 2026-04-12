@@ -25,54 +25,32 @@ import java.util.*;
 public class AdminController {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     UserService userService;
 
     @Autowired
     AdoptionService adoptionService;
 
     @Autowired
-    CatRepository catRepository;
-
-    @Autowired
     StockService stockService;
-
-    @Autowired
-    StockRepository stockRepository;
-
-    @Autowired
-    AnnouncementRepository announcementRepository;
 
     @Autowired
     ShiftService shiftService;
 
     @Autowired
-    ShiftRepository shiftRepository;
-
-    @Autowired
-    AdoptionRepository adoptionRepository;
-
-    @Autowired
-    TaskService taskService;
-
-    @Autowired
     CatService catService;
 
     @Autowired
-    NoteRepository noteRepository;
+    NoteService noteService;
 
     @Autowired
-    NoteService noteService;
+    AnnouncementService announcementService;
+
     @Autowired
-    private AnnouncementService announcementService;
-    @Autowired
-    private AuthService authService;
+   AuthService authService;
 
     @GetMapping(value="/")
     public String admin(Model model){
-        List<Cat> cats = catRepository.findTop8ByOrderByArrivalDateDesc();
+        List<Cat> cats = catService.getRecentCats();
         int pendingApproval = userService.countPendingApproval();
         int lowStock = stockService.countLowStockItems();
         List<Announcement> announcements = announcementService.getRecentAnnouncements();
@@ -85,11 +63,8 @@ public class AdminController {
 
     @GetMapping(value = "/manage-application")
     public String manageApplication(Model model){
-
-            List<Adoption> adoptions = adoptionRepository.findByStatus("Pendente");
-
+            List<Adoption> adoptions = adoptionService.getPendingAdoptions();
             model.addAttribute("adoptions", adoptions);
-
             return "admin/manage-application";
     }
 
@@ -98,14 +73,12 @@ public class AdminController {
         LocalDate today = LocalDate.now();
         List<User> volunteers = userService.getVolunteers();
         int shiftCount = shiftService.getTotalShiftsForWeek(today);
-        List<AddTaskModel> tasks = new ArrayList<>();
-
         Map<String, List<Shift>> shiftsByDay = new LinkedHashMap<>();
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("EEE, dd MMM", new Locale("pt", "PT"));
         for (int i = 0; i < 7; i++) {
             LocalDate date = today.plusDays(i);
-            List<Shift> shifts = shiftRepository.findByDate(date);
+            List<Shift> shifts = shiftService.getShiftsByDate(date);
             shifts.sort(Comparator.comparing(Shift::getStartTime)); //usa o getStartTime de cada Shift para comparar
             String formattedDate = date.format(formatter);
             formattedDate = formattedDate.substring(0,1).toUpperCase() + formattedDate.substring(1);
@@ -131,7 +104,6 @@ public class AdminController {
         tomorrowFormatted =  tomorrowFormatted.substring(0,1).toUpperCase() + tomorrowFormatted.substring(1);
         model.addAttribute("todayFormatted", todayFormatted);
         model.addAttribute("tomorrowFormatted", tomorrowFormatted);
-        model.addAttribute("tasks", tasks);
         return "admin/manage-schedule";
     }
 
