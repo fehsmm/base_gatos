@@ -82,6 +82,7 @@ public class AnnouncementService {
             //tem ambas as datas com prioridade
             announcements = announcementRepository.findByCreatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
         }
+        announcements.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
         return announcements;
     }
 
