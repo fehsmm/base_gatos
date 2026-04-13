@@ -253,6 +253,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
+            <hr>
 
             <div class="mb-3">
                 <label>Data</label>
@@ -285,6 +286,7 @@
 
             <div class="mt-4">
                 <h5>Tarefas</h5>
+                <hr>
 
                 <div id="tasksList" class="mb-3"></div>
 
@@ -336,6 +338,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id" id="editShiftId"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
+            <hr>
 
             <div class="mb-3">
                 <label>Data</label>
@@ -368,6 +371,7 @@
 
             <div class="mt-4">
                 <h5>Tarefas</h5>
+                <hr>
 
                 <div id="editTasksList" class="mb-3"></div>
 

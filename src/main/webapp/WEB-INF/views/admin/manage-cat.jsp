@@ -311,6 +311,8 @@
 
             <div class="mt-4">
                 <h5>Traços de Personalidade</h5>
+                <hr>
+
                 <div id="tagList" class="mb-3"></div>
 
                     <label class="form-label">
@@ -467,6 +469,8 @@
 
             <div class="mt-4">
                 <h5>Traços de Personalidade</h5>
+                <hr>
+
                 <div id="editTagList" class="mb-3"></div>
 
                 <label class="form-label">

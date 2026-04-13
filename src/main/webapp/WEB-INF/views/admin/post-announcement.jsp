@@ -225,10 +225,11 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id"/>
             <h3 class="mb-4">Detalhes do Comunicado</h3>
+            <hr>
 
             <div class="mb-3">
                 <label>Título</label>
-                <input type="text" name="title" id="title" class="form-control" required>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Título do comunicado" required>
             </div>
 
             <div class="mb-3">
@@ -244,7 +245,7 @@
 
             <div class="mb-3">
                 <label>Descrição</label>
-                <input type="text" name="description" id="description" class="form-control" required>
+                <input type="text" name="description" id="description" class="form-control" placeholder="Texto do comunicado" required>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
@@ -277,10 +278,11 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id" id="editAnnouncementId"/>
             <h3 class="mb-4">Detalhes do Comunicado</h3>
+            <hr>
 
             <div class="mb-3">
                 <label>Título</label>
-                <input type="text" name="title" id="editTitle" class="form-control" required>
+                <input type="text" name="title" id="editTitle" class="form-control" placeholder="Título do comunicado" required>
             </div>
 
             <div class="mb-3">
@@ -296,7 +298,7 @@
 
             <div class="mb-3">
                 <label>Descrição</label>
-                <input type="text" name="description" id="editDescription" class="form-control" required>
+                <input type="text" name="description" id="editDescription" class="form-control" placeholder="Texto do comunicado" required>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
