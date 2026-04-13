@@ -116,12 +116,12 @@ public class CatService {
         if (user != null && (user.isAdmin() || user.isVolunteer())) {
             cats = catRepository.findAll();
         }
-        else if (user != null && user.isAdopter()) {
+        /*else if (user != null && user.isAdopter()) {
             List<Cat> available = catRepository.findByStatus("Disponível");
             List<Cat> adopted = adoptionService.getAdoptedCatsByUser(user);
             cats = new ArrayList<>(available);
             cats.addAll(adopted);
-        } else {
+        }*/ else {
             cats = catRepository.findByStatus("Disponível");
         }
 
