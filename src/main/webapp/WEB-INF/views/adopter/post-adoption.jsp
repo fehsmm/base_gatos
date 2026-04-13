@@ -87,6 +87,7 @@
                                     <option>Excelente</option>
                                     <option>Bom</option>
                                     <option>Regular</option>
+                                    <option>Preocupante</option>
                                 </select>
                             </div>
 
@@ -95,10 +96,10 @@
                                 <textarea class="form-control" name="notes"></textarea>
                             </div>
 
-                            <div class="mb-3">
+                           <!-- <div class="mb-3">
                                 <label>Problemas de Saúde</label>
                                 <textarea class="form-control" name="health"></textarea>
-                            </div>
+                            </div>-->
 
                             <button class="btn btn-primary w-100">Enviar Relatório</button>
                         </form>
@@ -122,9 +123,9 @@
                                     <span class="text-muted">${report.date}</span>
                                 </div>
 
-                                <span class="badge badge-status status-excellent">
+                                <p>
                                         ${report.status}
-                                </span>
+                                </p>
 
                                 <p class="mt-2">${report.notes}</p>
 

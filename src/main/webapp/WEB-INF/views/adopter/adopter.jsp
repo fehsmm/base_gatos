@@ -58,7 +58,7 @@
     <div class="container">
         <div class="container-fluid p-4">
 
-            <!-- HEADER -->
+
             <div class="mb-4">
                 <h2 class="fw-bold">
                     Bem-vindo(a), ${user.name}!
@@ -68,7 +68,7 @@
                 </p>
             </div>
 
-            <!-- STATS -->
+
             <div class="row g-4 mb-4">
 
                 <div class="col-md-4">
@@ -109,7 +109,7 @@
 
             </div>
 
-            <!-- ALERTA -->
+
             <div class="card border-warning bg-warning-subtle p-4 rounded-4 mb-4">
                 <h5 class="fw-bold mb-2">
                     Relatório Mensal Pendente
@@ -123,7 +123,7 @@
                 </a>
             </div>
 
-            <!-- MEUS GATOS -->
+
             <div class="card p-4 shadow-sm border-0 rounded-4 mb-4">
 
                 <h5 class="fw-bold mb-3">Os Meus Gatos</h5>
