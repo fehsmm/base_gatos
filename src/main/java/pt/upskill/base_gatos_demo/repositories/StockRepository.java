@@ -9,7 +9,11 @@ import java.util.List;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
-    List<Stock> findByProductType (String productType);
+    List<Stock> findByProductTypeContainingIgnoreCase (String productType);
+
+    List<Stock> findByProductTypeContainingIgnoreCaseAndTag (String productType, String tag);
+
+    List<Stock> findByTag (String tag);
 
 
 

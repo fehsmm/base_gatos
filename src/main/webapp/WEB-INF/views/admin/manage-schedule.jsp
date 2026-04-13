@@ -419,7 +419,6 @@
         </p>
 
         <form id="deleteForm" method="POST" action="/admin/delete-shift">
-
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="shiftId" id="deleteShiftId"/>
 
@@ -432,7 +431,6 @@
                     Eliminar
                 </button>
             </div>
-
         </form>
 
     </div>

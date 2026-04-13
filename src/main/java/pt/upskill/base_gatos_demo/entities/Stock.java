@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Stock {
@@ -33,7 +34,7 @@ public class Stock {
         return productType;
     }
 
-    public void setProductType(String name) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
 
@@ -95,5 +96,14 @@ public class Stock {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getFormattedUpdatedAt() {
+        if(updatedAt == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return updatedAt.format(formatter);
+        }
     }
 }

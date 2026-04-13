@@ -108,16 +108,26 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-stock")
-    public String manageStock(Model model){
-        List<Stock> stockList = stockService.getAllProducts();
+    public String manageStock(Model model,
+                              @RequestParam (required = false) String productTypeFilter,
+                              @RequestParam (required = false) String tagFilter){
+        List<Stock> stockList = stockService.getAllProducts(productTypeFilter, tagFilter);
+        int lowStock = stockService.countLowStockItems();
+        List<Stock> lowStockItems = stockService.getLowStockItems();
+        List<String> tags = stockService.getTags();
         model.addAttribute("stockList", stockList);
+        model.addAttribute("lowStockCount", lowStock);
+        model.addAttribute("lowStockItems", lowStockItems);
+        model.addAttribute("tags", tags);
         return "admin/manage-stock";
     }
 
     @GetMapping(value = "/manage-user")
     public String manageUser(Model model){
         List<User> pendingUsers = userService.findPendingApproval();
+        int pendingApproval = userService.countPendingApproval();
         model.addAttribute("pendingUsers", pendingUsers);
+        model.addAttribute("pendingUsersCount", pendingApproval);
         return "admin/manage-user";
     }
 
@@ -228,6 +238,38 @@ public class AdminController {
         announcementService.updateAnnouncement(model);
         redirectAttributes.addFlashAttribute("success", "Comunicado atualizado com sucesso!");
         return "redirect:/admin/post-announcement";
+    }
+
+    @PostMapping(value = "/create-stock")
+    public String createStock(@ModelAttribute CreateStockModel model, RedirectAttributes redirectAttributes) {
+        stockService.createStock(model);
+        redirectAttributes.addFlashAttribute("success", "Produto criado com sucesso!");
+        return "redirect:/admin/manage-stock";
+    }
+
+    @PostMapping(value = "/delete-stock")
+    public String deleteStock(@RequestParam("stockId") Long stockId,
+                                     RedirectAttributes redirectAttributes) {
+        stockService.deleteStock(stockId);
+        redirectAttributes.addFlashAttribute("success", "Produto eliminado com sucesso!");
+        return "redirect:/admin/manage-stock";
+    }
+
+    @PostMapping("/update-stock")
+    public String updateStock(@ModelAttribute EditStockModel model,
+                                     RedirectAttributes redirectAttributes) {
+        stockService.updateStock(model);
+        redirectAttributes.addFlashAttribute("success", "Produto atualizado com sucesso!");
+        return "redirect:/admin/manage-stock";
+    }
+
+    @PostMapping("/use-stock")
+    public String useStock(@RequestParam("id") Long stockId,
+                                     @RequestParam("value") int value,
+                                     RedirectAttributes redirectAttributes) {
+        stockService.useStock(stockId, value);
+        redirectAttributes.addFlashAttribute("success", "Uso registado com sucesso!");
+        return "redirect:/admin/manage-stock";
     }
 
     @PostMapping("/adoptions/{id}/approve")

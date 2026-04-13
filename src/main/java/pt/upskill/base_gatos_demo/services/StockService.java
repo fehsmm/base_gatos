@@ -8,6 +8,7 @@ import pt.upskill.base_gatos_demo.models.EditStockModel;
 import pt.upskill.base_gatos_demo.repositories.StockRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,8 +31,28 @@ public class StockService {
         return lowStockItems;
     }
 
-    public List<Stock> getAllProducts() {
-        return stockRepository.findAll();
+    public List<Stock> getLowStockItems() {
+        List<Stock> lowStockItems = new ArrayList<>();
+        for (Stock item : stockRepository.findAll()) {
+            if(item.isLowStock()) {
+                lowStockItems.add(item);
+            }
+        }
+        return lowStockItems;
+    }
+
+    public List<Stock> getAllProducts(String productTypeFilter, String tagFilter) {
+        List<Stock> allProducts = new ArrayList<>();
+        if((productTypeFilter == null || productTypeFilter.isEmpty()) && (tagFilter == null || tagFilter.isEmpty())) {
+            allProducts = stockRepository.findAll();
+        } else if ((productTypeFilter == null || productTypeFilter.isEmpty()) && tagFilter != null && !tagFilter.isEmpty()) {
+            allProducts = stockRepository.findByTag(tagFilter);
+        } else if (productTypeFilter != null && !productTypeFilter.isEmpty() && tagFilter != null && !tagFilter.isEmpty()) {
+            allProducts = stockRepository.findByProductTypeContainingIgnoreCaseAndTag(productTypeFilter, tagFilter);
+        } else if (productTypeFilter != null && !productTypeFilter.isEmpty() && (tagFilter == null || tagFilter.isEmpty())) {
+            allProducts = stockRepository.findByProductTypeContainingIgnoreCase(productTypeFilter);
+        }
+        return allProducts;
     }
 
     public void updateStock(EditStockModel model) {
@@ -63,11 +84,27 @@ public class StockService {
         stockRepository.save(stock);
     }
 
-    public void removeStock(Long id, int value) {
+    public void useStock(Long id, int value) {
         Stock stock = getById(id);
+        if (value <= 0) {
+            throw new IllegalArgumentException("Valor inválido");
+        }
+        if (stock.getCurrentQuantity() - value < 0) {
+            throw new IllegalArgumentException("Stock insuficiente");
+        }
         stock.setCurrentQuantity(stock.getCurrentQuantity() - value);
         stock.setUpdatedAt(LocalDateTime.now());
         stock.setLowStock(stock.isLowStock());
         stockRepository.save(stock);
+    }
+
+    public List<String> getTags() {
+        List<String> tags = new ArrayList<>();
+        for(Stock stock : stockRepository.findAll()) {
+            if(!tags.contains(stock.getTag())) {
+                tags.add(stock.getTag());
+            }
+        }
+        return tags;
     }
 }
