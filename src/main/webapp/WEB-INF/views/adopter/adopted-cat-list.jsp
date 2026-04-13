@@ -117,11 +117,6 @@
                             </p>
 
 
-                            <a href="/public/cat-profile/${adoption.cat.id}"
-                               class="btn btn-dark w-100 mt-3 rounded-3">
-                                Ver Perfil Completo
-                            </a>
-
                         </div>
                     </div>
 

@@ -57,9 +57,87 @@
     </aside>
 
     <main class="container">
-        <div class="card">
-            <div class="card-header"><h1>Bem-vindo à !</h1></div>
-            <div class="card-body"><p>Ajude-nos a ajudar os gatinhos da comunidade.</p></div>
+        <div class="content">
+
+            <h2>Relatório Pós-Adoção</h2>
+            <p class="text-muted">Partilhe o progresso do seu gato connosco</p>
+
+            <div class="row">
+
+                <div class="col-md-7">
+
+                    <div class="card card-custom p-4">
+
+                        <h5>Novo Relatório</h5>
+
+                        <form action="/adopter/reports" method="post">
+
+                            <div class="mb-3">
+                                <label>Selecione o Gato *</label>
+                                <select class="form-control" name="catId">
+                                    <c:forEach items="${cats}" var="cat">
+                                        <option value="${cat.id}">${cat.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Estado Geral *</label>
+                                <select class="form-control" name="status">
+                                    <option>Excelente</option>
+                                    <option>Bom</option>
+                                    <option>Regular</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Observações *</label>
+                                <textarea class="form-control" name="notes"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Problemas de Saúde</label>
+                                <textarea class="form-control" name="health"></textarea>
+                            </div>
+
+                            <button class="btn btn-primary w-100">Enviar Relatório</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <div class="card card-custom p-4">
+
+                        <h5>Relatórios Anteriores</h5>
+
+                        <c:forEach items="${reports}" var="report">
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="d-flex justify-content-between">
+                                    <b>${report.cat.name}</b>
+                                    <span class="text-muted">${report.date}</span>
+                                </div>
+
+                                <span class="badge badge-status status-excellent">
+                                        ${report.status}
+                                </span>
+
+                                <p class="mt-2">${report.notes}</p>
+
+                            </div>
+
+                        </c:forEach>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </main>
 </div>

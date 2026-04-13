@@ -5,16 +5,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pt.upskill.base_gatos_demo.entities.Adoption;
-import pt.upskill.base_gatos_demo.entities.Cat;
-import pt.upskill.base_gatos_demo.entities.Shift;
-import pt.upskill.base_gatos_demo.entities.User;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
+import pt.upskill.base_gatos_demo.repositories.ReportRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
+import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +30,12 @@ public class AdopterController {
 
     @Autowired
     AdoptionRepository adoptionRepository;
+
+    @Autowired
+    CatRepository catRepository;
+
+    @Autowired
+    ReportRepository reportRepository;
 
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
@@ -67,7 +76,51 @@ public class AdopterController {
     }
 
     @GetMapping(value = "/post-adoption")
-    public String postAdoption(){return "adopter/post-adoption";}
+    public String postAdoption(Model model, Principal principal){
+            User user = userRepository.getUserByUsername(principal.getName());
+
+            List<Adoption> adoptions =
+                    adoptionRepository.findByUserAndStatus(user, "Aprovada");
+
+            List<Cat> cats = new ArrayList<>();
+
+            for (Adoption adoption : adoptions) {
+                cats.add(adoption.getCat());
+            }
+
+            List<Report> reports = reportRepository.findByUser(user);
+
+            model.addAttribute("cats", cats);
+            model.addAttribute("reports", reports);
+
+        return "adopter/post-adoption";
+    }
+
+
+    @PostMapping("/reports")
+    public String submitReport(@RequestParam Long catId,
+                               @RequestParam String status,
+                               @RequestParam String notes,
+                               @RequestParam(required = false) String health,
+                               Principal principal,
+                               RedirectAttributes redirectAttributes) {
+
+        User user = userRepository.getUserByUsername(principal.getName());
+        Cat cat = catRepository.findById(catId).orElse(null);
+
+        Report report = new Report();
+        report.setUser(user);
+        report.setCat(cat);
+        report.setStatus(status);
+        report.setNotes(notes);
+        report.setHealth(health);
+
+        reportRepository.save(report);
+
+        redirectAttributes.addFlashAttribute("success", "Relatório enviado!");
+
+        return "redirect:/adopter/post-adoption";
+    }
 
     //post mapping pos adocao monitoramento
 }
