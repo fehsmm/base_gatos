@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,16 @@ public class Cat {
     private boolean parasiteControl;
     private boolean sterilization;
     private boolean health = isHealthy();
+
+    @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL)
+    private List<MedicationRecord> medications = new ArrayList<>();
+
+    public List<MedicationRecord> getMedications() {
+        return medications;
+    }
+    public void setMedications(List<MedicationRecord> medications) {
+        this.medications = medications;
+    }
 
     public Long getId() {
         return id;

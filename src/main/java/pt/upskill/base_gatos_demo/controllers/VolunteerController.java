@@ -38,6 +38,8 @@ public class VolunteerController {
     CatRepository catRepository;
     @Autowired
     TaskService taskService;
+    @Autowired
+    MedicationRecordService medicationRecordService;
 
     @GetMapping("/")
     public String volunteer(Model model) {
@@ -105,6 +107,7 @@ public class VolunteerController {
         if (!todayShifts.isEmpty()) {
             model.addAttribute("todayShift", todayShifts.get(0));
         }
+        model.addAttribute("activeMedications", medicationRecordService.getAllActiveToday());
         return "volunteer/view-shift";
     }
 

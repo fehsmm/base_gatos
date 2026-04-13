@@ -191,6 +191,9 @@
                                 <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
 
                                     <div class="d-flex gap-2">
+                                        <a href="/admin/medication/${cat.id}" class="btn btn-sm btn-outline-success">
+                                            💊 Medicações
+                                        </a>
                                         <button class="btn btn-sm btn-outline-primary"
                                                 onclick="editCat(this)"
                                                 data-id="${cat.id}"

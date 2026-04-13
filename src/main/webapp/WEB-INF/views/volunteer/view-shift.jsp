@@ -208,6 +208,38 @@
                         </div>
 
                         <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
+                            <c:if test="${not empty activeMedications}">
+                                <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:8px;
+                padding:1rem; margin-bottom:1.5rem;">
+                                    <div style="font-weight:700; color:#dc2626; margin-bottom:0.75rem; font-size:1rem;">
+                                        💊 Medicações para hoje
+                                    </div>
+                                    <c:forEach var="med" items="${activeMedications}">
+                                        <div style="background:white; border-radius:6px; padding:0.75rem;
+                        margin-bottom:0.5rem; border-left:3px solid #dc2626;">
+                                            <div style="font-weight:600; margin-bottom:0.25rem;">
+                                                🐱 ${med.cat.name} — ${med.medicationName}
+                                            </div>
+                                            <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
+                                                Dose: <strong>${med.dose}</strong>
+                                            </div>
+                                            <c:if test="${not empty med.storageLocation}">
+                                                <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
+                                                    📦 Localização: <strong>${med.storageLocation}</strong>
+                                                </div>
+                                            </c:if>
+                                            <div style="font-size:0.85rem; color:#6b7280;">
+                                                Até: ${med.formattedEndDate}
+                                            </div>
+                                            <c:if test="${not empty med.notes}">
+                                                <div style="font-size:0.85rem; color:#dc2626; margin-top:0.25rem;">
+                                                    ⚠️ ${med.notes}
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                             <div class="section-title">Tarefas</div>
                             <c:choose>
                                 <c:when test="${empty todayShift.tasks}">

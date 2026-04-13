@@ -38,6 +38,9 @@ public class DataInitializer {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private MedicationRecordRepository medRepo;
+
 
     @PostConstruct
     public void init() {
@@ -143,6 +146,21 @@ public class DataInitializer {
             t3.setCompleted(false);
             t3.setShift(s4);
             taskRepository.save(t3);
+
+            if (medRepo.count() == 0 && catRepo.count() > 0) {
+                Cat cat = catRepo.findAll().get(0);
+
+                MedicationRecord med1 = new MedicationRecord();
+                med1.setCat(cat);
+                med1.setMedicationName("Lepicortinol");
+                med1.setDose("5mg — 3/4 comprimido");
+                med1.setStorageLocation("Gaveta da Andreia");
+                med1.setStartDate(LocalDate.now().minusDays(3));
+                med1.setEndDate(LocalDate.now().plusDays(10));
+                med1.setNotes("Dar sempre com comida. Confirmar que engoliu.");
+                med1.setCreatedBy("AdminSistema");
+                medRepo.save(med1);
+            }
         }
     }
 
