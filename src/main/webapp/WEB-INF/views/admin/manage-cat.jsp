@@ -113,7 +113,7 @@
                     <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
                         Estado do Gato
                     </label>
-                    <select name="statusFilter" id="statusFilter" class="form-control" value="${param.statusFilter}">
+                    <select name="statusFilter" id="statusFilter" class="form-control">
                         <option value="">Qualquer estado</option>
                         <option value="Disponível">Disponível</option>
                         <option value="Em Processo">Em Processo</option>

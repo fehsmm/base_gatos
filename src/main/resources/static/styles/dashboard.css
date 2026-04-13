@@ -92,6 +92,7 @@ p { color: #4b5563; }
 }
 .card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f3f4f6; }
 .card-body { padding: 1.5rem; }
+.mini-card{display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:1rem;}
 .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 
 /* ---- Badges ---- */
@@ -105,9 +106,10 @@ p { color: #4b5563; }
 .badge-green { background: #dcfce7; color: #166534; }
 .badge-yellow { background: #fef9c3; color: #854d0e; }
 .badge-gray { background: #f3f4f6; color: #4b5563; }
-.badge-orange { background: #ffedd5; color: #c2410c; }
+.badge-red { background: #ffedd5; color: #c2410c; }
 .badge-blue { background: #dbeafe; color: #1e40af; }
 .badge-purple { background: #f3e8ff; color: #6b21a8; }
+.badge-orange { background: #ffecda; color: #fa8500}
 .badge-outline { background: transparent; border: 1.5px solid #d1d5db; color: #6b7280; }
 
 /* ---- Forms ---- */
@@ -355,8 +357,21 @@ tr:hover td { background: #f9fafb; }
 
 /* ===== V3 ADDITIONS ===== */
 .badge-red { background:#fee2e2; color:#991b1b; }
-.stock-card { transition: box-shadow .2s; }
-.stock-card.low-stock { border-color:#fca5a5 !important; }
+.stock-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: white;
+    transition: box-shadow 0.2s;
+}
+
+.stock-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.low-stock {
+    border: 1px solid #fca5a5;
+    background: #fff7f7;
+}
 .priority-urgent { border-color:#fca5a5; background:#fff5f5; }
 .priority-high { border-color:#fdba74; background:#fffbf5; }
 .user-row { display:flex; align-items:center; justify-content:space-between; padding:.85rem 1rem; background:#f9fafb; border-radius:.5rem; margin-bottom:.5rem; flex-wrap:wrap; gap:.75rem; }

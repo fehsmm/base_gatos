@@ -118,7 +118,7 @@
                 <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
                     Prioridade
                 </label>
-                <select name="priorityFilter" id="priorityFilter" class="form-control" value="${param.priorityFilter}">
+                <select name="priorityFilter" id="priorityFilter" class="form-control">
                     <option value="">Todas as prioridades</option>
                     <option value="urgent">Urgente</option>
                     <option value="high">Alta</option>
@@ -212,7 +212,7 @@
 
 <div id="createAnnouncementModal" class="modal-overlay">
 
-    <div class="modal-content">
+    <div class="modal-content" style="height: fit-content">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4>Criar Novo Comunicado</h4>
             <button class="modal-close" onclick="closeModal()">
@@ -264,7 +264,7 @@
 
 <div id="editAnnouncementModal" class="modal-overlay">
 
-    <div class="modal-content">
+    <div class="modal-content" style="height: fit-content">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4>Alterar Detalhes do Comunicado</h4>
             <button class="modal-close" onclick="closeEditModal()">
