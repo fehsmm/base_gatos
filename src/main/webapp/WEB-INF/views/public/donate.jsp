@@ -42,7 +42,7 @@
             <form action="#" method="post" onsubmit="handleDonation(event)">
                 <div class="form-group">
                     <label>Escolha um Valor</label>
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1rem">
+                    <div class="grid donation-amounts" style="gap:.75rem;margin-bottom:1rem">
                         <button type="button" onclick="selectAmount('10')" id="btn10" class="btn btn-outline" style="flex-direction:column;padding:1rem">
                             <span style="font-size:1.5rem;font-weight:700">€10</span>
                         </button>

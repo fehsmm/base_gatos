@@ -20,7 +20,7 @@
             <div class="alert alert-success">${success}</div>
         </c:if>
 
-        <div style="display:grid;grid-template-columns:2fr 1fr;gap:2rem">
+        <div class="grid contact-grid" style="gap:2rem">
             <!-- FORM -->
             <div class="card">
                 <div class="card-header"><strong> Envie-nos uma Mensagem</strong></div>
