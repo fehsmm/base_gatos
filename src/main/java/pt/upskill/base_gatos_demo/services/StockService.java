@@ -3,8 +3,11 @@ package pt.upskill.base_gatos_demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Stock;
+import pt.upskill.base_gatos_demo.models.CreateStockModel;
+import pt.upskill.base_gatos_demo.models.EditStockModel;
 import pt.upskill.base_gatos_demo.repositories.StockRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,25 +34,40 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-    /*public void updateStock(UpdateStockModel model) {
+    public void updateStock(EditStockModel model) {
         Stock stock = getById(model.getId());
-        stock.setQuantity(model.getQuantity());
+        stock.setProductType(model.getProductType());
+        stock.setCurrentQuantity(model.getCurrentQuantity());
+        stock.setStockNote(model.getStockNote());
+        stock.setTag(model.getTag());
+        stock.setMeasureUnit(model.getMeasureUnit());
+        stock.setLowQuantity(model.getLowQuantity());
+        stock.setUpdatedAt(LocalDateTime.now());
+        stock.setLowStock(stock.isLowStock());
         stockRepository.save(stock);
     }
 
-    public void deleteCat(StockModel model) {
-        Stock stock = getById(model.getId());
-        stockRepository.delete(stock);
+    public void deleteStock(Long id) {
+        stockRepository.deleteById(id);
     }
 
-    public void createStock(StockModel model) {
+    public void createStock(CreateStockModel model) {
         Stock stock = new Stock();
-        stock.setName(model.getName());
+        stock.setProductType(model.getProductType());
+        stock.setCurrentQuantity(model.getCurrentQuantity());
+        stock.setLowQuantity(model.getLowQuantity());
+        stock.setStockNote(model.getStockNote());
+        stock.setMeasureUnit(model.getMeasureUnit());
+        stock.setTag(model.getTag());
+        stock.setLowStock(stock.isLowStock());
         stockRepository.save(stock);
     }
 
-    public void addStock(StockModel model) {
-        Stock stock = getById(model.getId());
-        stock.getQuantity();
-    }*/
+    public void removeStock(Long id, int value) {
+        Stock stock = getById(id);
+        stock.setCurrentQuantity(stock.getCurrentQuantity() - value);
+        stock.setUpdatedAt(LocalDateTime.now());
+        stock.setLowStock(stock.isLowStock());
+        stockRepository.save(stock);
+    }
 }

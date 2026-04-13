@@ -93,20 +93,33 @@
         </c:if>
 
             <div>
-                <h3>Filtrar Gatos</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+                    Filtrar Gatos
+                </h3>
             </div>
 
-            <form method="GET" action="/admin/manage-cat" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:center;">
+            <form method="GET" action="/admin/manage-cat" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
 
-                <input type="text" name="nameFilter" id="nameFilter" class="form-control" placeholder="Nome do gato"
-                value="${param.nameFilter}">
+                <div style="display:flex; flex-direction:column; flex: 1">
+                    <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                        Nome do Gato
+                    </label>
+                    <input type="text" name="nameFilter" id="nameFilter" class="form-control" placeholder="Nome do gato"
+                    value="${param.nameFilter}">
+                </div>
 
-                <select name="statusFilter" id="statusFilter" class="form-control">
-                    <option value="">Qualquer estado</option>
-                    <option value="Disponível">Disponível</option>
-                    <option value="Em Processo">Em Processo</option>
-                    <option value="Adotado">Adotado</option>
-                </select>
+                <div style="display:flex; flex-direction:column; flex: 1">
+                    <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                        Estado do Gato
+                    </label>
+                    <select name="statusFilter" id="statusFilter" class="form-control" value="${param.statusFilter}">
+                        <option value="">Qualquer estado</option>
+                        <option value="Disponível">Disponível</option>
+                        <option value="Em Processo">Em Processo</option>
+                        <option value="Adotado">Adotado</option>
+                    </select>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Filtrar</button>
                 <a href="/admin/manage-cat" class="btn btn-secondary">Limpar</a>

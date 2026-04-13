@@ -3,6 +3,8 @@ package pt.upskill.base_gatos_demo.entities;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
+
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -42,6 +44,15 @@ public class Note {
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getFormattedUpdatedAt() {
+        if(updatedAt == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return updatedAt.format(formatter);
+        }
+    }
 
     public boolean isRead() { return read; }
     public void setRead(boolean read) { this.read = read; }

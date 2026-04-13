@@ -75,10 +75,12 @@ public class DataInitializer {
         if (stockRepo.count() == 0) {
             for (int i = 1; i <= 5; i++) {
                 Stock s = new Stock();
-                s.setName("Item " + i);
+                s.setProductType("Item " + i);
                 s.setCurrentQuantity(i * 2);
                 s.setLowQuantity(5);
-                s.setNote("Nota de stock " + i);
+                s.setMeasureUnit("Kg");
+                s.setTag("Alimentação");
+                s.setStockNote("Nota de stock " + i);
                 s.setLowStock(s.isLowStock());
                 stockRepo.save(s);
             }

@@ -1,13 +1,18 @@
 package pt.upskill.base_gatos_demo.models;
 
+import java.time.LocalDateTime;
+
 public class EditStockModel {
 
     private long id;
 
-    private String name;
-    private int quantity;
-    private static int lowStock;
-    private String note;
+    private String productType;
+    private int currentQuantity;
+    private int lowQuantity;
+    private String stockNote; //ver se é preciso/se está no formulário
+    private String measureUnit;
+    private String tag;
+    private LocalDateTime updatedAt;
 
     public long getId() {
         return id;
@@ -17,35 +22,59 @@ public class EditStockModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductType() {
+        return productType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getCurrentQuantity() {
+        return currentQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCurrentQuantity(int currentQuantity) {
+        this.currentQuantity = currentQuantity;
     }
 
-    public String getNote() {
-        return note;
+    public int getLowQuantity() {
+        return lowQuantity;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setLowQuantity(int lowQuantity) {
+        this.lowQuantity = lowQuantity;
     }
 
-    public static int getLowStock() {
-        return lowStock;
+    public String getStockNote() {
+        return stockNote;
     }
 
-    public static void setLowStock(int lowStock) {
-        EditStockModel.lowStock = lowStock;
+    public void setStockNote(String stockNote) {
+        this.stockNote = stockNote;
+    }
+
+    public String getMeasureUnit() {
+        return measureUnit;
+    }
+
+    public void setMeasureUnit(String measureUnit) {
+        this.measureUnit = measureUnit;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

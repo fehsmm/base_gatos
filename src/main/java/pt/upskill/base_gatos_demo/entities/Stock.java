@@ -4,17 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Stock {
     @Id
     @GeneratedValue
     private long id;
 
-    private String name;
+    private String productType;
     private int currentQuantity;
     private int lowQuantity;
-    private String note; //ver se é preciso/se está no formulário
+    private String stockNote; //ver se é preciso/se está no formulário
     private boolean lowStock = isLowStock();
+    private String measureUnit; //litros, kg, sacos, doses, etc.
+    private String tag;
+    private LocalDateTime updatedAt;
 
     public long getId() {
         return id;
@@ -24,20 +29,12 @@ public class Stock {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductType() {
+        return productType;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setProductType(String name) {
+        this.productType = productType;
     }
 
     public int getCurrentQuantity() {
@@ -66,5 +63,37 @@ public class Stock {
 
     public void setLowStock(boolean lowStock) {
         this.lowStock = lowStock;
+    }
+
+    public String getStockNote() {
+        return stockNote;
+    }
+
+    public void setStockNote(String stockNote) {
+        this.stockNote = stockNote;
+    }
+
+    public String getMeasureUnit() {
+        return measureUnit;
+    }
+
+    public void setMeasureUnit(String measureUnit) {
+        this.measureUnit = measureUnit;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

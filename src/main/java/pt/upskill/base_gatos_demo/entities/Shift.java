@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +89,15 @@ public class Shift {
         return endedAt;
     }
 
+    public String getFormattedEndedAt() {
+        if(endedAt == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return endedAt.format(formatter);
+        }
+    }
+
     public void setEndedAt(LocalDateTime endedAt) {
         this.endedAt = endedAt;
     }
@@ -98,6 +108,15 @@ public class Shift {
 
     public void setStartedAt(LocalDateTime startedAt) {
         this.startedAt = startedAt;
+    }
+
+    public String getFormattedStartedAt() {
+        if(startedAt == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return startedAt.format(formatter);
+        }
     }
 
     public List<Note> getNotes() {
