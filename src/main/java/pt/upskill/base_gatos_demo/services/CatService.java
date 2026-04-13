@@ -126,9 +126,14 @@ public class CatService {
         }
 
         if (gender != null && !gender.equals("all")) {
-            boolean isMale = gender.equals("Macho");
+            boolean isMale = gender.equals("male");
             cats = cats.stream()
                     .filter(c -> c.isGender() == isMale)
+                    .toList();
+        }
+        if (status != null && !status.equals("all")) {
+            cats = cats.stream()
+                    .filter(c -> c.getStatus().equals(status))
                     .toList();
         }
         return cats;

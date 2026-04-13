@@ -20,25 +20,33 @@
             <p>Conheça os nossos adoráveis gatos que estão à procura de um lar amoroso</p>
         </div>
 
-        <!-- FILTERS -->
+
         <form action="/public/cat-list" method="get" style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
-            <!-- <div style="flex:1;min-width:200px">
-                <label>Estado de Adoção</label>
-                <select name="status" onchange="this.form.submit()">
-                    <option value="all" ${selectedStatus == 'all' ? 'selected' : ''}>Todos</option>
-                    <option value="Disponível" ${selectedStatus == 'Disponível' ? 'selected' : ''}>Disponível</option>
-                    <option value="Em Processo" ${selectedStatus == 'Em Processo' ? 'selected' : ''}>Em Processo</option>
-                    <option value="Adotado" ${selectedStatus == 'Adotado' ? 'selected' : ''}>Adotado</option>
-                </select>
-            </div> -->
-            <div style="flex:1;min-width:200px">
+
+
+            <div style="flex:1">
                 <label>Género</label>
-                <select name="gender" onchange="this.form.submit()">
+                <select name="gender" onchange="this.form.submit()" style="width: 100%">
                     <option value="all" ${selectedGender == 'all' ? 'selected' : ''}>Todos</option>
                     <option value="Macho" ${selectedGender == 'Macho' ? 'selected' : ''}>Macho</option>
                     <option value="Fêmea" ${selectedGender == 'Fêmea' ? 'selected' : ''}>Fêmea</option>
                 </select>
             </div>
+
+            <c:if test="${currentUser != null && (currentUser.isAdmin() || currentUser.isVolunteer())}">
+                <div style="flex:1">
+                    <label>Estado de Adoção</label>
+                    <select name="status" onchange="this.form.submit()" style="width: 100%">
+                        <option value="all" ${selectedStatus == 'all' ? 'selected' : ''}>Todos</option>
+                        <option value="Disponível" ${selectedStatus == 'Disponível' ? 'selected' : ''}>Disponível
+                        </option>
+                        <option value="Em Processo" ${selectedStatus == 'Em Processo' ? 'selected' : ''}>Em Processo
+                        </option>
+                        <option value="Adotado" ${selectedStatus == 'Adotado' ? 'selected' : ''}>Adotado</option>
+                    </select>
+                </div>
+            </c:if>
+
         </form>
 
         <p class="mb-6 text-gray">
@@ -55,20 +63,23 @@
                 <c:forEach items="${cats}" var="cat">
                     <div class="card cat-card">
                         <div class="cat-card-img-wrapper" style="position:relative;overflow:hidden">
-                            <img src="${cat.image}" alt="${cat.name}" style="width:100%;aspect-ratio:1;object-fit:cover;transition:transform .3s"/>
+                            <img src="${cat.image}" alt="${cat.name}"
+                                 style="width:100%;aspect-ratio:1;object-fit:cover;transition:transform .3s"/>
 
                         </div>
                         <div class="card-body">
                             <div class="cat-card-badge">
                                 <c:choose>
-                                    <c:when test="${cat.status == 'Disponível'}"><span class="badge badge-green">${cat.status}</span></c:when>
-                                    <c:when test="${cat.status == 'Em Processo'}"><span class="badge badge-yellow">${cat.status}</span></c:when>
+                                    <c:when test="${cat.status == 'Disponível'}"><span
+                                            class="badge badge-green">${cat.status}</span></c:when>
+                                    <c:when test="${cat.status == 'Em Processo'}"><span
+                                            class="badge badge-yellow">${cat.status}</span></c:when>
                                     <c:otherwise><span class="badge badge-gray">${cat.status}</span></c:otherwise>
                                 </c:choose>
                             </div>
                             <h3>${cat.name}</h3>
                             <p class="text-sm mb-4">
-                                ${cat.estimatedAge}
+                                    ${cat.estimatedAge}
                                 • ${cat.gender ? 'Macho' : 'Fêmea'}
                                 <br/>${cat.breed}
                             </p>
@@ -83,7 +94,8 @@
                                     <span class="badge badge-outline">${cat.tags}</span>
                                 </c:if>
                             </div>
-                            <a href="/public/cat-profile/${cat.id}" class="btn btn-primary w-full">Ver Perfil Completo</a>
+                            <a href="/public/cat-profile/${cat.id}" class="btn btn-primary w-full">Ver Perfil
+                                Completo</a>
                         </div>
                     </div>
                 </c:forEach>
