@@ -79,10 +79,13 @@ public class PublicController {
         if (cat == null) {
             return "redirect:/public/cat-list";
         }
+        List<Cat> cats = catService.listAllCats("all", "all");
+
+
         model.addAttribute("cat", cat);
         model.addAttribute("currentUser", authService.getAuthenticatedUser());
 
-        List<Cat> cats = catService.listAllCats("all", "all");
+
 
         int index = -1;
         for (int i = 0; i < cats.size(); i++) {
@@ -155,8 +158,19 @@ public class PublicController {
         return "redirect:/public/adoption";
     }
 
-    //post mapping para formulario de doacao
+    @PostMapping("/contact")
+    public String processContact(@RequestParam String name,
+                                 @RequestParam String email,
+                                 @RequestParam String subject,
+                                 @RequestParam String message,
+                                 Model model) {
 
-    //post mapping para formulario de contacto
+        model.addAttribute("success", "Mensagem enviada com sucesso! Entraremos em contacto em breve.");
+        model.addAttribute("currentUser", authService.getAuthenticatedUser());
+        return "public/contact";
+    }
+
+
+
 }
 
