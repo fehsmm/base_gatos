@@ -125,9 +125,15 @@ p { color: #4b5563; }
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
     .hide-mobile { display: none !important; }
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .about-cards { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2rem; }
+    .hero { padding: 3rem 1rem; }
+    .hero p { font-size: 1rem; }
+    .hero-btns { flex-direction: column; }
+    .btn-hero { width: 100%; justify-content: center; }
     .mobile-nav-bar {
         background: #111827;
         padding: 0.75rem 1rem;
@@ -136,7 +142,18 @@ p { color: #4b5563; }
         justify-content: space-between;
         color: white;
     }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    .about-title { font-size: 1.6rem; }
+    .about-paragraph { font-size: 1rem; }
+    .stat-value { font-size: 1.5rem; }
+    .container, .container-sm { padding: 0 1rem; }
+    .page { padding: 1rem; }
+    .about-section { padding: 2rem 0; }
+    h3 { font-size: 1rem; }
+    .footer { padding: 2rem 1rem; }
 }
+
 @media (min-width: 769px) {
     .mobile-nav-bar { display: none; }
 }
@@ -223,11 +240,6 @@ p { color: #4b5563; }
 .card-green  { background-color: #f0fdf4; border-color: #bbf7d0; }
 .card-purple { background-color: #faf5ff; border-color: #e9d5ff; }
 
-@media (max-width: 768px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-}
 
 .cat_gif {
     display: block;

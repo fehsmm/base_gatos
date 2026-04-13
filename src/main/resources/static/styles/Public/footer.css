@@ -56,7 +56,7 @@ p { color: #4b5563; }
     cursor: pointer;
     transition: background-color 0.1s ease;
     display: block;
-    margin-left: 1275px;
+    margin-left: auto;
 }
 .top-btn:hover {
     background-color: #eff6ff;
@@ -64,6 +64,9 @@ p { color: #4b5563; }
 
 @media (max-width: 768px) {
     .grid-3 { grid-template-columns: 1fr; }
+    .footer { padding: 2rem 1rem; }
+    .container { padding: 0 1rem; }
+    .footer-bottom { font-size: 0.75rem; }
     .mobile-nav-bar {
         background: #111827;
         padding: 0.75rem 1rem;

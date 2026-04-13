@@ -16,6 +16,7 @@ body {
 
 /* ---- Typography ---- */
 h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
 h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
 p { color: #4b5563; }
 
@@ -130,7 +131,7 @@ p { color: #4b5563; }
 
 
 /* ---- Table ---- */
-table { width: 100%; border-collapse: collapse; }
+table { display: block; overflow-x: auto;  }
 td { padding: 0.85rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem; vertical-align: middle; }
 tr:hover td { background: #f9fafb; }
 
@@ -148,8 +149,49 @@ tr:hover td { background: #f9fafb; }
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
-    .hide-mobile { display: none !important; }
-    .mobile-nav-bar {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-right {
+        order: -1;
+    }
+
+    .profile-left {
+        margin-top: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    /* ADD */
+    h3 {
+        font-size: 1rem;
+    }
+
+    .container-sm {
+        padding: 0 1rem;
+    }
+
+    .page {
+        padding: 1rem;
+    }
+
+    .footer {
+        padding: 2rem 1rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .mobile-nav-bar { /* ADD */
         background: #111827;
         padding: 0.75rem 1rem;
         display: flex;
@@ -157,28 +199,34 @@ tr:hover td { background: #f9fafb; }
         justify-content: space-between;
         color: white;
     }
-}
-@media (min-width: 769px) {
-    .mobile-nav-bar { display: none; }
-}
 
-/* ---- Profile Layout ---- */
-.profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-}
+    @media (min-width: 769px) {
+        .mobile-nav-bar {
+            display: none;
+        }
+    }
 
-.profile-left {  margin-top: -1rem;}
-.profile-right { }
+    @media (min-width: 769px) {
+        .mobile-nav-bar {
+            display: none;
+        }
+    }
 
-@media (max-width: 768px) {
+    /* ---- Profile Layout ---- */
     .profile-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
     }
+
+    .profile-left {
+        margin-top: 0rem;
+    }
+
     .profile-right {
-        order: -1;
     }
 }
+
+
 
