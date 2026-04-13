@@ -172,38 +172,7 @@ textarea { resize: vertical; }
 .text-center { text-align: center; }
 
 
-/* ---- Responsive ---- */
-@media (max-width: 768px) {
-    .hide-mobile { display: none !important; }
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .requirements-grid { grid-template-columns: 1fr; }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.2rem; }
-    h3 { font-size: 1rem; }
-    .container, .container-sm { padding: 0 1rem; }
-    .page { padding: 1rem; }
-    .footer { padding: 2rem 1rem; }
-    .custom-alert { right: 1rem; left: 1rem; width: auto; }
-    .mobile-nav-bar {
-        background: #111827;
-        padding: 0.75rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: white;
-    }
-}
-@media (min-width: 769px) {
-    .mobile-nav-bar { display: none; }
-}
 
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
 
 .step-1 { background: #fff7ed; border-color: #fed7aa; }
 .step-2 { background: #eff6ff; border-color: #bfdbfe; }
@@ -242,3 +211,35 @@ textarea { resize: vertical; }
     from { opacity: 0; transform: translateY(-10px);}
     to { opacity: 1; transform: translateY(0);}
 }
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .hide-mobile { display: none !important; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .requirements-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1rem; }
+    .container, .container-sm { padding: 0 1rem; }
+    .page { padding: 1rem; }
+    .footer { padding: 2rem 1rem; }
+    .custom-alert { right: 1rem; left: 1rem; width: auto; }
+    .mobile-nav-bar {
+        background: #111827;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+    }
+}
+@media (min-width: 769px) {
+    .mobile-nav-bar { display: none; }
+}
+

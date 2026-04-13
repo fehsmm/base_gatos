@@ -188,6 +188,18 @@ input:focus, select:focus, textarea:focus {
 .text-sm { font-size: 0.875rem; }
 
 
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;}
+
+.card-body .btn-primary {
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+}
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
     .hide-mobile { display: none !important; }
@@ -209,16 +221,4 @@ input:focus, select:focus, textarea:focus {
 }
 @media (min-width: 769px) {
     .mobile-nav-bar { display: none; }
-}
-
-.card-body {
-    padding: 1.5rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;}
-
-.card-body .btn-primary {
-    margin-top: auto;
-    margin-bottom: 0.5rem;
 }

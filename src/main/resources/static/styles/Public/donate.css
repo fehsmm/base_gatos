@@ -167,9 +167,11 @@ textarea { resize: vertical; }
 .text-sm { font-size: 0.875rem; }
 .text-center { text-align: center; }
 
+.donation-amounts { grid-template-columns: repeat(4, 1fr); }
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
+    .donation-amounts { grid-template-columns: repeat(2, 1fr); }
     .hide-mobile { display: none !important; }
     .grid-2 { grid-template-columns: 1fr; }
     h1 { font-size: 1.5rem; }
