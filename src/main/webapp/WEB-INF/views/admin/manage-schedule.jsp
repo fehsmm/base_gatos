@@ -251,7 +251,6 @@
         <form action="/admin/create-shift" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="id"/>
             <h3 class="mb-4">Detalhes do Turno</h3>
             <hr>
 
@@ -495,7 +494,6 @@
     }
 
     function openDeleteModal(id) {
-        console.log("abrir modal", id);
         document.getElementById("deleteShiftId").value = id;
         document.getElementById("deleteModal").classList.add("open");
     }

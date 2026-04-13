@@ -35,13 +35,13 @@ public class CatService {
             cats = catRepository.findTop8ByOrderByArrivalDateDesc();
         } else if ((statusFilter != null && !statusFilter.isEmpty()) && (nameFilter == null ||  nameFilter.isEmpty())) {
             //só status selecionado
-            cats = catRepository.findByStatus(statusFilter);
+            cats = catRepository.findByStatusOrderByArrivalDateDesc(statusFilter);
         } else if ((nameFilter != null && !nameFilter.isEmpty()) && (statusFilter == null || statusFilter.isEmpty())) {
             //só nome selecionado
-            cats = catRepository.findByNameContainingIgnoreCase(nameFilter);
+            cats = catRepository.findByNameContainingIgnoreCaseOrderByArrivalDateDesc(nameFilter);
         } else if((nameFilter != null && !nameFilter.isEmpty()) && (statusFilter != null && !statusFilter.isEmpty())) {
             //ambos selecionados
-            cats = catRepository.findByStatusAndNameContainingIgnoreCase(statusFilter, nameFilter);
+            cats = catRepository.findByStatusAndNameContainingIgnoreCaseOrderByArrivalDateDesc(statusFilter, nameFilter);
         }
         return cats;
     }
@@ -114,15 +114,15 @@ public class CatService {
         List<Cat> cats;
 
         if (user != null && (user.isAdmin() || user.isVolunteer())) {
-            cats = catRepository.findAll();
+            cats = catRepository.findAllByOrderByArrivalDateDesc();
         }
         /*else if (user != null && user.isAdopter()) {
-            List<Cat> available = catRepository.findByStatus("Disponível");
+            List<Cat> available = catRepository.findByStatusOrderByArrivalDateDesc("Disponível");
             List<Cat> adopted = adoptionService.getAdoptedCatsByUser(user);
             cats = new ArrayList<>(available);
             cats.addAll(adopted);
         }*/ else {
-            cats = catRepository.findByStatus("Disponível");
+            cats = catRepository.findByStatusOrderByArrivalDateDesc("Disponível");
         }
 
         if (gender != null && !gender.equals("all")) {

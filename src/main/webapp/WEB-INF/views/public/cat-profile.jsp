@@ -147,11 +147,13 @@
             <div class="profile-left">
 
                 <h1>${cat.name}</h1>
-                <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem">
-                    <c:if test="${not empty cat.tags}">
-                        <span class="badge badge-outline">${cat.tags}</span>
-                    </c:if>
-                </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem">
+                        <c:if test="${not empty cat.tags}">
+                            <c:forEach var="tag" items="${cat.tags}">
+                                <span class="badge badge-outline">${tag}</span>
+                            </c:forEach>
+                        </c:if>
+                    </div>
 
                 <div class="card mb-4">
                     <div class="card-header">

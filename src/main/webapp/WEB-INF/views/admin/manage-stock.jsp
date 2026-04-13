@@ -289,7 +289,6 @@
         <form action="/admin/create-stock" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="id"/>
             <h3 class="mb-4">Detalhes do Produto</h3>
             <hr>
 
@@ -546,7 +545,6 @@
     }
 
     function openDeleteStockModal(id) {
-        console.log("abrir modal", id);
         document.getElementById("deleteStockId").value = id;
         document.getElementById("deleteStockModal").classList.add("open");
     }

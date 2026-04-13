@@ -250,17 +250,16 @@
         <form action="/admin/create-cat" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="id"/>
 
             <div class="mb-4">
                 <h5 style="font-weight:600;">Informação Básica</h5>
                 <hr style="margin-top:4px;">
             </div>
 
-            <div class="mb-3">
+            <!--<div class="mb-3">
                 <label>Foto</label>
                 <input type="file" name="image" id="image" class="form-control-file">
-            </div>
+            </div>-->
 
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
@@ -306,7 +305,7 @@
 
             <div class="mb-3">
                 <label>Descrição</label>
-                <input type="text" name="description" id="description" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
+                <input type="text" name="description" id="description" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas">
             </div>
 
             <div class="mt-4">
@@ -415,10 +414,10 @@
                 <hr style="margin-top:4px;">
             </div>
 
-            <div class="mb-3">
+            <!--<div class="mb-3">
                 <label>Foto</label>
                 <input type="file" name="image" id="editImage" class="form-control-file">
-            </div>
+            </div>-->
 
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
@@ -464,7 +463,7 @@
 
             <div class="mb-3">
                 <label>Descrição</label>
-                <input type="text" name="description" id="editDescription" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas" required>
+                <input type="text" name="description" id="editDescription" class="form-control" placeholder="Ex: Dá-se bem com outros gatos, mas tem medo de pessoas">
             </div>
 
             <div class="mt-4">
@@ -657,7 +656,6 @@
     }
 
     function openDeleteModal(id) {
-        console.log("abrir modal", id);
         document.getElementById("deleteCatId").value = id;
         document.getElementById("deleteModal").classList.add("open");
     }

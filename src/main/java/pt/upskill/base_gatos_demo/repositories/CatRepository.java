@@ -11,13 +11,17 @@ import java.util.List;
 public interface CatRepository extends JpaRepository<Cat,Long> {
 
     List<Cat> findByName(String name);
-    List<Cat> findByNameContainingIgnoreCase(String name);
+    List<Cat> findByNameContainingIgnoreCaseOrderByArrivalDateDesc(String name);
     List<Cat> findByStatus(String status);
-    List<Cat> findByStatusAndNameContainingIgnoreCase(String status, String name);
+    List<Cat> findByStatusAndNameContainingIgnoreCaseOrderByArrivalDateDesc(String status, String name);
 
     List<Cat> findByStatusAndGender(String status, boolean gender);
 
     List<Cat> findTop8ByOrderByArrivalDateDesc();
+
+    List<Cat> findAllByOrderByArrivalDateDesc();
+
+    List<Cat> findByStatusOrderByArrivalDateDesc(String status);
 
     List<Cat> findByGender(boolean gender);
 
