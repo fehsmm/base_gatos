@@ -127,6 +127,15 @@ public class PublicController {
         User user = userRepository.getUserByUsername(principal.getName());
         Cat cat = catRepository.findById(adoptionForm.getCatId()).orElse(null);
 
+        List<Adoption> find = adoptionRepository.findByUserAndCat(user, cat);
+
+        for(Adoption adoption : find){
+            if("Pendente".equals(adoption.getStatus()) || "Aprovada".equals(adoption.getStatus())){
+                redirectAttributes.addFlashAttribute("error", "Já submeteram candidatura a este gato!");
+                return "redirect:/public/adoption";
+            }
+        }
+
 
         Adoption adoption = new Adoption();
         adoption.setUser(user);

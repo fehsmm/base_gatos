@@ -99,6 +99,10 @@
                 <div class="card shadow-sm border-0 rounded-4 h-100">
                     <div class="card-header"><h2 class="fw-bold mb-0">${adoption.applicantName}</h2></div>
                     <div class="card-body">
+                        <img src="${adoption.cat.image}"
+                             class="card-img-top"
+                             style="height:200px; object-fit:cover;">
+                            <h4 class="fw-bold">${adoption.cat.name}</h4>
                         <div class="row text-center">
                             <div class="col-md-6 mb-3">
                                 <p><b>Razão</b></p>

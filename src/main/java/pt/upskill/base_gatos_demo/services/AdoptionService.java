@@ -28,16 +28,15 @@ public class AdoptionService {
 
     public void approveAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow();
+        Cat cat = adoption.getCat();
 
         adoption.setStatus("Aprovada");
         adoption.setReviewDate(LocalDateTime.now());
         adoption.setAdoptionDate(LocalDate.now());
         adoptionRepository.save(adoption);
 
-        Cat cat = adoption.getCat();
         cat.setStatus("Adotado");
         catRepository.save(cat);
-
 
     }
 
