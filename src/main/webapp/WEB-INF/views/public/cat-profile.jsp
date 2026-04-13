@@ -175,7 +175,7 @@
                                     </c:choose>
                                 </td></tr>
                             <tr><td style="color:#6b7280;padding:.4rem 0">Data de Chegada:</td>
-                                <td style="text-align:right;font-weight:500"><fmt:formatDate value="${cat.arrivalDate}" pattern="dd/MM/yyyy"/></td></tr>
+                                <td style="text-align:right;font-weight:500">${cat.formattedArrivalDate}</td></tr>
                         </table>
                     </div>
                 </div>
