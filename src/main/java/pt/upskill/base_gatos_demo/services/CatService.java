@@ -126,7 +126,7 @@ public class CatService {
         }
 
         if (gender != null && !gender.equals("all")) {
-            boolean isMale = gender.equals("male");
+            boolean isMale = gender.equals("Macho");
             cats = cats.stream()
                     .filter(c -> c.isGender() == isMale)
                     .toList();
