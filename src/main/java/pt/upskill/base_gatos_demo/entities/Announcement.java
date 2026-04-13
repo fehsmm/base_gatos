@@ -59,7 +59,7 @@ public class Announcement {
 
     public String getFormattedCreatedAt() {
         if(createdAt == null) {
-            return "--/--/----";
+            return "Sem data.";
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
             return createdAt.format(formatter);
@@ -80,7 +80,7 @@ public class Announcement {
 
     public String getFormattedUpdatedAt() {
         if(updatedAt == null) {
-            return "--/--/----";
+            return "Sem data.";
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
             return updatedAt.format(formatter);

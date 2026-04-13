@@ -98,7 +98,7 @@ public class Cat {
 
     public String getFormattedArrivalDate() {
         if(arrivalDate == null) {
-            return "--/--/----";
+            return "Sem data.";
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             return arrivalDate.format(formatter);
