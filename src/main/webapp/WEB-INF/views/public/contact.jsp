@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-header"><strong> Envie-nos uma Mensagem</strong></div>
                 <div class="card-body">
-                    <form action="/contacto" method="post">
+                    <form action="/public/contact" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <div class="grid grid-2" style="gap:1rem">
                             <div class="form-group"><label>Nome *</label><input type="text" name="name" required placeholder="O seu nome"/></div>
