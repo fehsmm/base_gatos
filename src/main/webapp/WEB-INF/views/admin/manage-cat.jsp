@@ -192,7 +192,9 @@
 
                                     <div class="d-flex gap-2">
                                         <a href="/admin/medication/${cat.id}" class="btn btn-sm btn-outline-success">
-                                            💊 Medicações
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
+                                                <path d="M420-420v120h-80v-120H220v-80h120v-120h80v120h120v80H420Zm60 300q-42 0-71-29t-29-71v-520q0-42 29-71t71-29h340q42 0 71 29t29 71v520q0 42-29 71t-71 29H480Zm0-80h340v-520H480v520ZM140-160q-42 0-71-29t-29-71v-600h80v600h600v80H140Zm340-440Z"/>
+                                            </svg> Medicações
                                         </a>
                                         <button class="btn btn-sm btn-outline-primary"
                                                 onclick="editCat(this)"

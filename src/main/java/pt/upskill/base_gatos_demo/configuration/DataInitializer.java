@@ -27,8 +27,8 @@ public class DataInitializer {
     @Autowired
     private StockRepository stockRepo;
 
-    @Autowired                          // NOVO
-    private ShiftRepository shiftRepo;  // NOVO
+    @Autowired
+    private ShiftRepository shiftRepo;
 
     @Autowired
     private CatRepository catRepo;
