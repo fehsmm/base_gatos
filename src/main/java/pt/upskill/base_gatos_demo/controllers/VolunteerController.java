@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pt.upskill.base_gatos_demo.entities.Announcement;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.Shift;
 import pt.upskill.base_gatos_demo.entities.User;
@@ -112,9 +113,11 @@ public class VolunteerController {
     }
 
     @GetMapping("/manage-cat")
-    public String manageCat(Model model) {
+    public String manageCat(Model model,
+                            @RequestParam(required = false) String nameFilter,
+                            @RequestParam(required = false) String statusFilter) {
         model.addAttribute("user", authService.getAuthenticatedUser());
-        model.addAttribute("cats", catService.listAllCats("all", "all"));
+        model.addAttribute("cats", catService.listAllCats(statusFilter, "all"));
         return "volunteer/manage-cat";
     }
 
@@ -126,9 +129,21 @@ public class VolunteerController {
     }
 
     @GetMapping("/view-announcement")
-    public String viewAnnouncement(Model model) {
+    public String viewAnnouncement(Model model,
+                                   @RequestParam(required = false) String priorityFilter,
+                                   @RequestParam(required = false) String dateStartFilter,
+                                   @RequestParam(required = false) String dateEndFilter) {
+
         model.addAttribute("user", authService.getAuthenticatedUser());
-        model.addAttribute("announcements", announcementService.findAll());
+
+        LocalDate startDate = (dateStartFilter != null && !dateStartFilter.isEmpty())
+                ? LocalDate.parse(dateStartFilter) : null;
+        LocalDate endDate = (dateEndFilter != null && !dateEndFilter.isEmpty())
+                ? LocalDate.parse(dateEndFilter) : null;
+
+        model.addAttribute("announcements",
+                announcementService.getAnnouncements(startDate, endDate, priorityFilter));
+
         return "volunteer/view-announcement";
     }
 

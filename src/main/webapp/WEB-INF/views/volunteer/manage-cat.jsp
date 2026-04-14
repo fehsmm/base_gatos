@@ -1,15 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Base de Gatos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Gatos | MEG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
-
 <body>
 <div class="admin-layout">
 
@@ -44,8 +42,7 @@
             <a href="/volunteer/manage-cat" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                      fill="white">
-                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
-                </svg>
+                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
                 Gatos</a>
             <a href="/volunteer/request-stock">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -98,56 +95,78 @@
 
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">
-            <div class="mb-4">
-                <div class="page-title"
-                     style="font-size: 2rem; text-align: left; margin-bottom: 0.25rem; font-weight: bold;">
-                    Gatos
-                </div>
-                <div class="page-subtitle">Lista de todos os gatos do abrigo.</div>
 
-                <c:choose>
-                    <c:when test="${empty cats}">
-                        <div class="panel text-center" style="margin-top:1rem;">
-                            Não há gatos registados no abrigo.
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="row g-3 mt-2">
+            <div class="page-title" style="font-size:2rem; font-weight:bold; margin-bottom:0.25rem;">
+                Gatos
+            </div>
+            <div class="page-subtitle" style="margin-bottom:1.5rem;">
+                Lista de todos os gatos do abrigo.
+            </div>
+
+            <form method="GET" action="/volunteer/manage-cat"
+                  style="display:flex; gap:0.75rem; margin-bottom:1.5rem; max-width:500px;">
+                <input type="text" name="nameFilter" value="${param.nameFilter}"
+                       class="form-control" placeholder="Pesquisar por nome">
+                <select name="statusFilter" class="form-control">
+                    <option value="">Todos os estados</option>
+                    <option value="Disponível" ${param.statusFilter == 'Disponível' ? 'selected' : ''}>Disponível</option>
+                    <option value="Em Processo" ${param.statusFilter == 'Em Processo' ? 'selected' : ''}>Em Processo</option>
+                    <option value="Adotado" ${param.statusFilter == 'Adotado' ? 'selected' : ''}>Adotado</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a href="/volunteer/manage-cat" class="btn btn-secondary">Limpar</a>
+            </form>
+
+            <div class="card">
+                <div class="card-body">
+                    <c:choose>
+                        <c:when test="${empty cats}">
+                            <div style="color:#9ca3af; text-align:center; padding:1rem;">
+                                Nenhum gato encontrado.
+                            </div>
+                        </c:when>
+                        <c:otherwise>
                             <c:forEach var="cat" items="${cats}">
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="panel h-100">
-                                        <c:if test="${not empty cat.image}">
+                                <div style="display:flex; align-items:center; gap:1rem;
+                                            padding:0.75rem 1rem; border-bottom:1px solid #f3f4f6;">
+                                    <c:choose>
+                                        <c:when test="${not empty cat.image}">
                                             <img src="${cat.image}" alt="${cat.name}"
-                                                 style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem;">
-                                        </c:if>
-                                        <div style="font-weight:600;font-size:1.1rem;">${cat.name}</div>
-                                        <div style="color:#9ca3af;font-size:0.85rem;margin-bottom:0.75rem;">
-                                                ${cat.estimatedAge} &nbsp;•&nbsp;
-                                            <c:choose>
-                                                <c:when test="${cat.gender}">Macho</c:when>
-                                                <c:otherwise>Fêmea</c:otherwise>
-                                            </c:choose>
-                                            &nbsp;•&nbsp;
-                                            <span class="badge ${cat.status == 'Disponível' ? 'badge-green' : (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
-                                                    ${cat.status}
-                                            </span>
+                                                 style="width:40px; height:40px; border-radius:50%; object-fit:cover;"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div style="width:40px; height:40px; border-radius:50%;
+                                                        background:#e5e7eb; display:flex; align-items:center;
+                                                        justify-content:center; font-size:1.2rem;"><img src="/icons/cat.svg" width="20px" height="20px"/></div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                    <div style="flex:1;">
+                                        <div style="font-weight:600;">${cat.name}</div>
+                                        <div style="font-size:0.85rem; color:#9ca3af;">
+                                                ${cat.estimatedAge} • ${cat.gender ? 'Macho' : 'Fêmea'} • ${cat.breed}
                                         </div>
-                                        <a href="/public/cat-profile/${cat.id}" class="btn btn-primary btn-sm">
-                                            Ver Perfil
-                                        </a>
                                     </div>
+
+                                    <span class="badge
+                                        ${cat.status == 'Disponível' ? 'badge-green' :
+                                        (cat.status == 'Em Processo' ? 'badge-yellow' : 'badge-gray')}">
+                                            ${cat.status}
+                                    </span>
+
+                                    <a href="/public/cat-profile/${cat.id}"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Ver Perfil
+                                    </a>
                                 </div>
                             </c:forEach>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
         </div>
     </main>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

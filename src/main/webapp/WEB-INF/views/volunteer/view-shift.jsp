@@ -98,7 +98,7 @@
             <div id="modalNoteAnterior" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%;
              background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center;">
                 <div style="background:white; border-radius:12px; padding:2rem; width:100%; max-width:500px; margin:1rem; max-height:80vh; overflow-y:auto;">
-                    <div style="font-weight:600; font-size:1.2rem; margin-bottom:0.25rem;"><img src="/icons/notes.svg" width="20px" height="20px"/> Nota do turno anterior
+                    <div style="font-weight:600; font-size:1.2rem; margin-bottom:0.25rem;"><img src="/icons/noteicon.svg" width="20px" height="20px"/> Nota do turno anterior
                     </div>
                     <div style="color:#9ca3af; font-size:0.8rem; margin-bottom:1.5rem;">Lê antes de iniciar o teu
                         turno
@@ -117,7 +117,7 @@
                     <form action="/volunteer/read-note/${previousNote.shift.id}" method="POST">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button type="submit" class="btn btn-primary" style="width:100%;">
-                            <img src="/icons/checkmark.svg" width="20px" height="20px"/> Li e compreendi — Iniciar turno
+                            <img src="/icons/checkicon.svg" width="20px" height="20px"/> Li e compreendi — Iniciar turno
                         </button>
                     </form>
                 </div>
@@ -151,8 +151,8 @@
                             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
                                 <div>
                                     <div style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
-                                        <img src="/icons/calendar.svg" width="20px" height="20px"/> ${todayShift.date}</div>
-                                    <div style="color:#9ca3af; font-size:0.9rem;"><img src="/icons/Time.svg" width="20px" height="20px"/> ${todayShift.startTime}
+                                        <img src="/icons/calendaricon.svg" width="20px" height="20px"/> ${todayShift.date}</div>
+                                    <div style="color:#9ca3af; font-size:0.9rem;"><img src="/icons/clock.svg" width="20px" height="20px"/> ${todayShift.startTime}
                                         — ${todayShift.endTime}</div>
                                 </div>
                                 <c:choose>
@@ -188,7 +188,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div style="color:#16a34a; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
-                                        <img src="/icons/checkmark.svg" width="20px" height="20px"/> Turno iniciado às ${todayShift.startedAt}
+                                        <img src="/icons/checkicon.svg" width="20px" height="20px"/> Turno iniciado às ${todayShift.startedAt}
                                     </div>
                                 </c:otherwise>
                             </c:choose>
@@ -212,24 +212,20 @@
                                 <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:8px;
                 padding:1rem; margin-bottom:1.5rem;">
                                     <div style="font-weight:700; color:#dc2626; margin-bottom:0.75rem; font-size:1rem;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                                            <path d="M420-420v120h-80v-120H220v-80h120v-120h80v120h120v80H420Zm60 300q-42 0-71-29t-29-71v-520q0-42 29-71t71-29h340q42 0 71 29t29 71v520q0 42-29 71t-71 29H480Zm0-80h340v-520H480v520ZM140-160q-42 0-71-29t-29-71v-600h80v600h600v80H140Zm340-440Z"/>
-                                        </svg> Medicações para hoje
+                                        <img src="/icons/medicine.svg" width="20px" height="20px"/> Medicações para hoje
                                     </div>
                                     <c:forEach var="med" items="${activeMedications}">
                                         <div style="background:white; border-radius:6px; padding:0.75rem;
                         margin-bottom:0.5rem; border-left:3px solid #dc2626;">
                                             <div style="font-weight:600; margin-bottom:0.25rem;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                                                    <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Z"/>
-                                                </svg> ${med.cat.name} — ${med.medicationName}
+                                                <img src="/icons/cat.svg" width="20px" height="20px"/> ${med.cat.name} — ${med.medicationName}
                                             </div>
                                             <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
                                                 Dose: <strong>${med.dose}</strong>
                                             </div>
                                             <c:if test="${not empty med.storageLocation}">
                                                 <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
-                                                    <img src="/icons/stock.svg" width="20px" height="20px"/> Localização: <strong>${med.storageLocation}</strong>
+                                                    <img src="/icons/box.svg" width="20px" height="20px"/> Localização: <strong>${med.storageLocation}</strong>
                                                 </div>
                                             </c:if>
                                             <div style="font-size:0.85rem; color:#6b7280;">
@@ -237,9 +233,7 @@
                                             </div>
                                             <c:if test="${not empty med.notes}">
                                                 <div style="font-size:0.85rem; color:#dc2626; margin-top:0.25rem;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                                                        <path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/>
-                                                    </svg> ${med.notes}
+                                                    <img src="/icons/noteicon.svg" width="20px" height="20px"/> ${med.notes}
                                                 </div>
                                             </c:if>
                                         </div>

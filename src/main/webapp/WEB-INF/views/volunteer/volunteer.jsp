@@ -109,7 +109,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="/volunteer/view-schedule" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📅</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/calendaricon.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">As Minhas Escalas</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Consulta os teus turnos agendados e anteriores.
@@ -124,7 +124,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="/volunteer/view-shift" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">✅</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/checkicon.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Turno Atual</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Vê as tarefas do turno em curso e marca as concluídas.
@@ -136,7 +136,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="/volunteer/view-announcement" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📢</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/megaphone.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Comunicados</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Acompanha os avisos e informações importantes do MEG.
@@ -148,7 +148,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="/volunteer/request-stock" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📦</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/box.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Pedido de Stock</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Regista materiais em falta para reposição.
@@ -158,9 +158,9 @@
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-4">
-                        <a href="/volunteer/leave-shift-note" style="text-decoration:none;">
+                        <a href="/volunteer/shift-report" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">📝</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/noteicon.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Notas do Turno</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Deixa observações para o próximo voluntário.
@@ -172,7 +172,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="/volunteer/manage-cat" style="text-decoration:none;">
                             <div class="panel h-100" style="cursor:pointer;">
-                                <div style="font-size:1.5rem; margin-bottom:0.5rem;">🐱</div>
+                                <div style="font-size:1.5rem; margin-bottom:0.5rem;"><img src="/icons/cat.svg" width="20px" height="20px"/></div>
                                 <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">Gatos</div>
                                 <div style="color:#9ca3af; font-size:0.85rem;">
                                     Consulta a lista de gatos.
