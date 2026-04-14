@@ -88,9 +88,12 @@
 
                 <div style="margin-left:auto; display:flex; flex-direction:column; gap:0.5rem; align-items: flex-end;">
                     <button class="btn btn-dark ms-auto" onclick="document.getElementById('modalAdd').style.display='flex'">
-                        + Nova Medicação
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                        Nova Medicação
                     </button>
-                    <a href="/admin/manage-cat" class="btn btn-secondary btn-sm">← Voltar</a>
+                    <a href="/admin/manage-cat" class="btn btn-secondary btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" width="15px" fill="white"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+                        Voltar</a>
                 </div>
             </div>
 
@@ -155,16 +158,28 @@
                                             </div>
                                         </div>
 
-                                        <form action="/admin/medication/delete/${med.id}" method="POST">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('Apagar esta medicação?')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="20px"
-                                                     viewBox="0 -960 960 960" width="20px" fill="#1f1f1f">
-                                                    <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                                                </svg>
-                                            </button>
-                                        </form>
+                                        <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
+
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="editModal(this)"
+                                                        data-id="${med.id}"
+                                                        data-medicationName="${med.medicationName}"
+                                                        data-dose="${med.dose}"
+                                                        data-storageLocation="${med.storageLocation}"
+                                                        data-startDate="${med.startDate}"
+                                                        data-endDate="${med.endDate}"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
+                                                </button>
+
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="openDeleteModal(${med.id})">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -182,7 +197,9 @@
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
             <h4>Nova Medicação — ${cat.name}</h4>
             <button class="modal-close"
-                    onclick="document.getElementById('modalAdd').style.display='none'">✕</button>
+                    onclick="document.getElementById('modalAdd').style.display='none'">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
         </div>
 
         <form action="/admin/medication/create" method="POST">
