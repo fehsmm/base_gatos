@@ -122,7 +122,7 @@
             </h3>
         </div>
 
-        <form method="GET" action="/admin/post-announcement" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
+        <form method="GET" action="/admin/manage-application" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
 
             <div style="display:flex; flex-direction:column; flex: 1">
                 <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
@@ -140,7 +140,7 @@
 
             <div style="display:flex; flex-direction:column; flex: 1">
                 <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
-                    Estado
+                    Estado da Candidatura
                 </label>
                 <select name="statusFilter" id="statusFilter" class="form-control">
                     <option value="">Todas as candidaturas</option>
@@ -149,10 +149,31 @@
                 </select>
             </div>
 
+            <div style="display:flex; align-items:center; height:38px;">
+            <label style="display:flex; align-items:center; gap:.5rem; margin:0; white-space:nowrap; font-size:0.95rem;">
+                    <input type="checkbox" name="unreadFilter" id="unreadFilter" value="true"
+                    ${param.unreadFilter == 'true' ? 'checked' : ''}>
+                    Não lidas
+                </label>
+            </div>
+
             <button type="submit" class="btn btn-primary">Filtrar</button>
             <a href="/admin/manage-application" class="btn btn-secondary">Limpar</a>
 
         </form>
+
+        <div style="gap:1rem; margin-bottom:1.5rem;">
+            <div class="card">
+
+                <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                    <strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>
+                        Candidaturas
+                    </strong>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 
