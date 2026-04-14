@@ -69,7 +69,8 @@ public class VolunteerController {
         User user = authService.getAuthenticatedUser();
         model.addAttribute("user", user);
         LocalDate today = LocalDate.now();
-        List<Shift> allShifts = shiftService.getShifts(null);
+
+        List<Shift> allShifts = shiftService.getAllShifts();
 
         List<Shift> upcomingShifts = allShifts.stream()
                 .filter(s -> !s.getDate().isBefore(today))
@@ -159,7 +160,7 @@ public class VolunteerController {
         model.addAttribute("user", authService.getAuthenticatedUser());
         LocalDate today = LocalDate.now();
 
-        List<Shift> allPastShifts = shiftService.getShifts(null).stream()
+        List<Shift> allPastShifts = shiftService.getAllShifts().stream()
                 .filter(s -> !s.getDate().isAfter(today))
                 .filter(s -> s.getEndedAt() != null)
                 .sorted(Comparator.comparing(Shift::getDate).reversed())
@@ -198,6 +199,13 @@ public class VolunteerController {
     public String saveNote(@PathVariable Long id,
                            @RequestParam String summary,
                            @RequestParam String importantObservations) {
+        User user = authService.getAuthenticatedUser();
+        Shift shift = shiftService.getById(id);
+
+        if (!shift.getVolunteers().contains(user)) {
+            return "redirect:/volunteer/view-shift";
+        }
+
         noteService.saveNote(id, summary, importantObservations);
         return "redirect:/volunteer/view-shift";
     }
