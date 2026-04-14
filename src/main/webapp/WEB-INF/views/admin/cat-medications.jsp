@@ -78,24 +78,20 @@
         <main class="admin-main">
         <div style="padding:1.5rem">
 
-            <%-- CABEÇALHO --%>
             <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
-                <a href="/admin/manage-cat" class="btn btn-secondary btn-sm">← Voltar</a>
-                <c:if test="${not empty cat.image}">
-                    <img src="${cat.image}" alt="${cat.name}"
-                         style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
-                </c:if>
                 <div>
-                    <h1 style="margin:0; font-size:1.5rem;"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                        <path d="M420-420v120h-80v-120H220v-80h120v-120h80v120h120v80H420Zm60 300q-42 0-71-29t-29-71v-520q0-42 29-71t71-29h340q42 0 71 29t29 71v520q0 42-29 71t-71 29H480Zm0-80h340v-520H480v520ZM140-160q-42 0-71-29t-29-71v-600h80v600h600v80H140Zm340-440Z"/>
-                    </svg> Medicações — ${cat.name}</h1>
-                    <p style="margin:0; color:#9ca3af; font-size:0.85rem;">
-                        Gerir medicações ativas e histórico clínico
-                    </p>
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M345-120q-94 0-159.5-65.5T120-345q0-45 17-86t49-73l270-270q32-32 73-49t86-17q94 0 159.5 65.5T840-615q0 45-17 86t-49 73L504-186q-32 32-73 49t-86 17Zm266-286 107-106q20-20 31-47t11-56q0-60-42.5-102.5T615-760q-29 0-56 11t-47 31L406-611l205 205ZM345-200q29 0 56-11t47-31l106-107-205-205-107 106q-20 20-31 47t-11 56q0 60 42.5 102.5T345-200Z"/></svg>                        Medicações — ${cat.name}
+                    </h1>
+                    <p>Gerir medicações ativas e histórico clínico</p>
                 </div>
-                <button class="btn btn-dark ms-auto" onclick="document.getElementById('modalAdd').style.display='flex'">
-                    + Nova Medicação
-                </button>
+
+                <div style="margin-left:auto; display:flex; flex-direction:column; gap:0.5rem; align-items: flex-end;">
+                    <button class="btn btn-dark ms-auto" onclick="document.getElementById('modalAdd').style.display='flex'">
+                        + Nova Medicação
+                    </button>
+                    <a href="/admin/manage-cat" class="btn btn-secondary btn-sm">← Voltar</a>
+                </div>
             </div>
 
                 <c:if test="${success != null}">
@@ -148,10 +144,9 @@
                                             </div>
 
                                             <c:if test="${not empty med.notes}">
-                                                <div style="font-size:0.85rem; color:#dc2626; margin-top:0.5rem;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                                                        <path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/>
-                                                    </svg> ${med.notes}
+                                                    <div style="font-size:0.85rem; color:#ff911c; margin-top:0.5rem;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" width="15px" fill="orange"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                                        ${med.notes}
                                                 </div>
                                             </c:if>
 
@@ -182,7 +177,6 @@
     </main>
 </div>
 
-<%-- MODAL ADICIONAR MEDICAÇÃO --%>
 <div id="modalAdd" class="modal-overlay">
     <div class="modal-content">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">

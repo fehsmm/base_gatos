@@ -196,6 +196,7 @@
                                                 <path d="M420-420v120h-80v-120H220v-80h120v-120h80v120h120v80H420Zm60 300q-42 0-71-29t-29-71v-520q0-42 29-71t71-29h340q42 0 71 29t29 71v520q0 42-29 71t-71 29H480Zm0-80h340v-520H480v520ZM140-160q-42 0-71-29t-29-71v-600h80v600h600v80H140Zm340-440Z"/>
                                             </svg> Medicações
                                         </a>
+
                                         <button class="btn btn-sm btn-outline-primary"
                                                 onclick="editCat(this)"
                                                 data-id="${cat.id}"
