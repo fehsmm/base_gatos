@@ -39,7 +39,7 @@ public class Adoption {
     private LocalDateTime requestDate = LocalDateTime.now();
     private LocalDate adoptionDate;
     private LocalDateTime ReviewDate;
-    private boolean read = isRead();
+    private boolean read;
 
 
     public Long getId() {
@@ -148,14 +148,14 @@ public class Adoption {
     }
 
     public boolean isRead() {
-        if(ReviewDate == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return read;
     }
 
     public void setRead(boolean read) {
-        this.read = read;
+        if(ReviewDate == null) {
+            read = false;
+        } else {
+            read = true;
+        }
     }
 }

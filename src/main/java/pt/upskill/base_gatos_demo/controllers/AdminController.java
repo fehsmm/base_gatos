@@ -67,9 +67,9 @@ public class AdminController {
                                     @RequestParam (required = false) LocalDate dateEndFilter,
                                     @RequestParam (required = false) String statusFilter,
                                     @RequestParam (required = false) Boolean unreadFilter){
-            List<Adoption> adoptions = adoptionService.getAdoptions(dateStartFilter, dateEndFilter, statusFilter, unreadFilter);
+            List<Adoption> adoptionApps = adoptionService.getAdoptions(dateStartFilter, dateEndFilter, statusFilter, unreadFilter);
             int pendingAdoptions = adoptionService.countPendingAdoptions();
-            model.addAttribute("adoptions", adoptions);
+            model.addAttribute("adoptionApps", adoptionApps);
             model.addAttribute("pendingAdoptions", pendingAdoptions);
             return "admin/manage-application";
     }

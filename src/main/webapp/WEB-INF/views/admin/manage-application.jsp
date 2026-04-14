@@ -173,7 +173,12 @@
                 </div>
 
                 <div class="card-body">
-
+                    <c:forEach var="app" items="${adoptionApps}">
+                        <span class="badge
+                            ${!app.read ? 'badge-blue' : 'badge-gray'}">
+                                ${!app.read ? 'Nova Candidatura' : 'Lida'}
+                        </span>
+                    </c:forEach>
                 </div>
 
             </div>
@@ -182,9 +187,12 @@
     </div>
 
     <div class="container">
-        <c:forEach items="${adoptions}" var="adoption">
+        <c:forEach items="${adoptionApps}" var="adoption">
                 <div class="card shadow-sm border-0 rounded-4 h-100">
-                    <div class="card-header"><h2 class="fw-bold mb-0">${adoption.applicantName}</h2></div>
+                    <div class="card-header">
+                        <h2 class="fw-bold mb-0">${adoption.applicantName}</h2>
+                    </div>
+
                     <div class="card-body">
                         <img src="${adoption.cat.image}"
                              class="card-img-top"
