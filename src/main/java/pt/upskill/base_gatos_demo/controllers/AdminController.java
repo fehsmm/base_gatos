@@ -154,10 +154,12 @@ public class AdminController {
         int availableCats = catService.countAvailableCats();
         int adoptedCats = catService.countAdoptedCats();
         int allCats = catService.countAllCats();
+        int inProcessCats = catService.countCatsInAdoptionProcess();
         model.addAttribute("cats", cats);
         model.addAttribute("availableCats", availableCats);
         model.addAttribute("adoptedCats", adoptedCats);
         model.addAttribute("allCats", allCats);
+        model.addAttribute("inProcessCats", inProcessCats);
         return "admin/manage-cat";
     }
 

@@ -136,43 +136,68 @@
                     <h3>
                         <c:out value="${availableCats}" />
                     </h3>
-                    <p class="text-muted">Disponíveis</p>
+                    <p class="text-muted">Gatos Disponíveis</p>
                 </div>
 
                 <div class="card" style="flex:1; text-align:center; padding:1rem;">
                     <h3>
                         <c:out value="${adoptedCats}" />
                     </h3>
-                    <p class="text-muted">Adotados</p>
+                    <p class="text-muted">Gatos Adotados</p>
+                </div>
+
+                <div class="card" style="flex:1; text-align:center; padding:1rem;">
+                    <h3>
+                        <c:out value="${inProcessCats}" />
+                    </h3>
+                    <p class="text-muted">Gatos em Processo de Adoção</p>
                 </div>
             </div>
 
             <div class="card-body">
                 <div class="card">
-                    <div class="card-header" style="display:flex;align-items:center;">
-                        <strong>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="black"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
-                            Gatos Resgatados
-                        </strong>
-                        <button class="btn btn-dark position-absolute top-0 end-0" onclick="openModal()" style="margin-top: 12px; margin-right: 12px">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                            Adicionar Gato
-                        </button>
+
+                    <div class="card-header" style="display:flex; align-items:center; gap:1rem; padding:0.75rem 1.5rem;">
+                        <div style="flex:1.5;">
+                            <strong>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="black"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
+                                Gatos Resgatados
+                            </strong>
+                        </div>
+
+                        <div style="flex:1; font-size:0.85rem; color:#6b7280;">
+                            Informação
+                        </div>
+
+                        <div style="flex:1; font-size:0.85rem; color:#6b7280;">
+                            Estado
+                        </div>
+
+                        <div style="flex:1; font-size:0.85rem; color:#6b7280;">
+                            Chegada
+                        </div>
+
+                        <div style="width:200px; display:flex; justify-content:flex-end;">
+                            <button class="btn btn-dark" onclick="openModal()">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                                Adicionar Gato
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card-body">
                         <c:forEach var="cat" items="${cats}">
-                            <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
+                            <div style="display:flex; align-items:center; gap:1rem; padding:.75rem 1.5rem; border-top:1px solid #f3f4f6">
 
-                                <div style="flex:2; display:flex; align-items:center; gap:.75rem;">
-                                    <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
-                                    <div style="flex:1">
+                                <div style="flex:1.5; display:flex; align-items:center; gap:.75rem;">
+                                    <img src="${cat.image}" alt="${cat.name}" class="avatar" style="width:40px; height:40px; border-radius:50%; object-fit:cover;"/>
+                                    <div>
                                         <div style="font-weight:500">${cat.name}</div>
                                         <div class="text-sm text-gray">${cat.breed}</div>
                                     </div>
                                 </div>
 
-                                <div style="flex:2;">
+                                <div style="flex:1;">
                                         ${cat.estimatedAge} • ${cat.gender ? 'Macho' : 'Fêmea'}
                                 </div>
 
@@ -188,13 +213,12 @@
                                         ${cat.formattedArrivalDate}
                                 </div>
 
-                                <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
+                                <div style="width:200px; display:flex; justify-content:flex-end; align-items:center; gap:.5rem;">
 
                                     <div class="d-flex gap-2">
                                         <a href="/admin/medication/${cat.id}" class="btn btn-sm btn-outline-success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                                                <path d="M420-420v120h-80v-120H220v-80h120v-120h80v120h120v80H420Zm60 300q-42 0-71-29t-29-71v-520q0-42 29-71t71-29h340q42 0 71 29t29 71v520q0 42-29 71t-71 29H480Zm0-80h340v-520H480v520ZM140-160q-42 0-71-29t-29-71v-600h80v600h600v80H140Zm340-440Z"/>
-                                            </svg> Medicações
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M345-120q-94 0-159.5-65.5T120-345q0-45 17-86t49-73l270-270q32-32 73-49t86-17q94 0 159.5 65.5T840-615q0 45-17 86t-49 73L504-186q-32 32-73 49t-86 17Zm266-286 107-106q20-20 31-47t11-56q0-60-42.5-102.5T615-760q-29 0-56 11t-47 31L406-611l205 205ZM345-200q29 0 56-11t47-31l106-107-205-205-107 106q-20 20-31 47t-11 56q0 60 42.5 102.5T345-200Z"/></svg>
+                                            Medicação
                                         </a>
 
                                         <button class="btn btn-sm btn-outline-primary"

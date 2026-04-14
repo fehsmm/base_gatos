@@ -159,6 +159,16 @@ public class CatService {
         return catCount;
     }
 
+    public int countCatsInAdoptionProcess() {
+        int catCount = 0;
+        for (Cat cat : catRepository.findAll()) {
+            if(cat.getStatus().equals("Em Processo")) {
+                catCount++;
+            }
+        }
+        return catCount;
+    }
+
     public int countAllCats() {
         int catCount = 0;
         for (Cat cat : catRepository.findAll()) {

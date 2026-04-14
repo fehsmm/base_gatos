@@ -143,7 +143,6 @@
                 </div>
             </div>
 
-            <!-- LEFT COLUMN -->
             <div class="profile-left">
 
                 <h1>${cat.name}</h1>
