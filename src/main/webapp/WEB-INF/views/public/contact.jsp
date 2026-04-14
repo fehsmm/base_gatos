@@ -12,7 +12,7 @@
 <main class="flex-1 page">
     <div class="container-sm">
         <div class="text-center mb-8">
-            <h1>Entre em Contacto</h1>
+            <h1>Entre em Contacto 📣</h1>
             <p>Tem alguma <b>questão</b>, quer saber mais sobre o <b>nosso trabalho</b> ou mesmo ser um <b>voluntário</b>? Adoramos ouvir de si!</p>
         </div>
 
@@ -23,7 +23,7 @@
         <div class="grid contact-grid" style="gap:2rem">
             <!-- FORM -->
             <div class="card">
-                <div class="card-header"><strong> Envie-nos uma Mensagem</strong></div>
+                <div class="card-header"><strong> Envie-nos uma Mensagem </strong></div>
                 <div class="card-body">
                     <form action="/public/contact" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -62,7 +62,7 @@
 
         <!-- FAQ -->
         <div class="mt-8">
-            <h2 class="text-center mb-6">Perguntas Frequentes</h2>
+            <h2 class="text-center mb-6">Perguntas Frequentes 🤔</h2>
             <div class="grid grid-2" style="gap:1rem">
                 <div class="card"><div class="card-body"><h3>Posso visitar os gatos sem compromisso?</h3><p class="text-sm">Sim! Encorajamos visitas para conhecer os nossos gatos. Não há qualquer obrigação de adoção.</p></div></div>
                 <div class="card"><div class="card-body"><h3>Como posso tornar-me voluntário?</h3><p class="text-sm">Entre em contacto connosco através do formulário ou email. Teremos todo o gosto em explicar o processo.</p></div></div>
