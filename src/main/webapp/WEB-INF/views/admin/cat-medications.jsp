@@ -280,7 +280,7 @@
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="catId" value="${cat.id}"/>
-            <input type="hidden" name="medicationId" id="editMedicationId"/>
+            <input type="hidden" name="id" id="editMedicationId"/>
 
             <div class="mb-4">
                 <h5 style="font-weight:600;">Informação da Medicação</h5>

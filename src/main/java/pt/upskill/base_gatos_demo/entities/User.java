@@ -14,12 +14,12 @@ public class User {
     private String username;
     private String password;
     private String role;
-    private long telephone;
+    private Long telephone;
     private String address;
     private boolean approved;
 
     //Construtores para DataInitializer
-    public User(String name, String username,String password, String role, long telephone,String address, boolean approved) {
+    public User(String name, String username,String password, String role, Long telephone,String address, boolean approved) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -73,11 +73,11 @@ public class User {
         this.name = name;
     }
 
-    public long getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(long telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 

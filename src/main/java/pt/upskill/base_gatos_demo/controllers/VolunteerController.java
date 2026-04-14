@@ -50,7 +50,7 @@ public class VolunteerController {
 
         List<Shift> allShifts = shiftService.getShifts(null);
 
-        long upcomingCount = allShifts.stream()
+        Long upcomingCount = allShifts.stream()
                 .filter(s -> !s.getDate().isBefore(today))
                 .count();
 

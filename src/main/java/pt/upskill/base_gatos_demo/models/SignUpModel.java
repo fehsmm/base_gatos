@@ -6,7 +6,7 @@ public class SignUpModel {
     private String username;
     private String password;
     private String role;
-    private long telephone;
+    private Long telephone;
     private String address;
     private boolean approved;
 
@@ -42,11 +42,11 @@ public class SignUpModel {
         this.name = name;
     }
 
-    public long getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(long telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 

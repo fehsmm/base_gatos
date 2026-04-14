@@ -59,6 +59,6 @@ public class MedicationController {
                                      RedirectAttributes redirectAttributes) {
         medService.updateMedication(model);
         redirectAttributes.addFlashAttribute("success", "Medicação atualizada com sucesso!");
-        return "redirect:/admin/medication/" + model.getCat().getId();
+        return "redirect:/admin/medication/" + model.getCatId();
     }
 }

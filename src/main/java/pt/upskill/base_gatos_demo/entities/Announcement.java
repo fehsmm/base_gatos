@@ -21,11 +21,11 @@ public class Announcement {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,10 +68,6 @@ public class Announcement {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getUpdatedAt() {

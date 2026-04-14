@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 public class EditMedicationRecordModel {
 
-    private long id;
-    private Cat cat;
+    private Long id;
+    private Long catId;
     private String medicationName;
     private String dose;
     private String storageLocation;
@@ -83,19 +83,19 @@ public class EditMedicationRecordModel {
         this.updatedBy = updatedBy;
     }
 
-    public Cat getCat() {
-        return cat;
-    }
-
-    public void setCat(Cat cat) {
-        this.cat = cat;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Long getCatId() {
+        return catId;
+    }
+
+    public void setCatId(Long catId) {
+        this.catId = catId;
     }
 }
