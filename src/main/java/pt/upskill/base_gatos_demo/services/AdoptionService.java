@@ -1,9 +1,11 @@
 package pt.upskill.base_gatos_demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Adoption;
+import pt.upskill.base_gatos_demo.entities.Announcement;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.AdoptionForm;
@@ -13,6 +15,8 @@ import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -70,6 +74,85 @@ public class AdoptionService {
             }
         }
         return pendingAdoptions;
+    }
+
+    public List<Adoption> getAdoptions(LocalDate dateStartFilter, LocalDate dateEndFilter, String statusFilter, Boolean unreadFilter) {
+        List<Adoption> adoptions = new ArrayList<>();
+        if(dateStartFilter == null && dateEndFilter == null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //todos vazios
+            adoptions = adoptionRepository.findAll();
+        } else if(dateStartFilter != null && dateEndFilter == null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //so data inicio preenchida
+            adoptions = adoptionRepository.findByRequestDateAfter(dateStartFilter.atStartOfDay());
+        } else if(dateStartFilter == null && dateEndFilter != null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //so data fim preenchida
+            adoptions = adoptionRepository.findByRequestDateBefore(dateEndFilter.atTime(23, 59, 59));
+        } else if(dateStartFilter == null && dateEndFilter == null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //so status preenchido
+            adoptions = adoptionRepository.findByStatus(statusFilter);
+        } else if(dateStartFilter == null && dateEndFilter == null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //so unread preenchido
+            adoptions = adoptionRepository.findByReadFalse();
+        } else if (dateStartFilter != null && dateEndFilter != null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //data inicio +  data fim
+            adoptions = adoptionRepository.findByRequestDateBetween(dateStartFilter.atStartOfDay(),
+                    dateEndFilter.atTime(23, 59, 59));
+        } else if(dateStartFilter != null && dateEndFilter == null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //data inicio + status
+            adoptions = adoptionRepository.findByRequestDateAfterAndStatus(dateStartFilter.atStartOfDay(), statusFilter);
+        } else if(dateStartFilter != null && dateEndFilter == null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //data inicio + unread
+            adoptions = adoptionRepository.findByRequestDateAfterAndReadFalse(dateStartFilter.atStartOfDay());
+        } else if(dateStartFilter != null && dateEndFilter != null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //data inicio + data fim + status
+            adoptions = adoptionRepository.findByRequestDateBetweenAndStatus(dateStartFilter.atStartOfDay(),
+                    dateEndFilter.atTime(23, 59, 59), statusFilter);
+        } else if(dateStartFilter != null && dateEndFilter != null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //data inicio + data fim + unread
+            adoptions = adoptionRepository.findByRequestDateBetweenAndReadFalse(dateStartFilter.atStartOfDay(),
+                    dateEndFilter.atTime(23, 59, 59));
+        } else if(dateStartFilter != null && dateEndFilter == null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //data inicio + status + unread
+            adoptions = adoptionRepository.findByRequestDateAfterAndStatusAndReadFalse(dateStartFilter.atStartOfDay(), statusFilter);
+        } else if(dateStartFilter == null && dateEndFilter != null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //data fim + status
+            adoptions = adoptionRepository.findByRequestDateBeforeAndStatus(dateEndFilter.atTime(23, 59, 59),
+                    statusFilter);
+        } else if (dateStartFilter == null && dateEndFilter != null
+                && (statusFilter == null || statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //data fim + unread
+            adoptions = adoptionRepository.findByRequestDateBeforeAndReadFalse(dateEndFilter.atTime(23, 59, 59));
+        } else if(dateStartFilter == null && dateEndFilter != null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //data fim + status + unread
+            adoptions = adoptionRepository.findByRequestDateBeforeAndStatusAndReadFalse(dateEndFilter.atTime(23, 59, 59),
+                    statusFilter);
+        } else if(dateStartFilter == null && dateEndFilter == null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //status + unread
+            adoptions = adoptionRepository.findByStatusAndReadFalse(statusFilter);
+        } else if(dateStartFilter != null && dateEndFilter != null
+                && (statusFilter != null && !statusFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //todos
+            adoptions = adoptionRepository.findByRequestDateBetweenAndStatusAndReadFalse(dateStartFilter.atStartOfDay(),
+                    dateEndFilter.atTime(23,59,59),  statusFilter);
+        }
+        adoptions.sort(Comparator.comparing(Adoption::isRead) // as unread vêm primeiro
+                        .thenComparing(Adoption::getRequestDate, Comparator.reverseOrder()) //e por ordem das mais recentes
+        );
+        return adoptions;
     }
 
     public Boolean getProcessAdoption(String username, AdoptionForm adoptionForm){

@@ -62,8 +62,12 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-application")
-    public String manageApplication(Model model){
-            List<Adoption> adoptions = adoptionService.getPendingAdoptions();
+    public String manageApplication(Model model,
+                                    @RequestParam (required = false) LocalDate dateStartFilter,
+                                    @RequestParam (required = false) LocalDate dateEndFilter,
+                                    @RequestParam (required = false) String statusFilter,
+                                    @RequestParam (required = false) Boolean unreadFilter){
+            List<Adoption> adoptions = adoptionService.getAdoptions(dateStartFilter, dateEndFilter, statusFilter, unreadFilter);
             int pendingAdoptions = adoptionService.countPendingAdoptions();
             model.addAttribute("adoptions", adoptions);
             model.addAttribute("pendingAdoptions", pendingAdoptions);
