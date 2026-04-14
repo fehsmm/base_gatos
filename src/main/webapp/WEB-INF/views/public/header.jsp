@@ -29,10 +29,10 @@
 
     <div class="top-header-left">
         <img src="/images/logo.svg" alt="Logo MEG" class="top-logo">
-        <div>
+        <a href="/public/home" class="top-brand">
             <div class="top-title">Meg</div>
             <div class="top-subtitle">Movimento Esterilização de Gatos de Lisboa</div>
-        </div>
+        </a>
     </div>
 
     <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">

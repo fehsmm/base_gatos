@@ -25,6 +25,14 @@
     margin: 0;
     margin-top: 0.40rem;
 }
+.top-brand {
+    text-decoration: none;
+}
+
+.top-brand:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
 
 .top-header {
     display: flex;
