@@ -47,20 +47,18 @@ public class MedicationController {
 
     @PostMapping(value = "/delete-medication")
     public String deleteAnnouncement(@RequestParam("medicationId") Long medicationId,
-                                     @PathVariable Long id,
                                      RedirectAttributes redirectAttributes) {
+        Long catId = medService.getById(medicationId).getCat().getId();
         medService.deleteMedication(medicationId);
-        Long catId = medService.getById(id).getCat().getId();
         redirectAttributes.addFlashAttribute("success", "Medicação eliminada com sucesso!");
         return "redirect:/admin/medication/" + catId;
     }
 
     @PostMapping("/update-medication")
     public String updateAnnouncement(@ModelAttribute EditMedicationRecordModel model,
-                                     @PathVariable Long id,
                                      RedirectAttributes redirectAttributes) {
         medService.updateMedication(model);
         redirectAttributes.addFlashAttribute("success", "Medicação atualizada com sucesso!");
-        return "redirect:/admin/medication/" + id;
+        return "redirect:/admin/medication/" + model.getCat().getId();
     }
 }

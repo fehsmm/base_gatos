@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class EditMedicationRecordModel {
 
     private long id;
+    private Cat cat;
     private String medicationName;
     private String dose;
     private String storageLocation;
@@ -37,12 +38,6 @@ public class EditMedicationRecordModel {
         return startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getMedicationName() {
         return medicationName;
     }
@@ -86,5 +81,21 @@ public class EditMedicationRecordModel {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public Cat getCat() {
+        return cat;
+    }
+
+    public void setCat(Cat cat) {
+        this.cat = cat;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
