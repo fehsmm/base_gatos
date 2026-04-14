@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Adoption;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.AdoptionForm;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
@@ -70,4 +71,27 @@ public class AdoptionService {
         }
         return pendingAdoptions;
     }
+
+    public Boolean getProcessAdoption(String username, AdoptionForm adoptionForm){
+        User user = userRepository.getUserByUsername(username);
+        Cat cat = catRepository.findById(adoptionForm.getCatId()).orElse(null);
+
+        List<Adoption> findUser = adoptionRepository.findByUserAndCat(user, cat);
+
+        for(Adoption adoption : findUser) {
+            if ("Pendente".equals(adoption.getStatus()) || "Aprovada".equals(adoption.getStatus())) {
+                return false;
+            }
+        }
+        Adoption adoption = new Adoption();
+            adoption.setUser(user);
+            adoption.setCat(cat);
+            adoption.setApplicantName(adoptionForm.getApplicantName());
+            adoption.setReason(adoptionForm.getReason());
+            adoption.setExperience(adoptionForm.getExperience());
+            adoption.setStatus("Pendente");
+            adoptionRepository.save(adoption);
+            return true;
+    }
+
 }

@@ -181,4 +181,7 @@ public class CatService {
         return catRepository.findTop8ByOrderByArrivalDateDesc();
     }
 
+    public List<Cat> getByStatus(String status) {
+        return catRepository.findByStatus(status);
+    }
 }

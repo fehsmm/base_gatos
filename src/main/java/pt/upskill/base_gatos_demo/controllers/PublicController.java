@@ -13,6 +13,7 @@ import pt.upskill.base_gatos_demo.models.AdoptionForm;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.services.AdoptionService;
 import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.CatService;
 import pt.upskill.base_gatos_demo.services.UserService;
@@ -28,11 +29,8 @@ public class PublicController {
     private CatService catService;
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CatRepository catRepository;
-    @Autowired
-    private AdoptionRepository adoptionRepository;
+    private AdoptionService adoptionService;
+
     @Autowired
     private AuthService authService;
 
@@ -66,7 +64,7 @@ public class PublicController {
 
     @GetMapping(value = "/adoption")
     public String adoption(Model model, Authentication authentication){
-        List<Cat> availableCats = catRepository.findByStatus("Disponível");
+        List<Cat> availableCats = catService.getByStatus("Disponível");
         model.addAttribute("availableCats", availableCats);
         model.addAttribute("currentUser", authService.getAuthenticatedUser());
         return "public/adoption";
@@ -117,43 +115,19 @@ public class PublicController {
                                   RedirectAttributes redirectAttributes) {
 
 
-
-
-
-
         if (principal == null) {
             redirectAttributes.addFlashAttribute("error",
                     "⚠️ Tem de iniciar sessão antes de submeter.");
             return "redirect:/public/adoption";
         }
 
-        User user = userRepository.getUserByUsername(principal.getName());
-        Cat cat = catRepository.findById(adoptionForm.getCatId()).orElse(null);
+           boolean successGetProcessAdoption = adoptionService.getProcessAdoption(principal.getName(),adoptionForm);
 
-        List<Adoption> find = adoptionRepository.findByUserAndCat(user, cat);
-
-        for(Adoption adoption : find){
-            if("Pendente".equals(adoption.getStatus()) || "Aprovada".equals(adoption.getStatus())){
-                redirectAttributes.addFlashAttribute("error", "Já submeteram candidatura a este gato!");
-                return "redirect:/public/adoption";
+        if(!successGetProcessAdoption){
+                redirectAttributes.addFlashAttribute("error", "Já submeteu candidatura para este gato!");
+            }else{
+                redirectAttributes.addFlashAttribute("success","Candidatura enviada com sucesso para o gato!");
             }
-        }
-
-
-        Adoption adoption = new Adoption();
-        adoption.setUser(user);
-        adoption.setCat(cat);
-        adoption.setApplicantName(adoptionForm.getApplicantName());
-        //adoption.setEmail(email);
-        //adoption.setPhone(phone);
-        //adoption.setAddress(address);
-        adoption.setReason(adoptionForm.getReason());
-        adoption.setExperience(adoptionForm.getExperience());
-        adoption.setStatus("Pendente");
-
-        adoptionRepository.save(adoption);
-
-        redirectAttributes.addFlashAttribute("success","Candidatura enviada com sucesso para o gato " + cat.getName() + "!");
 
         return "redirect:/public/adoption";
     }
