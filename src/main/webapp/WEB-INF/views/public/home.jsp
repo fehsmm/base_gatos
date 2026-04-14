@@ -17,8 +17,9 @@
         <h1>Juntos Salvamos Vidas Felinas 🐾</h1>
         <p>Dê um lar amoroso a um gato que precisa. Cada adoção é uma segunda chance para uma vida feliz.</p>
         <div class="hero-btns">
-            <a href="/public/cat-list" class="btn btn-hero">Ver Gatos Disponíveis →</a>
+            <a href="/public/cat-list" class="btn btn-hero">Ver Gatinhos →</a>
             <a href="/public/donate" class="btn btn-hero">Fazer Donativo</a>
+            <a href="/public/contact" class="btn btn-hero">Quero ser Voluntário!</a>
         </div>
     </div></section>
     <section class="about-section">
