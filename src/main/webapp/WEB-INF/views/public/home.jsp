@@ -7,6 +7,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Meg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/Public/home.css"/>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -38,22 +39,22 @@
 
                 <div class="about-cards">
                     <div class="about-card card-orange">
-                        <span class="card-icon"></span>
+                        <span class="card-icon">🩺</span>
                         <h3>Cuidado Veterinário</h3>
                         <p>Todos os gatos são vacinados, esterilizados e tratados.</p>
                     </div>
                     <div class="about-card card-blue">
-                        <span class="card-icon"></span>
+                        <span class="card-icon">📋</span>
                         <h3>Controle e cuidado</h3>
                         <p>Cada gatinho fica identificado em nosso sistema.</p>
                     </div>
                     <div class="about-card card-green">
-                        <span class="card-icon"></span>
+                        <span class="card-icon">🤝</span>
                         <h3>Acompanhamento</h3>
                         <p>Apoio contínuo após a adoção para garantir o sucesso.</p>
                     </div>
                     <div class="about-card card-purple">
-                        <span class="card-icon"></span>
+                        <span class="card-icon">❤️</span>
                         <h3>Dedicação</h3>
                         <p>Voluntários comprometidos com respeito e amor pelos bichanos.</p>
                     </div>
@@ -90,13 +91,13 @@
         <div class="text-center mt-8"><a href="/public/cat-list" class="btn btn-outline btn-lg">Ver Todos os Gatos →</a></div>
     </div></section>
 
-    <section style="padding:4rem 1.5rem;background:linear-gradient(135deg,#f97316,#ec4899);color:white;text-align:center"><div class="container-sm">
+    <section style="padding:4rem 1.5rem;background: linear-gradient(135deg, #f97316, #ea580c);;color:white;text-align:center"><div class="container-sm">
         <h2 style="font-size:2rem;color:white">Como Pode Ajudar?</h2>
         <p style="color:#fde68a;font-size:1.1rem;margin-bottom:2rem">Há várias formas de apoiar o nosso trabalho</p>
         <div class="grid grid-3" style="gap:1rem">
-            <a href="/public/adoption" class="btn btn-white btn-lg">️ Adotar</a>
-            <a href="/public/donate" class="btn btn-white btn-lg"> Doar</a>
-            <a href="/public/contact" class="btn btn-white btn-lg"> Voluntariar</a>
+            <a href="/public/adoption" class="btn btn-white btn-lg">️🐱 Adotar</a>
+            <a href="/public/donate" class="btn btn-white btn-lg">🎁 Doar</a>
+            <a href="/public/contact" class="btn btn-white btn-lg">🙌 Voluntariar</a>
         </div>
     </div></section>
 </main>
