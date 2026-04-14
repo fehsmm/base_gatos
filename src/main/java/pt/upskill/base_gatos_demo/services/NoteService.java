@@ -65,28 +65,6 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-    /*public void createNote(CreateNoteModel model) {
-        Note note = new Note();
-        note.setPriority(model.getPriority());
-        note.setUpdatedAt(LocalDateTime.now());
-        note.setRead(false);
-        note.setSummary(model.getSummary());
-        note.setImportantObservations(model.getImportantObservations());
-        noteRepository.save(note);
-    }
-
-    public void editNote(EditNoteModel model) {
-        for (Note note : noteRepository.findAll()) {
-            if(note.getShift().equals(model.getShift())) {
-                note.setUpdatedAt(LocalDateTime.now());
-                note.setRead(false);
-                note.setSummary(model.getSummary());
-                note.setImportantObservations(model.getImportantObservations());
-
-            }
-        }
-    }*/
-
     public int countUnreadNotes() {
         int unreadNotes = 0;
         for(Note note : noteRepository.findAll()) {

@@ -34,7 +34,7 @@ public class Adoption {
     @Column(columnDefinition = "TEXT")
     private String experience;
 
-    // Controlo do Processo
+
     private String status = "Pendente"; // Valor inicial por defeito
     private LocalDateTime requestDate = LocalDateTime.now();
     private LocalDate adoptionDate;
