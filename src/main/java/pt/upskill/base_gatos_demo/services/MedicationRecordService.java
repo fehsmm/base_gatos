@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.MedicationRecord;
+import pt.upskill.base_gatos_demo.models.CreateMedicationRecordModel;
+import pt.upskill.base_gatos_demo.models.EditMedicationRecordModel;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.MedicationRecordRepository;
 
@@ -19,6 +21,9 @@ public class MedicationRecordService {
 
     @Autowired
     private CatRepository catRepo;
+
+    @Autowired
+    private AuthService authService;
 
     public List<MedicationRecord> getBycat(Long catId) {
         return medRepo.findByCatId(catId);
@@ -36,23 +41,35 @@ public class MedicationRecordService {
                 .collect(Collectors.toList());
     }
 
-    public void create(Long catId, String medicationName, String dose,
-                       String storageLocation, LocalDate startDate,
-                       LocalDate endDate, String notes, String createdBy) {
+    public void createMedication(Long catId, CreateMedicationRecordModel model) {
         Cat cat = catRepo.findById(catId).orElseThrow();
         MedicationRecord med = new MedicationRecord();
+        String user = authService.getAuthenticatedUser().getName();
         med.setCat(cat);
-        med.setMedicationName(medicationName);
-        med.setDose(dose);
-        med.setStorageLocation(storageLocation);
-        med.setStartDate(startDate);
-        med.setEndDate(endDate);
-        med.setNotes(notes);
-        med.setCreatedBy(createdBy);
+        med.setMedicationName(model.getMedicationName());
+        med.setDose(model.getDose());
+        med.setStorageLocation(model.getStorageLocation());
+        med.setStartDate(model.getStartDate());
+        med.setEndDate(model.getEndDate());
+        med.setNotes(model.getNotes());
+        med.setCreatedBy(user);
         medRepo.save(med);
     }
 
-    public void delete(Long id) {
+    public void updateMedication(EditMedicationRecordModel model) {
+        MedicationRecord med = getById(model.getId());
+        String user = authService.getAuthenticatedUser().getName();
+        med.setMedicationName(model.getMedicationName());
+        med.setDose(model.getDose());
+        med.setStorageLocation(model.getStorageLocation());
+        med.setStartDate(model.getStartDate());
+        med.setEndDate(model.getEndDate());
+        med.setNotes(model.getNotes());
+        med.setUpdatedBy(user);
+        medRepo.save(med);
+    }
+
+    public void deleteMedication(Long id) {
         medRepo.deleteById(id);
     }
 

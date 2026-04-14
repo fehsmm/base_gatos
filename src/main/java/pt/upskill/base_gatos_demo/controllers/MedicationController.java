@@ -6,6 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.models.CreateAnnouncementModel;
+import pt.upskill.base_gatos_demo.models.CreateMedicationRecordModel;
+import pt.upskill.base_gatos_demo.models.EditAnnouncementModel;
+import pt.upskill.base_gatos_demo.models.EditMedicationRecordModel;
 import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.CatService;
 import pt.upskill.base_gatos_demo.services.MedicationRecordService;
@@ -32,29 +36,31 @@ public class MedicationController {
         return "admin/cat-medications";
     }
 
-    @PostMapping("/create")
-    public String create(@RequestParam Long catId,
-                         @RequestParam String medicationName,
-                         @RequestParam String dose,
-                         @RequestParam(required = false) String storageLocation,
-                         @RequestParam LocalDate startDate,
-                         @RequestParam(required = false) LocalDate endDate,
-                         @RequestParam(required = false) String notes,
-                         RedirectAttributes redirectAttributes) {
-        User user = authService.getAuthenticatedUser();
-        String createdBy = user != null ? user.getName() : "Admin";
-        medService.create(catId, medicationName, dose, storageLocation,
-                startDate, endDate, notes, createdBy);
-        redirectAttributes.addFlashAttribute("success", "Medicação adicionada com sucesso.");
+    @PostMapping(value = "/create-medication")
+    public String createMedication(@ModelAttribute CreateMedicationRecordModel model,
+                                     @RequestParam Long catId,
+                                     RedirectAttributes redirectAttributes) {
+        medService.createMedication(catId, model);
+        redirectAttributes.addFlashAttribute("success", "Medicação adicionada com sucesso!");
         return "redirect:/admin/medication/" + catId;
     }
 
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id,
-                         RedirectAttributes redirectAttributes) {
+    @PostMapping(value = "/delete-medication")
+    public String deleteAnnouncement(@RequestParam("medicationId") Long medicationId,
+                                     @PathVariable Long id,
+                                     RedirectAttributes redirectAttributes) {
+        medService.deleteMedication(medicationId);
         Long catId = medService.getById(id).getCat().getId();
-        medService.delete(id);
-        redirectAttributes.addFlashAttribute("success", "Medicação removida com sucesso.");
+        redirectAttributes.addFlashAttribute("success", "Medicação eliminada com sucesso!");
         return "redirect:/admin/medication/" + catId;
+    }
+
+    @PostMapping("/update-medication")
+    public String updateAnnouncement(@ModelAttribute EditMedicationRecordModel model,
+                                     @PathVariable Long id,
+                                     RedirectAttributes redirectAttributes) {
+        medService.updateMedication(model);
+        redirectAttributes.addFlashAttribute("success", "Medicação atualizada com sucesso!");
+        return "redirect:/admin/medication/" + id;
     }
 }

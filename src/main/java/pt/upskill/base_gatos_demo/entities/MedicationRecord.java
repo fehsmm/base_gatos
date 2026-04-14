@@ -27,6 +27,7 @@ public class MedicationRecord {
     private String notes;
 
     private String createdBy;
+    private String updatedBy;
 
     public boolean isActiveToday() {
         LocalDate today = LocalDate.now();
@@ -98,5 +99,13 @@ public class MedicationRecord {
     }
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }

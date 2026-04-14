@@ -87,7 +87,7 @@
                 </div>
 
                 <div style="margin-left:auto; display:flex; flex-direction:column; gap:0.5rem; align-items: flex-end;">
-                    <button class="btn btn-dark ms-auto" onclick="document.getElementById('modalAdd').style.display='flex'">
+                    <button class="btn btn-dark ms-auto" onclick="openModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                         Nova Medicação
                     </button>
@@ -193,12 +193,12 @@
     </main>
 </div>
 
-<div id="modalAdd" class="modal-overlay">
+<div id="addMedicationModal" class="modal-overlay">
+
     <div class="modal-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <h4>Nova Medicação — ${cat.name}</h4>
-            <button class="modal-close"
-                    onclick="document.getElementById('modalAdd').style.display='none'">
+            <button class="modal-close" onclick="closeModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
             </button>
         </div>
