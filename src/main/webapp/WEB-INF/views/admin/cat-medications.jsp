@@ -97,6 +97,10 @@
                 </button>
             </div>
 
+                <c:if test="${success != null}">
+                    <div class="alert alert-success">${success}</div>
+                </c:if>
+
             <div class="card">
                 <div class="card-header">
                     <strong>Medicações Registadas</strong>
@@ -113,7 +117,7 @@
                                 <div class="shift-card ${med.activeToday ? 'error-announcement' : ''}">
                                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                         <div>
-                                                <%-- Nome + badge ativo/inativo --%>
+
                                             <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem;">
                                                     ${med.medicationName}
                                                 <c:choose>
@@ -126,12 +130,10 @@
                                                 </c:choose>
                                             </div>
 
-                                                <%-- Dose --%>
                                             <div style="font-size:0.9rem; margin-bottom:0.25rem;">
                                                 Dose: <strong>${med.dose}</strong>
                                             </div>
 
-                                                <%-- Localização --%>
                                             <c:if test="${not empty med.storageLocation}">
                                                 <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
@@ -140,12 +142,10 @@
                                                 </div>
                                             </c:if>
 
-                                                <%-- Datas --%>
                                             <div style="font-size:0.85rem; color:#9ca3af;">
                                                     ${med.formattedStartDate} → ${med.formattedEndDate}
                                             </div>
 
-                                                <%-- Notas --%>
                                             <c:if test="${not empty med.notes}">
                                                 <div style="font-size:0.85rem; color:#dc2626; margin-top:0.5rem;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
@@ -154,13 +154,11 @@
                                                 </div>
                                             </c:if>
 
-                                                <%-- Criado por --%>
                                             <div style="font-size:0.8rem; color:#9ca3af; margin-top:0.5rem;">
                                                 Registado por ${med.createdBy}
                                             </div>
                                         </div>
 
-                                            <%-- Botão apagar --%>
                                         <form action="/admin/medication/delete/${med.id}" method="POST">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                             <button type="submit" class="btn btn-sm btn-outline-danger"
