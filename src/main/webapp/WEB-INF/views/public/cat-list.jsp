@@ -91,7 +91,9 @@
                             </p>
                             <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
                                 <c:if test="${not empty cat.tags}">
-                                    <span class="badge badge-outline">${cat.tags}</span>
+                                    <c:forEach var="tag" items="${cat.tags}">
+                                        <span class="badge badge-outline">${tag}</span>
+                                    </c:forEach>
                                 </c:if>
                             </div>
                             <a href="/public/cat-profile/${cat.id}" class="btn btn-primary w-full">Ver Perfil
