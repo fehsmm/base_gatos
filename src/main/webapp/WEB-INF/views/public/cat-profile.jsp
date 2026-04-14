@@ -95,50 +95,48 @@
                         <strong>Saúde</strong>
                     </div>
                     <div class="card-body">
-                        <table style="width:100%">
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Vacinação:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.vaccination == true}"><span class="badge badge-green">Vacinado.</span></c:when>
-                                        <c:when test="${cat.vaccination == false}"><span class="badge badge-yellow">Não vacinado.</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Esterilizado:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.sterilization == true && cat.gender == true}"><span class="badge badge-green">Castrado.</span></c:when>
-                                        <c:when test="${cat.sterilization == true && cat.gender == false}"><span class="badge badge-green">Esterilizada.</span></c:when>
-                                        <c:when test="${cat.sterilization == false && cat.gender == true}"><span class="badge badge-yellow">Não castrado.</span></c:when>
-                                        <c:when test="${cat.sterilization == false && cat.gender == false}"><span class="badge badge-yellow">Não esterilizada.</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Desparasitação:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.parasiteControl == true}"><span class="badge badge-green">Desparasitado.</span></c:when>
-                                        <c:when test="${cat.parasiteControl == false}"><span class="badge badge-yellow">Não desparasitado.</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Teste FIV:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.fiv == false}"><span class="badge badge-green">Negativo.</span></c:when>
-                                        <c:when test="${cat.fiv == true}"><span class="badge badge-yellow">Positivo.</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">Não testado.</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Teste FELV:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.felv == false}"><span class="badge badge-green">Negativo.</span></c:when>
-                                        <c:when test="${cat.felv == true}"><span class="badge badge-yellow">Positivo.</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">Não testado.</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                        </table>
+                        <div class="info-row">
+                            <span class="info-label">Vacinação:</span>
+                            <c:choose>
+                                <c:when test="${cat.vaccination == true}"><span class="badge badge-green">Vacinado.</span></c:when>
+                                <c:when test="${cat.vaccination == false}"><span class="badge badge-yellow">Não vacinado.</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Esterilizado:</span>
+                            <c:choose>
+                                <c:when test="${cat.sterilization == true && cat.gender == true}"><span class="badge badge-green">Castrado.</span></c:when>
+                                <c:when test="${cat.sterilization == true && cat.gender == false}"><span class="badge badge-green">Esterilizada.</span></c:when>
+                                <c:when test="${cat.sterilization == false && cat.gender == true}"><span class="badge badge-yellow">Não castrado.</span></c:when>
+                                <c:when test="${cat.sterilization == false && cat.gender == false}"><span class="badge badge-yellow">Não esterilizada.</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Desparasitação:</span>
+                            <c:choose>
+                                <c:when test="${cat.parasiteControl == true}"><span class="badge badge-green">Desparasitado.</span></c:when>
+                                <c:when test="${cat.parasiteControl == false}"><span class="badge badge-yellow">Não desparasitado.</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">Sem informação.</span></c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Teste FIV:</span>
+                            <c:choose>
+                                <c:when test="${cat.fiv == false}"><span class="badge badge-green">Negativo.</span></c:when>
+                                <c:when test="${cat.fiv == true}"><span class="badge badge-yellow">Positivo.</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">Não testado.</span></c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Teste FELV:</span>
+                            <c:choose>
+                                <c:when test="${cat.felv == false}"><span class="badge badge-green">Negativo.</span></c:when>
+                                <c:when test="${cat.felv == true}"><span class="badge badge-yellow">Positivo.</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">Não testado.</span></c:otherwise>
+                            </c:choose>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,24 +158,30 @@
                         <strong>Informação Básica</strong>
                     </div>
                     <div class="card-body">
-                        <table style="width:100%">
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Idade:</td>
-                                <td style="text-align:right;font-weight:500">${cat.estimatedAge}</td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Género:</td>
-                                <td style="text-align:right;font-weight:500">${cat.gender ? 'Macho' : 'Fêmea'}</td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Raça:</td>
-                                <td style="text-align:right;font-weight:500">${cat.breed}</td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Estado:</td>
-                                <td style="text-align:right">
-                                    <c:choose>
-                                        <c:when test="${cat.status == 'Disponível'}"><span class="badge badge-green">${cat.status}</span></c:when>
-                                        <c:when test="${cat.status == 'Em Processo'}"><span class="badge badge-yellow">${cat.status}</span></c:when>
-                                        <c:otherwise><span class="badge badge-gray">${cat.status}</span></c:otherwise>
-                                    </c:choose>
-                                </td></tr>
-                            <tr><td style="color:#6b7280;padding:.4rem 0">Data de Chegada:</td>
-                                <td style="text-align:right;font-weight:500">${cat.formattedArrivalDate}</td></tr>
-                        </table>
+                        <div class="info-row">
+                            <span class="info-label">Idade:</span>
+                            <span style="font-weight:500">${cat.estimatedAge}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Género:</span>
+                            <span style="font-weight:500">${cat.gender ? 'Macho' : 'Fêmea'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Raça:</span>
+                            <span style="font-weight:500">${cat.breed}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Estado:</span>
+                            <c:choose>
+                                <c:when test="${cat.status == 'Disponível'}"><span class="badge badge-green">${cat.status}</span></c:when>
+                                <c:when test="${cat.status == 'Em Processo'}"><span class="badge badge-yellow">${cat.status}</span></c:when>
+                                <c:otherwise><span class="badge badge-gray">${cat.status}</span></c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Data de Chegada:</span>
+                            <span style="font-weight:500">${cat.formattedArrivalDate}</span>
+                        </div>
                     </div>
                 </div>
 

@@ -270,24 +270,6 @@ p {
 }
 
 
-/* ---- Table ---- */
-table {
-    display: block;
-    overflow-x: auto;
-}
-
-td {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 0.9rem;
-    vertical-align: middle;
-}
-
-tr:hover td {
-    background: #f9fafb;
-}
-
-
 /* ---- Color helpers ---- */
 
 .bg-orange-50 {
@@ -322,20 +304,38 @@ tr:hover td {
 }
 
 
-    /* ---- Profile Layout ---- */
-    .profile-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: start;
-    }
+/* ---- Profile Layout ---- */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
 
-    .profile-left {
-        margin-top: 0rem;
-    }
+.profile-left {
+    margin-top: 0rem;
+}
 
-    .profile-right {
-    }
+.profile-right {
+}
+
+/* ---- Info Rows ---- */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
@@ -375,10 +375,6 @@ tr:hover td {
         padding: 2rem 1rem;
     }
 
-    table {
-        display: block;
-        overflow-x: auto;
-    }
 
     .mobile-nav-bar { /* ADD */
         background: #111827;
@@ -388,17 +384,11 @@ tr:hover td {
         justify-content: space-between;
         color: white;
     }
+}
 
-    @media (min-width: 769px) {
-        .mobile-nav-bar {
-            display: none;
-        }
-    }
-
-    @media (min-width: 769px) {
-        .mobile-nav-bar {
-            display: none;
-        }
+@media (min-width: 769px) {
+    .mobile-nav-bar {
+        display: none;
     }
 }
 
