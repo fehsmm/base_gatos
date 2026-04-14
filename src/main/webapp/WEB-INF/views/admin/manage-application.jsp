@@ -92,6 +92,68 @@
             <div class="alert alert-success">${success}</div>
         </c:if>
 
+        <c:if test="${pendingAdoptions > 0}">
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+
+                <c:if test="${pendingAdoptions > 0}">
+                    <c:choose>
+                        <c:when test="${pendingAdoptions == 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                    ${pendingAdoptions} candidatura por ver
+                            </div>
+                        </c:when>
+                        <c:when test="${pendingAdoptions > 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#991b1b"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                    ${pendingAdoptions} candidaturas por ver
+                            </div>
+                        </c:when>
+                    </c:choose>
+                </c:if>
+
+            </div>
+        </c:if>
+
+        <div>
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+                Filtrar Candidaturas
+            </h3>
+        </div>
+
+        <form method="GET" action="/admin/post-announcement" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Data de Início
+                </label>
+                <input type="date" name="dateStartFilter" id="dateStartFilter" class="form-control" value="${param.dateStartFilter}"/>
+            </div>
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Data de Fim
+                </label>
+                <input type="date" name="dateEndFilter" id="dateEndFilter" class="form-control" value="${param.dateEndFilter}"/>
+            </div>
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Estado
+                </label>
+                <select name="statusFilter" id="statusFilter" class="form-control">
+                    <option value="">Todas as candidaturas</option>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Aceite">Aceite</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="/admin/manage-application" class="btn btn-secondary">Limpar</a>
+
+        </form>
+
     </div>
 
     <div class="container">

@@ -60,4 +60,14 @@ public class AdoptionService {
     public List<Adoption> getPendingAdoptions() {
         return  adoptionRepository.findByStatus("Pendente");
     }
+
+    public int countPendingAdoptions() {
+        int pendingAdoptions = 0;
+        for (Adoption adoption : adoptionRepository.findAll()) {
+            if (adoption.getStatus().equals("Pendente")) {
+                pendingAdoptions++;
+            }
+        }
+        return pendingAdoptions;
+    }
 }

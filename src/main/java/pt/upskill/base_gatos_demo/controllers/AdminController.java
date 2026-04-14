@@ -64,7 +64,9 @@ public class AdminController {
     @GetMapping(value = "/manage-application")
     public String manageApplication(Model model){
             List<Adoption> adoptions = adoptionService.getPendingAdoptions();
+            int pendingAdoptions = adoptionService.countPendingAdoptions();
             model.addAttribute("adoptions", adoptions);
+            model.addAttribute("pendingAdoptions", pendingAdoptions);
             return "admin/manage-application";
     }
 
