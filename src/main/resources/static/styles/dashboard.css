@@ -200,6 +200,10 @@ textarea { resize: vertical; }
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 .sidebar-header { padding: 1.5rem; border-bottom: 1px solid #1f2937; }
 .sidebar-nav { flex: 1; padding: 1rem; }
@@ -217,6 +221,7 @@ textarea { resize: vertical; }
 }
 .sidebar-nav a:hover { background: #1f2937; color: white; }
 .sidebar-nav a.active { background: #f97316; color: white; }
+.sidebar-nav a.active svg path { fill: white; }
 .sidebar-footer { padding: 1rem; border-top: 1px solid #1f2937; }
 .admin-main { flex: 1; overflow: auto; }
 .sidebar-link {
