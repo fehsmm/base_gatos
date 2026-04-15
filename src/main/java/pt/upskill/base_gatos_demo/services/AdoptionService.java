@@ -177,4 +177,8 @@ public class AdoptionService {
             return true;
     }
 
+    public List<Adoption> getUserAndStatus(User user, String status){
+        return adoptionRepository.findByUserAndStatus(user, status);
+    }
+
 }

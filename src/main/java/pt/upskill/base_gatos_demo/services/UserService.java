@@ -44,4 +44,8 @@ public class UserService {
     public List<User> getVolunteers() {
         return userRepository.findByRole("volunteer");
     }
+
+    public User getUsername(String username) {
+        return userRepository.getUserByUsername(username);
+    }
 }

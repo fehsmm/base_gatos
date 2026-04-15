@@ -14,6 +14,9 @@ import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ReportRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.services.AdoptionService;
+import pt.upskill.base_gatos_demo.services.ReportService;
+import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -26,10 +29,16 @@ import java.util.List;
 public class AdopterController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    AdoptionRepository adoptionRepository;
+    AdoptionService adoptionService;
+
+    @Autowired
+    ReportService reportService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     CatRepository catRepository;
@@ -38,10 +47,11 @@ public class AdopterController {
     ReportRepository reportRepository;
 
 
+
     private void addLoggedUserToModel(Authentication authentication, Model model) {
         if (authentication != null) {
             String username = authentication.getName();
-            User user = userRepository.getUserByUsername(username);
+            User user = userService.getUsername(username);
             model.addAttribute("user", user);
         }
     }
@@ -50,12 +60,12 @@ public class AdopterController {
         addLoggedUserToModel(authentication, model);
 
         String username = authentication.getName();
-        User user = userRepository.getUserByUsername(username);
+        User user = userService.getUsername(username);
 
         if (user == null) {
             return "redirect:/auth/login";
         }
-        List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Aprovada");
+        List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
         model.addAttribute("adoptions", adoptions);
         return "adopter/adopter";
     }
@@ -67,8 +77,8 @@ public class AdopterController {
         }
 
         String username = authentication.getName();
-        User user = userRepository.getUserByUsername(username);
-        List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Aprovada");
+        User user = userService.getUsername(username);
+        List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
         model.addAttribute("adoptions", adoptions);
         model.addAttribute("user", user);
 
@@ -77,10 +87,9 @@ public class AdopterController {
 
     @GetMapping(value = "/post-adoption")
     public String postAdoption(Model model, Principal principal){
-            User user = userRepository.getUserByUsername(principal.getName());
+            User user = userService.getUsername(principal.getName());
 
-            List<Adoption> adoptions =
-                    adoptionRepository.findByUserAndStatus(user, "Aprovada");
+            List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
 
             List<Cat> cats = new ArrayList<>();
 
@@ -88,7 +97,7 @@ public class AdopterController {
                 cats.add(adoption.getCat());
             }
 
-            List<Report> reports = reportRepository.findByUser(user);
+            List<Report> reports = reportService.getUser(user);
 
             model.addAttribute("cats", cats);
             model.addAttribute("reports", reports);
