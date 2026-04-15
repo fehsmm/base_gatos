@@ -181,4 +181,12 @@ public class AdoptionService {
         return adoptionRepository.findByUserAndStatus(user, status);
     }
 
+    public void markAsRead(Long id){
+        Adoption adoption = adoptionRepository.findById(id).orElse(null);
+       if(adoption != null){
+           adoption.setRead(true);
+           adoptionRepository.save(adoption);
+       }
+    }
+
 }

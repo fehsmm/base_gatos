@@ -46,10 +46,10 @@ public class AdminController {
     AnnouncementService announcementService;
 
     @Autowired
-   AuthService authService;
+    AuthService authService;
 
-    @GetMapping(value="/")
-    public String admin(Model model){
+    @GetMapping(value = "/")
+    public String admin(Model model) {
         List<Cat> cats = catService.getRecentCats();
         int pendingApproval = userService.countPendingApproval();
         int lowStock = stockService.countLowStockItems();
@@ -63,19 +63,19 @@ public class AdminController {
 
     @GetMapping(value = "/manage-application")
     public String manageApplication(Model model,
-                                    @RequestParam (required = false) LocalDate dateStartFilter,
-                                    @RequestParam (required = false) LocalDate dateEndFilter,
-                                    @RequestParam (required = false) String statusFilter,
-                                    @RequestParam (required = false) Boolean unreadFilter){
-            List<Adoption> adoptionApps = adoptionService.getAdoptions(dateStartFilter, dateEndFilter, statusFilter, unreadFilter);
-            int pendingAdoptions = adoptionService.countPendingAdoptions();
-            model.addAttribute("adoptionApps", adoptionApps);
-            model.addAttribute("pendingAdoptions", pendingAdoptions);
-            return "admin/manage-application";
+                                    @RequestParam(required = false) LocalDate dateStartFilter,
+                                    @RequestParam(required = false) LocalDate dateEndFilter,
+                                    @RequestParam(required = false) String statusFilter,
+                                    @RequestParam(required = false) Boolean unreadFilter) {
+        List<Adoption> adoptionApps = adoptionService.getAdoptions(dateStartFilter, dateEndFilter, statusFilter, unreadFilter);
+        int pendingAdoptions = adoptionService.countPendingAdoptions();
+        model.addAttribute("adoptionApps", adoptionApps);
+        model.addAttribute("pendingAdoptions", pendingAdoptions);
+        return "admin/manage-application";
     }
 
     @GetMapping(value = "/manage-schedule")
-    public String manageSchedule(Model model){
+    public String manageSchedule(Model model) {
         LocalDate today = LocalDate.now();
         List<User> volunteers = userService.getVolunteers();
         int shiftCount = shiftService.getTotalShiftsForWeek(today);
@@ -87,7 +87,7 @@ public class AdminController {
             List<Shift> shifts = shiftService.getShiftsByDate(date);
             shifts.sort(Comparator.comparing(Shift::getStartTime)); //usa o getStartTime de cada Shift para comparar
             String formattedDate = date.format(formatter);
-            formattedDate = formattedDate.substring(0,1).toUpperCase() + formattedDate.substring(1);
+            formattedDate = formattedDate.substring(0, 1).toUpperCase() + formattedDate.substring(1);
             shiftsByDay.put(formattedDate, shifts);
         }
         Map<Long, Integer> completedTasks = new HashMap<>();
@@ -105,9 +105,9 @@ public class AdminController {
         model.addAttribute("completedTasks", completedTasks);
         model.addAttribute("totalTasks", totalTasks);
         String todayFormatted = LocalDate.now().format(formatter);
-        todayFormatted = todayFormatted.substring(0,1).toUpperCase() + todayFormatted.substring(1);
+        todayFormatted = todayFormatted.substring(0, 1).toUpperCase() + todayFormatted.substring(1);
         String tomorrowFormatted = LocalDate.now().plusDays(1).format(formatter);
-        tomorrowFormatted =  tomorrowFormatted.substring(0,1).toUpperCase() + tomorrowFormatted.substring(1);
+        tomorrowFormatted = tomorrowFormatted.substring(0, 1).toUpperCase() + tomorrowFormatted.substring(1);
         model.addAttribute("todayFormatted", todayFormatted);
         model.addAttribute("tomorrowFormatted", tomorrowFormatted);
         return "admin/manage-schedule";
@@ -115,8 +115,8 @@ public class AdminController {
 
     @GetMapping(value = "/manage-stock")
     public String manageStock(Model model,
-                              @RequestParam (required = false) String productTypeFilter,
-                              @RequestParam (required = false) String tagFilter){
+                              @RequestParam(required = false) String productTypeFilter,
+                              @RequestParam(required = false) String tagFilter) {
         List<Stock> stockList = stockService.getAllProducts(productTypeFilter, tagFilter);
         int lowStock = stockService.countLowStockItems();
         List<Stock> lowStockItems = stockService.getLowStockItems();
@@ -129,7 +129,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-user")
-    public String manageUser(Model model){
+    public String manageUser(Model model) {
         List<User> pendingUsers = userService.findPendingApproval();
         int pendingApproval = userService.countPendingApproval();
         model.addAttribute("pendingUsers", pendingUsers);
@@ -139,9 +139,9 @@ public class AdminController {
 
     @GetMapping(value = "/post-announcement")
     public String postAnnouncement(Model model,
-                                   @RequestParam (required = false) LocalDate dateStartFilter,
-                                   @RequestParam (required = false) LocalDate dateEndFilter,
-                                   @RequestParam (required = false) @Nullable String priorityFilter){
+                                   @RequestParam(required = false) LocalDate dateStartFilter,
+                                   @RequestParam(required = false) LocalDate dateEndFilter,
+                                   @RequestParam(required = false) @Nullable String priorityFilter) {
         User user = authService.getAuthenticatedUser();
         List<Announcement> announcements = announcementService.getAnnouncements(dateStartFilter, dateEndFilter, priorityFilter);
         model.addAttribute("announcements", announcements);
@@ -150,12 +150,14 @@ public class AdminController {
     }
 
     @GetMapping(value = "/vet")
-    public String viewClinicalInformation(){ return "admin/vet";}
+    public String viewClinicalInformation() {
+        return "admin/vet";
+    }
 
     @GetMapping(value = "/manage-cat")
     public String manageCat(Model model,
-                            @RequestParam (required = false) String nameFilter,
-                            @RequestParam (required = false) String statusFilter){
+                            @RequestParam(required = false) String nameFilter,
+                            @RequestParam(required = false) String statusFilter) {
         List<Cat> cats = catService.listCats(nameFilter, statusFilter);
         int availableCats = catService.countAvailableCats();
         int adoptedCats = catService.countAdoptedCats();
@@ -170,7 +172,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/view-shift-note")
-    public String viewShiftNote(Model model){
+    public String viewShiftNote(Model model) {
         List<Note> shiftNotes = noteService.getNotes();
         int unreadNotes = noteService.countUnreadNotes();
         model.addAttribute("shiftNotes", shiftNotes);
@@ -211,7 +213,7 @@ public class AdminController {
 
     @PostMapping(value = "/delete-cat")
     public String deleteCat(@RequestParam("catId") Long catId,
-                              RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes) {
         catService.deleteCat(catId);
         redirectAttributes.addFlashAttribute("success", "Gato eliminado com sucesso!");
         return "redirect:/admin/manage-cat";
@@ -219,7 +221,7 @@ public class AdminController {
 
     @PostMapping("/update-cat")
     public String updateCat(@ModelAttribute EditCatModel model,
-                              RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes) {
         catService.updateCat(model);
         redirectAttributes.addFlashAttribute("success", "Gato atualizado com sucesso!");
         return "redirect:/admin/manage-cat";
@@ -234,7 +236,7 @@ public class AdminController {
 
     @PostMapping(value = "/delete-announcement")
     public String deleteAnnouncement(@RequestParam("announcementId") Long announcementId,
-                            RedirectAttributes redirectAttributes) {
+                                     RedirectAttributes redirectAttributes) {
         announcementService.deleteAnnouncement(announcementId);
         redirectAttributes.addFlashAttribute("success", "Comunicado eliminado com sucesso!");
         return "redirect:/admin/post-announcement";
@@ -242,7 +244,7 @@ public class AdminController {
 
     @PostMapping("/update-announcement")
     public String updateAnnouncement(@ModelAttribute EditAnnouncementModel model,
-                            RedirectAttributes redirectAttributes) {
+                                     RedirectAttributes redirectAttributes) {
         announcementService.updateAnnouncement(model);
         redirectAttributes.addFlashAttribute("success", "Comunicado atualizado com sucesso!");
         return "redirect:/admin/post-announcement";
@@ -257,7 +259,7 @@ public class AdminController {
 
     @PostMapping(value = "/delete-stock")
     public String deleteStock(@RequestParam("stockId") Long stockId,
-                                     RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         stockService.deleteStock(stockId);
         redirectAttributes.addFlashAttribute("success", "Produto eliminado com sucesso!");
         return "redirect:/admin/manage-stock";
@@ -265,7 +267,7 @@ public class AdminController {
 
     @PostMapping("/update-stock")
     public String updateStock(@ModelAttribute EditStockModel model,
-                                     RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         stockService.updateStock(model);
         redirectAttributes.addFlashAttribute("success", "Produto atualizado com sucesso!");
         return "redirect:/admin/manage-stock";
@@ -273,8 +275,8 @@ public class AdminController {
 
     @PostMapping("/use-stock")
     public String useStock(@RequestParam("id") Long stockId,
-                                     @RequestParam("value") int value,
-                                     RedirectAttributes redirectAttributes) {
+                           @RequestParam("value") int value,
+                           RedirectAttributes redirectAttributes) {
         stockService.useStock(stockId, value);
         redirectAttributes.addFlashAttribute("success", "Uso registado com sucesso!");
         return "redirect:/admin/manage-stock";
@@ -287,20 +289,21 @@ public class AdminController {
     }
 
     @PostMapping("/adoptions/{id}/reject")
-    public String reject(@PathVariable Long id) {
-        adoptionService.rejectAdoption(id, "Rejeitado");
+    public String reject(@PathVariable Long id,
+                         @RequestParam("reason") String reason) {
+        adoptionService.rejectAdoption(id, reason);
         return "redirect:/admin/manage-application";
     }
+
+    @PostMapping("/mark-as-read/{id}")
+    @ResponseBody
+    public void markAsRead(@PathVariable Long id) {
+        adoptionService.markAsRead(id);
+    }
+
+}
 
     //post mapping aceitar/rejeitar voluntarios
     //eliminar user
     //filtros na pagina de manage users
 
-    //post mapping add stock
-    //post mapping registar uso
-    //post mapping atualizar?
-
-    //put para atualizar
-    //delete para excluir
-    //calcular baixo stock
-}

@@ -114,58 +114,63 @@
 
                 <div class="card-body">
                     <c:forEach var="app" items="${adoptionApps}">
-                        <div class="shift-card ${!app.read ? 'alert-info' : ''}">
+                        <div class="shift-card ${!app.read ? 'info-announcement' : ''}">
 
-                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
-                            <div>
-                                <div style="font-weight:500;font-size:1rem; margin-bottom:0.25rem">
-                                        ${app.applicantName}
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.35rem">
+                            <div style="display:flex; flex-direction:column; gap:0.35rem;">
 
-                                    <span class="badge
+                                <div style="font-size:1rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                                        <strong>${app.applicantName}</strong>
+
+                                        <span class="badge
                                                 ${app.status == 'Pendente' ? 'badge-yellow' :
                                                   (app.status == 'Aprovada' ? 'badge-green' :
                                                   (app.status == 'Rejeitada' ? 'badge-red' : 'badge-gray'))}">
-                                        ${app.status}
-                                    </span>
+                                                ${app.status}
+                                        </span>
 
-                                    <span class="badge
+                                        <span class="badge
                                         ${!app.read ? 'badge-blue' : 'badge-gray'}">
-                                        ${!app.read ? 'Nova' : 'Lida'}
-                                    </span>
-
-                                   <!--ver se aqui posso tirar o style inline quando testar-->
-                                    <div style="font-size:0.9rem; margin-bottom:0.25rem;">
-                                        Gato a adotar: <strong>${app.cat.name}</strong>
-                                    </div>
-
-                                            <div class="text-sm text-gray" style="margin-bottom: 10px">
-                                                Submetido a ${app.formattedRequestDate}
-                                            </div>
-
-                                            <c:if test="${app.reviewDate != null}">
-                                                <div class="text-sm text-gray" style="margin-bottom: 10px">
-                                                    Avaliado a ${app.formattedReviewDate}
-                                                </div>
-                                            </c:if>
+                                                ${!app.read ? 'Nova' : 'Lida'}
+                                        </span>
                                 </div>
+
+                                <div style="font-size:0.9rem">
+                                    Gato a adotar: ${app.cat.name}
+                                </div>
+
+                                <div class="text-sm text-gray">
+                                    Submetido a ${app.formattedRequestDate}
+                                </div>
+
+                                <c:if test="${app.reviewDate != null}">
+                                    <div class="text-sm text-gray">
+                                        Avaliado a ${app.formattedReviewDate}
+                                    </div>
+                                </c:if>
                             </div>
 
                             <div style="display:flex; gap:.5rem;">
                                 <button class="btn btn-sm btn-outline-secondary"
                                         onclick="openViewModal(${app.id})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                     Ver Candidatura
                                 </button>
 
                                 <button class="btn btn-sm btn-outline-success"
                                         onclick="acceptApplication(${app.id}, ${app.read})">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
+                                    Aceitar Candidatura
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger"
                                         onclick="rejectApplication(${app.id}, ${app.read})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>                                </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
+                                    Rejeitar Candidatura
+                                </button>
                             </div>
 
                         </div>
+
                         </div>
                     </c:forEach>
 
@@ -225,6 +230,129 @@
     </div>
 </main>
 </div>
+
+<div id="viewModal" class="modal-overlay">
+    <div class="modal-content">
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+            <h4>Candidatura</h4>
+            <button onclick="closeViewModal()">✕</button>
+        </div>
+
+        <div style="font-size:0.9rem;">
+
+            <p><strong>Nome:</strong> <span id="viewName"></span></p>
+            <p><strong>Email:</strong> <span id="viewEmail"></span></p>
+            <p><strong>Telefone:</strong> <span id="viewPhone"></span></p>
+            <p><strong>Morada:</strong> <span id="viewAddress"></span></p>
+
+            <p><strong>Motivação:</strong></p>
+            <div id="viewReason"></div>
+
+            <p><strong>Experiência:</strong></p>
+            <div id="viewExperience"></div>
+
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-top:1rem;">
+            <button class="btn btn-danger" onclick="rejectApplicationFromModal()">Rejeitar</button>
+            <button class="btn btn-success" onclick="acceptApplicationFromModal()">Aceitar</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="rejectModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:500px;">
+
+        <h5>Rejeitar Candidatura</h5>
+
+        <p class="text-muted">
+            Indica o motivo da rejeição:
+        </p>
+
+        <form id="rejectForm" method="POST">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <textarea name="reason" class="form-control" rows="4"
+                      placeholder="Ex: Não reúne condições..." required></textarea>
+
+            <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-top:1rem;">
+                <button type="button" class="btn btn-secondary" onclick="closeRejectModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-danger">
+                    Confirmar Rejeição
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div id="warningModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:400px; max-height: fit-content">
+
+        <h5 class="mb-3">Atenção</h5>
+
+        <p class="text-muted">
+            Esta candidatura ainda não foi analisada. Tem a certeza que quer proceder?
+        </p>
+
+        <div style="display:flex; justify-content:flex-end; gap:.5rem;">
+            <button class="btn btn-secondary" onclick="closeWarningModal()">Cancelar</button>
+            <button class="btn btn-danger" onclick="confirmAction()">Continuar</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openViewModal(id) {
+        fetch('/admin/application/mark-as-read/' + id, {
+            method: 'POST'
+        });
+        document.getElementById("viewModal").classList.add("open");
+    }
+
+    function openRejectModal(id, isRead) {
+        if (!isRead) {
+            openWarningModal(id, 'reject');
+            return;
+        }
+        const form = document.getElementById("rejectForm");
+        form.action = "/admin/adoptions/" + id + "/reject";
+        document.getElementById("rejectModal").classList.add("open");
+    }
+
+    function closeRejectModal() {
+        document.getElementById("rejectModal").classList.remove("open");
+    }
+
+    let actionId = null;
+    let actionType = null;
+
+    function openWarningModal(id, type) {
+        actionId = id;
+        actionType = type;
+        document.getElementById("warningModal").classList.add("open");
+    }
+
+    function closeWarningModal() {
+        document.getElementById("warningModal").classList.remove("open");
+    }
+
+    function confirmAction() {
+        if (actionType === 'accept') {
+            window.location.href = '/admin/application/accept/' + actionId;
+        } else {
+            window.location.href = '/admin/application/reject/' + actionId;
+        }
+    }
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

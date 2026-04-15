@@ -266,6 +266,7 @@ tr:hover td { background: #f9fafb; }
 .shift-card { border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem; }
 .shift-card.error-announcement { background: #fff7f7; color: black; border-color: #fecaca; }
 .shift-card.warning-announcement { background: #fdfce6; color: black; border-color: #fef08a; }
+.shift-card.info-announcement { background: #f0f4ff; color: black; border: 1px solid #c2ddff; }
 
 /* ---- Color helpers ---- */
 .text-orange { color: #f97316; }
