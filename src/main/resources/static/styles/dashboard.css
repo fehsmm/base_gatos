@@ -340,7 +340,6 @@ tr:hover td { background: #f9fafb; }
     .hide-mobile { display: none !important; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2rem; }
-    .sidebar { display: none; }
     .admin-layout { flex-direction: column; }
     .mobile-nav-bar {
         background: #111827;
@@ -376,3 +375,89 @@ tr:hover td { background: #f9fafb; }
 .priority-high { border-color:#fdba74; background:#fffbf5; }
 .user-row { display:flex; align-items:center; justify-content:space-between; padding:.85rem 1rem; background:#f9fafb; border-radius:.5rem; margin-bottom:.5rem; flex-wrap:wrap; gap:.75rem; }
 .vet-stat { display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.25rem; }
+
+/* ===== MOBILE SIDEBAR / HAMBURGER MENU ===== */
+
+/* Hamburger button */
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Close button inside sidebar - mobile only */
+.sidebar-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Dark overlay behind sidebar */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+/* Prevent body scroll when sidebar is open */
+.sidebar-no-scroll {
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+
+    /* Show close button inside sidebar on mobile */
+    .sidebar-close-btn {
+        display: block;
+    }
+
+    /* Sidebar hidden by default on mobile - slides in from left */
+    .sidebar {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: -16rem;
+        height: 100vh;
+        z-index: 100;
+        transition: left 0.3s ease;
+        width: 16rem;
+    }
+
+    /* Sidebar open state */
+    .sidebar.sidebar-open {
+        left: 0;
+    }
+
+    /* Show overlay when sidebar is open */
+    .sidebar-overlay.sidebar-overlay-open {
+        display: block;
+    }
+
+    /* Sidebar header flex row to fit logo + close button */
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Main content takes full width on mobile */
+    .admin-main {
+        width: 100%;
+    }
+
+    /* Admin layout stacks vertically on mobile */
+    .admin-layout {
+        flex-direction: column;
+    }
+}
