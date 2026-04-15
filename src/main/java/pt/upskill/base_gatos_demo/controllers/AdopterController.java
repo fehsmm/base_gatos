@@ -35,16 +35,6 @@ public class AdopterController {
     @Autowired
     ReportService reportService;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    CatRepository catRepository;
-
-    @Autowired
-    ReportRepository reportRepository;
-
-
 
     private void addLoggedUserToModel(Authentication authentication, Model model) {
         if (authentication != null) {
@@ -109,20 +99,8 @@ public class AdopterController {
                                Principal principal,
                                RedirectAttributes redirectAttributes) {
 
-        User user = userRepository.getUserByUsername(principal.getName());
-        Cat cat = catRepository.findById(reportModel.getCatId()).orElse(null);
-
-        Report report = new Report();
-        report.setUser(user);
-        report.setCat(cat);
-        report.setStatus(reportModel.getStatus());
-        report.setNotes(reportModel.getNotes());
-        report.setHealth(reportModel.getHealth());
-
-        reportRepository.save(report);
-
+        reportService.processOfReport(reportModel, principal.getName());
         redirectAttributes.addFlashAttribute("success", "Relatório enviado!");
-
         return "redirect:/adopter/post-adoption";
     }
 
