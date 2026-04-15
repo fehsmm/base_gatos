@@ -133,6 +133,24 @@
 
                         </c:forEach>
 
+                        <c:if test="${not empty success}">
+                            <div class="custom-alert success">
+                                    ${success}
+                            </div>
+                            <!--Mostra alerta, espera 4 segundos e esconde...-->
+                            <script>
+                                setTimeout(() => {
+                                    document.querySelector('.custom-alert').style.display = 'none';
+                                }, 4000);
+                            </script>
+                        </c:if>
+
+                        <c:if test="${not empty error}">
+                            <div class="custom-alert error">
+                                    ${error}
+                            </div>
+                        </c:if>
+
                     </div>
 
                 </div>
