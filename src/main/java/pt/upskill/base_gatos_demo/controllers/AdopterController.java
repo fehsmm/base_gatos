@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.upskill.base_gatos_demo.entities.*;
+import pt.upskill.base_gatos_demo.models.ReportModel;
 import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ReportRepository;
@@ -107,22 +105,19 @@ public class AdopterController {
 
 
     @PostMapping("/reports")
-    public String submitReport(@RequestParam Long catId,
-                               @RequestParam String status,
-                               @RequestParam String notes,
-                               @RequestParam(required = false) String health,
+    public String submitReport(@ModelAttribute ReportModel reportModel,
                                Principal principal,
                                RedirectAttributes redirectAttributes) {
 
         User user = userRepository.getUserByUsername(principal.getName());
-        Cat cat = catRepository.findById(catId).orElse(null);
+        Cat cat = catRepository.findById(reportModel.getCatId()).orElse(null);
 
         Report report = new Report();
         report.setUser(user);
         report.setCat(cat);
-        report.setStatus(status);
-        report.setNotes(notes);
-        report.setHealth(health);
+        report.setStatus(reportModel.getStatus());
+        report.setNotes(reportModel.getNotes());
+        report.setHealth(reportModel.getHealth());
 
         reportRepository.save(report);
 
