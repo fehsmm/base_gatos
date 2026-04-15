@@ -187,14 +187,16 @@
 
                             <div class="text-sm text-gray" style="margin-bottom: 10px">
                                     Por ${ann.createdBy} • ${ann.formattedCreatedAt}
-                            </div style="margin-bottom:10px">
-                                ${ann.description}
-                            <div>
+                            </div>
 
+                                <div>
+                                        ${ann.description}
+                                </div>
+
+                            <div>
                             <c:if test="${ann.updatedAt != null}">
                                 <div class="text-gray text-xs" style="margin-top: 10px">Atualizado por ${ann.lastUpdatedBy} • ${ann.formattedUpdatedAt}</div>
                             </c:if>
-
                             </div>
                         </div>
                     </c:forEach>

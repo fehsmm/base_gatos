@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "adoption")
@@ -38,7 +39,7 @@ public class Adoption {
     private String status = "Pendente"; // Valor inicial por defeito
     private LocalDateTime requestDate = LocalDateTime.now();
     private LocalDate adoptionDate;
-    private LocalDateTime ReviewDate;
+    private LocalDateTime reviewDate;
     @Column(name = "is_read")
     private boolean read;
 
@@ -124,6 +125,15 @@ public class Adoption {
         this.requestDate = requestDate;
     }
 
+    public String getFormattedRequestDate() {
+        if(requestDate == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return requestDate.format(formatter);
+        }
+    }
+
     public LocalDate getAdoptionDate() {
         return adoptionDate;
     }
@@ -133,11 +143,20 @@ public class Adoption {
     }
 
     public LocalDateTime getReviewDate() {
-        return ReviewDate;
+        return reviewDate;
     }
 
     public void setReviewDate(LocalDateTime reviewDate) {
-        ReviewDate = reviewDate;
+        this.reviewDate = reviewDate;
+    }
+
+    public String getFormattedReviewDate() {
+        if(reviewDate == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return reviewDate.format(formatter);
+        }
     }
 
     public User getUser() {
@@ -153,7 +172,7 @@ public class Adoption {
     }
 
     public void setRead(boolean read) {
-        if(ReviewDate == null) {
+        if(reviewDate == null) {
             read = false;
         } else {
             read = true;
