@@ -153,12 +153,12 @@
                                 </div>
 
                                 <div style="margin-top:.5rem;">
-                                        ${note.resumo}
+                                        ${note.summary}
                                 </div>
 
-                                <c:if test="${not empty note.ocorrencias}">
+                                <c:if test="${not empty note.importantObservations}">
                                     <div style="margin-top:.5rem;">
-                                        <strong>Ocorrências:</strong> ${note.ocorrencias}
+                                        <strong>Ocorrências:</strong> ${note.importantObsrevations}
                                     </div>
                                 </c:if>
                             </div>

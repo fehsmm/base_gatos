@@ -39,6 +39,7 @@ public class Adoption {
     private LocalDateTime requestDate = LocalDateTime.now();
     private LocalDate adoptionDate;
     private LocalDateTime ReviewDate;
+    @Column(name = "is_read")
     private boolean read;
 
 
