@@ -51,7 +51,6 @@
                         <select name="role">
                             <option value="adopter">Adotar um gato</option>
                             <option value="volunteer">Ser voluntário</option>
-                            <option value="admin">Admin</option>
                         </select>
                     <div class="bg-blue-50 mb-4">
                         <p class="text-sm" style="color:#4b5563">Contas de voluntário requerem aprovação do administrador antes de serem ativadas.</p>
