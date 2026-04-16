@@ -29,6 +29,19 @@ public class MedicationRecord {
     private String createdBy;
     private String updatedBy;
 
+    private LocalDate lastAdministeredDate;
+
+    public boolean isAdministeredToday() {
+        return lastAdministeredDate != null && lastAdministeredDate.equals(LocalDate.now());
+    }
+
+    public LocalDate getLastAdministeredDate() {
+        return lastAdministeredDate;
+    }
+    public void setLastAdministeredDate(LocalDate lastAdministeredDate) {
+        this.lastAdministeredDate = lastAdministeredDate;
+    }
+
     public boolean isActiveToday() {
         LocalDate today = LocalDate.now();
         boolean started = startDate == null || !today.isBefore(startDate);

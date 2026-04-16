@@ -28,19 +28,16 @@ public class MedicationRecordService {
     public List<MedicationRecord> getBycat(Long catId) {
         return medRepo.findByCatId(catId);
     }
-
     public List<MedicationRecord> getActiveTodayByCat(Long catId) {
         return medRepo.findByCatId(catId).stream()
                 .filter(MedicationRecord::isActiveToday)
                 .collect(Collectors.toList());
     }
-
     public List<MedicationRecord> getAllActiveToday() {
         return medRepo.findAll().stream()
                 .filter(MedicationRecord::isActiveToday)
                 .collect(Collectors.toList());
     }
-
     public void createMedication(Long catId, CreateMedicationRecordModel model) {
         Cat cat = catRepo.findById(catId).orElseThrow();
         MedicationRecord med = new MedicationRecord();
@@ -55,7 +52,6 @@ public class MedicationRecordService {
         med.setCreatedBy(user);
         medRepo.save(med);
     }
-
     public void updateMedication(EditMedicationRecordModel model) {
         MedicationRecord med = getById(model.getId());
         String user = authService.getAuthenticatedUser().getName();
@@ -68,11 +64,14 @@ public class MedicationRecordService {
         med.setUpdatedBy(user);
         medRepo.save(med);
     }
-
+    public void markAdministered(Long id) {
+        MedicationRecord med = medRepo.findById(id).orElseThrow();
+        med.setLastAdministeredDate(LocalDate.now());
+        medRepo.save(med);
+    }
     public void deleteMedication(Long id) {
         medRepo.deleteById(id);
     }
-
     public MedicationRecord getById(Long id) {
         return medRepo.findById(id).orElse(null);
     }

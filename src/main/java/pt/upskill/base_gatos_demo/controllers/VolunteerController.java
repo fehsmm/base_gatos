@@ -215,13 +215,12 @@ public class VolunteerController {
         taskService.markCompleted(id);
         return "redirect:/volunteer/view-shift";
     }
+
+    @PostMapping("/administer-medication/{id}")
+    public String administerMedication(@PathVariable Long id) {
+        medicationRecordService.markAdministered(id);
+        return "redirect:/volunteer/view-shift";
+    }
 }
 
-
-//marcar tarefas como concluidas
-//nota de horario / comentario
-
-//post mapping pedido de stock
-
-//post mapping deixar notas de turno
 
