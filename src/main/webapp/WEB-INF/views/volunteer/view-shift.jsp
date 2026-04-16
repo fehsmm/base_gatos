@@ -13,7 +13,7 @@
 
     <c:set var="activePage" value="view-shift" />
     <c:set var="dashboardUrl" value="/volunteer/" />
-    <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
+    <%@ include file="../fragments/adminSidebar.jsp" %>
     <main class="flex-1 page">
         <c:if test="${previousNote != null && !previousNote.read && (not empty previousNote.summary || not empty previousNote.importantObservations)}">
             <div id="modalNoteAnterior" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%;

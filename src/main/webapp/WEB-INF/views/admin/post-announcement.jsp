@@ -13,7 +13,7 @@
 
     <c:set var="activePage" value="post-announcement" />
     <c:set var="dashboardUrl" value="/admin/" />
-    <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
+    <%@ include file="../fragments/adminSidebar.jsp" %>
 
 <main class="admin-main">
 

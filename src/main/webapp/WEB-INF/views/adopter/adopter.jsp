@@ -13,7 +13,7 @@
 
     <c:set var="activePage" value="dashboard" />
         <c:set var="dashboardUrl" value="/adopter/" />
-    <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
+    <%@ include file="../fragments/adminSidebar.jsp" %>
 
     <div class="container">
         <div class="container-fluid p-4">

@@ -13,7 +13,7 @@
 
     <c:set var="activePage" value="request-stock" />
     <c:set var="dashboardUrl" value="/volunteer/" />
-    <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
+    <%@ include file="../fragments/adminSidebar.jsp" %>
 
     <main class="flex-1 page">
         <div class="container-fluid px-3 py-3">

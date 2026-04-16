@@ -13,7 +13,7 @@
 
     <c:set var="activePage" value="post-adoption" />
     <c:set var="dashboardUrl" value="/adopter/" />
-    <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
+    <%@ include file="../fragments/adminSidebar.jsp" %>
 
     <main class="container p-4">
         <div class="content">
