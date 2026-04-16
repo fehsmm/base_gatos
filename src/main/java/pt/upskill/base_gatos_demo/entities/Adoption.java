@@ -143,6 +143,15 @@ public class Adoption {
         this.adoptionDate = adoptionDate;
     }
 
+    public String getFormattedAdoptionDate() {
+        if(adoptionDate == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return adoptionDate.format(formatter);
+        }
+    }
+
     public LocalDateTime getReviewDate() {
         return reviewDate;
     }

@@ -53,14 +53,14 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Observações</label>
+                                <label>Descrição Geral do Estado do Gato: </label>
                                 <textarea class="form-control" name="notes" placeholder="Ex: Tem brincado muito, já não tem medo do cão,..."></textarea>
                             </div>
 
-                           <!-- <div class="mb-3">
-                                <label>Problemas de Saúde</label>
-                                <textarea class="form-control" name="health"></textarea>
-                            </div>-->
+                           <div class="mb-3">
+                                <label>Observações de Saúde Relevantes: </label>
+                                <textarea class="form-control" name="health" placeholder="Ex: Foi diagnosticada com x doença, mas já está a fazer tratamento."></textarea>
+                            </div>
 
                             <button class="btn btn-primary w-100">Enviar Relatório</button>
                         </form>
@@ -81,7 +81,7 @@
 
                                 <div class="d-flex justify-content-between">
                                     <b>${report.cat.name}</b>
-                                    <span class="text-muted">${report.date}</span>
+                                    <span class="text-muted">${report.formattedReportDate}</span>
                                 </div>
 
                                 <p>
@@ -89,6 +89,8 @@
                                 </p>
 
                                 <p class="mt-2">${report.notes}</p>
+
+                                <p class="mt-2">${report.health}</p>
 
                             </div>
 
