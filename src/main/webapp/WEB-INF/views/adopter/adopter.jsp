@@ -31,7 +31,7 @@
 
             <div class="row g-4 mb-4">
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card p-3 shadow-sm border-0 rounded-4">
                         <div class="d-flex align-items-center">
 
@@ -43,19 +43,19 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card p-3 shadow-sm border-0 rounded-4">
                         <div class="d-flex align-items-center">
 
                             <div>
-                                <h4 class="mb-0">0</h4>
+                                <h4 class="mb-0">0ALTERAR</h4>
                                 <small class="text-muted">Relatório Pendente</small>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <!--<div class="col-md-4">
                     <div class="card p-3 shadow-sm border-0 rounded-4">
                         <div class="d-flex align-items-center">
 
@@ -64,7 +64,7 @@
                                 <small class="text-muted">Taxa de Felicidade</small>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
             </div>
@@ -78,7 +78,7 @@
                     É hora de partilhar como estão os seus gatinhos!
                 </p>
 
-                <a href="/adopter/post-adoption" class="btn btn-dark">
+                <a href="/adopter/post-adoption" class="btn btn-primary">
                     Preencher Relatório
                 </a>
             </div>
@@ -135,25 +135,25 @@
 
                 <h5 class="fw-bold mb-3">Ações Rápidas</h5>
 
-                <div class="row g-3">
+                <div class="row">
 
-                    <div class="col-md-4">
-                        <a href="/adopter/adopted-cat-list" class="btn btn-outline-dark w-100">
+                    <div class="col-md-6">
+                        <a href="/adopter/adopted-cat-list" class="btn btn-primary w-100">
                             Ver Todos os Meus Gatos
                         </a>
                     </div>
 
-                    <div class="col-md-4">
-                        <a href="/adopter/post-adoption" class="btn btn-outline-dark w-100">
+                    <div class="col-md-6">
+                        <a href="/adopter/post-adoption" class="btn btn-primary w-100">
                             Preencher Relatório
                         </a>
                     </div>
 
-                    <div class="col-md-4">
+                    <!--<div class="col-md-4">
                         <button class="btn btn-outline-dark w-100">
                             Agendar Consulta
                         </button>
-                    </div>
+                    </div>-->
 
                 </div>
 
