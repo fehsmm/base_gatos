@@ -49,6 +49,8 @@ public class AdminController {
     AuthService authService;
     @Autowired
     private ReportService reportService;
+    @Autowired
+    MedicationRecordService medicationRecordService; //Fernanda adicionou
 
     @GetMapping(value = "/")
     public String admin(Model model) {
@@ -112,6 +114,14 @@ public class AdminController {
         tomorrowFormatted = tomorrowFormatted.substring(0, 1).toUpperCase() + tomorrowFormatted.substring(1);
         model.addAttribute("todayFormatted", todayFormatted);
         model.addAttribute("tomorrowFormatted", tomorrowFormatted);
+        model.addAttribute("activeMedications", medicationRecordService.getAllActiveToday()); //Fernanda add para ver as medicações realizadas
+        List<MedicationRecord> meds = medicationRecordService.getAllActiveToday();
+        Map<String, List<MedicationRecord>> medsByCat = new LinkedHashMap<>();
+        for (MedicationRecord med : meds) {
+            String catName = med.getCat().getName();
+            medsByCat.computeIfAbsent(catName, k -> new ArrayList<>()).add(med);
+        }
+        model.addAttribute("medsByCat", medsByCat);
         return "admin/manage-schedule";
     }
 
