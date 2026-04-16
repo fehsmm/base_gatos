@@ -102,6 +102,27 @@
                                                 Registado por ${med.createdBy}
                                             </div>
                                         </div>
+                                            //Confirmar se foi realizada a Medicação
+                                        <div style="margin-top:0.5rem;">
+                                            <c:choose>
+                                                <c:when test="${med.administeredToday}">
+                                                    <span style="font-size:0.85rem; color:#16a34a; font-weight:600;
+                                                    background:#dcfce7; padding:0.25rem 0.75rem;border-radius:999px;">
+                                                        <img src="/icons/checkicon.svg" width="14px" height="14px"/> Administrada hoje
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${med.lastAdministeredDate != null}">
+                                                    <span style="font-size:0.8rem; color:#6b7280;">
+                                                        Última administração: <strong>${med.lastAdministeredDate}</strong>
+                                                    </span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span style="font-size:0.8rem; color:#dc2626;">
+                                                        Ainda não administrada hoje
+                                                    </span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
 
                                         <div style="width:100px; text-align:right; display:flex; justify-content:flex-end; gap:.5rem;">
 
