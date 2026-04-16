@@ -61,7 +61,7 @@
                                     <div>
                                         <div style="font-weight:600;"><img src="/icons/clockcalendar.svg" width="20px" height="20px"/> ${shift.date}</div>
                                         <div style="color:#9ca3af; font-size:0.85rem;">
-                                            <img src="/icons/alarm-clock.svg" width="20px" height="20px"/> ${shift.startTime} — ${shift.endTime} &nbsp;•&nbsp;
+                                            <img src="/icons/clock.svg" width="20px" height="20px"/> ${shift.startTime} — ${shift.endTime} &nbsp;•&nbsp;
                                             <c:forEach var="vol" items="${shift.volunteers}" varStatus="s">
                                                 ${vol.name}<c:if test="${!s.last}">, </c:if>
                                             </c:forEach>
