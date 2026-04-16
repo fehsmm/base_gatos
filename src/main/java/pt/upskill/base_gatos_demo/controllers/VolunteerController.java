@@ -4,18 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pt.upskill.base_gatos_demo.entities.Announcement;
-import pt.upskill.base_gatos_demo.entities.Cat;
-import pt.upskill.base_gatos_demo.entities.Shift;
-import pt.upskill.base_gatos_demo.entities.User;
+import pt.upskill.base_gatos_demo.entities.*;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 import pt.upskill.base_gatos_demo.services.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import java.util.stream.Collectors;
 
@@ -109,7 +105,13 @@ public class VolunteerController {
         if (!todayShifts.isEmpty()) {
             model.addAttribute("todayShift", todayShifts.get(0));
         }
-        model.addAttribute("activeMedications", medicationRecordService.getAllActiveToday());
+        List<MedicationRecord> meds = medicationRecordService.getAllActiveToday();
+        Map<String, List<MedicationRecord>> medsByCat = new LinkedHashMap<>();
+        for (MedicationRecord med : meds) {
+            String catName = med.getCat().getName();
+            medsByCat.computeIfAbsent(catName, k -> new ArrayList<>()).add(med);
+        }
+        model.addAttribute("medsByCat", medsByCat);
         return "volunteer/view-shift";
     }
 

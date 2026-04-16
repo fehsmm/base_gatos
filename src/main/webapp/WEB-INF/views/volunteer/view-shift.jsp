@@ -11,8 +11,8 @@
 <body>
 <div class="admin-layout">
 
-    <c:set var="activePage" value="view-shift" />
-    <c:set var="dashboardUrl" value="/volunteer/" />
+    <c:set var="activePage" value="view-shift"/>
+    <c:set var="dashboardUrl" value="/volunteer/"/>
     <%@ include file="../fragments/adminSidebar.jsp" %>
     <main class="flex-1 page">
         <c:if test="${previousNote != null && !previousNote.read && (not empty previousNote.summary || not empty previousNote.importantObservations)}">
@@ -138,61 +138,66 @@
                         </div>
 
                         <c:if test="${todayShift.startedAt != null && todayShift.endedAt == null}">
-                            <c:if test="${not empty activeMedications}">
+                            <c:if test="${not empty medsByCat}">
                                 <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:8px;
-                padding:1rem; margin-bottom:1.5rem;">
+                                padding:1rem; margin-bottom:1.5rem;">
                                     <div style="font-weight:700; color:#dc2626; margin-bottom:0.75rem; font-size:1rem;">
                                         <img src="/icons/medicine.svg" width="20px" height="20px"/> Medicações para hoje
                                     </div>
-                                    <c:forEach var="med" items="${activeMedications}">
-                                        <div style="background:white; border-radius:6px; padding:0.75rem; margin-bottom:0.5rem; border-left:3px solid
-                                            ${med.administeredToday ? '#16a34a' : '#dc2626'};">
-                                            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
-                                                <div style="flex:1;">
-                                                    <div style="font-size:0.95rem; margin-bottom:0.25rem;">
-                                                        <img src="/icons/cat.svg" width="20px" height="20px"/>
-                                                        <strong>${med.cat.name}</strong> — ${med.medicationName}
-                                                    </div>
-                                                    <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
-                                                        Dose: <strong style="color:#1f1f1f;">${med.dose}</strong>
-                                                    </div>
-                                                    <c:if test="${not empty med.storageLocation}">
-                                                        <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem;">
-                                                            Localização: <strong>${med.storageLocation}</strong>
-                                                        </div>
-                                                    </c:if>
-                                                    <div style="font-size:0.85rem; color:#6b7280;">
-                                                        Até: ${med.formattedEndDate}
-                                                    </div>
-                                                    <c:if test="${not empty med.notes}">
-                                                        <div style="font-size:0.85rem; color:#f97316; font-weight:700; margin-top:0.25rem;">
-                                                            <img src="/icons/warning.svg" width="20px" height="20px"/> ${med.notes}
-                                                        </div>
-                                                    </c:if>
-                                                </div>
 
-                                                <div style="flex-shrink:0; display:flex; align-items:center;">
-                                                    <c:choose>
-                                                        <c:when test="${med.administeredToday}">
-                                                            <div style="font-size:0.85rem; color:#16a34a; font-weight:600; background:#dcfce7; padding:0.4rem 0.75rem;
-                                                            border-radius:999px; white-space:nowrap;">
-                                                                <img src="/icons/checkicon.svg" width="16px"
-                                                                     height="16px"/> Administrada
+                                    <c:forEach var="entry" items="${medsByCat}">
+                                        <div style="background:white; border-radius:6px; margin-bottom:0.75rem;
+                                        overflow:hidden; border:1px solid #fca5a5;">
+                                            <div style="background:#fff7ed; border-bottom:1px solid #fed7aa;
+                                            padding:0.5rem 0.75rem; font-weight:700; font-size:0.95rem;
+                                            color:#1f1f1f;">${entry.key}
+                                            </div>
+
+                                            <div style="padding:0.75rem;">
+                                                <c:forEach var="med" items="${entry.value}" varStatus="medStatus">
+                                                    <div style="${!medStatus.last ? 'border-bottom:1px solid #f3f4f6; margin-bottom:0.5rem; padding-bottom:0.5rem;' : ''}">
+                                                        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.35rem;">
+                                                            <c:choose>
+                                                                <c:when test="${med.administeredToday}">
+                                                                    <input type="checkbox" checked disabled
+                                                                           style="accent-color:#f97316; width:16px; height:16px;"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form action="/volunteer/administer-medication/${med.id}"
+                                                                          method="POST"
+                                                                          style="display:inline; margin:0;">
+                                                                        <input type="hidden"
+                                                                               name="${_csrf.parameterName}"
+                                                                               value="${_csrf.token}"/>
+                                                                        <input type="checkbox"
+                                                                               style="accent-color:#f97316; width:16px; height:16px; cursor:pointer;"
+                                                                               onchange="this.form.submit()"/>
+                                                                    </form>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <div style="font-weight:600; font-size:0.9rem;
+                                                            ${med.administeredToday ? 'text-decoration:line-through; color:#9ca3af;' : ''}">
+                                                                    ${med.medicationName}
                                                             </div>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <form action="/volunteer/administer-medication/${med.id}"
-                                                                  method="POST">
-                                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                                       value="${_csrf.token}"/>
-                                                                <button type="submit" class="btn btn-sm" style="background:#f97316; color:white; font-size:0.8rem;
-                                                                white-space:nowrap;">
-                                                                    Marcar como administrada
-                                                                </button>
-                                                            </form>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
+                                                        </div>
+                                                        <ul style="margin:0; padding-left:1.25rem; font-size:0.85rem;color:#6b7280; margin-bottom:0.35rem;">
+                                                            <li>Dose: <strong
+                                                                    style="color:#1f1f1f;">${med.dose}</strong></li>
+                                                            <c:if test="${not empty med.storageLocation}">
+                                                                <li>Localização: <strong>${med.storageLocation}</strong>
+                                                                </li>
+                                                            </c:if>
+                                                            <li>Até: ${med.formattedEndDate}</li>
+                                                        </ul>
+                                                        <c:if test="${not empty med.notes}">
+                                                            <div style="font-size:0.85rem; color:#f97316; font-weight:700;">
+                                                                <img src="/icons/warning.svg" width="16px"
+                                                                     height="16px"/>
+                                                                    ${med.notes}
+                                                            </div>
+                                                        </c:if>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -202,7 +207,7 @@
                             <c:choose>
                                 <c:when test="${empty todayShift.tasks}">
                                     <div class="panel text-center" style="color:#9ca3af;">
-                                        Não há tarefas registadas para este turno.
+                                    Não há tarefas registadas para este turno.
                                     </div>
                                 </c:when>
                                 <c:otherwise>
