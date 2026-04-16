@@ -155,7 +155,7 @@ textarea { resize: vertical; }
 
 /* ---- Color helpers ---- */
 .text-orange { color: #f97316; }
-.bg-gray-50 { background: #bfdbfe; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; }
+.bg-gray-50 { background: #eef5ff; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; }
 
 /* ---- Spacing ---- */
 
