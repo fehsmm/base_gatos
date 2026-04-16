@@ -83,8 +83,8 @@
                                 <button class="btn btn-sm btn-outline-secondary"
                                         onclick="openViewModal(this)"
                                         data-id="${report.id}"
-                                        data-user="${report.user}"
-                                        data-cat="${report.cat}"
+                                        data-userName="${report.user.name}"
+                                        data-catName="${report.cat.name}"
                                         data-status="${report.status}"
                                         data-reportDate="${report.formattedReportDate}"
                                         data-notes="${report.notes}"
@@ -106,4 +106,115 @@
         </div>
     </main>
 </div>
+
+<div id="viewModal" class="modal-overlay">
+    <div class="modal-content" style="max-height: fit-content">
+
+        <div class="d-flex justify-content-between align-items-center fit-content mb-3">
+            <h4>Relatório — <span id="viewCatName"></span></h4>
+            <button onclick="closeViewModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.9rem;">
+
+
+            <div style="margin-bottom:0.5rem;">
+                <h5 style="font-weight:600; margin-bottom:0.25rem;">Identificação</h5>
+                <hr style="margin:0;">
+            </div>
+
+            <div style="display:flex; gap:1rem;">
+                <div style="flex:1">
+                    <p>
+                        <strong>Nome do Adotante: </strong>
+                        <span style="display:block; margin-top:0.25rem;" id="viewUserName"></span></p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Nome do Gato: </strong>
+                        <span style="display:block; margin-top:0.25rem;" id="viewCatName"> </span>
+                    </p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:1rem;">
+                <div style="flex:1">
+                    <p>
+                        <strong>Data do Relatório: </strong>
+                        <span style="display:block; margin-top:0.25rem;" id="viewReportDate"></span>
+                    </p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Estado do Gato: </strong><br/>
+                        <span style="display:block; margin-top:0.25rem;" id="viewStatus"> </span>
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-bottom:0.5rem;">
+                <h5 style="font-weight:600; margin-bottom:0.25rem;">Notas e Observações</h5>
+                <hr style="margin:0;">
+            </div>
+
+            <div>
+                <p>
+                    <strong>Atualização sobre o Comportamento do Gato: </strong>
+                    <span style="display:block; margin-top:0.25rem;" id="viewReason" style="margin-top: 0.25rem"> </span>
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Observações sobre a Saúde do Gato: </strong>
+                    <span style="display:block; margin-top:0.25rem;" id="viewHealth" style="margin-top:0.25rem;"></span>
+                </p>
+            </div>
+
+            <c:if test="${app.status == 'Rejeitada'}">
+                <div style="margin-bottom:0.5rem;">
+                    <h5 style="font-weight:600; margin-bottom:0.25rem;">Candidatura Rejeitada</h5>
+                    <hr style="margin:0;">
+                </div>
+
+                <div>
+                    <p>
+                        <strong>Motivo da Rejeição: </strong>
+                        <span style="display:block; margin-top:0.25rem;" id="viewRejectionMotive" style="margin-top:0.25rem;"></span>
+                    </p>
+                </div>
+            </c:if>
+
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-top:1rem;">
+            <button class="btn btn-danger" onclick="openRejectModal(this)" id="viewRejectBtn">Rejeitar</button>
+            <button class="btn btn-success" onclick="openApproveModal(this)" id="viewApproveBtn">Aceitar</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openViewModal(button) {
+        const id = button.dataset.id;
+
+        document.getElementById("viewUserName").innerText = button.dataset.userName;
+        document.getElementById("viewCatName").innerText = button.dataset.catName;
+        document.getElementById("viewStatus").innerText = button.dataset.status;
+        document.getElementById("viewReportDate").innerText = button.dataset.reportDate;
+        document.getElementById("viewNotes").innerText = button.dataset.notes;
+        document.getElementById("viewHealth").innerText = button.dataset.health;
+    }
+
+    function closeViewModal() {
+        document.getElementById("viewModal").classList.remove("open");
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
+</html>

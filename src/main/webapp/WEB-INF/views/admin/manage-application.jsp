@@ -166,7 +166,9 @@
                                                 data-email="${app.user.email}"
                                                 data-phone="${app.user.telephone}"
                                                 data-reason="${app.reason}"
-                                                data-experience="${app.experience}">
+                                                data-experience="${app.experience}"
+                                                data-status="${app.status}"
+                                                data-motive="${app.rejectionMotive}">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                             Ver Candidatura
                                         </button>
@@ -196,6 +198,7 @@
                                                 data-phone="${app.user.telephone}"
                                                 data-reason="${app.reason}"
                                                 data-experience="${app.experience}"
+                                                data-status="${app.status}"
                                                 data-motive="${app.rejectionMotive}">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                             Ver Candidatura
@@ -214,7 +217,9 @@
                                                 data-email="${app.user.email}"
                                                 data-phone="${app.user.telephone}"
                                                 data-reason="${app.reason}"
-                                                data-experience="${app.experience}">
+                                                data-experience="${app.experience}"
+                                                data-status="${app.status}"
+                                                data-motive="${app.rejectionMotive}">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                             Ver Candidatura
                                         </button>
@@ -265,20 +270,20 @@
             <div style="display:flex; gap:1rem;">
                 <div style="flex:1">
                     <p>
-                        <strong>Nome: </strong>
+                        <strong>Nome do Adotante: </strong>
                         <span style="display:block; margin-top:0.25rem;" id="viewApplicantName"></span></p>
                 </div>
 
                 <div style="flex:1">
                     <p>
-                        <strong>Gato: </strong>
+                        <strong>Gato a Adotar: </strong>
                         <span style="display:block; margin-top:0.25rem;" id="viewCat"> </span>
                     </p>
                 </div>
 
                 <div style="flex:1">
                     <p>
-                        <strong>Data: </strong>
+                        <strong>Data da Candidatura: </strong>
                         <span style="display:block; margin-top:0.25rem;" id="viewRequestDate"></span>
                     </p>
                 </div>
@@ -294,14 +299,14 @@
 
                 <div style="flex:1">
                     <p>
-                        <strong>Email: </strong><br/>
+                        <strong>Endereço de Email: </strong><br/>
                         <span style="display:block; margin-top:0.25rem;" id="viewEmail"> </span>
                     </p>
                 </div>
 
                 <div style="flex:1">
                     <p>
-                        <strong>Telefone: </strong><br/>
+                        <strong>Contacto Telefónico: </strong><br/>
                         <span style="display:block; margin-top:0.25rem;" id="viewPhone"> </span>
                     </p>
                 </div>
@@ -314,19 +319,19 @@
 
             <div>
                 <p>
-                    <strong>Motivação: </strong>
+                    <strong>Motivação para a Adoção: </strong>
                     <span style="display:block; margin-top:0.25rem;" id="viewReason" style="margin-top: 0.25rem"> </span>
                 </p>
             </div>
 
             <div>
                 <p>
-                    <strong>Experiência: </strong>
+                    <strong>Experiência Passada com Animais: </strong>
                     <span style="display:block; margin-top:0.25rem;" id="viewExperience" style="margin-top:0.25rem;"></span>
                 </p>
             </div>
 
-            <c:if test="${app.status == 'Rejeitada'}">
+            <div id="rejectionSection" style="display:none; background:#fff5f5; padding:0.75rem; border-radius:8px;">
                 <div style="margin-bottom:0.5rem;">
                     <h5 style="font-weight:600; margin-bottom:0.25rem;">Candidatura Rejeitada</h5>
                     <hr style="margin:0;">
@@ -335,10 +340,10 @@
                 <div>
                     <p>
                         <strong>Motivo da Rejeição: </strong>
-                        <span style="display:block; margin-top:0.25rem;" id="viewRejectionMotive" style="margin-top:0.25rem;"></span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewRejectionMotive"></span>
                     </p>
                 </div>
-            </c:if>
+            </div>
 
         </div>
 
@@ -444,6 +449,9 @@
 <script>
     function openViewModal(button) {
         const id = button.dataset.id;
+        const status = button.dataset.status;
+        const rejectionMotive = button.dataset.motive;
+        const rejectionSection = document.getElementById("rejectionSection");
 
         document.getElementById("viewUserName").innerText = button.dataset.user;
         document.getElementById("viewApplicantName").innerText = button.dataset.name;
@@ -454,7 +462,6 @@
         document.getElementById("viewPhone").innerText = button.dataset.phone;
         document.getElementById("viewReason").innerText = button.dataset.reason;
         document.getElementById("viewExperience").innerText = button.dataset.experience;
-        //document.getElementById("viewRejectionMotive").innerText = button.dataset.rejectionMotive;
 
         document.getElementById("viewModal").classList.add("open");
 
@@ -466,6 +473,13 @@
         fetch('/admin/adoptions/mark-as-read/' + id, {
             method: 'POST'
         });
+
+        if (status === "Rejeitada") {
+            rejectionSection.style.display = "block";
+            document.getElementById("viewRejectionMotive").innerText = rejectionMotive || "Sem motivo indicado";
+        } else {
+            rejectionSection.style.display = "none";
+        }
 
         updateApplicationAsRead(id);
     }
