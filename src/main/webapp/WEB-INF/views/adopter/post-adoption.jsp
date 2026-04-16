@@ -32,8 +32,9 @@
                         <form action="/adopter/reports" method="post">
 
                             <div class="mb-3">
-                                <label>Selecione o Gato *</label>
-                                <select class="form-control" name="catId">
+                                <label>Selecione o Gato</label>
+                                <select class="form-control" name="catId" required>
+                                    <option disabled value="">Selecione o Gato</option>
                                     <c:forEach items="${cats}" var="cat">
                                         <option value="${cat.id}">${cat.name}</option>
                                     </c:forEach>
@@ -41,18 +42,19 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Estado Geral *</label>
-                                <select class="form-control" name="status">
-                                    <option>Excelente</option>
-                                    <option>Bom</option>
-                                    <option>Regular</option>
-                                    <option>Preocupante</option>
+                                <label>Estado Geral</label>
+                                <select class="form-control" name="status" required>
+                                    <option disabled value=''>Selecione o estado do gato</option>
+                                    <option value='Excelente'>Excelente</option>
+                                    <option value='Bom'>Bom</option>
+                                    <option value='Normal'>Normal</option>
+                                    <option value='Preocupante'>Preocupante</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
-                                <label>Observações *</label>
-                                <textarea class="form-control" name="notes"></textarea>
+                                <label>Observações</label>
+                                <textarea class="form-control" name="notes" placeholder="Ex: Tem brincado muito, já não tem medo do cão,..."></textarea>
                             </div>
 
                            <!-- <div class="mb-3">

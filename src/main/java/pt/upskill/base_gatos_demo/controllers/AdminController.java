@@ -47,6 +47,8 @@ public class AdminController {
 
     @Autowired
     AuthService authService;
+    @Autowired
+    private ReportService reportService;
 
     @GetMapping(value = "/")
     public String admin(Model model) {
@@ -180,6 +182,15 @@ public class AdminController {
         return "admin/view-shift-note";
     }
 
+    @GetMapping(value = "/view-adoption/{id}")
+    public String viewAdoption(@PathVariable Long id, Model model) {
+        Adoption adoption = adoptionService.getById(id);
+        List<Report> reports = reportService.getReportsByUserAndCat(adoption.getUser(), adoption.getCat());
+        model.addAttribute("adoption", adoption);
+        model.addAttribute("reports", reports);
+        return "admin/view-adoption";
+    }
+
     @PostMapping(value = "/create-shift")
     public String createShift(@ModelAttribute CreateShiftModel model,
                               RedirectAttributes redirectAttributes) {
@@ -290,8 +301,8 @@ public class AdminController {
 
     @PostMapping("/adoptions/{id}/reject")
     public String reject(@PathVariable Long id,
-                         @RequestParam("reason") String reason) {
-        adoptionService.rejectAdoption(id, reason);
+                         @RequestParam("rejectionMotive") String rejectionMotive) {
+        adoptionService.rejectAdoption(id, rejectionMotive);
         return "redirect:/admin/manage-application";
     }
 

@@ -85,7 +85,8 @@
                 <select name="statusFilter" id="statusFilter" class="form-control">
                     <option value="">Todas as candidaturas</option>
                     <option value="Pendente">Pendente</option>
-                    <option value="Aprovada">Aceite</option>
+                    <option value="Aprovada">Aprovada</option>
+                    <option value="Rejeitada">Rejeitada</option>
                 </select>
             </div>
 
@@ -152,7 +153,7 @@
 
                             <div style="display:flex; gap:.5rem;">
                                 <c:choose>
-                                    <c:if test="${app.status == 'Pendente'}">
+                                    <c:when test="${app.status == 'Pendente'}">
                                         <button class="btn btn-sm btn-outline-secondary"
                                                 onclick="openViewModal(this)"
                                                 data-id="${app.id}"
@@ -166,7 +167,7 @@
                                                 data-phone="${app.user.telephone}"
                                                 data-reason="${app.reason}"
                                                 data-experience="${app.experience}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                             Ver Candidatura
                                         </button>
 
@@ -180,7 +181,26 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
                                             Rejeitar Candidatura
                                         </button>
-                                    </c:if>
+                                    </c:when>
+                                    <c:when test="${app.status == 'Rejeitada'}">
+                                        <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="openViewModal(this)"
+                                                data-id="${app.id}"
+                                                data-user="${app.user.name}"
+                                                data-read="${app.read}"
+                                                data-name="${app.applicantName}"
+                                                data-cat="${app.cat.name}"
+                                                data-date="${app.formattedRequestDate}"
+                                                data-address="${app.user.address}"
+                                                data-email="${app.user.email}"
+                                                data-phone="${app.user.telephone}"
+                                                data-reason="${app.reason}"
+                                                data-experience="${app.experience}"
+                                                data-motive="${app.rejectionMotive}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                                            Ver Candidatura
+                                        </button>
+                                    </c:when>
                                     <c:otherwise>
                                         <button class="btn btn-sm btn-outline-secondary"
                                                 onclick="openViewModal(this)"
@@ -195,20 +215,13 @@
                                                 data-phone="${app.user.telephone}"
                                                 data-reason="${app.reason}"
                                                 data-experience="${app.experience}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                             Ver Candidatura
                                         </button>
 
-                                        <button class="btn btn-sm btn-outline-success"
-                                                onclick="openApproveModal(this)" data-id="${app.id}" data-read="${app.read}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
-                                            Aceitar Candidatura
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger"
-                                                onclick="openRejectModal(this)" data-id="${app.id}" data-read="${app.read}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
-                                            Rejeitar Candidatura
-                                        </button>
+                                        <a href="/admin/view-adoption/${app.id}" class="btn btn-sm btn-outline-secondary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#adb5bd"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>                                            Ver Detalhes da Adoção
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -308,10 +321,24 @@
 
             <div>
                 <p>
-                    <strong>Experiência</strong>
+                    <strong>Experiência: </strong>
                     <span style="display:block; margin-top:0.25rem;" id="viewExperience" style="margin-top:0.25rem;"></span>
                 </p>
             </div>
+
+            <c:if test="${app.status == 'Rejeitada'}">
+                <div style="margin-bottom:0.5rem;">
+                    <h5 style="font-weight:600; margin-bottom:0.25rem;">Candidatura Rejeitada</h5>
+                    <hr style="margin:0;">
+                </div>
+
+                <div>
+                    <p>
+                        <strong>Motivo da Rejeição: </strong>
+                        <span style="display:block; margin-top:0.25rem;" id="viewRejectionMotive" style="margin-top:0.25rem;"></span>
+                    </p>
+                </div>
+            </c:if>
 
         </div>
 
@@ -366,7 +393,7 @@
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <textarea name="reason" class="form-control" rows="4"
+            <textarea name="rejectionMotive" class="form-control" rows="4"
                       placeholder="Ex: Não reúne condições..." required></textarea>
 
             <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-top:1rem;">
@@ -427,6 +454,7 @@
         document.getElementById("viewPhone").innerText = button.dataset.phone;
         document.getElementById("viewReason").innerText = button.dataset.reason;
         document.getElementById("viewExperience").innerText = button.dataset.experience;
+        //document.getElementById("viewRejectionMotive").innerText = button.dataset.rejectionMotive;
 
         document.getElementById("viewModal").classList.add("open");
 

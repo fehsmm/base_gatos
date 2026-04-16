@@ -5,7 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Report {
@@ -26,7 +28,7 @@ public class Report {
 
     private String health;
 
-    private LocalDateTime date = LocalDateTime.now();
+    private LocalDateTime reportDate;
 
     public Long getId() {
         return id;
@@ -76,11 +78,20 @@ public class Report {
         this.health = health;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getReportDate() {
+        return reportDate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setReportDate(LocalDateTime reportDate) {
+        this.reportDate = reportDate;
+    }
+
+    public String getFormattedReportDate() {
+        if(reportDate == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+            return reportDate.format(formatter);
+        }
     }
 }

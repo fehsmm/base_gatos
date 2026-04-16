@@ -1,10 +1,14 @@
 package pt.upskill.base_gatos_demo.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class ReportModel {
     private Long catId;
     private String status;
     private String notes;
     private String health;
+    private LocalDateTime reportDate;
 
     public Long getCatId() {
         return catId;
@@ -36,5 +40,13 @@ public class ReportModel {
 
     public void setHealth(String health) {
         this.health = health;
+    }
+
+    public LocalDateTime getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(LocalDateTime reportDate) {
+        this.reportDate = reportDate;
     }
 }

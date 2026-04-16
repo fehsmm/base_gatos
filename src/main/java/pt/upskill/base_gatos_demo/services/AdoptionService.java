@@ -46,12 +46,12 @@ public class AdoptionService {
 
     }
 
-    public void rejectAdoption(Long adoptionId, String reason) {
+    public void rejectAdoption(Long adoptionId, String rejectionMotive) {
         Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow();
 
         adoption.setStatus("Rejeitada");
         adoption.setReviewDate(LocalDateTime.now());
-        adoption.setReason(reason);
+        adoption.setRejectionMotive(rejectionMotive);
 
         adoptionRepository.save(adoption);
     }
@@ -189,6 +189,10 @@ public class AdoptionService {
            adoption.setRead(true);
            adoptionRepository.save(adoption);
        }
+    }
+
+    public Adoption getById(Long id){
+        return adoptionRepository.findById(id).orElse(null);
     }
 
 }

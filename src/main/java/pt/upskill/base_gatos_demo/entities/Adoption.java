@@ -42,6 +42,7 @@ public class Adoption {
     private LocalDateTime reviewDate;
     @Column(name = "is_read")
     private boolean read;
+    private String rejectionMotive;
 
 
     public Long getId() {
@@ -173,5 +174,13 @@ public class Adoption {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public String getRejectionMotive() {
+        return rejectionMotive;
+    }
+
+    public void setRejectionMotive(String rejectionMotive) {
+        this.rejectionMotive = rejectionMotive;
     }
 }
