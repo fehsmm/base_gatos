@@ -158,12 +158,12 @@
                                 </button>
 
                                 <button class="btn btn-sm btn-outline-success"
-                                        onclick="acceptApplication(${app.id}, ${app.read})">
+                                        onclick="openApproveModal(${app.id}, ${app.read})">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
                                     Aceitar Candidatura
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger"
-                                        onclick="rejectApplication(${app.id}, ${app.read})">
+                                        onclick="openRejectModal(${app.id}, ${app.read})">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
                                     Rejeitar Candidatura
                                 </button>
@@ -184,73 +184,90 @@
         </div>
 
     </div>
-
-    <div class="container">
-        <c:forEach items="${adoptionApps}" var="adoption">
-                <div class="card shadow-sm border-0 rounded-4 h-100">
-                    <div class="card-header">
-                        <h2 class="fw-bold mb-0">${adoption.applicantName}</h2>
-                    </div>
-
-                    <div class="card-body">
-                        <img src="${adoption.cat.image}"
-                             class="card-img-top"
-                             style="height:200px; object-fit:cover;">
-                            <h4 class="fw-bold">${adoption.cat.name}</h4>
-                        <div class="row text-center">
-                            <div class="col-md-6 mb-3">
-                                <p><b>Razão</b></p>
-                                <p>${adoption.reason}</p>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <p><b>Experiência</b></p>
-                                <p>${adoption.experience}</p>
-                            </div>
-
-                        </div>
-
-                        <div class="d-flex justify-content-center gap-3 mt-3">
-
-                            <form action="/admin/adoptions/${adoption.id}/approve" method="post">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <button class="btn btn-success px-4">Aprovar</button>
-                            </form>
-
-                            <form action="/admin/adoptions/${adoption.id}/reject" method="post">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <button class="btn btn-danger px-4">Rejeitar</button>
-                            </form>
-
-                        </div>
-
-                    </div>
-                </div>
-        </c:forEach>
-    </div>
 </main>
 </div>
 
 <div id="viewModal" class="modal-overlay">
     <div class="modal-content">
 
-        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-            <h4>Candidatura</h4>
-            <button onclick="closeViewModal()">✕</button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Candidatura — ${applicantName}</h4>
+                <button onclick="closeViewModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+                </button>
         </div>
 
-        <div style="font-size:0.9rem;">
+        <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.9rem;">
 
-            <p><strong>Nome:</strong> <span id="viewName"></span></p>
-            <p><strong>Email:</strong> <span id="viewEmail"></span></p>
-            <p><strong>Telefone:</strong> <span id="viewPhone"></span></p>
-            <p><strong>Morada:</strong> <span id="viewAddress"></span></p>
 
-            <p><strong>Motivação:</strong></p>
-            <div id="viewReason"></div>
+            <div class="mb-4">
+                <h5 style="font-weight:600;">Informação Básica</h5>
+                <hr>
+            </div>
 
-            <p><strong>Experiência:</strong></p>
-            <div id="viewExperience"></div>
+            <div style="display:flex; gap:1rem;">
+                <div style="flex:1">
+                    <p>
+                        <strong>Nome: </strong>
+                        <span id="viewApplicantName"></span></p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Gato: </strong>
+                        <span id="viewCat"> </span>
+                    </p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Data: </strong>
+                        <span id="viewRequestDate"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:1rem;">
+                <div style="flex:1">
+                    <p>
+                        <strong>Morada: </strong><br/>
+                        <span id="viewAddress"> </span>
+                    </p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Email: </strong><br/>
+                        <span id="viewEmail"> </span>
+                    </p>
+                </div>
+
+                <div style="flex:1">
+                    <p>
+                        <strong>Telefone: </strong><br/>
+                        <span id="viewPhone"> </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h5 style="font-weight:600;">Motivação e Experiência</h5>
+                <hr>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Motivação: </strong>
+                    <span id="viewReason" style="margin-top: 0.25rem"> </span>
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Experiência</strong>
+                    <span id="viewExperience" style="margin-top:0.25rem;"></span>
+                </p>
+            </div>
 
         </div>
 
@@ -260,6 +277,36 @@
         </div>
 
     </div>
+</div>
+
+<div id="approveModal" class="modal-overlay">
+
+    <div class="modal-content" style="max-width:400px;">
+
+        <h5>Confirmar Aprovação</h5>
+
+        <p class="text-muted">
+            Tens a certeza que queres aprovar esta candidatura?
+        </p>
+
+        <form id="approveForm" method="POST">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-secondary" onclick="closeApproveModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    Aprovar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
 <div id="rejectModal" class="modal-overlay">
@@ -317,6 +364,24 @@
         document.getElementById("viewModal").classList.add("open");
     }
 
+    function closeViewModal() {
+        document.getElementById("viewModal").classList.remove("open");
+    }
+
+    function openApproveModal(id, isRead) {
+        if (!isRead) {
+            openWarningModal(id, 'approve');
+            return;
+        }
+        const form = document.getElementById("approveForm");
+        form.action = "/admin/adoptions/" + id + "/approve";
+        document.getElementById("approveModal").classList.add("open");
+    }
+
+    function closeApproveModal() {
+        document.getElementById("approveModal").classList.remove("open");
+    }
+
     function openRejectModal(id, isRead) {
         if (!isRead) {
             openWarningModal(id, 'reject');
@@ -346,9 +411,9 @@
 
     function confirmAction() {
         if (actionType === 'accept') {
-            window.location.href = '/admin/application/accept/' + actionId;
-        } else {
-            window.location.href = '/admin/application/reject/' + actionId;
+            openApproveModal(actionId, true);
+        } else if (actionType === 'reject') {
+            openRejectModal(actionId, true);
         }
     }
 
