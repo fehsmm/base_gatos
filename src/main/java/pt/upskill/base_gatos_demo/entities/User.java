@@ -16,16 +16,18 @@ public class User {
     private String role;
     private Long telephone;
     private String address;
+    private String email;
     private boolean approved;
 
     //Construtores para DataInitializer
-    public User(String name, String username,String password, String role, Long telephone,String address, boolean approved) {
+    public User(String name, String username,String password, String role, Long telephone,String address, String email, boolean approved) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.role = role;
         this.telephone = telephone;
         this.address = address;
+        this.email = email;
         this.approved = approved;
     }
 
@@ -119,5 +121,13 @@ public class User {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

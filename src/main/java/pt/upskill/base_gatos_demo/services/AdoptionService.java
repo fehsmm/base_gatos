@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pt.upskill.base_gatos_demo.entities.Adoption;
 import pt.upskill.base_gatos_demo.entities.Announcement;
 import pt.upskill.base_gatos_demo.entities.Cat;
@@ -181,6 +182,7 @@ public class AdoptionService {
         return adoptionRepository.findByUserAndStatus(user, status);
     }
 
+    @Transactional
     public void markAsRead(Long id){
         Adoption adoption = adoptionRepository.findById(id).orElse(null);
        if(adoption != null){

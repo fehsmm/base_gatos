@@ -9,6 +9,7 @@ public class SignUpModel {
     private Long telephone;
     private String address;
     private boolean approved;
+    private String email;
 
     public String getUsername() {
         return username;
@@ -88,5 +89,13 @@ public class SignUpModel {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

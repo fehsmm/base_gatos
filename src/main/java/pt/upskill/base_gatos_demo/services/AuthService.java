@@ -23,6 +23,7 @@ public class AuthService {
         user.setAddress(signUpModel.getAddress());
         user.setTelephone(signUpModel.getTelephone());
         user.setName(signUpModel.getName());
+        user.setEmail(signUpModel.getEmail());
 
         String encodedPassword = passwordEncoder.encode(signUpModel.getPassword());
         user.setPassword(encodedPassword);

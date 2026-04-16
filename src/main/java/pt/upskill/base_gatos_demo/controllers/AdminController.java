@@ -295,7 +295,7 @@ public class AdminController {
         return "redirect:/admin/manage-application";
     }
 
-    @PostMapping("/mark-as-read/{id}")
+    @PostMapping("/adoptions/mark-as-read/{id}")
     @ResponseBody
     public void markAsRead(@PathVariable Long id) {
         adoptionService.markAsRead(id);

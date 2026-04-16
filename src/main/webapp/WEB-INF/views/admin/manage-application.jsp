@@ -39,13 +39,13 @@
                     <c:choose>
                         <c:when test="${pendingAdoptions == 1}">
                             <div class="alert alert-warning" style="flex:1;min-width:200px">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#854d0e"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
                                     ${pendingAdoptions} candidatura por ver
                             </div>
                         </c:when>
                         <c:when test="${pendingAdoptions > 1}">
                             <div class="alert alert-warning" style="flex:1;min-width:200px">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#991b1b"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#854d0e"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
                                     ${pendingAdoptions} candidaturas por ver
                             </div>
                         </c:when>
@@ -114,7 +114,7 @@
 
                 <div class="card-body">
                     <c:forEach var="app" items="${adoptionApps}">
-                        <div class="shift-card ${!app.read ? 'info-announcement' : ''}">
+                        <div id="card-${app.id}" class="shift-card ${!app.read ? 'info-announcement' : ''}">
 
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.35rem">
                             <div style="display:flex; flex-direction:column; gap:0.35rem;">
@@ -129,7 +129,7 @@
                                                 ${app.status}
                                         </span>
 
-                                        <span class="badge
+                                        <span id="badge-${app.id}" class="badge
                                         ${!app.read ? 'badge-blue' : 'badge-gray'}">
                                                 ${!app.read ? 'Nova' : 'Lida'}
                                         </span>
@@ -151,22 +151,66 @@
                             </div>
 
                             <div style="display:flex; gap:.5rem;">
-                                <button class="btn btn-sm btn-outline-secondary"
-                                        onclick="openViewModal(${app.id})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
-                                    Ver Candidatura
-                                </button>
+                                <c:choose>
+                                    <c:if test="${app.status == 'Pendente'}">
+                                        <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="openViewModal(this)"
+                                                data-id="${app.id}"
+                                                data-user="${app.user.name}"
+                                                data-read="${app.read}"
+                                                data-name="${app.applicantName}"
+                                                data-cat="${app.cat.name}"
+                                                data-date="${app.formattedRequestDate}"
+                                                data-address="${app.user.address}"
+                                                data-email="${app.user.email}"
+                                                data-phone="${app.user.telephone}"
+                                                data-reason="${app.reason}"
+                                                data-experience="${app.experience}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                                            Ver Candidatura
+                                        </button>
 
-                                <button class="btn btn-sm btn-outline-success"
-                                        onclick="openApproveModal(${app.id}, ${app.read})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
-                                    Aceitar Candidatura
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger"
-                                        onclick="openRejectModal(${app.id}, ${app.read})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
-                                    Rejeitar Candidatura
-                                </button>
+                                        <button class="btn btn-sm btn-outline-success"
+                                                onclick="openApproveModal(this)" data-id="${app.id}" data-read="${app.read}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
+                                            Aceitar Candidatura
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                onclick="openRejectModal(this)" data-id="${app.id}" data-read="${app.read}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
+                                            Rejeitar Candidatura
+                                        </button>
+                                    </c:if>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="openViewModal(this)"
+                                                data-id="${app.id}"
+                                                data-user="${app.user.name}"
+                                                data-read="${app.read}"
+                                                data-name="${app.applicantName}"
+                                                data-cat="${app.cat.name}"
+                                                data-date="${app.formattedRequestDate}"
+                                                data-address="${app.user.address}"
+                                                data-email="${app.user.email}"
+                                                data-phone="${app.user.telephone}"
+                                                data-reason="${app.reason}"
+                                                data-experience="${app.experience}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                                            Ver Candidatura
+                                        </button>
+
+                                        <button class="btn btn-sm btn-outline-success"
+                                                onclick="openApproveModal(this)" data-id="${app.id}" data-read="${app.read}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-455-47q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-300Zm0-340Z"/></svg>
+                                            Aceitar Candidatura
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                onclick="openRejectModal(this)" data-id="${app.id}" data-read="${app.read}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m696-440-56-56 83-84-83-83 56-57 84 84 83-84 57 57-84 83 84 84-57 56-83-83-84 83Zm-449-87q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-640Zm0 400Z"/></svg>
+                                            Rejeitar Candidatura
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
                         </div>
@@ -188,41 +232,41 @@
 </div>
 
 <div id="viewModal" class="modal-overlay">
-    <div class="modal-content">
+    <div class="modal-content" style="max-height: fit-content">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>Candidatura — ${applicantName}</h4>
+        <div class="d-flex justify-content-between align-items-center fit-content mb-3">
+                <h4>Candidatura — <span id="viewUserName"></span></h4>
                 <button onclick="closeViewModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
                 </button>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.9rem;">
+        <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.9rem;">
 
 
-            <div class="mb-4">
-                <h5 style="font-weight:600;">Informação Básica</h5>
-                <hr>
+            <div style="margin-bottom:0.5rem;">
+                <h5 style="font-weight:600; margin-bottom:0.25rem;">Informação Básica</h5>
+                <hr style="margin:0;">
             </div>
 
             <div style="display:flex; gap:1rem;">
                 <div style="flex:1">
                     <p>
                         <strong>Nome: </strong>
-                        <span id="viewApplicantName"></span></p>
+                        <span style="display:block; margin-top:0.25rem;" id="viewApplicantName"></span></p>
                 </div>
 
                 <div style="flex:1">
                     <p>
                         <strong>Gato: </strong>
-                        <span id="viewCat"> </span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewCat"> </span>
                     </p>
                 </div>
 
                 <div style="flex:1">
                     <p>
                         <strong>Data: </strong>
-                        <span id="viewRequestDate"></span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewRequestDate"></span>
                     </p>
                 </div>
             </div>
@@ -231,49 +275,49 @@
                 <div style="flex:1">
                     <p>
                         <strong>Morada: </strong><br/>
-                        <span id="viewAddress"> </span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewAddress"> </span>
                     </p>
                 </div>
 
                 <div style="flex:1">
                     <p>
                         <strong>Email: </strong><br/>
-                        <span id="viewEmail"> </span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewEmail"> </span>
                     </p>
                 </div>
 
                 <div style="flex:1">
                     <p>
                         <strong>Telefone: </strong><br/>
-                        <span id="viewPhone"> </span>
+                        <span style="display:block; margin-top:0.25rem;" id="viewPhone"> </span>
                     </p>
                 </div>
             </div>
 
-            <div class="mb-4">
-                <h5 style="font-weight:600;">Motivação e Experiência</h5>
-                <hr>
+            <div style="margin-bottom:0.5rem;">
+                <h5 style="font-weight:600; margin-bottom:0.25rem;">Motivação e Experiência</h5>
+                <hr style="margin:0;">
             </div>
 
             <div>
                 <p>
                     <strong>Motivação: </strong>
-                    <span id="viewReason" style="margin-top: 0.25rem"> </span>
+                    <span style="display:block; margin-top:0.25rem;" id="viewReason" style="margin-top: 0.25rem"> </span>
                 </p>
             </div>
 
             <div>
                 <p>
                     <strong>Experiência</strong>
-                    <span id="viewExperience" style="margin-top:0.25rem;"></span>
+                    <span style="display:block; margin-top:0.25rem;" id="viewExperience" style="margin-top:0.25rem;"></span>
                 </p>
             </div>
 
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-top:1rem;">
-            <button class="btn btn-danger" onclick="rejectApplicationFromModal()">Rejeitar</button>
-            <button class="btn btn-success" onclick="acceptApplicationFromModal()">Aceitar</button>
+            <button class="btn btn-danger" onclick="openRejectModal(this)" id="viewRejectBtn">Rejeitar</button>
+            <button class="btn btn-success" onclick="openApproveModal(this)" id="viewApproveBtn">Aceitar</button>
         </div>
 
     </div>
@@ -310,7 +354,7 @@
 </div>
 
 <div id="rejectModal" class="modal-overlay">
-    <div class="modal-content" style="max-width:500px;">
+    <div class="modal-content" style="max-width:500px; max-height: fit-content">
 
         <h5>Rejeitar Candidatura</h5>
 
@@ -344,9 +388,7 @@
 
         <h5 class="mb-3">Atenção</h5>
 
-        <p class="text-muted">
-            Esta candidatura ainda não foi analisada. Tem a certeza que quer proceder?
-        </p>
+        <p id="warningMessage" class="text-muted"></p>
 
         <div style="display:flex; justify-content:flex-end; gap:.5rem;">
             <button class="btn btn-secondary" onclick="closeWarningModal()">Cancelar</button>
@@ -356,40 +398,91 @@
     </div>
 </div>
 
+<div id="infoModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:400px; max-height: fit-content">
+        <h5 class="mb-3">Candidatura não visualizada</h5>
+
+        <p class="text-muted">
+            Esta candidatura ainda não foi aberta. Deve analisá-la antes de tomar uma decisão.
+        </p>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-secondary" onclick="closeInfoModal()">
+                Fechar
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
-    function openViewModal(id) {
-        fetch('/admin/application/mark-as-read/' + id, {
+    function openViewModal(button) {
+        const id = button.dataset.id;
+
+        document.getElementById("viewUserName").innerText = button.dataset.user;
+        document.getElementById("viewApplicantName").innerText = button.dataset.name;
+        document.getElementById("viewCat").innerText = button.dataset.cat;
+        document.getElementById("viewRequestDate").innerText = button.dataset.date;
+        document.getElementById("viewAddress").innerText = button.dataset.address;
+        document.getElementById("viewEmail").innerText = button.dataset.email;
+        document.getElementById("viewPhone").innerText = button.dataset.phone;
+        document.getElementById("viewReason").innerText = button.dataset.reason;
+        document.getElementById("viewExperience").innerText = button.dataset.experience;
+
+        document.getElementById("viewModal").classList.add("open");
+
+        document.getElementById("viewApproveBtn").dataset.id = id;
+        document.getElementById("viewRejectBtn").dataset.id = id;
+        document.getElementById("viewApproveBtn").dataset.read = "true";
+        document.getElementById("viewRejectBtn").dataset.read = "true";
+
+        fetch('/admin/adoptions/mark-as-read/' + id, {
             method: 'POST'
         });
-        document.getElementById("viewModal").classList.add("open");
+
+        updateApplicationAsRead(id);
     }
 
     function closeViewModal() {
         document.getElementById("viewModal").classList.remove("open");
     }
 
-    function openApproveModal(id, isRead) {
+    function updateApplicationAsRead(id) {
+        document.querySelectorAll(`[data-id='\${id}']`).forEach(el => {
+            el.dataset.read = "true";
+        });
+        document.querySelectorAll(`#badge-\${id}`).forEach(badge => {
+            badge.classList.remove("badge-blue");
+            badge.classList.add("badge-gray");
+            badge.innerText = "Lida";
+        });
+        const card = document.getElementById(`card-\${id}`);
+        if (card) {
+            card.classList.remove("info-announcement");
+        }
+    }
+
+    function openApproveModal(button) {
+        const id = button.dataset.id;
+        const isRead = button.dataset.read === "true";
         if (!isRead) {
-            openWarningModal(id, 'approve');
+            openInfoModal();
             return;
         }
-        const form = document.getElementById("approveForm");
-        form.action = "/admin/adoptions/" + id + "/approve";
-        document.getElementById("approveModal").classList.add("open");
+        openWarningModal(id, 'approve');
     }
 
     function closeApproveModal() {
         document.getElementById("approveModal").classList.remove("open");
     }
 
-    function openRejectModal(id, isRead) {
+    function openRejectModal(button) {
+        const id = button.dataset.id;
+        const isRead = button.dataset.read === "true";
         if (!isRead) {
-            openWarningModal(id, 'reject');
+            openInfoModal();
             return;
         }
-        const form = document.getElementById("rejectForm");
-        form.action = "/admin/adoptions/" + id + "/reject";
-        document.getElementById("rejectModal").classList.add("open");
+        openWarningModal(id, 'reject');
     }
 
     function closeRejectModal() {
@@ -402,6 +495,13 @@
     function openWarningModal(id, type) {
         actionId = id;
         actionType = type;
+        const message = document.getElementById("warningMessage");
+
+        if (type === 'approve') {
+            message.innerText = "Tem a certeza que pretende aceitar esta candidatura?";
+        } else {
+            message.innerText = "Tem a certeza que pretende rejeitar esta candidatura?";
+        }
         document.getElementById("warningModal").classList.add("open");
     }
 
@@ -410,11 +510,24 @@
     }
 
     function confirmAction() {
-        if (actionType === 'accept') {
-            openApproveModal(actionId, true);
+        if (actionType === 'approve') {
+            const form = document.getElementById("approveForm");
+            form.action = "/admin/adoptions/" + actionId + "/approve";
+            form.submit();
         } else if (actionType === 'reject') {
-            openRejectModal(actionId, true);
+            const form = document.getElementById("rejectForm");
+            form.action = "/admin/adoptions/" + actionId + "/reject";
+            document.getElementById("rejectModal").classList.add("open");
         }
+        closeWarningModal();
+    }
+
+    function openInfoModal() {
+        document.getElementById("infoModal").classList.add("open");
+    }
+
+    function closeInfoModal() {
+        document.getElementById("infoModal").classList.remove("open");
     }
 
 </script>

@@ -44,12 +44,12 @@ public class DataInitializer {
 
         if (userRepository.count() == 0) {
             List<User> users = List.of(
-                    new User("AdminSistema", "admin", "123", "admin", 910000001L, "Rua Central, 1", true),
-                    new User("João Voluntário", "joao.vol", "123", "volunteer", 910000002L, "Avenida da Liberdade, 10", true),
-                    new User("Maria Adotante", "maria.adop", "123", "adopter", 910000003L, "Rua das Flores, 5", true),
-                    new User("Pedro Voluntário", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", true),
-                    new User("Ana Adotante", "ana.adop", "123", "adopter", 910000005L, "Praceta do Sol, 3", true),
-                    new User("Catarina Voluntária", "catarina.vol", "123", "volunteer", 969000001L, "Praça do Chile, 15", false)
+                    new User("AdminSistema", "admin", "123", "admin", 910000001L, "Rua Central, 1", "admin@gmail.pt", true),
+                    new User("João Voluntário", "joao.vol", "123", "volunteer", 910000002L, "Avenida da Liberdade, 10", "joao@gmail.pt",true),
+                    new User("Maria Adotante", "maria.adop", "123", "adopter", 910000003L, "Rua das Flores, 5", "maria@gmail.pt",true),
+                    new User("Pedro Voluntário", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", "pedro@gmail.pt",true),
+                    new User("Ana Adotante", "ana.adop", "123", "adopter", 910000005L, "Praceta do Sol, 3", "ana@gmail.pt", true),
+                    new User("Catarina Voluntária", "catarina.vol", "123", "volunteer", 969000001L, "Praça do Chile, 15", "catarina@gmail.pt",false)
             );
 
             for (User user : users) {

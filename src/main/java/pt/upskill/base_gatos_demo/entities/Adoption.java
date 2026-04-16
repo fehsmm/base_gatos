@@ -172,10 +172,6 @@ public class Adoption {
     }
 
     public void setRead(boolean read) {
-        if(reviewDate == null) {
-            read = false;
-        } else {
-            read = true;
-        }
+        this.read = read;
     }
 }
