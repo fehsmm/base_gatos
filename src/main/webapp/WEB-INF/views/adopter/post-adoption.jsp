@@ -15,7 +15,7 @@
     <c:set var="dashboardUrl" value="/adopter/" />
     <%@ include file="/WEB-INF/views/fragments/adminSidebar.jsp" %>
 
-    <main class="container">
+    <main class="container p-4">
         <div class="content">
 
             <h2>Relatório Pós-Adoção</h2>
