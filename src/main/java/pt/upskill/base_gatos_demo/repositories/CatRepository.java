@@ -33,4 +33,6 @@ public interface CatRepository extends JpaRepository<Cat,Long> {
 
     List<Cat> findAllByStatusAndGender(String status, boolean gender);
 
+    Cat findFirstByName(String name);
+
 }

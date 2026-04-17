@@ -37,6 +37,8 @@ public class DataInitializer {
     private MedicationRecordRepository medRepo;
     @Autowired
     private NoteRepository noteRepository;
+    @Autowired
+    private ReportRepository reportRepo;
 
 
     @PostConstruct
@@ -45,11 +47,11 @@ public class DataInitializer {
         if (userRepository.count() == 0) {
             List<User> users = List.of(
                     new User("AdminSistema", "admin", "123", "admin", 910000001L, "Rua Central, 1", "admin@gmail.pt", true),
-                    new User("João Voluntário", "joao.vol", "123", "volunteer", 910000002L, "Avenida da Liberdade, 10", "joao@gmail.pt",true),
-                    new User("Maria Adotante", "maria.adop", "123", "adopter", 910000003L, "Rua das Flores, 5", "maria@gmail.pt",true),
-                    new User("Pedro Voluntário", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", "pedro@gmail.pt",true),
+                    new User("João Voluntário", "joao.vol", "123", "volunteer", 910000002L, "Avenida da Liberdade, 10", "joao@gmail.pt", true),
+                    new User("Maria Adotante", "maria.adop", "123", "adopter", 910000003L, "Rua das Flores, 5", "maria@gmail.pt", true),
+                    new User("Pedro Voluntário", "pedro.vol", "123", "volunteer", 910000004L, "Travessa do Ouro, 12", "pedro@gmail.pt", true),
                     new User("Ana Adotante", "ana.adop", "123", "adopter", 910000005L, "Praceta do Sol, 3", "ana@gmail.pt", true),
-                    new User("Catarina Voluntária", "catarina.vol", "123", "volunteer", 969000001L, "Praça do Chile, 15", "catarina@gmail.pt",false)
+                    new User("Catarina Voluntária", "catarina.vol", "123", "volunteer", 969000001L, "Praça do Chile, 15", "catarina@gmail.pt", false)
             );
 
             for (User user : users) {
@@ -74,7 +76,7 @@ public class DataInitializer {
                 a.setPriority((String) ann[0]);
                 a.setTitle((String) ann[1]);
                 a.setDescription((String) ann[2]);
-                a.setCreatedAt(LocalDateTime.now().minusDays((int)(Math.random() * 7)));
+                a.setCreatedAt(LocalDateTime.now().minusDays((int) (Math.random() * 7)));
                 a.setCreatedBy("AdminSistema");
                 annRepo.save(a);
             }
@@ -286,34 +288,28 @@ public class DataInitializer {
             med3.setCreatedBy("AdminSistema");
             medRepo.save(med3);
         }
-    }
 
-        /*if (adoptRepo.count() == 0) {
+
+        if (adoptRepo.count() == 0) {
 
             User maria = userRepository.getUserByUsername("maria.adop");
+            User ana = userRepository.getUserByUsername("ana.adop");
 
-            if (maria != null &&
-                    adoptRepo.findByUserAndStatus(maria, "Aprovada").isEmpty()) {
+            if (maria != null && ana != null) {
 
                 List<Cat> cats = catRepo.findByStatus("Disponível");
 
-                System.out.println("AVAILABLE CATS: " + cats.size());
-
                 if (cats.size() >= 2) {
 
-                    Cat cat1 = cats.get(0);
-                    Cat cat2 = cats.get(1);
-
-                    System.out.println("A criar adoções para: " + maria.getUsername());
+                    Cat cat1 = catRepo.findFirstByName("Branco");
+                    Cat cat2 = catRepo.findFirstByName("Bugalho");
+                    Cat cat3 = catRepo.findFirstByName("Enfermeira");
 
                     Adoption a1 = new Adoption();
                     a1.setUser(maria);
                     a1.setCat(cat1);
                     a1.setStatus("Aprovada");
                     a1.setApplicantName(maria.getName());
-                    a1.setEmail(maria.getUsername());
-                    a1.setPhone(String.valueOf(maria.getTelephone()));
-                    a1.setAddress(maria.getAddress());
                     a1.setReason("Adoro gatos");
                     a1.setExperience("Tenho experiência com animais");
                     a1.setAdoptionDate(LocalDate.now());
@@ -322,27 +318,46 @@ public class DataInitializer {
                     Adoption a2 = new Adoption();
                     a2.setUser(maria);
                     a2.setCat(cat2);
-                    a2.setStatus("Aprovada");
+                    a2.setStatus("Pendente");
                     a2.setApplicantName(maria.getName());
-                    a2.setEmail(maria.getUsername());
-                    a2.setPhone(String.valueOf(maria.getTelephone()));
-                    a2.setAddress(maria.getAddress());
                     a2.setReason("Adoro gatos");
                     a2.setExperience("Tenho experiência com gatinhos");
                     a2.setAdoptionDate(LocalDate.now());
                     adoptRepo.save(a2);
 
+                    Adoption a3 = new Adoption();
+                    a3.setUser(ana);
+                    a3.setCat(cat3);
+                    a3.setStatus("Pendente");
+                    a3.setApplicantName(ana.getName());
+                    a3.setReason("Adoro gatos");
+                    a3.setExperience("Tenho experiência com gatinhos");
+                    a3.setAdoptionDate(LocalDate.now());
+                    adoptRepo.save(a3);
+
                     // atualizar estado
                     cat1.setStatus("Adotado");
-                    cat2.setStatus("Adotado");
+                    cat2.setStatus("Disponível");
+                    cat3.setStatus("Disponível");
                     catRepo.save(cat1);
                     catRepo.save(cat2);
+                    catRepo.save(cat3);
 
-                    System.out.println("ADOÇÕES CRIADAS!");
+                    Report reportMaria = new Report();
+                    reportMaria.setUser(maria);
+                    reportMaria.setCat(cat1);
+                    reportMaria.setStatus("Excelente");
+                    reportMaria.setNotes("Muito bem adaptado");
+                    reportMaria.setReportDate(LocalDateTime.now());
+
+                    reportRepo.save(reportMaria);
+
                 } else {
                     System.out.println("Não há gatos suficientes disponíveis!");
                 }
 
             }
-        }*/
+        }
+
+    }
 }
