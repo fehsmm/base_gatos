@@ -2,17 +2,21 @@ package pt.upskill.base_gatos_demo.services;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.CreateCatModel;
 import pt.upskill.base_gatos_demo.models.EditCatModel;
 import pt.upskill.base_gatos_demo.repositories.CatRepository;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +26,15 @@ public class CatService {
     @Autowired
     CatRepository catRepository;
 
+    @Value("${app.upload.dir}")
+    private String uploadDir;
+
     @Autowired
     AuthService authService;
 
     @Autowired
     AdoptionService adoptionService;
+
 
     public List<Cat> listCats(String nameFilter, String statusFilter){
         List<Cat> cats = new ArrayList<>();
@@ -50,9 +58,27 @@ public class CatService {
         return catRepository.findById(id).orElse(null);
     }
 
+    private String savePhoto(MultipartFile photo) throws IOException {
+        String absoluteDir = System.getProperty("user.dir") + "/" + uploadDir;
+        File dir = new File(absoluteDir);
+        if (!dir.exists()) dir.mkdirs();
+        String original = photo.getOriginalFilename();
+        String ext = original.substring(original.lastIndexOf("."));
+        String filename = UUID.randomUUID().toString() + ext;
+        File dest = new File(dir, filename);
+        java.nio.file.Files.write(dest.toPath(), photo.getBytes());
+        return "/images/cats/" + filename;
+    }
+
     public void createCat(CreateCatModel model) {
         Cat cat = new Cat();
-        cat.setImage(model.getImage());
+        if (model.getPhoto() != null && !model.getPhoto().isEmpty()) {
+            try {
+                cat.setImage(savePhoto(model.getPhoto()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         cat.setName(model.getName());
         cat.setEstimatedAge(model.getEstimatedAge());
         cat.setGender(model.isGender());
@@ -71,10 +97,14 @@ public class CatService {
 
     public void updateCat(EditCatModel model) {
         Cat cat = getById(model.getId());
-        if (model.getImage() == null || model.getImage().isEmpty()) {
-            cat.setImage(cat.getImage());
+        if (model.getPhoto() != null && !model.getPhoto().isEmpty()) {
+            try {
+                cat.setImage(savePhoto(model.getPhoto()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-            cat.setImage(model.getImage());
+            cat.setImage(model.getExistingImage());
         }
         cat.setName(model.getName());
         cat.setEstimatedAge(model.getEstimatedAge());

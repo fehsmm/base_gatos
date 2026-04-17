@@ -1,14 +1,17 @@
 package pt.upskill.base_gatos_demo.models;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class EditCatModel {
 
     private Long id;
 
-    private String image;
+
+    private String existingImage;
+    private MultipartFile photo;
     private String name;
     private String estimatedAge;
     private boolean gender;
@@ -24,20 +27,28 @@ public class EditCatModel {
     private boolean parasiteControl;
     private boolean sterilization;
 
+    public String getExistingImage() {
+        return existingImage;
+    }
+
+    public void setExistingImage(String existingImage) {
+        this.existingImage = existingImage;
+    }
+
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getName() {

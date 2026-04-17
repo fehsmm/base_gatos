@@ -159,7 +159,7 @@ input:focus, select:focus, textarea:focus {
 
 
 /* ---- Cat Card ---- */
-.cat-card { transition: box-shadow 0.2s; height: 100% }
+.cat-card { transition: box-shadow 0.2s; }
 .cat-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .cat-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .cat-card-img-wrapper { position: relative; overflow: hidden; }
@@ -194,10 +194,10 @@ input:focus, select:focus, textarea:focus {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;}
-
+    gap: 0.25rem;
+}
 .card-body .btn-primary {
-    margin-top: auto;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 /* ---- Responsive ---- */

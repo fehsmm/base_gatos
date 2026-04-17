@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "cat_list")
 public class Cat {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String image;

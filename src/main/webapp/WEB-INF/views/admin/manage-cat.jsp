@@ -31,6 +31,9 @@
         <c:if test="${success != null}">
             <div class="alert alert-success">${success}</div>
         </c:if>
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
 
             <div>
                 <h3>
@@ -214,7 +217,7 @@
             </button>
         </div>
 
-        <form action="/admin/create-cat" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+        <form action="/admin/create-cat" method="POST" enctype="multipart/form-data" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -223,10 +226,10 @@
                 <hr style="margin-top:4px;">
             </div>
 
-            <!--<div class="mb-3">
-                <label>Foto</label>
-                <input type="file" name="image" id="image" class="form-control-file">
-            </div>-->
+            <div class="mb-3">
+                <label>Foto do Gato</label>
+                <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
+            </div>
 
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
@@ -370,7 +373,10 @@
             </button>
         </div>
 
-        <form action="/admin/update-cat" method="POST" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+        <form action="/admin/update-cat" method="POST" enctype="multipart/form-data" style="overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; padding: 10px;">
+
+            <input type="hidden" name="id" id="editCatId"/>
+            <input type="hidden" name="existingImage" id="existingImage"/>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="id" id="editCatId"/>
@@ -381,10 +387,14 @@
                 <hr style="margin-top:4px;">
             </div>
 
-            <!--<div class="mb-3">
-                <label>Foto</label>
-                <input type="file" name="image" id="editImage" class="form-control-file">
-            </div>-->
+            <div class="mb-3">
+                <label>Foto Atual</label><br>
+                <img id="editCurrentPhoto" src="" alt="Foto atual"
+                     class="img-thumbnail mb-2"
+                     style="max-width:120px; max-height:120px; object-fit:cover; display:none;">
+                <label class="mt-2">Nova Foto (deixe vazio para manter a atual)</label>
+                <input type="file" name="photo" id="editPhoto" class="form-control" accept="image/*">
+            </div>
 
             <div class="row" style="margin-bottom:10px;">
                 <div class="col">
@@ -530,6 +540,8 @@
 
         <form id="deleteForm" method="POST" action="/admin/delete-cat">
 
+            <input type="hidden" name="catId" id="deleteCatId"/>
+
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="catId" id="deleteCatId"/>
 
@@ -601,6 +613,13 @@
 
         document.getElementById("editCatId").value = id;
         document.getElementById("existingImage").value = image;
+        const photoEl = document.getElementById("editCurrentPhoto");
+        if (image && image.trim() !== "") {
+            photoEl.src = image;
+            photoEl.style.display = "block";
+        } else {
+            photoEl.style.display = "none";
+        }
         document.getElementById("editName").value = name;
         document.getElementById("editEstimatedAge").value = estimatedAge;
         document.getElementById("editGender").value = gender;

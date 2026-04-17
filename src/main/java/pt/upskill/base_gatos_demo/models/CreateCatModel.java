@@ -1,12 +1,14 @@
 package pt.upskill.base_gatos_demo.models;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class CreateCatModel {
 
-    private String image;
+    private MultipartFile photo;
     private String name;
     private String estimatedAge;
     private boolean gender;
@@ -22,13 +24,9 @@ public class CreateCatModel {
     private boolean parasiteControl;
     private boolean sterilization;
 
-    public String getImage() {
-        return image;
-    }
+    public MultipartFile getPhoto() { return photo; }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+    public void setPhoto(MultipartFile photo) { this.photo = photo; }
 
     public String getName() {
         return name;
