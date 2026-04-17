@@ -31,6 +31,75 @@
             <div class="alert alert-success">${success}</div>
         </c:if>
 
+        <c:if test="${pendingUsersCount > 0}">
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+
+                <c:if test="${pendingUsersCount > 0}">
+                    <c:choose>
+                        <c:when test="${pendingUsersCount == 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <strong>${pendingUsersCount} conta pendente de aprovação</strong>
+                            </div>
+                        </c:when>
+                        <c:when test="${pendingUsersCount > 1}">
+                            <div class="alert alert-warning" style="flex:1;min-width:200px">
+                                <strong>${pendingUsersCount} contas pendentes de aprovação</strong>
+                            </div>
+                        </c:when>
+                    </c:choose>
+                </c:if>
+
+            </div>
+        </c:if>
+
+        <div>
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+                Filtrar Candidaturas
+            </h3>
+        </div>
+
+        <form method="GET" action="/admin/manage-user" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Data de Início
+                </label>
+                <input type="date" name="dateStartFilter" id="dateStartFilter" class="form-control" value="${param.dateStartFilter}"/>
+            </div>
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Data de Fim
+                </label>
+                <input type="date" name="dateEndFilter" id="dateEndFilter" class="form-control" value="${param.dateEndFilter}"/>
+            </div>
+
+            <div style="display:flex; flex-direction:column; flex: 1">
+                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                    Estado da Candidatura
+                </label>
+                <select name="statusFilter" id="statusFilter" class="form-control">
+                    <option value="">Todas as candidaturas</option>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Aprovada">Aprovada</option>
+                    <option value="Rejeitada">Rejeitada</option>
+                </select>
+            </div>
+
+            <div style="display:flex; align-items:center; height:38px;">
+                <label style="display:flex; align-items:center; gap:.5rem; margin:0; white-space:nowrap; font-size:0.95rem;">
+                    <input type="checkbox" name="pendingFilter" id="pendingFilter" value="true"
+                    ${param.pendingFilter == 'true' ? 'checked' : ''}>
+                    Pendentes
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="/admin/manage-application" class="btn btn-secondary">Limpar</a>
+
+        </form>
+
     </div>
 
 </main>

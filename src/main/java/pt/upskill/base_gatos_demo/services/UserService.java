@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +35,10 @@ public class UserService {
     }
 
     public void rejectUser(Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.getUserById(id);
+        user.setRole("adopter");
+        userRepository.save(user);
+        //ao rejeitar uma conta de voluntário, não apaga a conta, fica com uma conta de adotante
     }
 
     public void deleteUser(Long id) {
@@ -47,5 +51,44 @@ public class UserService {
 
     public User getUsername(String username) {
         return userRepository.getUserByUsername(username);
+    }
+
+    public List<User> getUsers(String nameFilter, String roleFilter, Boolean pendingFilter) {
+        List<User> users = new ArrayList<>();
+        if((nameFilter == null || nameFilter.isEmpty()) && (roleFilter == null || roleFilter.isEmpty()) &&
+                (pendingFilter == null || !pendingFilter)) {
+            //todos vazios
+            users = userRepository.findTop8ByOrderByAccountCreationDesc();
+        } else if ((nameFilter != null && !nameFilter.isEmpty()) && (roleFilter == null || roleFilter.isEmpty()) &&
+                (pendingFilter == null || !pendingFilter)) {
+            //só nome
+            users = userRepository.findByNameContainingIgnoreCase(nameFilter);
+        } else if ((nameFilter == null || nameFilter.isEmpty()) && (roleFilter != null && !roleFilter.isEmpty()) &&
+                (pendingFilter == null || !pendingFilter)) {
+            //só role
+            users = userRepository.findByRole(roleFilter);
+        } else if ((nameFilter == null || nameFilter.isEmpty()) && (roleFilter == null || roleFilter.isEmpty()) &&
+                (pendingFilter != null && pendingFilter)) {
+            //só pending
+            users = userRepository.findByApprovedFalse();
+        } else if((nameFilter != null && !nameFilter.isEmpty()) && (roleFilter != null && !roleFilter.isEmpty()) &&
+                (pendingFilter == null || !pendingFilter)) {
+            //só nome e role
+            users = userRepository.findByNameContainingIgnoreCaseAndRole(nameFilter, roleFilter);
+        } else if((nameFilter != null && !nameFilter.isEmpty()) && (roleFilter == null || roleFilter.isEmpty()) &&
+                (pendingFilter != null && pendingFilter)) {
+            //só nome e pending
+            users = userRepository.findByNameContainingIgnoreCaseAndApprovedFalse(nameFilter);
+        } else if((nameFilter == null || nameFilter.isEmpty()) && (roleFilter != null && !roleFilter.isEmpty()) &&
+                (pendingFilter != null && pendingFilter)) {
+            //só pending e role
+            users = userRepository.findByRoleAndApprovedFalse(roleFilter);
+        } else if((nameFilter != null && !nameFilter.isEmpty()) && (roleFilter != null && !roleFilter.isEmpty()) &&
+                (pendingFilter != null && pendingFilter)) {
+            //todos
+            users = userRepository.findByNameContainingIgnoreCaseAndRoleAndApprovedFalse(nameFilter, roleFilter);
+        }
+        users.sort((a, b) -> b.getAccountCreation().compareTo(a.getAccountCreation()));
+        return users;
     }
 }

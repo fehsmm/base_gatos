@@ -39,12 +39,12 @@
                     <c:choose>
                         <c:when test="${pendingAdoptions == 1}">
                             <div class="alert alert-warning" style="flex:1;min-width:200px">
-                                <strong>${pendingAdoptions} candidatura por ver</strong>
+                                <strong>${pendingAdoptions} Nova Candidatura</strong>
                             </div>
                         </c:when>
                         <c:when test="${pendingAdoptions > 1}">
                             <div class="alert alert-warning" style="flex:1;min-width:200px">
-                                <strong>${pendingAdoptions} candidaturas por ver</strong>
+                                <strong>${pendingAdoptions} Novas Candidaturas</strong>
                             </div>
                         </c:when>
                     </c:choose>

@@ -141,10 +141,13 @@ public class AdminController {
     }
 
     @GetMapping(value = "/manage-user")
-    public String manageUser(Model model) {
-        List<User> pendingUsers = userService.findPendingApproval();
+    public String manageUser(Model model,
+                             @RequestParam(required = false) String nameFilter,
+                             @RequestParam(required = false) String roleFilter,
+                             @RequestParam(required = false) Boolean pendingFilter) {
+        List<User> users = userService.getUsers(nameFilter, roleFilter, pendingFilter);
         int pendingApproval = userService.countPendingApproval();
-        model.addAttribute("pendingUsers", pendingUsers);
+        model.addAttribute("users", users);
         model.addAttribute("pendingUsersCount", pendingApproval);
         return "admin/manage-user";
     }
@@ -308,15 +311,19 @@ public class AdminController {
     }
 
     @PostMapping("/adoptions/{id}/approve")
-    public String approve(@PathVariable Long id) {
+    public String approve(@PathVariable Long id,
+                          RedirectAttributes redirectAttributes) {
         adoptionService.approveAdoption(id);
+        redirectAttributes.addFlashAttribute("success", "Candidatura aprovada com sucesso!");
         return "redirect:/admin/manage-application";
     }
 
     @PostMapping("/adoptions/{id}/reject")
     public String reject(@PathVariable Long id,
-                         @RequestParam("rejectionMotive") String rejectionMotive) {
+                         @RequestParam("rejectionMotive") String rejectionMotive,
+                         RedirectAttributes redirectAttributes) {
         adoptionService.rejectAdoption(id, rejectionMotive);
+        redirectAttributes.addFlashAttribute("success", "Candidatura rejeitada com sucesso!");
         return "redirect:/admin/manage-application";
     }
 
@@ -328,13 +335,35 @@ public class AdminController {
 
     @PostMapping("/view-shift-notes/mark-as-read/{id}")
     @ResponseBody
-    public void markNoteAsRead(@PathVariable Long id) {
+    public void markNoteAsRead(@PathVariable Long id,
+                               RedirectAttributes redirectAttributes) {
         noteService.markAsRead(id);
+        redirectAttributes.addFlashAttribute("success", "Nota marcada como visualizada com sucesso!");
+    }
+
+    @PostMapping("/user/{id}/approve")
+    public String approveVolunteer(@PathVariable Long id,
+                          RedirectAttributes redirectAttributes) {
+        userService.approveUser(id);
+        redirectAttributes.addFlashAttribute("success", "Conta de Voluntário validada com sucesso!");
+        return "redirect:/admin/manage-user";
+    }
+
+    @PostMapping("/user/{id}/reject")
+    public String rejectVolunteer(@PathVariable Long id,
+                         RedirectAttributes redirectAttributes) {
+        userService.rejectUser(id);
+        redirectAttributes.addFlashAttribute("success", "Conta de Voluntário rejeitado com sucesso!");
+        return "redirect:/admin/manage-user";
+    }
+
+    @PostMapping(value = "/delete-user")
+    public String deleteUser(@RequestParam("userId") Long id,
+                              RedirectAttributes redirectAttributes) {
+        userService.deleteUser(id);
+        redirectAttributes.addFlashAttribute("success", "Conta eliminada com sucesso!");
+        return "redirect:/admin/manage-stock";
     }
 
 }
-
-    //post mapping aceitar/rejeitar voluntarios
-    //eliminar user
-    //filtros na pagina de manage users
 

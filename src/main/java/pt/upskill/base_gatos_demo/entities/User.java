@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class User {
@@ -20,6 +21,7 @@ public class User {
     private String address;
     private String email;
     private boolean approved;
+    private LocalDateTime accountCreation;
 
     private String resetToken;
     private LocalDateTime tokenExpiration;
@@ -150,5 +152,22 @@ public class User {
 
     public void setTokenExpiration(LocalDateTime tokenExpiration) {
         this.tokenExpiration = tokenExpiration;
+    }
+
+    public LocalDateTime getAccountCreation() {
+        return accountCreation;
+    }
+
+    public void setAccountCreation(LocalDateTime accountCreation) {
+        this.accountCreation = accountCreation;
+    }
+
+    public String getFormattedAccountCreation() {
+        if(accountCreation == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return accountCreation.format(formatter);
+        }
     }
 }

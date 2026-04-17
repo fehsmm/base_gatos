@@ -9,6 +9,8 @@ import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.SignUpModel;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AuthService {
     @Autowired
@@ -24,6 +26,7 @@ public class AuthService {
         user.setTelephone(signUpModel.getTelephone());
         user.setName(signUpModel.getName());
         user.setEmail(signUpModel.getEmail());
+        user.setAccountCreation(LocalDateTime.now());
 
         String encodedPassword = passwordEncoder.encode(signUpModel.getPassword());
         user.setPassword(encodedPassword);
