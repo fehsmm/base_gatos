@@ -116,18 +116,30 @@
 
                                         <span class="badge
                                                 ${user.role == 'admin' ? 'badge-purple' :
-                                                  (app.status == 'Aprovada' ? 'badge-green' :
-                                                  (app.status == 'Rejeitada' ? 'badge-red' : 'badge-gray'))}">
-                                                ${app.status}
+                                                  (user.role == 'volunteer' ? 'badge-blue' :
+                                                  (user.role == 'adopter' ? 'badge-orange' : 'badge-gray'))}">
+
+                                                ${user.role == 'admin' ? 'Administrador' :
+                                                        (user.role == 'volunteer' ? 'Voluntário' :
+                                                                (user.role == 'adopter' ? 'Adotante' : ''))}
                                         </span>
 
-                                        <span id="badge-${app.id}" class="badge
-                                        ${!app.read ? 'badge-blue' : 'badge-gray'}">
-                                                ${!app.read ? 'Nova' : 'Lida'}
+                                        <span id="badge-${user.id}" class="badge
+                                        ${!user.approved ? 'badge-yellow' : 'badge-green'}">
+                                                ${!user.approved ? 'Pendente' : 'Ativo'}
                                         </span>
                                     </div>
 
+                                    <div class="text-sm text-gray">
+                                        ${user.email}
+                                    </div>
+
+                                    <div class="text-sm text-gray">
+                                            Registado a ${user.formattedAccountCreation}
+                                    </div>
                                 </div>
+
+
                             </div>
 
                         </div>
