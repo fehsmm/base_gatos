@@ -27,6 +27,8 @@
 
                     <div class="card card-custom p-4">
 
+                        <c:if test="${not empty cats}">
+
                         <h5>Novo Relatório</h5>
 
                         <form action="/adopter/reports" method="post">
@@ -64,6 +66,13 @@
 
                             <button class="btn btn-primary w-100">Enviar Relatório</button>
                         </form>
+                        </c:if>
+                        <c:if test="${empty cats}">
+                            <div class="alert alert-warning text-center">
+                                Ainda não tem gatos adotados.
+                                Só pode submeter relatórios após uma adoção aprovada.
+                            </div>
+                        </c:if>
 
                     </div>
 

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class User {
     @Id
@@ -18,6 +20,9 @@ public class User {
     private String address;
     private String email;
     private boolean approved;
+
+    private String resetToken;
+    private LocalDateTime tokenExpiration;
 
     //Construtores para DataInitializer
     public User(String name, String username,String password, String role, Long telephone,String address, String email, boolean approved) {
@@ -129,5 +134,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    public LocalDateTime getTokenExpiration() {
+        return tokenExpiration;
+    }
+
+    public void setTokenExpiration(LocalDateTime tokenExpiration) {
+        this.tokenExpiration = tokenExpiration;
     }
 }

@@ -21,6 +21,7 @@ public class SecurityWebConfig {
             auth.dispatcherTypeMatchers(DispatcherType.FORWARD);
             auth.requestMatchers("/auth/**", "/styles/**", "/WEB-INF/**", "/error").permitAll();
             auth.requestMatchers("/styles/**", "/scripts/**", "/images/**","/icons/**").permitAll();
+            auth.requestMatchers("/login", "/forgot-password", "/reset-password").permitAll();
             auth.requestMatchers("/volunteer/**").hasRole("VOLUNTEER");
             auth.requestMatchers("/admin/**").hasRole("ADMIN");
             auth.requestMatchers("/adopter/**").hasRole("ADOPTER");

@@ -67,6 +67,11 @@
             </div>
         </div>
     </div>
+    <c:if test="${success != null}">
+        <div class="alert alert-success">
+                ${success}
+        </div>
+    </c:if>
 </div>
 <%@ include file="../public/footer.jsp" %>
 </body>
