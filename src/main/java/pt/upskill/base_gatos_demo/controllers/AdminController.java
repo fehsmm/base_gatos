@@ -326,7 +326,7 @@ public class AdminController {
         adoptionService.markAsRead(id);
     }
 
-    @PostMapping("/view-shift-notes/mark-as-read/{selectedNoteId}")
+    @PostMapping("/view-shift-notes/mark-as-read/{id}")
     @ResponseBody
     public void markNoteAsRead(@PathVariable Long id) {
         noteService.markAsRead(id);
