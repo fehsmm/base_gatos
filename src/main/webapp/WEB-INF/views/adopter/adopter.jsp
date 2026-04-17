@@ -14,13 +14,14 @@
     <c:set var="activePage" value="dashboard" />
         <c:set var="dashboardUrl" value="/adopter/" />
     <%@ include file="../fragments/adminSidebar.jsp" %>
-
+    <main class="admin-main">
     <div class="container">
         <div class="container-fluid p-4">
 
 
             <div class="mb-4">
                 <h2 class="fw-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h320v-560H200v560Zm400 0h160v-240H600v240Zm0-320h160v-240H600v240Z"/></svg>
                     Bem-vindo(a), ${user.name}!
                 </h2>
                 <p class="text-muted">
@@ -54,17 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="col-md-4">
-                    <div class="card p-3 shadow-sm border-0 rounded-4">
-                        <div class="d-flex align-items-center">
-
-                            <div>
-                                <h4 class="mb-0">100%</h4>
-                                <small class="text-muted">Taxa de Felicidade</small>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
 
             </div>
@@ -96,12 +86,11 @@
 
                             <div class="d-flex align-items-center p-3 border rounded-4">
 
-                                <!-- IMG -->
                                 <img src="${adoption.cat.image != null ? adoption.cat.image : '/images/default-cat.jpg'}"
                                      style="width:80px; height:80px; object-fit:cover; border-radius:10px;"
                                      class="me-3">
 
-                                <!-- INFO -->
+
                                 <div>
                                     <h6 class="fw-bold mb-1">
                                             ${adoption.cat.name}
@@ -149,17 +138,12 @@
                         </a>
                     </div>
 
-                    <!--<div class="col-md-4">
-                        <button class="btn btn-outline-dark w-100">
-                            Agendar Consulta
-                        </button>
-                    </div>-->
-
                 </div>
 
             </div>
 
         </div>
+    </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

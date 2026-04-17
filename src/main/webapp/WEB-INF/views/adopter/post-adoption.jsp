@@ -14,11 +14,13 @@
     <c:set var="activePage" value="post-adoption" />
     <c:set var="dashboardUrl" value="/adopter/" />
     <%@ include file="../fragments/adminSidebar.jsp" %>
-
+    <main class="admin-main">
     <main class="container p-4">
         <div class="content">
 
-            <h2>Relatório Pós-Adoção</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                Relatório Pós-Adoção</h2>
             <p class="text-muted">Partilhe o progresso do seu gato connosco</p>
 
             <div class="row">
@@ -130,6 +132,7 @@
             </div>
 
         </div>
+    </main>
     </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
