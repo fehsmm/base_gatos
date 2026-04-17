@@ -63,27 +63,21 @@
 
             <div style="display:flex; flex-direction:column; flex: 1">
                 <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
-                    Data de Início
+                    Nome do Utilizador
                 </label>
-                <input type="date" name="dateStartFilter" id="dateStartFilter" class="form-control" value="${param.dateStartFilter}"/>
+                <input type="text" name="nameFilter" id="nameFilter" class="form-control" placeholder="Nome do utilizador"
+                       value="${param.nameFilter}">
             </div>
 
             <div style="display:flex; flex-direction:column; flex: 1">
                 <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
-                    Data de Fim
+                    Tipo de Conta
                 </label>
-                <input type="date" name="dateEndFilter" id="dateEndFilter" class="form-control" value="${param.dateEndFilter}"/>
-            </div>
-
-            <div style="display:flex; flex-direction:column; flex: 1">
-                <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
-                    Estado da Candidatura
-                </label>
-                <select name="statusFilter" id="statusFilter" class="form-control">
-                    <option value="">Todas as candidaturas</option>
-                    <option value="Pendente">Pendente</option>
-                    <option value="Aprovada">Aprovada</option>
-                    <option value="Rejeitada">Rejeitada</option>
+                <select name="roleFilter" id="roleFilter" class="form-control">
+                    <option value="">Todas as contas</option>
+                    <option value="admin">Administrador</option>
+                    <option value="volunteer">Voluntário</option>
+                    <option value="adopter">Adotante</option>
                 </select>
             </div>
 
@@ -96,7 +90,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Filtrar</button>
-            <a href="/admin/manage-application" class="btn btn-secondary">Limpar</a>
+            <a href="/admin/manage-user" class="btn btn-secondary">Limpar</a>
 
         </form>
 

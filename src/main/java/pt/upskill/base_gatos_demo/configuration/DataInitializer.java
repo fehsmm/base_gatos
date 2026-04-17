@@ -56,6 +56,10 @@ public class DataInitializer {
                     new User("Catarina Voluntária", "catarina.vol", "123", "volunteer", 969000001L, "Praça do Chile, 15", "catarina@gmail.pt", false)
             );
 
+            for(User user : users) {
+                user.setAccountCreation(LocalDateTime.now());
+            }
+
             for (User user : users) {
                 if (userRepository.getUserByUsername(user.getUsername()) == null) {
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
