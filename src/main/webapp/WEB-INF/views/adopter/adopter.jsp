@@ -49,8 +49,8 @@
                         <div class="d-flex align-items-center">
 
                             <div>
-                                <h4 class="mb-0">0ALTERAR</h4>
-                                <small class="text-muted">Relatório Pendente</small>
+                                <h4 class="mb-0">${reportCountByUser}</h4>
+                                <small class="text-muted">Relatórios enviados</small>
                             </div>
                         </div>
                     </div>

@@ -49,4 +49,9 @@ public class ReportService {
         List<Report> reports = reportRepository.findTop5ByUserAndCatOrderByReportDateDesc(user, cat);
         return  reports;
     }
+
+    public int getReportCount(String username){
+    User user = userRepository.getUserByUsername(username);
+    return reportRepository.countReportByUser(user);
+    }
 }

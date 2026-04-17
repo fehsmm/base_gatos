@@ -54,7 +54,9 @@ public class AdopterController {
             return "redirect:/auth/login";
         }
         List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
+        int reportCountByUser = reportService.getReportCount(username);
         model.addAttribute("adoptions", adoptions);
+        model.addAttribute("reportCountByUser", reportCountByUser);
         return "adopter/adopter";
     }
 
