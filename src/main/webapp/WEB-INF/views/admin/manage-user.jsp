@@ -105,8 +105,33 @@
                 </div>
 
                 <div class="card-body">
+                    <c:forEach var="user" items="${users}">
+                        <div class="shift-card">
 
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.35rem">
+                                <div style="display:flex; flex-direction:column; gap:0.35rem;">
 
+                                    <div style="font-size:1rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                                        <strong>${user.name}</strong>
+
+                                        <span class="badge
+                                                ${user.role == 'admin' ? 'badge-purple' :
+                                                  (app.status == 'Aprovada' ? 'badge-green' :
+                                                  (app.status == 'Rejeitada' ? 'badge-red' : 'badge-gray'))}">
+                                                ${app.status}
+                                        </span>
+
+                                        <span id="badge-${app.id}" class="badge
+                                        ${!app.read ? 'badge-blue' : 'badge-gray'}">
+                                                ${!app.read ? 'Nova' : 'Lida'}
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </c:forEach>
                 </div>
 
             </div>

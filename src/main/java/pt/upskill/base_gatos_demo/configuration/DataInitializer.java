@@ -337,6 +337,7 @@ public class DataInitializer {
                     a1.setReason("Adoro gatos");
                     a1.setExperience("Tenho experiência com animais");
                     a1.setAdoptionDate(LocalDate.now());
+                    a1.setRead(true);
                     adoptRepo.save(a1);
 
                     Adoption a2 = new Adoption();
