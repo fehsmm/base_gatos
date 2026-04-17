@@ -184,7 +184,10 @@ public class AdminController {
     }
 
     @GetMapping(value = "/view-shift-note")
-    public String viewShiftNote(Model model) {
+    public String viewShiftNote(Model model,
+                                @RequestParam(required = false) LocalDate dateStartFilter,
+                                @RequestParam(required = false) LocalDate dateEndFilter,
+                                @RequestParam(required = false) @Nullable String priorityFilter) {
         List<Note> shiftNotes = noteService.getNotes();
         int unreadNotes = noteService.countUnreadNotes();
         model.addAttribute("shiftNotes", shiftNotes);

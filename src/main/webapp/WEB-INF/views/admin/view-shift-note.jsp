@@ -48,6 +48,47 @@
                 </div>
             </c:if>
 
+            <div>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+                    Filtrar Notas
+                </h3>
+            </div>
+
+            <form method="GET" action="/admin/view-shift-note" style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
+
+                <div style="display:flex; flex-direction:column; flex: 1">
+                    <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                        Data de Início
+                    </label>
+                    <input type="date" name="dateStartFilter" id="dateStartFilter" class="form-control" value="${param.dateStartFilter}"/>
+                </div>
+
+                <div style="display:flex; flex-direction:column; flex: 1">
+                    <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                        Data de Fim
+                    </label>
+                    <input type="date" name="dateEndFilter" id="dateEndFilter" class="form-control" value="${param.dateEndFilter}"/>
+                </div>
+
+                <div style="display:flex; flex-direction:column; flex: 1">
+                    <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">
+                        Prioridade
+                    </label>
+                    <select name="priorityFilter" id="priorityFilter" class="form-control">
+                        <option value="">Todas as prioridades</option>
+                        <option value="urgent">Urgente</option>
+                        <option value="high">Alta</option>
+                        <option value="normal">Normal</option>
+                        <option value="low">Baixa</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a href="/admin/view-shift-note" class="btn btn-secondary">Limpar</a>
+
+            </form>
+
             <div style="gap:1rem; margin-bottom:1.5rem;">
                 <div class="card">
                     <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
@@ -61,8 +102,8 @@
 
                         <c:forEach var="note" items="${shiftNotes}">
                             <div class="shift-card"
-                                 style="${note.priority == 'urgent' ? 'border-color:#fca5a5' :
-                             (note.priority == 'high' ? 'border-color:#fdba74' : '')}">
+                                 style="${note.priority == 'urgent' ? 'error-announcement' :
+                             (note.priority == 'high' ? 'warning-announcement' : '')}">
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
                                     <div style="font-weight:500;font-size:.9rem">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-188.5-11.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5ZM640-400q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-188.5-11.5Q280-263 280-280t11.5-28.5Q303-320 320-320t28.5 11.5Q360-297 360-280t-11.5 28.5Q337-240 320-240t-28.5-11.5ZM640-240q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
