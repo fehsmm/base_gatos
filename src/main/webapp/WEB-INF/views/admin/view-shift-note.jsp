@@ -84,9 +84,16 @@
                     </select>
                 </div>
 
+                <div style="display:flex; align-items:center; height:38px;">
+                    <label style="display:flex; align-items:center; gap:.5rem; margin:0; white-space:nowrap; font-size:0.95rem;">
+                        <input type="checkbox" name="unreadFilter" id="unreadFilter" value="true"
+                        ${param.unreadFilter == 'true' ? 'checked' : ''}>
+                        Não lidas
+                    </label>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Filtrar</button>
                 <a href="/admin/view-shift-note" class="btn btn-secondary">Limpar</a>
-
             </form>
 
             <div style="gap:1rem; margin-bottom:1.5rem;">
@@ -99,26 +106,42 @@
                     </div>
 
                     <div class="card-body">
-
                         <c:forEach var="note" items="${shiftNotes}">
-                            <div class="shift-card"
-                                 style="${note.priority == 'urgent' ? 'error-announcement' :
-                             (note.priority == 'high' ? 'warning-announcement' : '')}">
+                            <div class="shift-card
+                            ${note.priority == 'urgent' ? 'error-announcement' :
+                             (note.priority == 'high' ? 'warning-announcement' :
+                             (!note.read ? 'info-announcement' : ''))}"
+                                 data-note-id="${note.id}">
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem">
                                     <div style="font-weight:500;font-size:.9rem">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-188.5-11.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5ZM640-400q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-188.5-11.5Q280-263 280-280t11.5-28.5Q303-320 320-320t28.5 11.5Q360-297 360-280t-11.5 28.5Q337-240 320-240t-28.5-11.5ZM640-240q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
-                                        ${note.shift.date}
+                                        ${note.shift.formattedDate}
+
+                                        <c:if test="${!note.read}">
+                                            <button class="btn btn-sm btn-outline-primary ms-2"
+                                                    onclick="openMarkAsReadModal(${note.id})"
+                                                    id="mark-btn-${note.id}">
+                                                Marcar como lida
+                                            </button>
+                                        </c:if>
                                     </div>
 
-                                    <span class="badge
+                                    <div>
+                                        <span class="badge
                                     ${note.priority == 'urgent' ? 'badge-red' :
-                                      (note.priority == 'high' ? 'badge-orange' :
+                                      (note.priority == 'high' ? 'badge-yellow' :
                                       (note.priority == 'normal' ? 'badge-blue' : 'badge-gray'))}">
 
-                                            ${note.priority == 'urgent' ? 'Urgente' :
-                                                    (note.priority == 'high' ? 'Alta' :
-                                                            (note.priority == 'normal' ? 'Normal' : 'Baixa'))}
-                                    </span>
+                                                ${note.priority == 'urgent' ? 'Urgente' :
+                                                        (note.priority == 'high' ? 'Alta' :
+                                                                (note.priority == 'normal' ? 'Normal' : 'Baixa'))}
+                                        </span>
+
+                                        <span id="badge-${note.id}" class="badge
+                                        ${!note.read ? 'badge-blue' : 'badge-gray'}">
+                                                ${!note.read ? 'Nova' : 'Lida'}
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div style="font-size:.9rem; margin-bottom:.5rem;">
@@ -134,19 +157,19 @@
                                 </div>
 
                                 <div style="margin-top:.5rem;">
-                                        ${note.summary}
+                                    <strong>Resumo: </strong> ${note.summary}
                                 </div>
 
                                 <c:if test="${not empty note.importantObservations}">
                                     <div style="margin-top:.5rem;">
-                                        <strong>Ocorrências:</strong> ${note.importantObservations}
+                                        <strong>Observações:</strong> ${note.importantObservations}
                                     </div>
                                 </c:if>
                             </div>
                         </c:forEach>
 
                         <c:if test="${empty shiftNotes}">
-                            <div class="text-gray text-sm">Sem notas de turno.</div>
+                            <div class="text-gray text-sm">Ainda sem notas de turno.</div>
                         </c:if>
                     </div>
                 </div>
@@ -157,6 +180,61 @@
     </main>
 
 </div>
+
+<div id="markAsReadModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:400px; max-height: fit-content">
+
+        <h5 class="mb-3">Confirmar</h5>
+
+        <p class="text-muted">
+            Marcar esta nota como lida?
+        </p>
+
+        <div style="display:flex; justify-content:flex-end; gap:.5rem;">
+            <button class="btn btn-secondary" onclick="closeMarkAsReadModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="confirmMarkAsRead()">Confirmar</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let selectedNoteId = null;
+
+    function openMarkAsReadModal(id) {
+        selectedNoteId = id;
+        document.getElementById("markAsReadModal").classList.add("open");
+    }
+
+    function closeMarkAsReadModal() {
+        document.getElementById("markAsReadModal").classList.remove("open");
+    }
+
+    function confirmMarkAsRead() {
+        fetch('/admin/view-shift-notes/mark-as-read/' + selectedNoteId, {
+            method: 'POST'
+        })
+            .then(() => {
+                const btn = document.getElementById("mark-btn-" + selectedNoteId);
+                if (btn) btn.remove();
+
+                const badge = document.getElementById("badge-" + selectedNoteId);
+                if (badge) {
+                    badge.classList.remove("badge-blue");
+                    badge.classList.add("badge-gray");
+                    badge.innerText = "Lida";
+                }
+
+                const card = document.querySelector(`[data-note-id='\${selectedNoteId}']`);
+                if (card) {
+                    card.classList.remove("info-announcement");
+                }
+
+            });
+
+        closeMarkAsReadModal();
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

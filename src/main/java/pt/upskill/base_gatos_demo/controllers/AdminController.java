@@ -187,8 +187,9 @@ public class AdminController {
     public String viewShiftNote(Model model,
                                 @RequestParam(required = false) LocalDate dateStartFilter,
                                 @RequestParam(required = false) LocalDate dateEndFilter,
-                                @RequestParam(required = false) @Nullable String priorityFilter) {
-        List<Note> shiftNotes = noteService.getNotes();
+                                @RequestParam(required = false) @Nullable String priorityFilter,
+                                @RequestParam(required = false) Boolean unreadFilter) {
+        List<Note> shiftNotes = noteService.getFilteredNotes(dateStartFilter, dateEndFilter, priorityFilter, unreadFilter);
         int unreadNotes = noteService.countUnreadNotes();
         model.addAttribute("shiftNotes", shiftNotes);
         model.addAttribute("unreadNotesCount", unreadNotes);
@@ -323,6 +324,12 @@ public class AdminController {
     @ResponseBody
     public void markAsRead(@PathVariable Long id) {
         adoptionService.markAsRead(id);
+    }
+
+    @PostMapping("/view-shift-notes/mark-as-read/{selectedNoteId}")
+    @ResponseBody
+    public void markNoteAsRead(@PathVariable Long id) {
+        noteService.markAsRead(id);
     }
 
 }

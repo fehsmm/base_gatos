@@ -53,6 +53,15 @@ public class Shift {
         this.date = date;
     }
 
+    public String getFormattedDate() {
+        if(date == null) {
+            return "Sem data.";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return date.format(formatter);
+        }
+    }
+
     public LocalTime getStartTime() {
         return startTime;
     }

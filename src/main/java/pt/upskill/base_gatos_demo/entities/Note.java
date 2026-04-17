@@ -31,7 +31,7 @@ public class Note {
     private String priority;
 
     @Column(name = "is_read")
-    private boolean read = false;
+    private boolean read;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

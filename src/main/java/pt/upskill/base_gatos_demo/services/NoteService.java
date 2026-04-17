@@ -3,10 +3,8 @@ package pt.upskill.base_gatos_demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pt.upskill.base_gatos_demo.entities.Announcement;
-import pt.upskill.base_gatos_demo.entities.Note;
-import pt.upskill.base_gatos_demo.entities.Shift;
-import pt.upskill.base_gatos_demo.entities.User;
+import org.springframework.transaction.annotation.Transactional;
+import pt.upskill.base_gatos_demo.entities.*;
 //import pt.upskill.base_gatos_demo.models.CreateNoteModel;
 //import pt.upskill.base_gatos_demo.models.EditNoteModel;
 import pt.upskill.base_gatos_demo.repositories.NoteRepository;
@@ -40,6 +38,7 @@ public class NoteService {
         note.setSummary(summary);
         note.setImportantObservations(importantObservations);
         note.setUpdatedAt(LocalDateTime.now());
+        note.setRead(false);
         noteRepository.save(note);
         shift.getNotes().add(note);
         shiftRepository.save(shift);
@@ -138,18 +137,28 @@ public class NoteService {
                 (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
             //tem ambas as datas com unread
             notes = noteRepository.findByUpdatedAtBetweenAndReadFalse(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), unreadFilter);
-        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+        } else if (dateStartFilter != null && dateEndFilter == null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter != null && unreadFilter)) {
             //inicio prioridade unread
-            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
-        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            notes = noteRepository.findByUpdatedAtAfterAndPriorityAndReadFalse(dateStartFilter.atStartOfDay(), priorityFilter, unreadFilter);
+        } else if (dateStartFilter == null && dateEndFilter != null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter != null && unreadFilter)) {
             //fim prioridade unread
-            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
-        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            notes = noteRepository.findByUpdatedAtBeforeAndPriorityAndReadFalse(dateEndFilter.atTime(23,59,59), priorityFilter, unreadFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter != null && unreadFilter)) {
             //tem tudo
-            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
+            notes = noteRepository.findByUpdatedAtBetweenAndPriorityAndReadFalse(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter, unreadFilter);
         }
         notes.sort((a, b) -> b.getUpdatedAt().compareTo(a.getUpdatedAt()));
         return notes;
     }
 
+    @Transactional
+    public void markAsRead(Long id) {
+        Note note = noteRepository.findById(id).orElse(null);
+        if(note != null){
+            note.setRead(true);
+        }
+    }
 }
