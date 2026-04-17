@@ -35,6 +35,7 @@ public class NoteService {
     }
 
     public void saveNote(Shift shift, String summary, String importantObservations) {
+        //carrega o shift e guarda a nota, função auxiliar
         Note note = new Note();
         note.setSummary(summary);
         note.setImportantObservations(importantObservations);
@@ -45,6 +46,7 @@ public class NoteService {
     }
 
     public void saveNote(Long id, String summary, String importantObservations) {
+        //vai buscar o turno, define a data de fim, limpa a lista de voluntários e chama o save note para salvar a nota do turno anterior
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null) {
             shift.setEndedAt(LocalDateTime.now());
