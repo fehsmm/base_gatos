@@ -43,7 +43,7 @@
                 <div style="position:relative;margin-bottom:1.5rem">
                     <c:choose>
                         <c:when test="${not empty cat.image}">
-                            <img src="${cat.image}" alt="${cat.name}"
+                            <img src="/image/${cat.image}" alt="${cat.name}"
                                  style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:.75rem"/>
                         </c:when>
                         <c:otherwise>

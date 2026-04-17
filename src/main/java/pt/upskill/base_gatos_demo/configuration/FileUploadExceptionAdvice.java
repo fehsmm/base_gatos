@@ -1,4 +1,4 @@
-package pt.upskill.base_gatos_demo.controllers;
+package pt.upskill.base_gatos_demo.configuration;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

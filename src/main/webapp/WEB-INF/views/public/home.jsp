@@ -78,7 +78,7 @@
         <div class="grid grid-3" style="gap:1.5rem">
             <c:forEach items="${featuredCats}" var="cat">
                 <div class="card cat-card">
-                    <div class="cat-card-img-wrapper"><img src="${cat.imageUrl}" alt="${cat.name}" style="width:100%;aspect-ratio:1;object-fit:cover"/></div>
+                    <div class="cat-card-img-wrapper"><img src="/image/${cat.image}" alt="${cat.name}" style="width:100%;aspect-ratio:1;object-fit:cover"/></div>
                     <div class="card-body">
                         <h3>${cat.name}</h3>
                         <p class="text-sm mb-4">${cat.formattedAge} • ${cat.gender} • ${cat.breed}</p>

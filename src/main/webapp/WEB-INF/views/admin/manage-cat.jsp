@@ -133,7 +133,7 @@
                             <div style="display:flex; align-items:center; gap:1rem; padding:.75rem 1.5rem; border-top:1px solid #f3f4f6">
 
                                 <div style="flex:1.5; display:flex; align-items:center; gap:.75rem;">
-                                    <img src="${cat.image}" alt="${cat.name}" class="avatar" style="width:40px; height:40px; border-radius:50%; object-fit:cover;"/>
+                                    <img src="/image/${cat.image}" alt="${cat.name}" class="avatar" style="width:40px; height:40px; border-radius:50%; object-fit:cover;"/>
                                     <div>
                                         <div style="font-weight:500">${cat.name}</div>
                                         <div class="text-sm text-gray">${cat.breed}</div>
@@ -167,7 +167,7 @@
                                         <button class="btn btn-sm btn-outline-primary"
                                                 onclick="editCat(this)"
                                                 data-id="${cat.id}"
-                                                data-image="${cat.image}"
+                                                data-image="/image/${cat.image}"
                                                 data-name="${cat.name}"
                                                 data-estimatedAge="${cat.estimatedAge}"
                                                 data-gender="${cat.gender}"

@@ -53,7 +53,7 @@
                                             padding:0.75rem 1rem; border-bottom:1px solid #f3f4f6;">
                                     <c:choose>
                                         <c:when test="${not empty cat.image}">
-                                            <img src="${cat.image}" alt="${cat.name}"
+                                            <img src="/image/${cat.image}" alt="${cat.name}"
                                                  style="width:40px; height:40px; border-radius:50%; object-fit:cover;"/>
                                         </c:when>
                                         <c:otherwise>

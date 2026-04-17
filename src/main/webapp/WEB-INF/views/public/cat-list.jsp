@@ -63,7 +63,7 @@
                 <c:forEach items="${cats}" var="cat">
                     <div class="card cat-card">
                         <div class="cat-card-img-wrapper" style="position:relative;overflow:hidden">
-                            <img src="${cat.image}" alt="${cat.name}"
+                            <img src="/image/${cat.image}" alt="${cat.name}"
                                  style="width:100%;aspect-ratio:1;object-fit:cover;transition:transform .3s"/>
 
                         </div>

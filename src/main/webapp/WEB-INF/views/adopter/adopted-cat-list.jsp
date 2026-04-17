@@ -41,7 +41,7 @@
 
 
                         <img
-                                src="${adoption.cat.image != null ? adoption.cat.image: '/images/default-cat.jpg'}"
+                                src="${adoption.cat.image != null ? ('/image/' + adoption.cat.image) : '/images/default-cat.jpg'}"
                                 class="card-img-top rounded-top-4"
                                 style="height: 250px; object-fit: cover;"
                         >

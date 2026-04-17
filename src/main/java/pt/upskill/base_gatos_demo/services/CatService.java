@@ -26,9 +26,6 @@ public class CatService {
     @Autowired
     CatRepository catRepository;
 
-    @Value("${app.upload.dir}")
-    private String uploadDir;
-
     @Autowired
     AuthService authService;
 
@@ -59,15 +56,14 @@ public class CatService {
     }
 
     private String savePhoto(MultipartFile photo) throws IOException {
-        String absoluteDir = System.getProperty("user.dir") + "/" + uploadDir;
-        File dir = new File(absoluteDir);
+        File dir = new File("uploads");
         if (!dir.exists()) dir.mkdirs();
         String original = photo.getOriginalFilename();
         String ext = original.substring(original.lastIndexOf("."));
         String filename = UUID.randomUUID().toString() + ext;
         File dest = new File(dir, filename);
         java.nio.file.Files.write(dest.toPath(), photo.getBytes());
-        return "/images/cats/" + filename;
+        return filename;
     }
 
     public void createCat(CreateCatModel model) {

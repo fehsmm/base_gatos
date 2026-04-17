@@ -1,6 +1,10 @@
 package pt.upskill.base_gatos_demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,8 +147,6 @@ public class PublicController {
         model.addAttribute("currentUser", authService.getAuthenticatedUser());
         return "public/contact";
     }
-
-
 
 }
 

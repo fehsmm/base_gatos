@@ -114,7 +114,7 @@
                 <div class="card-body">
                     <c:forEach var="cat" items="${cats}">
                         <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;border-bottom:1px solid #f3f4f6">
-                            <img src="${cat.image}" alt="${cat.name}" class="avatar"/>
+                            <img src="/image/${cat.image}" alt="${cat.name}" class="avatar"/>
                             <div style="flex:1">
                                 <div style="font-weight:500">${cat.name}</div>
                                 <div class="text-sm text-gray">${cat.breed}</div>
