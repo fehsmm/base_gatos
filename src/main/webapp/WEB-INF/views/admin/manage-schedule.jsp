@@ -185,11 +185,8 @@
                                     </div>
                                 </c:if>
 
-
-                                //Aparecer as medicações do Dia
                                 <p class="fw-semibold mb-2">
-                                    <img src="/icons/pill.svg" width="20px" height="20px"/>
-                                    Medicações de hoje:
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M345-120q-94 0-159.5-65.5T120-345q0-45 17-86t49-73l270-270q32-32 73-49t86-17q94 0 159.5 65.5T840-615q0 45-17 86t-49 73L504-186q-32 32-73 49t-86 17Zm266-286 107-106q20-20 31-47t11-56q0-60-42.5-102.5T615-760q-29 0-56 11t-47 31L406-611l205 205ZM345-200q29 0 56-11t47-31l106-107-205-205-107 106q-20 20-31 47t-11 56q0 60 42.5 102.5T345-200Z"/></svg>                                    Medicações de hoje:
                                 </p>
                                 <c:forEach var="catEntry" items="${medsByCat}">
                                     <div style="margin-bottom:0.5rem;">
@@ -200,11 +197,14 @@
                                                 <span>
                                                     <c:choose>
                                                         <c:when test="${med.administeredToday}">
-                                                            <img src="/icons/checkmark.svg" width="20px" height="20px"/>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px"
+                                                                 viewBox="0 -960 960 960" width="20px" fill="#16a34a"><path
+                                                                    d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img src="/icons/alarm-clock.svg" width="20px"
-                                                                 height="20px"/>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px"
+                                                                 viewBox="0 -960 960 960" width="20px" fill="#adb5bd"><path
+                                                                    d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </span>

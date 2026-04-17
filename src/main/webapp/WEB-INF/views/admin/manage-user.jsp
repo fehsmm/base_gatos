@@ -33,18 +33,6 @@
 
     </div>
 
-    <div class="container">
-        <h2>Hello World</h2>
-        <p>Lorem ipsum etc etc etc</p>
-    </div>
-    <div class="container">
-        <h2>Header 2</h2>
-        <p>Lorem ipsum etc etc etc</p>
-    </div>
-    <div class="container">
-        <h2>Header 3</h2>
-        <p>Lorem ipsum etc etc etc</p>
-    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
