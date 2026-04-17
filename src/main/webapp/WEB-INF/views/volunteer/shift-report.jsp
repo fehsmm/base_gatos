@@ -20,7 +20,7 @@
             <div class="mb-4">
                 <div class="page-title"
                      style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
-                    Report de Turnos
+                    Relatórios de Turno
                 </div>
                 <div class="page-subtitle" style="margin-bottom: 1.5rem;">
                     Histórico dos teus turnos concluídos.
@@ -79,9 +79,9 @@
                                 <div id="report-${shift.id}" style="display:none; margin-top:1rem; border-top:1px solid #e5e7eb; padding-top:1rem;">
                                     <c:forEach items="${shift.getNotes()}" var="note">
                                         <div class="shift-note">
-                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Summary:</div>
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo: </div>
                                             <div style="font-size:0.9rem; margin-bottom:0.75rem; white-space:pre-wrap;">${note.summary}</div>
-                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Important Observations:</div>
+                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Observações: </div>
                                             <div style="font-size:0.9rem; white-space:pre-wrap;">${note.importantObservations}</div>
                                         </div>
                                     </c:forEach>
