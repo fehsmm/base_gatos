@@ -72,7 +72,7 @@ public class AnnouncementService {
         } else if(dateStartFilter == null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
             //tem só data de fim
             announcements = announcementRepository.findByCreatedAtBefore(dateEndFilter.atTime(23,59,59));
-        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+        } else if(dateStartFilter == null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
             //tem só data de fim e prioridade
             announcements = announcementRepository.findByCreatedAtBeforeAndPriority(dateEndFilter.atTime(23,59,59), priorityFilter);
         } else if(dateStartFilter != null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {

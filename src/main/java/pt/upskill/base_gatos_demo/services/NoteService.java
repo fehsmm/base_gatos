@@ -84,31 +84,68 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public List<Note> getFilteredNotes(LocalDate dateStartFilter, LocalDate dateEndFilter, String priorityFilter) {
+    public List<Note> getFilteredNotes(LocalDate dateStartFilter, LocalDate dateEndFilter, String priorityFilter, Boolean unreadFilter) {
         List<Note> notes = new ArrayList<>();
-        if(dateStartFilter == null && dateEndFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
-            //não tem datas nem prioridade
+        if(dateStartFilter == null && dateEndFilter == null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //não tem nada
             notes = noteRepository.findTop6ByOrderByUpdatedAtDesc();
-        } else if(dateStartFilter == null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
+        } else if(dateStartFilter == null && dateEndFilter == null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter == null || !unreadFilter)) {
             //tem só prioridade
             notes = noteRepository.findByPriority(priorityFilter);
-        } else if(dateStartFilter != null && dateEndFilter == null && (priorityFilter == null || priorityFilter.isEmpty())) {
+        } else if(dateStartFilter != null && dateEndFilter == null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
             //tem só data de inicio
             notes = noteRepository.findByUpdatedAtAfter(dateStartFilter.atStartOfDay());
-        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
-            //tem data de início e prioridade
-            notes = noteRepository.findByUpdatedAtAfterAndPriority(dateStartFilter.atStartOfDay(), priorityFilter);
-        } else if(dateStartFilter == null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
+        } else if (dateStartFilter == null && dateEndFilter == null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //tem só unread
+            notes = noteRepository.findByReadFalse(unreadFilter);
+        } else if(dateStartFilter == null && dateEndFilter != null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
             //tem só data de fim
             notes = noteRepository.findByUpdatedAtBefore(dateEndFilter.atTime(23,59,59));
-        } else if(dateStartFilter != null && dateEndFilter == null && priorityFilter != null && !priorityFilter.isEmpty()) {
-            //tem só data de fim e prioridade
-            notes = noteRepository.findByUpdatedAtBeforeAndPriority(dateEndFilter.atTime(23,59,59), priorityFilter);
-        } else if(dateStartFilter != null && dateEndFilter != null && (priorityFilter == null || priorityFilter.isEmpty())) {
-            //tem ambas as datas sem prioridade
+        } else if(dateStartFilter != null && dateEndFilter == null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter == null || !unreadFilter)) {
+            //tem data de início e prioridade
+            notes = noteRepository.findByUpdatedAtAfterAndPriority(dateStartFilter.atStartOfDay(), priorityFilter);
+        } else if (dateStartFilter != null && dateEndFilter == null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //tem data de inicio e unread
+            notes = noteRepository.findByUpdatedAtAfterAndReadFalse(dateStartFilter.atStartOfDay(), unreadFilter);
+        } else if(dateStartFilter != null && dateEndFilter != null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter == null || !unreadFilter)) {
+            //tem date de inicio e data de fim
             notes = noteRepository.findByUpdatedAtBetween(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59));
-        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+        } else if(dateStartFilter == null && dateEndFilter != null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter == null || !unreadFilter)) {
+            //tem data de fim e prioridade
+            notes = noteRepository.findByUpdatedAtBeforeAndPriority(dateEndFilter.atTime(23, 59, 59), priorityFilter);
+        } else if (dateStartFilter == null && dateEndFilter != null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //tem data de fim e unread
+            notes = noteRepository.findByUpdatedAtBeforeAndReadFalse(dateEndFilter.atTime(23,59,59), unreadFilter);
+        } else if (dateStartFilter == null && dateEndFilter == null
+                && priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter != null && unreadFilter)) {
+            //tem unread e prioridade
+            notes = noteRepository.findByPriorityAndReadFalse(priorityFilter, unreadFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null &&
+                priorityFilter != null && !priorityFilter.isEmpty() && (unreadFilter == null || !unreadFilter)) {
             //tem ambas as datas com prioridade
+            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null &&
+                (priorityFilter == null || priorityFilter.isEmpty()) && (unreadFilter != null && unreadFilter)) {
+            //tem ambas as datas com unread
+            notes = noteRepository.findByUpdatedAtBetweenAndReadFalse(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), unreadFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //inicio prioridade unread
+            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //fim prioridade unread
+            notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
+        } else if (dateStartFilter != null && dateEndFilter != null && priorityFilter != null && !priorityFilter.isEmpty()) {
+            //tem tudo
             notes = noteRepository.findByUpdatedAtBetweenAndPriority(dateStartFilter.atStartOfDay(), dateEndFilter.atTime(23,59,59), priorityFilter);
         }
         notes.sort((a, b) -> b.getUpdatedAt().compareTo(a.getUpdatedAt()));

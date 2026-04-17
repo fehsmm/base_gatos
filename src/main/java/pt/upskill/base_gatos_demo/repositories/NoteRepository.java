@@ -20,5 +20,6 @@ public interface NoteRepository extends JpaRepository<Note,Long> {
     List<Note> findByUpdatedAtBefore(LocalDateTime dateEndFilter);
     List<Note> findByUpdatedAtBetweenAndPriority(LocalDateTime dateStartFilter, LocalDateTime dateEndFilter, String priority);
 
+    List<Note> findByReadFalse(Boolean unreadFilter);
 }
 
