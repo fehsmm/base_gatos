@@ -94,10 +94,10 @@
     <section style="padding:4rem 1.5rem;background: linear-gradient(135deg, #f97316, #ea580c);;color:white;text-align:center"><div class="container-sm">
         <h2 style="font-size:2rem;color:white">Como Pode Ajudar?</h2>
         <p style="color:#fde68a;font-size:1.1rem;margin-bottom:2rem">Há várias formas de apoiar o nosso trabalho</p>
-        <div class="grid grid-3" style="gap:1rem">
-            <a href="/public/adoption" class="btn btn-white btn-lg">️ Adotar</a>
-            <a href="/public/donate" class="btn btn-white btn-lg"> Doar</a>
-            <a href="/public/contact" class="btn btn-white btn-lg"> Voluntariar</a>
+        <div class="grid grid-3" style="gap:1rem"  >
+            <a href="/public/adoption" class="btn btn-white btn-lg w-full">️ Adotar</a>
+            <a href="/public/donate" class="btn btn-white btn-lg w-full"> Doar</a>
+            <a href="/public/contact" class="btn btn-white btn-lg w-full"> Voluntariar</a>
         </div>
     </div></section>
 </main>
