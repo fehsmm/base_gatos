@@ -362,7 +362,7 @@ public class AdminController {
                               RedirectAttributes redirectAttributes) {
         userService.deleteUser(id);
         redirectAttributes.addFlashAttribute("success", "Conta eliminada com sucesso!");
-        return "redirect:/admin/manage-stock";
+        return "redirect:/admin/manage-user";
     }
 
 }
