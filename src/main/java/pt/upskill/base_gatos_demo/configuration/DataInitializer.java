@@ -134,7 +134,10 @@ public class DataInitializer {
                             false, false, false, false, false, "e1d1cae1-e2c4-4a2d-ba3e-53b19430b133.jpg"},
                     {"Perdiz", "2 anos", false, "Preta", "Adotado", "2026-02-04",
                             "Não gosta muito de brincar. Adora dormir. Ótima companhia para pessoas idosas.",
-                            false, false, true, true, true, "585576c8-a870-4b6c-bfb1-cc2f274bae03.jpg"}
+                            false, false, true, true, true, "585576c8-a870-4b6c-bfb1-cc2f274bae03.jpg"},
+                    {"Lagoa", "7 meses", false, "Europeu comum", "Em Processo", "2026-04-02",
+                            "A Lagoa é muito meiga mas também muito tímida. Está sempre atenta ao que acontece ao redor e pode ficar a olhar-te por horas com aquela carinha gira.",
+                            true, true, false, true, true, "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"}
             };
 
             for (Object[] c : cats) {
