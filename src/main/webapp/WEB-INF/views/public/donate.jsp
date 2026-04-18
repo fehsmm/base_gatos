@@ -39,7 +39,8 @@
     <div class="card mb-8">
         <div class="card-header"><strong> Fazer Donativo</strong></div>
         <div class="card-body">
-            <form action="#" method="post" onsubmit="handleDonation(event)">
+            <form action="${pageContext.request.contextPath}/donate/checkout" method="post" onsubmit="return handleDonation(event)">
+                <input type="hidden" name="amount" id="amountInCents" value=""/>
                 <div class="form-group">
                     <label>Escolha um Valor</label>
                     <div class="grid donation-amounts" style="gap:.75rem;margin-bottom:1rem">
@@ -149,15 +150,16 @@ function updateDonateBtn() {
 }
 document.getElementById('customAmount').addEventListener('input', updateDonateBtn);
 function handleDonation(e) {
-    e.preventDefault();
     var custom = document.getElementById('customAmount').value;
     var amount = selectedAmount || custom;
-    if (!amount) return;
-    document.getElementById('donationSuccess').style.display = 'block';
-    document.getElementById('donationSuccess').textContent = 'Obrigado pelo seu donativo de \u20AC' + amount + '! Processando pagamento...';
-    selectedAmount = '';
-    document.getElementById('customAmount').value = '';
-    updateDonateBtn();
+    if (!amount || parseFloat(amount) < 1) {
+        e.preventDefault();
+        alert('Por favor escolha um valor de pelo menos €1.');
+        return false;
+    }
+    // Stripe expects the amount in cents (€10 = 1000)
+    document.getElementById('amountInCents').value = Math.round(parseFloat(amount) * 100);
+    return true; // let the form submit normally — browser redirects to /donate/checkout
 }
 </script>
 

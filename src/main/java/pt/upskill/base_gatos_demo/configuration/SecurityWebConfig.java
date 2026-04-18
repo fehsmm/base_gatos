@@ -27,6 +27,7 @@ public class SecurityWebConfig {
             auth.requestMatchers("/adopter/**").hasRole("ADOPTER");
             auth.requestMatchers("/private/**").hasAnyRole("ADMIN", "VOLUNTEER");
             auth.requestMatchers( "/public/**").permitAll();
+            auth.requestMatchers("/donate/**").permitAll();
             auth.requestMatchers("/**").denyAll();
         });
         httpSecurity.formLogin(login -> {
