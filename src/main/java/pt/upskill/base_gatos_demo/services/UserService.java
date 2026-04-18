@@ -37,6 +37,7 @@ public class UserService {
     public void rejectUser(Long id) {
         User user = userRepository.getUserById(id);
         user.setRole("adopter");
+        user.setApproved(true);
         userRepository.save(user);
         //ao rejeitar uma conta de voluntário, não apaga a conta, fica com uma conta de adotante
     }

@@ -157,11 +157,11 @@
                                             <button class="btn btn-sm btn-outline-secondary"
                                                     onclick="openViewModal(this)"
                                                     data-id="${user.id}"
-                                                    data-user="${user.name}"
-                                                    data-read="${user.role}"
-                                                    data-name="${user.email}"
-                                                    data-cat="${user.address}"
-                                                    data-date="${user.telephone}">
+                                                    data-name="${user.name}"
+                                                    data-role="${user.role}"
+                                                    data-email="${user.email}"
+                                                    data-address="${user.address}"
+                                                    data-phone="${user.telephone}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                                 Ver Informação
                                             </button>
@@ -175,11 +175,11 @@
                                             <button class="btn btn-sm btn-outline-secondary"
                                                     onclick="openViewModal(this)"
                                                     data-id="${user.id}"
-                                                    data-user="${user.name}"
-                                                    data-read="${user.role}"
-                                                    data-name="${user.email}"
-                                                    data-cat="${user.address}"
-                                                    data-date="${user.telephone}">
+                                                    data-name="${user.name}"
+                                                    data-role="${user.role}"
+                                                    data-email="${user.email}"
+                                                    data-address="${user.address}"
+                                                    data-phone="${user.telephone}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#adb5bd"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                                                 Ver Informação
                                             </button>
@@ -265,6 +265,52 @@
     </div>
 </div>
 
+<div id="viewUserModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:500px; max-height: fit-content">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Perfil do Utilizador</h4>
+            <button onclick="closeViewModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>
+            </button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.9rem;">
+
+            <div style="display:flex; align-items:center; gap:1rem;">
+                <div style="width:50px;height:50px;border-radius:50%;background:#e5e7eb;
+                            display:flex;align-items:center;justify-content:center;font-weight:600;">
+                    <span id="viewInitials"></span>
+                </div>
+
+                <div>
+                    <strong id="viewName"></strong><br/>
+                    <span id="viewRole" class="badge"></span>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div>
+                <strong>Email</strong>
+                <div id="viewEmail" class="text-gray"></div>
+            </div>
+
+            <div>
+                <strong>Telefone</strong>
+                <div id="viewPhone" class="text-gray"></div>
+            </div>
+
+            <div>
+                <strong>Morada</strong>
+                <div id="viewAddress" class="text-gray"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 <script>
     function openApproveModal(id) {
         const form = document.getElementById("approveForm");
@@ -293,6 +339,43 @@
 
     function closeDeleteModal() {
         document.getElementById("deleteModal").classList.remove("open");
+    }
+
+    function openViewModal(button) {
+        const name = button.dataset.name;
+        const role = button.dataset.role;
+        const email = button.dataset.email;
+        const address = button.dataset.address;
+        const phone = button.dataset.phone;
+
+        document.getElementById("viewName").innerText = name;
+        document.getElementById("viewEmail").innerText = email;
+        document.getElementById("viewAddress").innerText = address;
+        document.getElementById("viewPhone").innerText = phone;
+
+        const initials = name.split(" ").map(n => n[0]).join("").toUpperCase();
+        document.getElementById("viewInitials").innerText = initials;
+
+        const roleSpan = document.getElementById("viewRole");
+
+        roleSpan.className = "badge";
+
+        if (role === "admin") {
+            roleSpan.classList.add("badge-purple");
+            roleSpan.innerText = "Administrador";
+        } else if (role === "volunteer") {
+            roleSpan.classList.add("badge-blue");
+            roleSpan.innerText = "Voluntário";
+        } else {
+            roleSpan.classList.add("badge-orange");
+            roleSpan.innerText = "Adotante";
+        }
+
+        document.getElementById("viewUserModal").classList.add("open");
+    }
+
+    function closeViewModal() {
+        document.getElementById("viewUserModal").classList.remove("open");
     }
 </script>
 
