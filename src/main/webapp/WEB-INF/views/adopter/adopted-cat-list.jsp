@@ -40,11 +40,25 @@
                     <div class="card shadow-sm border-0 rounded-4 h-100">
 
 
-                        <img
-                                src="${adoption.cat.image != null ? ('/image/' + adoption.cat.image) : '/images/default-cat.jpg'}"
-                                class="card-img-top rounded-top-4"
-                                style="height: 250px; object-fit: cover;"
-                        >
+                        <c:choose>
+
+                            <c:when test="${not empty adoption.cat.image}">
+                                <img
+                                        src="${pageContext.request.contextPath}/image/${adoption.cat.image}"
+                                        class="card-img-top rounded-top-4"
+                                        style="height: 250px; object-fit: cover;"
+                                >
+                            </c:when>
+
+                            <c:otherwise>
+                                <img
+                                        src="${pageContext.request.contextPath}/images/default-cat.jpg"
+                                        class="card-img-top rounded-top-4"
+                                        style="height: 250px; object-fit: cover;"
+                                >
+                            </c:otherwise>
+
+                        </c:choose>
 
 
                         <div class="card-body">

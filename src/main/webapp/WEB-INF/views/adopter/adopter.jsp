@@ -86,9 +86,23 @@
 
                             <div class="d-flex align-items-center p-3 border rounded-4">
 
-                                <img src="${adoption.cat.image != null ? adoption.cat.image : '/images/default-cat.jpg'}"
-                                     style="width:80px; height:80px; object-fit:cover; border-radius:10px;"
-                                     class="me-3">
+                                <c:choose>
+
+                                    <c:when test="${not empty adoption.cat.image}">
+                                        <img
+                                                src="${pageContext.request.contextPath}/image/${adoption.cat.image}"
+                                                style="width:80px; height:80px; object-fit:cover; border-radius:10px;"
+                                                class="me-3">
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <img
+                                                src="${pageContext.request.contextPath}/images/default-cat.jpg"
+                                                style="width:80px; height:80px; object-fit:cover; border-radius:10px;"
+                                                class="me-3">
+                                    </c:otherwise>
+
+                                </c:choose>
 
 
                                 <div>
