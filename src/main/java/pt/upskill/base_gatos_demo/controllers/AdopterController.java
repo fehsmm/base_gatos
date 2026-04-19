@@ -13,6 +13,7 @@ import pt.upskill.base_gatos_demo.repositories.CatRepository;
 import pt.upskill.base_gatos_demo.repositories.ReportRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 import pt.upskill.base_gatos_demo.services.AdoptionService;
+import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.ReportService;
 import pt.upskill.base_gatos_demo.services.UserService;
 
@@ -35,21 +36,13 @@ public class AdopterController {
     @Autowired
     ReportService reportService;
 
+    @Autowired
+    AuthService authService;
 
-    private void addLoggedUserToModel(Authentication authentication, Model model) {
-        if (authentication != null) {
-            String username = authentication.getName();
-            User user = userService.getUsername(username);
-            model.addAttribute("user", user);
-        }
-    }
     @GetMapping(value = "/")
-    public String adopter(Authentication authentication, Model model){
-        addLoggedUserToModel(authentication, model);
-
-        String username = authentication.getName();
-        User user = userService.getUsername(username);
-
+    public String adopter(Model model){
+        User user = authService.getAuthenticatedUser();
+        String username = user.getUsername();
         if (user == null) {
             return "redirect:/auth/login";
         }
@@ -61,17 +54,15 @@ public class AdopterController {
     }
 
     @GetMapping(value = "/adopted-cat-list")
-    public String adoptedCatList(Authentication authentication, Model model){
-        if (authentication == null) {
+    public String adoptedCatList(Model model){
+        User user = authService.getAuthenticatedUser();
+        if (user == null) {
             return "redirect:/auth/login";
         }
 
-        String username = authentication.getName();
-        User user = userService.getUsername(username);
         List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
         model.addAttribute("adoptions", adoptions);
         model.addAttribute("user", user);
-
         return "adopter/adopted-cat-list";
     }
 
@@ -106,5 +97,4 @@ public class AdopterController {
         return "redirect:/adopter/post-adoption";
     }
 
-    //post mapping pos adocao monitoramento
 }

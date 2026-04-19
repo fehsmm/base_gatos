@@ -34,7 +34,7 @@ public class Shift {
     @ManyToOne
     private User currentVolunteer;
 
-    @OneToMany
+    @OneToMany (mappedBy = "shift", cascade = CascadeType.ALL)
     private List<Note> notes = new ArrayList<>();
 
     public Long getId() {
