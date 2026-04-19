@@ -42,6 +42,7 @@ public class AdopterController {
         }
         List<Adoption> adoptions = adoptionService.getUserAndStatus(user, "Aprovada");
         int reportCountByUser = reportService.getReportCount(username);
+        model.addAttribute("user", user);
         model.addAttribute("adoptions", adoptions);
         model.addAttribute("reportCountByUser", reportCountByUser);
         return "adopter/adopter";
