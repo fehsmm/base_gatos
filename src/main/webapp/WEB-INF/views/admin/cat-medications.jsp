@@ -102,7 +102,7 @@
                                                 Registado por ${med.createdBy}
                                             </div>
                                         </div>
-                                            //Confirmar se foi realizada a Medicação
+
                                         <div style="margin-top:0.5rem;">
                                             <c:choose>
                                                 <c:when test="${med.administeredToday}">
