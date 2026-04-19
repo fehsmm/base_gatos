@@ -9,6 +9,7 @@ import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.AddTaskModel;
 import pt.upskill.base_gatos_demo.models.CreateShiftModel;
 import pt.upskill.base_gatos_demo.models.EditShiftModel;
+import pt.upskill.base_gatos_demo.repositories.NoteRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 import pt.upskill.base_gatos_demo.repositories.TaskRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
@@ -31,6 +32,9 @@ public class ShiftService {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    NoteRepository noteRepository;
 
     public List<Shift> getAllShifts() {
         return shiftRepository.findAll();
@@ -147,8 +151,20 @@ public class ShiftService {
         shiftRepository.save(shift);
     }
 
-    public void deleteShift(Long id){
+    public boolean deleteShift(Long id){
+        Shift shift = getById(id);
+        if (!canDeleteShift(shift)) {
+            return false;
+        }
         shiftRepository.deleteById(id);
+        return true;
+    }
+
+    public boolean canDeleteShift(Shift shift) {
+        if(!noteRepository.existsByShift(shift)) {
+            return true;
+        }
+        return false;
     }
 
     public List<Shift>  getShiftsByDate(LocalDate date) {

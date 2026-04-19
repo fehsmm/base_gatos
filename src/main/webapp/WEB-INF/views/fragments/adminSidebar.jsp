@@ -36,7 +36,6 @@
                     <sec:authorize access="hasRole('ADMIN')">Administrador</sec:authorize>
                     <sec:authorize access="hasRole('VOLUNTEER')">Voluntário</sec:authorize>
                     <sec:authorize access="hasRole('ADOPTER')">Adotante</sec:authorize>
-                    <sec:authorize access="hasRole('VET')">Veterinário</sec:authorize>
                 </div>
             </div>
         </a>

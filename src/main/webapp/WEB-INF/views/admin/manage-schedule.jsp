@@ -40,6 +40,10 @@
                 <div class="alert alert-success">${success}</div>
             </c:if>
 
+            <c:if test="${error != null}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
+
         </div>
 
         <div class="mb-4" style="margin: 0 1.5rem; margin-bottom: 1.5rem; position: relative;">

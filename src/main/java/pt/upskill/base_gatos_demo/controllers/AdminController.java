@@ -218,6 +218,15 @@ public class AdminController {
     @PostMapping(value = "/delete-shift")
     public String deleteShift(@RequestParam("shiftId") Long shiftId,
                               RedirectAttributes redirectAttributes) {
+        boolean deleted = shiftService.deleteShift(shiftId);
+        if(deleted) {
+            redirectAttributes.addFlashAttribute("success", "Turno eliminado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Não é possível eliminar este turno " +
+                    "enquanto este está a decorrer, ou se já existem notas associadas a este.");
+        }
+
+
         shiftService.deleteShift(shiftId);
         redirectAttributes.addFlashAttribute("success", "Turno eliminado com sucesso!");
         return "redirect:/admin/manage-schedule";

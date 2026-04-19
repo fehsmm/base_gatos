@@ -32,7 +32,7 @@ public class AuthService {
         user.setPassword(encodedPassword);
 
         user.setRole(signUpModel.getRole());
-        if(signUpModel.getRole().equals("VOLUNTEER")){
+        if(signUpModel.getRole().equals("volunteer")){
             user.setApproved(false);
         } else {
             user.setApproved(true);
