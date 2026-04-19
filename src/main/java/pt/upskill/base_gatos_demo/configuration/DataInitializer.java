@@ -111,10 +111,10 @@ public class DataInitializer {
                             true, true, false, true, true, List.of("Tímida", "Observadora"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"},
                     {"Tobias", "3 anos", true, "Laranja", "Em Processo", "2024-05-20",
                             "Muito sociável, dá-se bem com outros gatos e também com cães, precisa de companhia de quatro patas.",
-                            false, false, true, true, true, List.of("Sociável", "Brincalhão")},
+                            false, false, true, true, true, List.of("Sociável", "Brincalhão"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"},
                     {"Nuvem", "6 anos", false, "Branco", "Disponível", "2022-07-10",
                             "Gata FIV+, precisa de cuidados especiais.",
-                            true, false, true, true, true, List.of("FIV+", "Especial")}
+                            true, false, true, true, true, List.of("FIV+", "Especial"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"}
             };
 
             for (Object[] c : cats) {
@@ -213,11 +213,11 @@ public class DataInitializer {
             a6.setCat(kelly);
             a6.setApplicantName(ana.getName());
             a6.setEmail(ana.getEmail());
-            a3.setPhone(String.valueOf(ana.getTelephone()));
+            a6.setPhone(String.valueOf(ana.getTelephone()));
             a6.setAddress(ana.getAddress());
             a6.setReason("Procuro uma gata calma para apartamento.");
             a6.setExperience("Alguma experiência com gatos.");
-            a6.setStatus("Pendente");
+            a6.setStatus("Aprovada");
             a6.setRequestDate(kelly.getArrivalDate().atStartOfDay().plusDays(7));
             a6.setReviewDate(a2.getRequestDate().plusDays(5));
             a6.setAdoptionDate(a2.getReviewDate().toLocalDate());
@@ -268,6 +268,13 @@ public class DataInitializer {
             Cat kelly = catRepo.findFirstByName("Kelly");
             Cat branco = catRepo.findFirstByName("Branco");
             Cat natalina = catRepo.findFirstByName("Natalina");
+
+            if (bruno == null || ana == null || maria == null ||
+                    perdiz == null || kelly == null || branco == null || natalina == null) {
+
+                System.out.println("⚠️ Dados de relatórios incompletos.");
+                return;
+            }
 
             //PERDIZ (Bruno)
             Report p1 = new Report();
