@@ -22,11 +22,7 @@
                     O seu apoio faz uma diferença enorme na vida dos nossos gatos.
                     Graças a si, continuamos a salvar, cuidar e encontrar lares para eles.
                 </p>
-                <c:if test="${not empty sessionId}">
-                    <p class="text-sm" style="color:#6b7280;margin-bottom:2rem">
-                        Referência: <code>${sessionId}</code>
-                    </p>
-                </c:if>
+
                 <a href="${pageContext.request.contextPath}/public/home" class="btn btn-primary btn-lg">
                     Voltar à Página Inicial
                 </a>
