@@ -81,6 +81,13 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public String forgotPassword(@RequestParam String email, RedirectAttributes redirectAttributes) {
         User user = userService.getUserByEmail(email);
+
+        if (user == null) {
+
+            redirectAttributes.addFlashAttribute("error", "Não existe nenhuma conta com esse e-mail. Faça o favor de se Registar!");
+            return "redirect:/auth/login";
+        }
+
         String token = UUID.randomUUID().toString();
 
         user.setResetToken(token);

@@ -72,6 +72,18 @@
                 ${success}
         </div>
     </c:if>
+
+    <c:if test="${not empty error}">
+        <div class="custom-alert error">
+                ${error}
+        </div>
+        <!--Mostra alerta, espera 4 segundos e esconde...-->
+        <script>
+            setTimeout(() => {
+                document.querySelector('.custom-alert').style.display = 'none';
+            }, 4000);
+        </script>
+    </c:if>
 </div>
 <%@ include file="../public/footer.jsp" %>
 </body>
