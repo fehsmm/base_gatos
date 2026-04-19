@@ -18,7 +18,7 @@
                 <div style="font-size:4rem;margin-bottom:1rem">😿</div>
                 <h1 style="color:#c2410c;margin-bottom:1rem">Donativo Cancelado</h1>
                 <p style="font-size:1.1rem;margin-bottom:2rem">
-                    Não foi efetuado nenhum pagamento. Se mudou de ideias,
+                    Não foi efetuado nenhum pagamento. Se mudou de ideia,
                     pode tentar novamente quando quiser — cada contribuição conta!
                 </p>
                 <a href="${pageContext.request.contextPath}/public/donate" class="btn btn-primary btn-lg">
