@@ -153,7 +153,7 @@
         <div class="bg-orange-50">
             <h3>Precisa de Ajuda?</h3>
             <p style="margin-bottom:.5rem">Se tiver dúvidas sobre o processo de adoção, não hesite em contactar-nos.</p>
-            <p>Email: <a href="mailto:adocoes@abrigofelino.pt" style="color:#f97316">adocoes@abrigofelino.pt</a> &nbsp;|&nbsp;
+            <p>Email: <a href="mailto:adocoes@meg.pt" style="color:#f97316">adocoes@meg.pt</a> &nbsp;|&nbsp;
                 Telefone: <a href="tel:+351912345678" style="color:#f97316">+351 912 345 678</a></p>
         </div>
     </div>
