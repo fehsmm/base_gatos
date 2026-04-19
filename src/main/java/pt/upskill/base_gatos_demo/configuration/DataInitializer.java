@@ -137,258 +137,6 @@ public class DataInitializer {
             }
         }
 
-        //ADOÇÕES
-        if (adoptRepo.count() == 0) {
-            User maria = userRepository.getUserByUsername("maria.adop");
-            User ana = userRepository.getUserByUsername("ana.adop");
-            User bruno = userRepository.getUserByUsername("bruno.adop");
-            User sofia = userRepository.getUserByUsername("sofia.adop");
-
-            Cat branco = catRepo.findFirstByName("Branco");
-            Cat natalina = catRepo.findFirstByName("Natalina");
-            Cat kelly = catRepo.findFirstByName("Kelly");
-            Cat perdiz = catRepo.findFirstByName("Perdiz");
-            Cat andreia = catRepo.findFirstByName("Andreia");
-            Cat tobias = catRepo.findFirstByName("Tobias");
-
-            if (maria == null || ana == null || bruno == null || sofia == null ||
-                    branco == null || natalina == null || kelly == null || perdiz == null || andreia == null || tobias == null) {
-
-                System.out.println("⚠️ DataInitializer: Dados de adoção incompletos.");
-            } else {
-
-                LocalDate today = LocalDate.now();
-
-                //MARIA » Branco + Natalina
-                Adoption a1 = new Adoption();
-                a1.setUser(maria);
-                a1.setCat(branco);
-                a1.setApplicantName(maria.getName());
-                a1.setEmail(maria.getEmail());
-                a1.setPhone(String.valueOf(maria.getTelephone()));
-                a1.setAddress(maria.getAddress());
-                a1.setReason("Procuro companhia tranquila para casa.");
-                a1.setExperience("Já tive gatos durante vários anos.");
-                a1.setStatus("Aprovada");
-                a1.setRequestDate(branco.getArrivalDate().atStartOfDay().plusDays(5));
-                a1.setReviewDate(a1.getRequestDate().plusDays(2));
-                a1.setAdoptionDate(a1.getReviewDate().toLocalDate());
-                a1.setRead(true);
-                adoptRepo.save(a1);
-
-                Adoption a2 = new Adoption();
-                a2.setUser(maria);
-                a2.setCat(natalina);
-                a2.setApplicantName(maria.getName());
-                a2.setEmail(maria.getEmail());
-                a2.setPhone(String.valueOf(maria.getTelephone()));
-                a2.setAddress(maria.getAddress());
-                a2.setReason("Quero uma gata jovem e ativa.");
-                a2.setExperience("Tenho experiência com gatos energéticos.");
-                a2.setStatus("Aprovada");
-                a2.setRequestDate(natalina.getArrivalDate().atStartOfDay().plusDays(3));
-                a2.setReviewDate(a2.getRequestDate().plusDays(1));
-                a2.setAdoptionDate(a2.getReviewDate().toLocalDate());
-                a2.setRead(true);
-                adoptRepo.save(a2);
-
-                //ANA » Kelly, Andreia pendente
-                Adoption a3 = new Adoption();
-                a3.setUser(ana);
-                a3.setCat(andreia);
-                a3.setApplicantName(ana.getName());
-                a3.setEmail(ana.getEmail());
-                a3.setPhone(String.valueOf(ana.getTelephone()));
-                a3.setAddress(ana.getAddress());
-                a3.setReason("Procuro uma companhia para a Kelly.");
-                a3.setExperience("Alguma experiência com gatos.");
-                a3.setStatus("Pendente");
-                a3.setRequestDate(andreia.getArrivalDate().atStartOfDay().plusDays(7));
-                a3.setRead(false);
-                adoptRepo.save(a3);
-
-                Adoption a6 = new Adoption();
-                a6.setUser(ana);
-                a6.setCat(kelly);
-                a6.setApplicantName(ana.getName());
-                a6.setEmail(ana.getEmail());
-                a6.setPhone(String.valueOf(ana.getTelephone()));
-                a6.setAddress(ana.getAddress());
-                a6.setReason("Procuro uma gata calma para apartamento.");
-                a6.setExperience("Alguma experiência com gatos.");
-                a6.setStatus("Aprovada");
-                a6.setRequestDate(kelly.getArrivalDate().atStartOfDay().plusDays(7));
-                a6.setReviewDate(a2.getRequestDate().plusDays(5));
-                a6.setAdoptionDate(a2.getReviewDate().toLocalDate());
-                a6.setRead(true);
-                adoptRepo.save(a6);
-
-                //BRUNO » Perdiz
-                Adoption a4 = new Adoption();
-                a4.setUser(bruno);
-                a4.setCat(perdiz);
-                a4.setApplicantName(bruno.getName());
-                a4.setEmail(bruno.getEmail());
-                a4.setPhone(String.valueOf(bruno.getTelephone()));
-                a4.setAddress(bruno.getAddress());
-                a4.setReason("Quero um gato tranquilo para companhia.");
-                a4.setExperience("Primeira vez com gatos.");
-                a4.setStatus("Aprovada");
-                a4.setRequestDate(perdiz.getArrivalDate().atStartOfDay().plusDays(10));
-                a4.setReviewDate(a4.getRequestDate().plusDays(2));
-                a4.setAdoptionDate(a4.getReviewDate().toLocalDate());
-                a4.setRead(true);
-                adoptRepo.save(a4);
-
-                //SOFIA » Tobias rejeitado
-                Adoption a5 = new Adoption();
-                a5.setUser(sofia);
-                a5.setCat(tobias);
-                a5.setApplicantName(sofia.getName());
-                a5.setEmail(sofia.getEmail());
-                a5.setPhone(String.valueOf(sofia.getTelephone()));
-                a5.setAddress(sofia.getAddress());
-                a5.setReason("Procuro um novo gatinho para apartamento.");
-                a5.setExperience("Tenho uma gata sénior.");
-                a5.setStatus("Rejeitada");
-                a5.setRequestDate(tobias.getArrivalDate().atStartOfDay().plusDays(2));
-                a5.setRead(true);
-                a5.setRejectionMotive("Já recebemos contacto sobre o Tobias e ele está atualmente em início de processo de adoção");
-                adoptRepo.save(a5);
-            }
-        }
-
-        //RELATÓRIOS PÓS-ADOÇÃO
-        if (reportRepo.count() == 0) {
-            User bruno = userRepository.getUserByUsername("bruno.adop");
-            User ana = userRepository.getUserByUsername("ana.adop");
-            User maria = userRepository.getUserByUsername("maria.adop");
-
-            Cat perdiz = catRepo.findFirstByName("Perdiz");
-            Cat kelly = catRepo.findFirstByName("Kelly");
-            Cat branco = catRepo.findFirstByName("Branco");
-            Cat natalina = catRepo.findFirstByName("Natalina");
-
-            if (bruno == null || ana == null || maria == null ||
-                    perdiz == null || kelly == null || branco == null || natalina == null) {
-
-                System.out.println("⚠️ Dados de relatórios incompletos.");
-            } else {
-
-                //PERDIZ (Bruno)
-                Report p1 = new Report();
-                p1.setUser(bruno);
-                p1.setCat(perdiz);
-                p1.setStatus("Bom");
-                p1.setNotes("Adaptou-se rapidamente à nova casa. Passa grande parte do tempo a dormir e já procura contacto com o dono.");
-                p1.setHealth("Sem alterações relevantes.");
-                p1.setReportDate(LocalDateTime.now().minusDays(20));
-                reportRepo.save(p1);
-
-                Report p2 = new Report();
-                p2.setUser(bruno);
-                p2.setCat(perdiz);
-                p2.setStatus("Excelente");
-                p2.setNotes("Totalmente integrado. Muito tranquilo e afetuoso, especialmente durante a noite.");
-                p2.setHealth("Sem alterações relevantes.");
-                p2.setReportDate(LocalDateTime.now().minusDays(10));
-                reportRepo.save(p2);
-
-                Report p3 = new Report();
-                p3.setUser(bruno);
-                p3.setCat(perdiz);
-                p3.setStatus("Excelente");
-                p3.setNotes("Mantém comportamento calmo e estável. Demonstra confiança total no ambiente.");
-                p3.setHealth("Sem alterações relevantes.");
-                p3.setReportDate(LocalDateTime.now().minusDays(3));
-                reportRepo.save(p3);
-
-                // KELLY (Ana)
-                Report k1 = new Report();
-                k1.setUser(ana);
-                k1.setCat(kelly);
-                k1.setStatus("Normal");
-                k1.setNotes("Inicialmente mais reservada. Evita contacto direto mas observa tudo ao redor.");
-                k1.setHealth("Sem alterações relevantes.");
-                k1.setReportDate(LocalDateTime.now().minusDays(18));
-                reportRepo.save(k1);
-
-                Report k2 = new Report();
-                k2.setUser(ana);
-                k2.setCat(kelly);
-                k2.setStatus("Bom");
-                k2.setNotes("Já aceita festas em momentos específicos, especialmente quando recebe comida húmida.");
-                k2.setHealth("Apetite irregular nos primeiros dias, entretanto estabilizado.");
-                k2.setReportDate(LocalDateTime.now().minusDays(9));
-                reportRepo.save(k2);
-
-                Report k3 = new Report();
-                k3.setUser(ana);
-                k3.setCat(kelly);
-                k3.setStatus("Bom");
-                k3.setNotes("Mais sociável, começa a procurar companhia. Mantém personalidade independente.");
-                k3.setHealth("Sem alterações relevantes.");
-                k3.setReportDate(LocalDateTime.now().minusDays(2));
-                reportRepo.save(k3);
-
-                // BRANCO (Maria)
-                Report b1 = new Report();
-                b1.setUser(maria);
-                b1.setCat(branco);
-                b1.setStatus("Excelente");
-                b1.setNotes("Adaptação imediata. Muito carinhoso e confortável com a nova família.");
-                b1.setReportDate(LocalDateTime.now().minusDays(25));
-                b1.setHealth("Sem alterações relevantes.");
-                reportRepo.save(b1);
-
-                Report b2 = new Report();
-                b2.setUser(maria);
-                b2.setCat(branco);
-                b2.setStatus("Excelente");
-                b2.setNotes("Extremamente sociável, procura constantemente atenção e interação.");
-                b2.setHealth("Sem alterações relevantes.");
-                b2.setReportDate(LocalDateTime.now().minusDays(12));
-                reportRepo.save(b2);
-
-                Report b3 = new Report();
-                b3.setUser(maria);
-                b3.setCat(branco);
-                b3.setStatus("Excelente");
-                b3.setNotes("Perfeitamente integrado no ambiente familiar. Muito ativo e brincalhão.");
-                b3.setHealth("Vacinação em dia.");
-                b3.setReportDate(LocalDateTime.now().minusDays(4));
-                reportRepo.save(b3);
-
-                // NATALINA (Maria)
-                Report n1 = new Report();
-                n1.setUser(maria);
-                n1.setCat(natalina);
-                n1.setStatus("Bom");
-                n1.setNotes("Muito ativa e curiosa. Explora constantemente a casa.");
-                n1.setHealth("Sem alterações relevantes.");
-                n1.setReportDate(LocalDateTime.now().minusDays(22));
-                reportRepo.save(n1);
-
-                Report n2 = new Report();
-                n2.setUser(maria);
-                n2.setCat(natalina);
-                n2.setStatus("Excelente");
-                n2.setNotes("Totalmente adaptada. Brinca frequentemente e interage bem com o Branco.");
-                n2.setHealth("Sem alterações relevantes.");
-                n2.setReportDate(LocalDateTime.now().minusDays(11));
-                reportRepo.save(n2);
-
-                Report n3 = new Report();
-                n3.setUser(maria);
-                n3.setCat(natalina);
-                n3.setStatus("Excelente");
-                n3.setNotes("Muito feliz e energética. Demonstra grande confiança no ambiente.");
-                n3.setHealth("Foi esterilizada recentemente, mas fez uma boa recuperação.");
-                n3.setReportDate(LocalDateTime.now().minusDays(1));
-                reportRepo.save(n3);
-            }
-        }
-
         //COMUNICADOS
         if (annRepo.count() == 0) {
             Object[][] announcements = {
@@ -685,6 +433,258 @@ public class DataInitializer {
                 med3.setCreatedBy("AdminSistema");
                 med3.setLastAdministeredDate(LocalDate.now());
                 medRepo.save(med3);
+            }
+        }
+
+        //ADOÇÕES
+        if (adoptRepo.count() == 0) {
+            User maria = userRepository.getUserByUsername("maria.adop");
+            User ana = userRepository.getUserByUsername("ana.adop");
+            User bruno = userRepository.getUserByUsername("bruno.adop");
+            User sofia = userRepository.getUserByUsername("sofia.adop");
+
+            Cat branco = catRepo.findFirstByName("Branco");
+            Cat natalina = catRepo.findFirstByName("Natalina");
+            Cat kelly = catRepo.findFirstByName("Kelly");
+            Cat perdiz = catRepo.findFirstByName("Perdiz");
+            Cat andreia = catRepo.findFirstByName("Andreia");
+            //Cat tobias = catRepo.findFirstByName("Tobias");
+
+            if (maria == null || ana == null || bruno == null || sofia == null ||
+                    branco == null || natalina == null || kelly == null || perdiz == null || andreia == null /*|| tobias == null*/) {
+
+                System.out.println("⚠️ DataInitializer: Dados de adoção incompletos.");
+            } else {
+
+                LocalDate today = LocalDate.now();
+
+                //MARIA » Branco + Natalina
+                Adoption a1 = new Adoption();
+                a1.setUser(maria);
+                a1.setCat(branco);
+                a1.setApplicantName(maria.getName());
+                a1.setEmail(maria.getEmail());
+                a1.setPhone(String.valueOf(maria.getTelephone()));
+                a1.setAddress(maria.getAddress());
+                a1.setReason("Procuro companhia tranquila para casa.");
+                a1.setExperience("Já tive gatos durante vários anos.");
+                a1.setStatus("Aprovada");
+                a1.setRequestDate(branco.getArrivalDate().atStartOfDay().plusDays(5));
+                a1.setReviewDate(a1.getRequestDate().plusDays(2));
+                a1.setAdoptionDate(a1.getReviewDate().toLocalDate());
+                a1.setRead(true);
+                adoptRepo.save(a1);
+
+                Adoption a2 = new Adoption();
+                a2.setUser(maria);
+                a2.setCat(natalina);
+                a2.setApplicantName(maria.getName());
+                a2.setEmail(maria.getEmail());
+                a2.setPhone(String.valueOf(maria.getTelephone()));
+                a2.setAddress(maria.getAddress());
+                a2.setReason("Quero uma gata jovem e ativa.");
+                a2.setExperience("Tenho experiência com gatos energéticos.");
+                a2.setStatus("Aprovada");
+                a2.setRequestDate(natalina.getArrivalDate().atStartOfDay().plusDays(3));
+                a2.setReviewDate(a2.getRequestDate().plusDays(1));
+                a2.setAdoptionDate(a2.getReviewDate().toLocalDate());
+                a2.setRead(true);
+                adoptRepo.save(a2);
+
+                //ANA » Kelly, Andreia pendente
+                Adoption a3 = new Adoption();
+                a3.setUser(ana);
+                a3.setCat(andreia);
+                a3.setApplicantName(ana.getName());
+                a3.setEmail(ana.getEmail());
+                a3.setPhone(String.valueOf(ana.getTelephone()));
+                a3.setAddress(ana.getAddress());
+                a3.setReason("Procuro uma companhia para a Kelly.");
+                a3.setExperience("Alguma experiência com gatos.");
+                a3.setStatus("Pendente");
+                a3.setRequestDate(andreia.getArrivalDate().atStartOfDay().plusDays(7));
+                a3.setRead(false);
+                adoptRepo.save(a3);
+
+                Adoption a6 = new Adoption();
+                a6.setUser(ana);
+                a6.setCat(kelly);
+                a6.setApplicantName(ana.getName());
+                a6.setEmail(ana.getEmail());
+                a6.setPhone(String.valueOf(ana.getTelephone()));
+                a6.setAddress(ana.getAddress());
+                a6.setReason("Procuro uma gata calma para apartamento.");
+                a6.setExperience("Alguma experiência com gatos.");
+                a6.setStatus("Aprovada");
+                a6.setRequestDate(kelly.getArrivalDate().atStartOfDay().plusDays(7));
+                a6.setReviewDate(a6.getRequestDate().plusDays(5));
+                a6.setAdoptionDate(a6.getReviewDate().toLocalDate());
+                a6.setRead(true);
+                adoptRepo.save(a6);
+
+                //BRUNO » Perdiz
+                Adoption a4 = new Adoption();
+                a4.setUser(bruno);
+                a4.setCat(perdiz);
+                a4.setApplicantName(bruno.getName());
+                a4.setEmail(bruno.getEmail());
+                a4.setPhone(String.valueOf(bruno.getTelephone()));
+                a4.setAddress(bruno.getAddress());
+                a4.setReason("Quero um gato tranquilo para companhia.");
+                a4.setExperience("Primeira vez com gatos.");
+                a4.setStatus("Aprovada");
+                a4.setRequestDate(perdiz.getArrivalDate().atStartOfDay().plusDays(10));
+                a4.setReviewDate(a4.getRequestDate().plusDays(2));
+                a4.setAdoptionDate(a4.getReviewDate().toLocalDate());
+                a4.setRead(true);
+                adoptRepo.save(a4);
+
+                //SOFIA » Branco rejeitado
+                Adoption a5 = new Adoption();
+                a5.setUser(sofia);
+                a5.setCat(branco);
+                a5.setApplicantName(sofia.getName());
+                a5.setEmail(sofia.getEmail());
+                a5.setPhone(String.valueOf(sofia.getTelephone()));
+                a5.setAddress(sofia.getAddress());
+                a5.setReason("Procuro um novo gatinho para apartamento.");
+                a5.setExperience("Tenho uma gata sénior.");
+                a5.setStatus("Rejeitada");
+                a5.setRequestDate(branco.getArrivalDate().atStartOfDay().plusDays(2));
+                a5.setRead(true);
+                a5.setRejectionMotive("Já recebemos contacto sobre o Branco e ele está atualmente em início de processo de adoção");
+                adoptRepo.save(a5);
+            }
+        }
+
+        //RELATÓRIOS PÓS-ADOÇÃO
+        if (reportRepo.count() == 0) {
+            User bruno = userRepository.getUserByUsername("bruno.adop");
+            User ana = userRepository.getUserByUsername("ana.adop");
+            User maria = userRepository.getUserByUsername("maria.adop");
+
+            Cat perdiz = catRepo.findFirstByName("Perdiz");
+            Cat kelly = catRepo.findFirstByName("Kelly");
+            Cat branco = catRepo.findFirstByName("Branco");
+            Cat natalina = catRepo.findFirstByName("Natalina");
+
+            if (bruno == null || ana == null || maria == null ||
+                    perdiz == null || kelly == null || branco == null || natalina == null) {
+
+                System.out.println("⚠️ Dados de relatórios incompletos.");
+            } else {
+
+                //PERDIZ (Bruno)
+                Report p1 = new Report();
+                p1.setUser(bruno);
+                p1.setCat(perdiz);
+                p1.setStatus("Bom");
+                p1.setNotes("Adaptou-se rapidamente à nova casa. Passa grande parte do tempo a dormir e já procura contacto com o dono.");
+                p1.setHealth("Sem alterações relevantes.");
+                p1.setReportDate(LocalDateTime.now().minusDays(20));
+                reportRepo.save(p1);
+
+                Report p2 = new Report();
+                p2.setUser(bruno);
+                p2.setCat(perdiz);
+                p2.setStatus("Excelente");
+                p2.setNotes("Totalmente integrado. Muito tranquilo e afetuoso, especialmente durante a noite.");
+                p2.setHealth("Sem alterações relevantes.");
+                p2.setReportDate(LocalDateTime.now().minusDays(10));
+                reportRepo.save(p2);
+
+                Report p3 = new Report();
+                p3.setUser(bruno);
+                p3.setCat(perdiz);
+                p3.setStatus("Excelente");
+                p3.setNotes("Mantém comportamento calmo e estável. Demonstra confiança total no ambiente.");
+                p3.setHealth("Sem alterações relevantes.");
+                p3.setReportDate(LocalDateTime.now().minusDays(3));
+                reportRepo.save(p3);
+
+                // KELLY (Ana)
+                Report k1 = new Report();
+                k1.setUser(ana);
+                k1.setCat(kelly);
+                k1.setStatus("Normal");
+                k1.setNotes("Inicialmente mais reservada. Evita contacto direto mas observa tudo ao redor.");
+                k1.setHealth("Sem alterações relevantes.");
+                k1.setReportDate(LocalDateTime.now().minusDays(18));
+                reportRepo.save(k1);
+
+                Report k2 = new Report();
+                k2.setUser(ana);
+                k2.setCat(kelly);
+                k2.setStatus("Bom");
+                k2.setNotes("Já aceita festas em momentos específicos, especialmente quando recebe comida húmida.");
+                k2.setHealth("Apetite irregular nos primeiros dias, entretanto estabilizado.");
+                k2.setReportDate(LocalDateTime.now().minusDays(9));
+                reportRepo.save(k2);
+
+                Report k3 = new Report();
+                k3.setUser(ana);
+                k3.setCat(kelly);
+                k3.setStatus("Bom");
+                k3.setNotes("Mais sociável, começa a procurar companhia. Mantém personalidade independente.");
+                k3.setHealth("Sem alterações relevantes.");
+                k3.setReportDate(LocalDateTime.now().minusDays(2));
+                reportRepo.save(k3);
+
+                // BRANCO (Maria)
+                Report b1 = new Report();
+                b1.setUser(maria);
+                b1.setCat(branco);
+                b1.setStatus("Excelente");
+                b1.setNotes("Adaptação imediata. Muito carinhoso e confortável com a nova família.");
+                b1.setReportDate(LocalDateTime.now().minusDays(25));
+                b1.setHealth("Sem alterações relevantes.");
+                reportRepo.save(b1);
+
+                Report b2 = new Report();
+                b2.setUser(maria);
+                b2.setCat(branco);
+                b2.setStatus("Excelente");
+                b2.setNotes("Extremamente sociável, procura constantemente atenção e interação.");
+                b2.setHealth("Sem alterações relevantes.");
+                b2.setReportDate(LocalDateTime.now().minusDays(12));
+                reportRepo.save(b2);
+
+                Report b3 = new Report();
+                b3.setUser(maria);
+                b3.setCat(branco);
+                b3.setStatus("Excelente");
+                b3.setNotes("Perfeitamente integrado no ambiente familiar. Muito ativo e brincalhão.");
+                b3.setHealth("Vacinação em dia.");
+                b3.setReportDate(LocalDateTime.now().minusDays(4));
+                reportRepo.save(b3);
+
+                // NATALINA (Maria)
+                Report n1 = new Report();
+                n1.setUser(maria);
+                n1.setCat(natalina);
+                n1.setStatus("Bom");
+                n1.setNotes("Muito ativa e curiosa. Explora constantemente a casa.");
+                n1.setHealth("Sem alterações relevantes.");
+                n1.setReportDate(LocalDateTime.now().minusDays(22));
+                reportRepo.save(n1);
+
+                Report n2 = new Report();
+                n2.setUser(maria);
+                n2.setCat(natalina);
+                n2.setStatus("Excelente");
+                n2.setNotes("Totalmente adaptada. Brinca frequentemente e interage bem com o Branco.");
+                n2.setHealth("Sem alterações relevantes.");
+                n2.setReportDate(LocalDateTime.now().minusDays(11));
+                reportRepo.save(n2);
+
+                Report n3 = new Report();
+                n3.setUser(maria);
+                n3.setCat(natalina);
+                n3.setStatus("Excelente");
+                n3.setNotes("Muito feliz e energética. Demonstra grande confiança no ambiente.");
+                n3.setHealth("Foi esterilizada recentemente, mas fez uma boa recuperação.");
+                n3.setReportDate(LocalDateTime.now().minusDays(1));
+                reportRepo.save(n3);
             }
         }
 
