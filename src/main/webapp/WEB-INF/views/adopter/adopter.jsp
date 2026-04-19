@@ -134,7 +134,7 @@
             </div>
 
 
-            <div class="card p-4 shadow-sm border-0 rounded-4">
+            <div class="card p-4 shadow-sm border-0 rounded-4" style="margin-bottom: 25px;">
 
                 <h5 class="fw-bold mb-3">Ações Rápidas</h5>
 

@@ -80,13 +80,8 @@
                             </p>
 
                             <p class="text-muted mb-1">
-                                <strong>Adotado em:</strong> ${adoption.adoptionDate}
+                                <strong>Adotado em:</strong> ${adoption.formattedAdoptionDate}
                             </p>
-
-                            <p class="text-muted">
-                                <strong>Última consulta:</strong> 01/03/2026
-                            </p>
-
 
                         </div>
                     </div>

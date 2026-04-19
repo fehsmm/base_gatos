@@ -91,17 +91,25 @@
                             <div class="border rounded p-3 mb-3">
 
                                 <div class="d-flex justify-content-between">
-                                    <b>${report.cat.name}</b>
+                                    <div>
+                                        <b>Gato: </b> ${report.cat.name}
+                                    </div>
                                     <span class="text-muted">${report.formattedReportDate}</span>
                                 </div>
 
-                                <p>
-                                        ${report.status}
+                                <p class="mt-2">
+                                    <b> Estado do Gato: </b>${report.status}
                                 </p>
 
-                                <p class="mt-2">${report.notes}</p>
+                                <p class="mt-2">
+                                       <b>Descrição Geral: </b> ${report.notes}
+                                </p>
 
-                                <p class="mt-2">${report.health}</p>
+                                <c:if test="${not empty report.health}">
+                                    <p class="mt-2">
+                                        <b>Observações de Saúde: </b> ${report.health}
+                                    </p>
+                                </c:if>
 
                             </div>
 
