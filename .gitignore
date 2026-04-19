@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 uploads
+
+# Local secrets — never commit
+src/main/resources/application-secrets.properties
