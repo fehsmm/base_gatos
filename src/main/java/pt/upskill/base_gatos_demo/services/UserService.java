@@ -3,7 +3,7 @@ package pt.upskill.base_gatos_demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.User;
-import pt.upskill.base_gatos_demo.repositories.UserRepository;
+import pt.upskill.base_gatos_demo.repositories.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,18 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ShiftRepository shiftRepository;
+
+    @Autowired
+    NoteRepository noteRepository;
+
+    @Autowired
+    ReportRepository  reportRepository;
+
+    @Autowired
+    AdoptionRepository adoptionRepository;
 
     public int countPendingApproval() {
         int pendingApproval = 0;
@@ -38,8 +50,13 @@ public class UserService {
         //ao rejeitar uma conta de voluntário, não apaga a conta, fica com uma conta de adotante
     }
 
-    public void deleteUser(Long id) {
+    public boolean deleteUser(Long id) {
+        User user = userRepository.getUserById(id);
+        if(!canDeleteUser(user)) {
+            return false;
+        }
         userRepository.deleteById(id);
+        return true;
     }
 
     public List<User> getVolunteers() {
@@ -91,5 +108,14 @@ public class UserService {
         }
         users.sort((a, b) -> b.getAccountCreation().compareTo(a.getAccountCreation()));
         return users;
+    }
+
+    public boolean canDeleteUser(User user) {
+        if(!adoptionRepository.existsByUser(user) && !noteRepository.existsByAuthor(user)
+                && !shiftRepository.existsByVolunteersContains(user)
+                && !reportRepository.existsByUser(user)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -9,7 +9,8 @@ import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.CreateCatModel;
 import pt.upskill.base_gatos_demo.models.EditCatModel;
-import pt.upskill.base_gatos_demo.repositories.CatRepository;
+import pt.upskill.base_gatos_demo.repositories.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -24,6 +25,18 @@ public class CatService {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    AdoptionRepository adoptionRepository;
+
+    @Autowired
+    ShiftRepository shiftRepository;
+
+    @Autowired
+    MedicationRecordRepository medicationRecordRepository;
+
+    @Autowired
+    ReportRepository reportRepository;
 
 
     public List<Cat> listCats(String nameFilter, String statusFilter){
@@ -111,8 +124,13 @@ public class CatService {
         catRepository.save(cat);
     }
 
-    public void deleteCat(Long id) {
+    public boolean deleteCat(Long id) {
+        Cat cat = getById(id);
+        if(!canDeleteCat(cat)) {
+            return false;
+        }
         catRepository.deleteById(id);
+        return true;
     }
 
     public List<Cat> listAllCats(String status, String gender) {
@@ -196,5 +214,13 @@ public class CatService {
 
     public List<Cat> getByStatus(String status) {
         return catRepository.findByStatus(status);
+    }
+
+    public boolean canDeleteCat(Cat cat) {
+        if(!adoptionRepository.existsByCat(cat) && !medicationRecordRepository.existsByCat(cat)
+                && !reportRepository.existsByCat(cat)) {
+            return true;
+        }
+        return false;
     }
 }

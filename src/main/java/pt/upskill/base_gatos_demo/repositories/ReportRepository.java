@@ -15,4 +15,7 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     int countReportByUser(User user);
 
+    boolean existsByUser(User user);
+    boolean existsByCat(Cat cat);
+
 }

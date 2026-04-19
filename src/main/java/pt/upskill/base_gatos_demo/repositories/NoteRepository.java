@@ -3,6 +3,7 @@ package pt.upskill.base_gatos_demo.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pt.upskill.base_gatos_demo.entities.Note;
+import pt.upskill.base_gatos_demo.entities.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,5 +27,7 @@ public interface NoteRepository extends JpaRepository<Note,Long> {
     List<Note> findByUpdatedAtAfterAndPriorityAndReadFalse(LocalDateTime dateStartTime, String priorityFilter, Boolean unreadFilter);
     List<Note> findByUpdatedAtBeforeAndPriorityAndReadFalse(LocalDateTime dateEndTime, String priorityFilter, Boolean unreadFilter);
     List<Note> findByUpdatedAtBetweenAndPriorityAndReadFalse(LocalDateTime dateStartTime, LocalDateTime dateEndTime, String priorityFilter, Boolean unreadFilter);
+
+    boolean existsByAuthor(User user);
 }
 

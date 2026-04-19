@@ -31,6 +31,9 @@ public interface AdoptionRepository extends JpaRepository<Adoption,Long> {
         List<Adoption> findByRequestDateBetweenAndStatusAndReadFalse(LocalDateTime startDate, LocalDateTime endDate, String status);
         List<Adoption> findByRequestDateBetweenAndReadFalse(LocalDateTime startDate, LocalDateTime endDate);
 
+        boolean existsByUser(User user);
+        boolean existsByCat(Cat cat);
+
 
 
 }

@@ -241,8 +241,13 @@ public class AdminController {
     @PostMapping(value = "/delete-cat")
     public String deleteCat(@RequestParam("catId") Long catId,
                             RedirectAttributes redirectAttributes) {
-        catService.deleteCat(catId);
-        redirectAttributes.addFlashAttribute("success", "Gato eliminado com sucesso!");
+        boolean deleted = catService.deleteCat(catId);
+        if(deleted) {
+            redirectAttributes.addFlashAttribute("success", "Gato eliminado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Não é possível eliminar este gato pois ainda " +
+                    "existem adoções, medicações, ou relatórios associadas a este.");
+        }
         return "redirect:/admin/manage-cat";
     }
 
@@ -359,8 +364,13 @@ public class AdminController {
     @PostMapping(value = "/delete-user")
     public String deleteUser(@RequestParam("userId") Long id,
                               RedirectAttributes redirectAttributes) {
-        userService.deleteUser(id);
-        redirectAttributes.addFlashAttribute("success", "Conta eliminada com sucesso!");
+        boolean deleted = userService.deleteUser(id);
+        if(deleted) {
+            redirectAttributes.addFlashAttribute("success", "Conta eliminada com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Esta conta não pode ser eliminada pois ainda " +
+                    "existem adoções, turnos, notas ou relatórios associados a esta.");
+        }
         return "redirect:/admin/manage-user";
     }
 

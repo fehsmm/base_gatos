@@ -13,6 +13,8 @@ public interface ShiftRepository extends JpaRepository<Shift, Long> {
 
     List<Shift> findByVolunteersContains(User volunteer);
     List<Shift> findByDate(LocalDate date);
-    List<Shift> findByVolunteersContainsAndDate(User volunteer, LocalDate date); //ERRADO
+    List<Shift> findByVolunteersContainsAndDate(User volunteer, LocalDate date);
+
+    boolean existsByVolunteersContains(User user);
 
 }
