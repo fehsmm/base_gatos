@@ -1,26 +1,16 @@
 package pt.upskill.base_gatos_demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pt.upskill.base_gatos_demo.entities.Adoption;
 import pt.upskill.base_gatos_demo.entities.Cat;
-import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.AdoptionForm;
-import pt.upskill.base_gatos_demo.repositories.AdoptionRepository;
-import pt.upskill.base_gatos_demo.repositories.CatRepository;
-import pt.upskill.base_gatos_demo.repositories.UserRepository;
 import pt.upskill.base_gatos_demo.services.AdoptionService;
 import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.CatService;
-import pt.upskill.base_gatos_demo.services.UserService;
 
 import java.security.Principal;
 import java.util.List;

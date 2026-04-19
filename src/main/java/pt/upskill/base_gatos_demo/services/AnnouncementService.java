@@ -1,6 +1,5 @@
 package pt.upskill.base_gatos_demo.services;
 
-import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.upskill.base_gatos_demo.entities.Announcement;
@@ -20,10 +19,6 @@ public class AnnouncementService {
     AnnouncementRepository announcementRepository;
     @Autowired
     private AuthService authService;
-
-    public List<Announcement> findAll() {
-        return announcementRepository.findAll();
-    }
 
     private Announcement getById(Long id) {
         return announcementRepository.findById(id).orElse(null);

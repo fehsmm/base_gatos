@@ -34,6 +34,9 @@ public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping(value = "/login")
     public String loginPage() {
         return "auth/login";
@@ -77,9 +80,7 @@ public class AuthController {
 
     @PostMapping("/forgot-password")
     public String forgotPassword(@RequestParam String email, RedirectAttributes redirectAttributes) {
-
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User não encontrado!"));
-
+        User user = userService.getUserByEmail(email);
         String token = UUID.randomUUID().toString();
 
         user.setResetToken(token);
@@ -121,11 +122,5 @@ public class AuthController {
 
         return "redirect:/auth/login";
     }
-
-    //post mapping login
-    //post mapping signup
-    //post mapping forgot password
-
-    //perguntar sobre o excluir conta
 
 }

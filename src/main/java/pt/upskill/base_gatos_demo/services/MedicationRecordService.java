@@ -28,11 +28,7 @@ public class MedicationRecordService {
     public List<MedicationRecord> getBycat(Long catId) {
         return medRepo.findByCatId(catId);
     }
-    public List<MedicationRecord> getActiveTodayByCat(Long catId) {
-        return medRepo.findByCatId(catId).stream()
-                .filter(MedicationRecord::isActiveToday)
-                .collect(Collectors.toList());
-    }
+
     public List<MedicationRecord> getAllActiveToday() {
         return medRepo.findAll().stream()
                 .filter(MedicationRecord::isActiveToday)

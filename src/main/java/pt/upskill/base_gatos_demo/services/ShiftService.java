@@ -34,7 +34,7 @@ public class ShiftService {
 
     public List<Shift> getAllShifts() {
         return shiftRepository.findAll();
-    } // Fernanda Adicionou - é suposto os voluntários poder ver o shift mensal para possiveis trocas
+    }
 
     public List<Shift> getShifts (@Nullable LocalDate date) {
         User user = authService.getAuthenticatedUser();
@@ -126,10 +126,6 @@ public class ShiftService {
             task.setShift(null);
             taskRepository.save(task);
         }
-//        shift.getTasks().forEach(task -> {
-//            task.setShift(null);
-//            taskRepository.save(task);
-//        });
 
         List<Task> tasks = new ArrayList<>();
         if (model.getTasks() != null) {

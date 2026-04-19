@@ -1,10 +1,6 @@
 package pt.upskill.base_gatos_demo.services;
 
-import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -28,9 +24,6 @@ public class CatService {
 
     @Autowired
     AuthService authService;
-
-    @Autowired
-    AdoptionService adoptionService;
 
 
     public List<Cat> listCats(String nameFilter, String statusFilter){
@@ -141,13 +134,7 @@ public class CatService {
 
         if (user != null && (user.isAdmin() || user.isVolunteer())) {
             cats = catRepository.findAllByOrderByArrivalDateDesc();
-        }
-        /*else if (user != null && user.isAdopter()) {
-            List<Cat> available = catRepository.findByStatusOrderByArrivalDateDesc("Disponível");
-            List<Cat> adopted = adoptionService.getAdoptedCatsByUser(user);
-            cats = new ArrayList<>(available);
-            cats.addAll(adopted);
-        }*/ else {
+        } else {
             cats = catRepository.findByStatusOrderByArrivalDateDesc("Disponível");
         }
 

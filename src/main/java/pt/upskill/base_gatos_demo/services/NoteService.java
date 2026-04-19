@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 import pt.upskill.base_gatos_demo.entities.*;
-//import pt.upskill.base_gatos_demo.models.CreateNoteModel;
-//import pt.upskill.base_gatos_demo.models.EditNoteModel;
 import pt.upskill.base_gatos_demo.repositories.NoteRepository;
 import pt.upskill.base_gatos_demo.repositories.ShiftRepository;
 
@@ -63,10 +61,6 @@ public class NoteService {
                 noteRepository.save(note);
             }
         }
-    }
-
-    public void saveExistingNote(Note note) {
-        noteRepository.save(note);
     }
 
     public int countUnreadNotes() {

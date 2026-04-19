@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Entity
 public class Note {

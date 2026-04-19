@@ -1,7 +1,6 @@
 package pt.upskill.base_gatos_demo.models;
 
 import jakarta.persistence.Column;
-import pt.upskill.base_gatos_demo.entities.Cat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

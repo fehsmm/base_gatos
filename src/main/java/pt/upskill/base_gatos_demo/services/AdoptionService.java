@@ -1,12 +1,9 @@
 package pt.upskill.base_gatos_demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pt.upskill.base_gatos_demo.entities.Adoption;
-import pt.upskill.base_gatos_demo.entities.Announcement;
 import pt.upskill.base_gatos_demo.entities.Cat;
 import pt.upskill.base_gatos_demo.entities.User;
 import pt.upskill.base_gatos_demo.models.AdoptionForm;
@@ -54,17 +51,6 @@ public class AdoptionService {
         adoption.setRejectionMotive(rejectionMotive);
 
         adoptionRepository.save(adoption);
-    }
-
-    public List<Cat> getAdoptedCatsByUser(User user) {
-        List<Adoption> adoptions = adoptionRepository.findByUserAndStatus(user, "Adotado");
-        return adoptions.stream()
-                .map(Adoption::getCat)
-                .toList();
-    }
-
-    public List<Adoption> getPendingAdoptions() {
-        return  adoptionRepository.findByStatus("Pendente");
     }
 
     public int countPendingAdoptions() {

@@ -22,7 +22,6 @@ public class User {
     private String email;
     private boolean approved;
     private LocalDateTime accountCreation;
-    private boolean active;
 
     private String resetToken;
     private LocalDateTime tokenExpiration;
@@ -170,13 +169,5 @@ public class User {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             return accountCreation.format(formatter);
         }
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }

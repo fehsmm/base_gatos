@@ -1,11 +1,8 @@
 package pt.upskill.base_gatos_demo.models;
 
-import jakarta.persistence.Column;
 import pt.upskill.base_gatos_demo.entities.Shift;
-import pt.upskill.base_gatos_demo.entities.Task;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class CreateNoteModel {
 

@@ -5,16 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pt.upskill.base_gatos_demo.entities.User;
-import pt.upskill.base_gatos_demo.models.CreateAnnouncementModel;
 import pt.upskill.base_gatos_demo.models.CreateMedicationRecordModel;
-import pt.upskill.base_gatos_demo.models.EditAnnouncementModel;
 import pt.upskill.base_gatos_demo.models.EditMedicationRecordModel;
 import pt.upskill.base_gatos_demo.services.AuthService;
 import pt.upskill.base_gatos_demo.services.CatService;
 import pt.upskill.base_gatos_demo.services.MedicationRecordService;
-
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/admin/medication")

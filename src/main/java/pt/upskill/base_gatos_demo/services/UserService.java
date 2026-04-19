@@ -24,10 +24,6 @@ public class UserService {
         return pendingApproval;
     }
 
-    public List<User> findPendingApproval() {
-        return userRepository.findByApprovedFalse();
-    }
-
     public void approveUser(Long id) {
         User user = userRepository.getUserById(id);
         user.setApproved(true);
@@ -52,6 +48,10 @@ public class UserService {
 
     public User getUsername(String username) {
         return userRepository.getUserByUsername(username);
+    }
+
+    public User getUserByEmail (String email) {
+        return userRepository.findByEmail(email);
     }
 
     public List<User> getUsers(String nameFilter, String roleFilter, Boolean pendingFilter) {

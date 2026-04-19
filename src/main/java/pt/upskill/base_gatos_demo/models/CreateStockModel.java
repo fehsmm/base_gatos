@@ -1,7 +1,5 @@
 package pt.upskill.base_gatos_demo.models;
 
-import pt.upskill.base_gatos_demo.entities.Stock;
-
 public class CreateStockModel {
 
     private String productType;

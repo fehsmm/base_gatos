@@ -11,8 +11,6 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findByUser(User user);
 
-    List<Report> findByUserAndCat(User user, Cat cat);
-
     List<Report> findTop5ByUserAndCatOrderByReportDateDesc(User user, Cat cat);
 
     int countReportByUser(User user);

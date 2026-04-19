@@ -1,7 +1,5 @@
 package pt.upskill.base_gatos_demo.models;
 
-import java.time.LocalTime;
-
 public class AddTaskModel {
 
     private String title;

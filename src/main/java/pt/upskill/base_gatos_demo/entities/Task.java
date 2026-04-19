@@ -2,8 +2,6 @@ package pt.upskill.base_gatos_demo.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-
 @Entity
 public class Task {
     @Id

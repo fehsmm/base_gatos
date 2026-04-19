@@ -1,6 +1,5 @@
 package pt.upskill.base_gatos_demo.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ReportModel {
