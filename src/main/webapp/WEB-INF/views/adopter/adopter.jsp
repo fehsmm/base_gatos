@@ -118,9 +118,6 @@
                                         Adotado em: ${adoption.adoptionDate}
                                     </p>
 
-                                    <p class="text-muted mb-0">
-                                        Próxima consulta: 01/06/2026
-                                    </p>
                                 </div>
 
                             </div>
