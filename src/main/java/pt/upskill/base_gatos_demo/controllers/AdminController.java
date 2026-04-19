@@ -223,12 +223,8 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("success", "Turno eliminado com sucesso!");
         } else {
             redirectAttributes.addFlashAttribute("error", "Não é possível eliminar este turno " +
-                    "enquanto este está a decorrer, ou se já existem notas associadas a este.");
+                    "enquanto este está a decorrer, ou se já existirem notas associadas a este.");
         }
-
-
-        shiftService.deleteShift(shiftId);
-        redirectAttributes.addFlashAttribute("success", "Turno eliminado com sucesso!");
         return "redirect:/admin/manage-schedule";
     }
 

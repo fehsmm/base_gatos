@@ -15,6 +15,8 @@ import pt.upskill.base_gatos_demo.repositories.TaskRepository;
 import pt.upskill.base_gatos_demo.repositories.UserRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,10 +163,12 @@ public class ShiftService {
     }
 
     public boolean canDeleteShift(Shift shift) {
-        if(!noteRepository.existsByShift(shift)) {
-            return true;
+        LocalTime now = LocalTime.now();
+        LocalDate today = LocalDate.now();
+        if(noteRepository.existsByShift(shift) || ((today.equals(shift.getDate())) && (now.isAfter(shift.getStartTime()) && now.isBefore(shift.getEndTime())))) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public List<Shift>  getShiftsByDate(LocalDate date) {
