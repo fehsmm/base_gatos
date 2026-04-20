@@ -90,7 +90,7 @@
                                 <input type="hidden" name="measureUnit" value="${req.measureUnit}"/>
                                 <input type="hidden" name="tag" value="${req.tag}"/>
                                 <input type="hidden" name="stockNote" value=""/> <%-- LIMPA A NOTA --%>
-                                <button type="submit" class="btn btn-sm btn-dark">Visto</button>
+                                <button type="submit" class="btn btn-sm btn-dark">Atualizar</button>
                             </form>
                         </div>
                     </c:forEach>
