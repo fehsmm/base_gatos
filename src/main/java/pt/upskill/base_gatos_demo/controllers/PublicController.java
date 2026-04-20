@@ -120,7 +120,7 @@ public class PublicController {
         if(!successGetProcessAdoption){
                 redirectAttributes.addFlashAttribute("error", "Já submeteu candidatura para este gato!");
             }else{
-                redirectAttributes.addFlashAttribute("success","Candidatura enviada com sucesso para o gato!");
+                redirectAttributes.addFlashAttribute("success","Candidatura enviada com sucesso!");
             }
 
         return "redirect:/public/adoption";
