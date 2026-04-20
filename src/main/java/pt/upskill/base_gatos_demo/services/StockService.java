@@ -114,4 +114,18 @@ public class StockService {
         }
         return tags;
     }
+
+    public void requestStock(String productType, int quantity, String observations) {
+        List<Stock> products = stockRepository.findByProductTypeContainingIgnoreCase(productType);
+
+        if (!products.isEmpty()) {
+            Stock stock = products.get(0);
+            String notaFormatada = "PEDIDO DE REPOSIÇÃO: " + quantity + " unidades. Motivo: " + observations;
+
+            stock.setStockNote(notaFormatada);
+            stock.setUpdatedAt(LocalDateTime.now());
+
+            stockRepository.save(stock);
+        }
+    }
 }

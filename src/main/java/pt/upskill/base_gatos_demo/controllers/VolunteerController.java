@@ -37,6 +37,8 @@ public class VolunteerController {
     TaskService taskService;
     @Autowired
     MedicationRecordService medicationRecordService;
+    @Autowired
+    StockService stockService;
 
     @GetMapping("/")
     public String volunteer(Model model) {
@@ -112,15 +114,13 @@ public class VolunteerController {
                     .ifPresent(n -> model.addAttribute("sameShiftNote", n));
         }
 
-        // 2. Nota do turno anterior (Para aparecer no MODAL)
         allShifts.stream()
-                .filter(s -> s.getDate().isBefore(now.toLocalDate())) // Qualquer turno de dias passados
-                .sorted(Comparator.comparing(Shift::getDate).reversed()) // O mais recente primeiro
+                .filter(s -> s.getDate().isBefore(LocalDate.now()))
+                .sorted(Comparator.comparing(Shift::getDate).reversed())
                 .findFirst()
                 .ifPresent(lastShift -> {
-                    // Procura notas não lidas deste turno anterior
                     lastShift.getNotes().stream()
-                            .filter(n -> !n.isRead())
+                            .filter(n -> !n.isRead()) // Se o user logado ainda não a leu
                             .findFirst()
                             .ifPresent(n -> model.addAttribute("previousNote", n));
                 });
@@ -237,20 +237,14 @@ public class VolunteerController {
         medicationRecordService.markAdministered(id);
         return "redirect:/volunteer/view-shift";
     }
+
     @PostMapping("/request-stock")
     public String handleStockRequest(
             @RequestParam String item,
             @RequestParam int quantity,
             @RequestParam String observations) {
 
-        Stock novoPedido = new Stock();
-        novoPedido.setProductType(item);
-        novoPedido.setCurrentQuantity(quantity);
-        novoPedido.setStockNote(observations);
-        novoPedido.setUpdatedAt(LocalDateTime.now());
-
-        // Aqui deves chamar o teu repository ou service de Stock
-        // stockRepository.save(novoPedido);
+        stockService.requestStock(item, quantity, observations);
 
         return "redirect:/volunteer/request-stock?success=true";
     }

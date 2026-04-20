@@ -24,11 +24,9 @@ public class NoteService {
     public void startShift(Long id, User user) {
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null) {
-            // Se for o primeiro voluntário a chegar, marca o início real do turno
             if (shift.getStartedAt() == null) {
                 shift.setStartedAt(LocalDateTime.now());
             }
-            // Define SEMPRE o utilizador que clicou no botão como o "voluntário atual"
             shift.setCurrentVolunteer(user);
             shiftRepository.save(shift);
         }

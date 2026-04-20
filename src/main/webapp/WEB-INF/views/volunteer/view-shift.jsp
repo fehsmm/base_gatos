@@ -33,7 +33,7 @@
             </div>
         </c:if>
 
-        <%-- 2. MODAL DA NOTA DO COLEGA (MESMO TURNO) --%>
+        <%-- 2. MODAL MESMO TURNO --%>
         <c:if test="${sameShiftNote != null && !sameShiftNote.read}">
             <div id="modalSameTurno"
                  style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
@@ -133,25 +133,48 @@
                         <%-- Área de Trabalho (Medicações e Tarefas) --%>
                         <c:if test="${userIsActive && !currentUserSubmittedNote}">
                             <%-- Medicações --%>
-                            <c:if test="${not empty medsByCat}">
-                                <div class="section-title"><strong>Medicações</strong></div>
+                            <div class="panel"
+                                 style="border: 1px solid #fee2e2; border-radius: 12px; background: #fff; padding: 1.5rem; margin-bottom: 1.5rem;">
+                                <h3 style="color: #dc2626; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <img src="/icons/medicine.svg" width="20px"/> Medicações para hoje
+                                </h3>
                                 <c:forEach var="entry" items="${medsByCat}">
-                                    <div class="panel mb-3" style="border: 1px solid #fca5a5;">
-                                        <div style="font-weight:700;">${entry.key}</div>
-                                        <c:forEach var="med" items="${entry.value}">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <form action="/volunteer/administer-medication/${med.id}" method="POST">
-                                                    <input type="hidden" name="${_csrf.parameterName}"
-                                                           value="${_csrf.token}"/>
-                                                    <input type="checkbox"
-                                                           onchange="this.form.submit()" ${med.administeredToday ? 'checked disabled' : ''}>
-                                                </form>
-                                                <span>${med.medicationName}</span>
-                                            </div>
-                                        </c:forEach>
+                                    <div style="border: 1px solid #fee2e2; border-radius: 8px; margin-bottom: 1rem; overflow: hidden;">
+                                        <div style="background: #fff7ed; padding: 0.5rem 1rem; font-weight: 700; color: #1f2937; border-bottom: 1px solid #fed7aa;">
+                                                ${entry.key}
+                                        </div>
+                                        <div style="padding: 1rem; background: #fff;">
+                                            <c:forEach var="med" items="${entry.value}">
+                                                <div style="margin-bottom: 1rem; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.5rem;">
+                                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                        <form action="/volunteer/administer-medication/${med.id}"
+                                                              method="POST" style="margin:0">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                   value="${_csrf.token}"/>
+                                                            <input type="checkbox"
+                                                                   onchange="this.form.submit()" ${med.administeredToday ? 'checked' : ''}
+                                                                   style="width:18px; height:18px; accent-color: #f97316;">
+                                                        </form>
+                                                        <span style="font-weight: 600; ${med.administeredToday ? 'text-decoration: line-through; color: #9ca3af;' : ''}">
+                                                                ${med.medicationName}
+                                                        </span>
+                                                    </div>
+                                                    <ul style="list-style: none; padding-left: 1.8rem; margin: 0.25rem 0; font-size: 0.85rem; color: #6b7280;">
+                                                        <li>• Dose: <strong>${med.dose}</strong></li>
+                                                        <li>• Localização: ${med.storageLocation}</li>
+                                                        <li>• Até: ${med.formattedEndDate}</li>
+                                                    </ul>
+                                                    <c:if test="${not empty med.notes}">
+                                                        <div style="padding-left: 1.8rem; color: #f97316; font-size: 0.85rem; font-weight: 600;">
+                                                            <img src="/icons/warning.svg" width="14px"/> ${med.notes}
+                                                        </div>
+                                                    </c:if>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </c:forEach>
-                            </c:if>
+                            </div>
 
                             <%-- Tarefas --%>
                             <div class="section-title"><strong>Tarefas</strong></div>

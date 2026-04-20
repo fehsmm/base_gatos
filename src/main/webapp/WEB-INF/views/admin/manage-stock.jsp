@@ -19,44 +19,6 @@
 
     <main class="admin-main">
 
-        <%-- BLOCO DE PEDIDOS DOS VOLUNTÁRIOS --%>
-        <c:if test="${not empty pendingRequests}">
-            <div style="padding: 0 1.5rem; margin-top: 1rem;">
-                <div class="card mb-4" style="border: 2px solid #f97316;">
-                    <div class="card-header"
-                         style="background-color: #fff7ed; color: #c2410c; display: flex; align-items: center; gap: 0.5rem;">
-                        <img src="/icons/box.svg" width="20px" height="20px"
-                             style="filter: invert(34%) sepia(91%) saturate(2206%) hue-rotate(13deg) brightness(93%) contrast(93%);"/>
-                        <strong>Pedidos de Reposição Urgente</strong>
-                    </div>
-                    <div class="card-body">
-                        <c:forEach var="req" items="${pendingRequests}">
-                            <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem; border-bottom:1px solid #f3f4f6;">
-                                <div>
-                                    <span class="badge badge-orange">${req.productType}</span>
-                                    <div style="margin-top:0.5rem; font-size:0.9rem; font-weight: 500;">
-                                            ${req.stockNote}
-                                    </div>
-                                </div>
-                                    <%-- Botão para limpar --%>
-                                <form action="/admin/update-stock" method="POST">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <input type="hidden" name="id" value="${req.id}"/>
-                                    <input type="hidden" name="productType" value="${req.productType}"/>
-                                    <input type="hidden" name="currentQuantity" value="${req.currentQuantity}"/>
-                                    <input type="hidden" name="lowQuantity" value="${req.lowQuantity}"/>
-                                    <input type="hidden" name="measureUnit" value="${req.measureUnit}"/>
-                                    <input type="hidden" name="tag" value="${req.tag}"/>
-                                    <input type="hidden" name="stockNote" value=""/> <%-- Limpa o pedido --%>
-                                    <button type="submit" class="btn btn-sm btn-dark">Comprado</button>
-                                </form>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
-        </c:if>
-
         <div style="padding:1.5rem">
             <div class="mb-8">
                 <h1 style="margin-bottom:.25rem">
@@ -106,6 +68,32 @@
                         </c:choose>
                     </c:if>
 
+                </div>
+            </c:if>
+
+            <%-- BLOCO DE PEDIDOS DOS VOLUNTÁRIOS --%>
+            <c:if test="${not empty pendingRequests}">
+                <div class="alert alert-warning"
+                     style="border: 2px solid #f97316; background: #fff7ed; margin-bottom: 1.5rem;">
+                    <h4 style="color: #c2410c; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        🔔 Pedidos de Reposição Pendentes:
+                    </h4>
+                    <c:forEach var="req" items="${pendingRequests}">
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding: 0.5rem 0; border-bottom: 1px solid #fed7aa;">
+                            <span><strong>${req.productType}</strong>: ${req.stockNote}</span>
+                            <form action="/admin/update-stock" method="POST" style="margin:0">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="hidden" name="id" value="${req.id}"/>
+                                <input type="hidden" name="productType" value="${req.productType}"/>
+                                <input type="hidden" name="currentQuantity" value="${req.currentQuantity}"/>
+                                <input type="hidden" name="lowQuantity" value="${req.lowQuantity}"/>
+                                <input type="hidden" name="measureUnit" value="${req.measureUnit}"/>
+                                <input type="hidden" name="tag" value="${req.tag}"/>
+                                <input type="hidden" name="stockNote" value=""/> <%-- LIMPA A NOTA --%>
+                                <button type="submit" class="btn btn-sm btn-dark">Visto</button>
+                            </form>
+                        </div>
+                    </c:forEach>
                 </div>
             </c:if>
 
@@ -220,13 +208,10 @@
                                         Quantidade Atual:
                                         <strong>${product.currentQuantity}</strong> ${product.measureUnit}
                                     </div>
-
                                     <div style="font-size:0.75rem; color:#6b7280; margin-bottom:.75rem;">
                                         Valor Mínimo: ${product.lowQuantity} ${product.measureUnit}
                                     </div>
-
                                     <hr>
-
                                     <div style="display:flex; gap:.5rem; margin-bottom:.75rem;">
                                         <button class="btn btn-sm btn-outline-primary"
                                                 onclick="useStockModal(this)"
@@ -247,7 +232,6 @@
                                             Atualizar Stock
                                         </button>
                                     </div>
-
                                     <c:choose>
                                         <c:when test="${product.updatedAt == null}">
                                             <div class="text-xs">
@@ -260,23 +244,17 @@
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
-
                                 </div>
-
                             </c:forEach>
 
                             <c:if test="${empty stockList}">
                                 <div class="text-gray text-sm">Sem produtos em stock.</div>
                             </c:if>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
         </div>
-
     </main>
 </div>
 
