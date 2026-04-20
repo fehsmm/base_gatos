@@ -29,7 +29,7 @@
                 <div class="about-text">
                     <h2 class="about-title">Sobre a Meg</h2>
                     <p class="about-paragraph">
-                        Desde 2018, a Meg - Movimento Esterilização de Gatos de Lisboa -  dedica-se ao resgate, cuidado e reabilitação de gatos abandonados e maltratados. A nossa missão é proporcionar um ambiente seguro e amoroso enquanto procuramos o lar perfeito para cada felino.
+                        Desde 2016, a Meg - Movimento Esterilização de Gatos de Lisboa -  dedica-se ao resgate, cuidado e reabilitação de gatos abandonados e maltratados. A nossa missão é proporcionar um ambiente seguro e amoroso enquanto procuramos o lar perfeito para cada felino.
                     </p>
                     <p class="about-paragraph">
                         Com uma equipa dedicada de voluntários e apoio da comunidade, já ajudámos centenas de gatos a encontrar famílias que os amem incondicionalmente.
