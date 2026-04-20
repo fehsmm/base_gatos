@@ -110,9 +110,7 @@
                                     <c:if test="${not empty sameShiftNote}">
                                         <div class="alert alert-warning"
                                              style="margin-bottom: 1rem; border: 1px solid #ca8a04;">
-                                            <strong>⚠️ NOTA DO COLEGA:</strong> O teu colega de turno já deixou um
-                                            relatório.
-                                            Lê o aviso que apareceu no ecrã antes de clicares em iniciar!
+                                            <strong>⚠️ Leia as Notas dos Turnos!!!:</strong>
                                         </div>
                                     </c:if>
                                     <form action="/volunteer/start-shift/${todayShift.id}" method="POST">
