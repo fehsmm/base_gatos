@@ -88,7 +88,7 @@ public class DataInitializer {
                     {"Branco", "3 anos", true, "Europeu comum", "Adotado", "2023-06-15",
                             "O Branco é um gato muito carinhoso e sociável. Dá-se bem com outros gatos e adora festas. Está à procura de um lar tranquilo onde possa ser o centro das atenções.",
                             false, false, true, true, true, List.of("Sociável", "Calmo"), "e8b7e3e0-2e24-4ea8-a437-d144f1ffe4b4.jpg"},
-                    {"Andreia", "5 anos", false, "Europeu comum", "Disponível", "2022-11-20",
+                    {"Andreia", "5 anos", false, "Preta", "Disponível", "2022-11-20",
                             "A Andreia é uma gata um pouco tímida no início mas muito meiga quando cria confiança. Prefere ambientes calmos e sem crianças pequenas.",
                             false, false, true, true, true, List.of("Tímida", "Calma"), "6641c4cf-f2bc-4ffb-80ee-e37e63832c94.jpg"},
                     {"Favorito", "8 anos", true, "Europeu comum", "Disponível", "2021-03-10",
@@ -100,7 +100,7 @@ public class DataInitializer {
                     {"Kelly", "4 anos", false, "Europeu comum", "Adotado", "2023-09-30",
                             "A Kelly é uma gata muito especial — às vezes parece triste mas é só o temperamento dela. Adora paté e fica completamente diferente quando lhe dão o petisco favorito.",
                             false, false, true, true, true, List.of("Gulosa", "Independente"), "a1bfdb8a-5788-4d8a-a614-22d75cc3bdd9.jpg"},
-                    {"Beringela", "1 ano", false, "Preta", "Disponível", "2024-08-12",
+                    {"Beringela", "1 ano", false, "Preta e caramelo", "Disponível", "2024-08-12",
                             "A Beringela é a mais nova do abrigo. Está sempre a coçar-se e está a fazer tratamento para alergias. Muito curiosa e brincalhona.",
                             true, true, false, false, false, List.of("Tratamento", "Curiosa"), "e1d1cae1-e2c4-4a2d-ba3e-53b19430b133.jpg"},
                     {"Perdiz", "2 anos", false, "Preta", "Adotado", "2026-02-04",
@@ -111,10 +111,13 @@ public class DataInitializer {
                             true, true, false, true, true, List.of("Tímida", "Observadora"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"},
                     {"Tobias", "3 anos", true, "Laranja", "Em Processo", "2024-05-20",
                             "Muito sociável, dá-se bem com outros gatos e também com cães, precisa de companhia de quatro patas.",
-                            false, false, true, true, true, List.of("Sociável", "Brincalhão"),"5ac14eed-f051-4662-8e7f-40d1856336a6.jpg"},
+                            false, false, true, true, true, List.of("Sociável", "Brincalhão"), "5ac14eed-f051-4662-8e7f-40d1856336a6.jpg"},
                     {"Nuvem", "6 anos", false, "Europeu comum", "Disponível", "2022-07-10",
                             "Gata FIV+, precisa de cuidados especiais.",
-                            true, false, true, true, true, List.of("FIV+", "Especial"), "98d293ee-407b-4a3a-a958-1469f255f39c.jpg"}
+                            true, false, true, true, true, List.of("FIV+", "Especial"), "98d293ee-407b-4a3a-a958-1469f255f39c.jpg"},
+                    {"EDP", "2 anos", false, "Laranja", "Disponível", "2026-03-16",
+                    "A edp é muito ativa, adora brincar e está sempre bem humorada.",
+                    false, false, true, true, true, List.of("Esperta", "Brincalhona"), "f9b9d6b8-df61-4c73-b8b3-b5a75abadea7.jpg"}
             };
 
             for (Object[] c : cats) {
