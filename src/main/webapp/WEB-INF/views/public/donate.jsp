@@ -65,13 +65,7 @@
                         <input type="number" id="customAmount" min="1" style="padding-left:2rem" placeholder="Digite um valor" oninput="clearPreset()"/>
                     </div>
                 </div>
-                <!--<div class="form-group">
-                    <label>Método de Pagamento</label>
-                    <div style="display:flex;flex-direction:column;gap:.5rem">
-                        <button type="button" class="btn btn-outline" style="justify-content:flex-start;gap:.75rem">💳 Cartão de Crédito/Débito</button>
-                        <button type="button" class="btn btn-outline" style="justify-content:flex-start;gap:.75rem">🏦 Transferência Bancária</button>
-                    </div>
-                </div>-->
+
                 <button type="submit" id="donateBtn" class="btn btn-primary btn-lg w-full" disabled>Fazer Donativo</button>
             </form>
             <div id="donationSuccess" class="alert alert-success mt-4" style="display:none">Obrigado pelo seu donativo! Processando pagamento...</div>
@@ -159,7 +153,7 @@ function handleDonation(e) {
     }
     // Stripe expects the amount in cents (€10 = 1000)
     document.getElementById('amountInCents').value = Math.round(parseFloat(amount) * 100);
-    return true; // let the form submit normally — browser redirects to /donate/checkout
+    return true;
 }
 </script>
 
