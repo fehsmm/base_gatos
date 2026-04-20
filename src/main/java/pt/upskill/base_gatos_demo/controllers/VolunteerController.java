@@ -120,7 +120,7 @@ public class VolunteerController {
                 .findFirst()
                 .ifPresent(lastShift -> {
                     lastShift.getNotes().stream()
-                            .filter(n -> !n.isRead()) // Se o user logado ainda não a leu
+                            .filter(n -> !n.isRead())
                             .findFirst()
                             .ifPresent(n -> model.addAttribute("previousNote", n));
                 });

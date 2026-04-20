@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 <body>
-<div class="admin-layout">
+<div class="admin-layout" style="display: flex; width: 100%;">
 
     <c:set var="activePage" value="view-shift"/>
     <c:set var="dashboardUrl" value="/volunteer/"/>
     <%@ include file="../fragments/adminSidebar.jsp" %>
 
-    <main class="flex-1 page">
+    <main class="flex-1 page" style="width: 100%; overflow-x: hidden;">
         <%-- 1. MODAL DA NOTA DO TURNO ANTERIOR --%>
         <c:if test="${previousNote != null && !previousNote.read}">
             <div id="modalNoteAnterior"
@@ -64,7 +64,7 @@
             </div>
         </c:if>
 
-        <div class="container-fluid px-3 py-3">
+            <div class="container-fluid px-3 py-3" style="width: 100%; max-width: 100%;">
             <div class="mb-4">
                 <div class="page-title" style="font-size: 2rem; font-weight: bold;">Turno Atual</div>
                 <div class="page-subtitle" style="margin-bottom: 1.5rem;">Resumo do turno em curso.</div>

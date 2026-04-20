@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 <body>
-<div class="admin-layout">
+<div class="admin-layout" style="display: flex; width: 100%;">
 
-    <c:set var="activePage" value="view-announcement" />
-    <c:set var="dashboardUrl" value="/volunteer/" />
+    <c:set var="activePage" value="view-announcement"/>
+    <c:set var="dashboardUrl" value="/volunteer/"/>
     <%@ include file="../fragments/adminSidebar.jsp" %>
 
-    <main class="flex-1 page">
-        <div class="container-fluid px-3 py-3">
+    <main class="flex-1 page" style="width: 100%; overflow-x: hidden;">
+        <div class="container-fluid px-3 py-3" style="width: 100%; max-width: 100%;">
             <div class="mb-4">
                 <div class="page-title"
                      style="font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">
@@ -28,27 +28,36 @@
                 </div>
 
                 <form method="GET" action="/volunteer/view-announcement"
-                      style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-end; width:100%;">
-                    <div style="display:flex; flex-direction:column; flex:1">
+                      style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; width:100%; align-items:flex-end;">
+
+                    <div style="display:flex; flex-direction:column; flex:1; min-width:140px;">
                         <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">Data de Início</label>
-                        <input type="date" name="dateStartFilter" class="form-control" value="${param.dateStartFilter}"/>
+                        <input type="date" name="dateStartFilter" class="form-control"
+                               value="${param.dateStartFilter}"/>
                     </div>
-                    <div style="display:flex; flex-direction:column; flex:1">
+
+                    <div style="display:flex; flex-direction:column; flex:1; min-width:140px;">
                         <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">Data de Fim</label>
                         <input type="date" name="dateEndFilter" class="form-control" value="${param.dateEndFilter}"/>
                     </div>
-                    <div style="display:flex; flex-direction:column; flex:1">
+
+                    <div style="display:flex; flex-direction:column; flex:1; min-width:140px;">
                         <label style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem;">Prioridade</label>
                         <select name="priorityFilter" class="form-control">
-                            <option value="">Todas as prioridades</option>
-                            <option value="urgent" ${param.priorityFilter == 'urgent' ? 'selected' : ''}>Urgente</option>
+                            <option value="">Todas</option>
+                            <option value="urgent" ${param.priorityFilter == 'urgent' ? 'selected' : ''}>Urgente
+                            </option>
                             <option value="high" ${param.priorityFilter == 'high' ? 'selected' : ''}>Alta</option>
                             <option value="normal" ${param.priorityFilter == 'normal' ? 'selected' : ''}>Normal</option>
                             <option value="low" ${param.priorityFilter == 'low' ? 'selected' : ''}>Baixa</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
-                    <a href="/volunteer/view-announcement" class="btn btn-secondary">Limpar</a>
+
+                    <div style="display:flex; gap:0.5rem; width:100%;">
+                        <button type="submit" class="btn btn-primary" style="flex:1;">Filtrar</button>
+                        <a href="/volunteer/view-announcement" class="btn btn-secondary"
+                           style="flex:1; text-align:center;">Limpar</a>
+                    </div>
                 </form>
 
                 <div style="gap:1rem; margin-bottom:1.5rem;">
@@ -56,7 +65,8 @@
 
                         <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
                             <strong>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"
+                                     width="20px" fill="black">
                                     <path d="M720-440v-80h160v80H720Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM200-200v-160h-40q-33 0-56.5-23.5T80-440v-80q0-33 23.5-56.5T160-600h160l200-120v480L320-360h-40v160h-80Zm240-182v-196l-98 58H160v80h182l98 58Zm120 36v-268q27 24 43.5 58.5T620-480q0 41-16.5 75.5T560-346ZM300-480Z"/>
                                 </svg>
                                 Comunicados Recentes
