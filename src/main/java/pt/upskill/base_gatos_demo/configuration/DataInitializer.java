@@ -203,14 +203,15 @@ public class DataInitializer {
                 .findFirst().orElse(null);
 
         if (racaoSeca != null) {
-            racaoSeca.setStockNote("Pedido: 3 Kg — Ração Renal para o Favorito se possível. (João Silva)");
+            racaoSeca.setStockNote("PEDIDO DE REPOSIÇÃO: 3 Kg — Ração Renal para o Favorito se possível. (João Silva)");
             stockRepo.save(racaoSeca);
         }
 
         if (areia != null) {
-            areia.setStockNote("Pedido: 2 Sacos — A areia está quase no fim, urgente. (Inês Martins)");
+            areia.setStockNote("PEDIDO DE REPOSIÇÃO: 2 Sacos — A areia está quase no fim, urgente. (Inês Martins)");
             stockRepo.save(areia);
         }
+
 
 
         //TURNOS
