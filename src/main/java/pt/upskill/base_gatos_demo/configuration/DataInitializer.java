@@ -116,8 +116,8 @@ public class DataInitializer {
                             "Gata FIV+, precisa de cuidados especiais.",
                             true, false, true, true, true, List.of("FIV+", "Especial"), "98d293ee-407b-4a3a-a958-1469f255f39c.jpg"},
                     {"EDP", "2 anos", false, "Laranja", "Disponível", "2026-03-16",
-                    "A edp é muito ativa, adora brincar e está sempre bem humorada.",
-                    false, false, true, true, true, List.of("Esperta", "Brincalhona"), "f9b9d6b8-df61-4c73-b8b3-b5a75abadea7.jpg"}
+                            "A edp é muito ativa, adora brincar e está sempre bem humorada.",
+                            false, false, true, true, true, List.of("Esperta", "Brincalhona"), "f9b9d6b8-df61-4c73-b8b3-b5a75abadea7.jpg"}
             };
 
             for (Object[] c : cats) {
@@ -157,7 +157,7 @@ public class DataInitializer {
                 a.setDescription((String) ann[2]);
                 a.setCreatedAt(LocalDateTime.now().minusDays((int) (Math.random() * 7)));
                 a.setCreatedBy("AdminSistema");
-                if(Math.random() < 0.5) {
+                if (Math.random() < 0.5) {
                     a.setLastUpdatedBy("AdminSistema");
                     a.setUpdatedAt(LocalDateTime.now().minusDays((int) (Math.random() * 7)));
                 }
@@ -186,12 +186,32 @@ public class DataInitializer {
                 s.setMeasureUnit((String) st[3]);
                 s.setTag((String) st[4]);
                 s.setLowStock(s.isLowStock());
-                if(Math.random() < 0.5) {
+                if (Math.random() < 0.5) {
                     s.setUpdatedAt(LocalDateTime.now().minusDays((int) (Math.random() * 7)));
                 }
                 stockRepo.save(s);
             }
         }
+
+        // PEDIDOS PENDENTES — Voluntários
+        Stock racaoSeca = stockRepo.findAll().stream()
+                .filter(s -> s.getProductType().equals("Ração Seca Royal Canin"))
+                .findFirst().orElse(null);
+
+        Stock areia = stockRepo.findAll().stream()
+                .filter(s -> s.getProductType().equals("Areia para gatos"))
+                .findFirst().orElse(null);
+
+        if (racaoSeca != null) {
+            racaoSeca.setStockNote("Pedido: 3 Kg — Ração Renal para o Favorito se possível. (João Silva)");
+            stockRepo.save(racaoSeca);
+        }
+
+        if (areia != null) {
+            areia.setStockNote("Pedido: 2 Sacos — A areia está quase no fim, urgente. (Inês Martins)");
+            stockRepo.save(areia);
+        }
+
 
         //TURNOS
         if (shiftRepo.count() == 0) {
