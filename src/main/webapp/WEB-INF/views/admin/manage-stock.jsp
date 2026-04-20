@@ -71,12 +71,12 @@
                 </div>
             </c:if>
 
-            <%-- BLOCO DE PEDIDOS DOS VOLUNTÁRIOS --%>
             <c:if test="${not empty pendingRequests}">
                 <div class="alert alert-warning"
                      style="border: 2px solid #f97316; background: #fff7ed; margin-bottom: 1.5rem;">
                     <h4 style="color: #c2410c; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">
-                        🔔 Pedidos de Reposição Pendentes:
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#854d0e"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></svg>
+                        Pedidos de Reposição:
                     </h4>
                     <c:forEach var="req" items="${pendingRequests}">
                         <div style="display:flex; justify-content:space-between; align-items:center; padding: 0.5rem 0; border-bottom: 1px solid #fed7aa;">
