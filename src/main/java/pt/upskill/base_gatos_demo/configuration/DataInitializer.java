@@ -108,13 +108,13 @@ public class DataInitializer {
                             false, false, true, true, true, List.of("Calma", "Caseira"), "585576c8-a870-4b6c-bfb1-cc2f274bae03.jpg"},
                     {"Lagoa", "7 meses", false, "Europeu comum", "Em Processo", "2026-04-02",
                             "A Lagoa é muito meiga mas também muito tímida. Está sempre atenta ao que acontece ao redor e pode ficar a olhar-te por horas com aquela carinha gira.",
-                            true, true, false, true, true, List.of("Tímida", "Observadora"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"}/*,
+                            true, true, false, true, true, List.of("Tímida", "Observadora"), "89bc63db-7fc5-46f3-9824-1c23a825f7e3.jpg"},
                     {"Tobias", "3 anos", true, "Laranja", "Em Processo", "2024-05-20",
                             "Muito sociável, dá-se bem com outros gatos e também com cães, precisa de companhia de quatro patas.",
-                            false, false, true, true, true, List.of("Sociável", "Brincalhão")},
-                    {"Nuvem", "6 anos", false, "Branco", "Disponível", "2022-07-10",
+                            false, false, true, true, true, List.of("Sociável", "Brincalhão"),"5ac14eed-f051-4662-8e7f-40d1856336a6.jpg"},
+                    {"Nuvem", "6 anos", false, "Europeu comum", "Disponível", "2022-07-10",
                             "Gata FIV+, precisa de cuidados especiais.",
-                            true, false, true, true, true, List.of("FIV+", "Especial")}*/
+                            true, false, true, true, true, List.of("FIV+", "Especial"), "98d293ee-407b-4a3a-a958-1469f255f39c.jpg"}
             };
 
             for (Object[] c : cats) {
