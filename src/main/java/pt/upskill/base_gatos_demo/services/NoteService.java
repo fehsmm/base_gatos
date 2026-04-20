@@ -23,43 +23,55 @@ public class NoteService {
 
     public void startShift(Long id, User user) {
         Shift shift = shiftRepository.findById(id).orElse(null);
-        if (shift != null && shift.getStartedAt() == null) {
-            shift.setStartedAt(LocalDateTime.now());
+        if (shift != null) {
+            // Se for o primeiro voluntário a chegar, marca o início real do turno
+            if (shift.getStartedAt() == null) {
+                shift.setStartedAt(LocalDateTime.now());
+            }
+            // Define SEMPRE o utilizador que clicou no botão como o "voluntário atual"
             shift.setCurrentVolunteer(user);
             shiftRepository.save(shift);
         }
     }
 
-    public void saveNote(Shift shift, String summary, String importantObservations) {
+    public void saveNote(Shift shift, String summary, String importantObservations, String priority, User author) {
         //carrega o shift e guarda a nota, função auxiliar
         Note note = new Note();
+        note.setShift(shift);
         note.setSummary(summary);
         note.setImportantObservations(importantObservations);
+        note.setPriority(priority);
+        note.setAuthor(author);
         note.setUpdatedAt(LocalDateTime.now());
-        note.setRead(false);
         noteRepository.save(note);
+        if (shift.getNotes() == null) shift.setNotes(new ArrayList<>());
         shift.getNotes().add(note);
         shiftRepository.save(shift);
     }
 
-    public void saveNote(Long id, String summary, String importantObservations) {
+    public void saveNote(Long id, String summary, String importantObservations, String priority, User author) {
         //vai buscar o turno, define a data de fim, limpa a lista de voluntários e chama o save note para salvar a nota do turno anterior
         Shift shift = shiftRepository.findById(id).orElse(null);
         if (shift != null) {
-            shift.setEndedAt(LocalDateTime.now());
+            long notesJaExistentes = shift.getNotes().size();
+            long totalVoluntariosEscalados = shift.getVolunteers().size();
+
+            if (notesJaExistentes + 1 >= totalVoluntariosEscalados) {
+                shift.setEndedAt(LocalDateTime.now());
+            }
+
             shift.setCurrentVolunteer(null);
             shiftRepository.save(shift);
-            saveNote(shift, summary, importantObservations);
+
+            saveNote(shift, summary, importantObservations, priority, author);
         }
     }
 
-    public void readNote(Long shiftId) {
-        Shift shift = shiftRepository.findById(shiftId).orElse(null);
-        if (shift != null) {
-            for (Note note : shift.getNotes()) {
-                note.setRead(true);
-                noteRepository.save(note);
-            }
+    public void readNote(Long noteId) {
+        Note note = noteRepository.findById(noteId).orElse(null);
+        if (note != null) {
+            note.setRead(true);
+            noteRepository.save(note);
         }
     }
 

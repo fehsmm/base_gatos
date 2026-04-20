@@ -10,6 +10,7 @@ import pt.upskill.base_gatos_demo.repositories.StockRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StockService {
@@ -39,6 +40,12 @@ public class StockService {
             }
         }
         return lowStockItems;
+    }
+
+    public List<Stock> getPendingRequests() {  // Fernanda add para aparecer o stock q os Voluntários solicitaram
+        return stockRepository.findAll().stream()
+                .filter(item -> item.getStockNote() != null && item.getStockNote().startsWith("PEDIDO DE REPOSIÇÃO:"))
+                .collect(Collectors.toList());
     }
 
     public List<Stock> getAllProducts(String productTypeFilter, String tagFilter) {

@@ -12,8 +12,8 @@
 <body>
 <div class="admin-layout">
 
-    <c:set var="activePage" value="shift-report" />
-    <c:set var="dashboardUrl" value="/volunteer/" />
+    <c:set var="activePage" value="shift-report"/>
+    <c:set var="dashboardUrl" value="/volunteer/"/>
     <%@ include file="../fragments/adminSidebar.jsp" %>
 
     <main class="flex-1 page">
@@ -60,9 +60,11 @@
                                  onclick="toggleReport('report-${shift.id}')">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <div>
-                                        <div style="font-weight:600;"><img src="/icons/clockcalendar.svg" width="20px" height="20px"/> ${shift.date}</div>
+                                        <div style="font-weight:600;"><img src="/icons/clockcalendar.svg" width="20px"
+                                                                           height="20px"/> ${shift.date}</div>
                                         <div style="color:#9ca3af; font-size:0.85rem;">
-                                            <img src="/icons/clock.svg" width="20px" height="20px"/> ${shift.startTime} — ${shift.endTime} &nbsp;•&nbsp;
+                                            <img src="/icons/clock.svg" width="20px" height="20px"/> ${shift.startTime}
+                                            — ${shift.endTime} &nbsp;•&nbsp;
                                             <c:forEach var="vol" items="${shift.volunteers}" varStatus="s">
                                                 ${vol.name}<c:if test="${!s.last}">, </c:if>
                                             </c:forEach>
@@ -77,13 +79,37 @@
                                     </div>
                                 </div>
 
-                                <div id="report-${shift.id}" style="display:none; margin-top:1rem; border-top:1px solid #e5e7eb; padding-top:1rem;">
-                                    <c:forEach items="${shift.getNotes()}" var="note">
-                                        <div class="shift-note">
-                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Resumo: </div>
-                                            <div style="font-size:0.9rem; margin-bottom:0.75rem; white-space:pre-wrap;">${note.summary}</div>
-                                            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">Observações: </div>
-                                            <div style="font-size:0.9rem; white-space:pre-wrap;">${note.importantObservations}</div>
+                                <div id="report-${shift.id}"
+                                     style="display:none; margin-top:1rem; border-top:1px solid #e5e7eb; padding-top:1rem;">
+                                    <c:forEach items="${shift.notes}" var="note">
+                                        <div class="shift-card"
+                                             style="border-left: 5px solid ${note.priority == 'urgent' ? '#dc2626' : (note.priority == 'high' ? '#f97316' : '#9ca3af')}; margin-bottom: 1rem; padding: 1rem;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <img src="/icons/Person.svg" width="18px" height="18px"/>
+                                                    <strong style="font-size: 1rem; color: #1f2937;">${note.author.name}</strong>
+                                                </div>
+                                                <span class="badge ${note.priority == 'urgent' ? 'badge-red' : (note.priority == 'high' ? 'badge-orange' : 'badge-gray')}">
+                                                        ${note.priority == 'urgent' ? 'Urgente' : (note.priority == 'high' ? 'Alta' : 'Normal')}
+                                                </span>
+                                            </div>
+                                            <div style="background: #fef2f2; border-radius: 8px; padding: 0.75rem; border: 1px solid #fee2e2; margin-bottom: 0.75rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; color: #991b1b; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
+                                                    <img src="/icons/warning.svg" width="14px" height="14px"/>
+                                                    Observações Críticas
+                                                </div>
+                                                <div style="color: #111827; font-weight: 500; font-size: 0.95rem;">
+                                                        ${note.importantObservations}
+                                                </div>
+                                            </div>
+                                            <div style="padding-left: 0.5rem;">
+                                                <div style="font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">
+                                                    Resumo do Turno:
+                                                </div>
+                                                <div style="color: #4b5563; font-size: 0.9rem; line-height: 1.4;">
+                                                        ${note.summary}
+                                                </div>
+                                            </div>
                                         </div>
                                     </c:forEach>
                                 </div>

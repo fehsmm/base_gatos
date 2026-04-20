@@ -44,7 +44,6 @@ public class VolunteerController {
         if (user == null) return "redirect:/auth/login";
         model.addAttribute("user", user);
         LocalDate today = LocalDate.now();
-
         List<Shift> allShifts = shiftService.getShifts(null);
 
         Long upcomingCount = allShifts.stream()
@@ -55,7 +54,6 @@ public class VolunteerController {
                 .filter(s -> s.getDate().isBefore(today))
                 .max(Comparator.comparing(Shift::getDate))
                 .ifPresent(s -> model.addAttribute("previousNotes", s.getNotes()));
-
         model.addAttribute("upcomingCount", upcomingCount);
         return "volunteer/volunteer";
     }
@@ -65,7 +63,6 @@ public class VolunteerController {
         User user = authService.getAuthenticatedUser();
         model.addAttribute("user", user);
         LocalDate today = LocalDate.now();
-
         List<Shift> allShifts = shiftService.getAllShifts();
 
         List<Shift> upcomingShifts = allShifts.stream()
@@ -89,29 +86,52 @@ public class VolunteerController {
         User user = authService.getAuthenticatedUser();
         model.addAttribute("user", user);
         LocalDateTime now = LocalDateTime.now();
-        List<Shift> allShifts = shiftService.getShifts(null);
+        List<Shift> allShifts = shiftService.getAllShifts();
 
-        List<Shift> todayShifts = allShifts.stream()
+        Shift todayShift = allShifts.stream()
                 .filter(s -> s.getDate().equals(now.toLocalDate()) &&
-                        s.getStartTime().isBefore(now.toLocalTime()) &&
-                        s.getEndTime().isAfter(now.toLocalTime()))
-                .collect(Collectors.toList());
+                        !now.toLocalTime().isBefore(s.getStartTime()) &&
+                        !now.toLocalTime().isAfter(s.getEndTime()))
+                .findFirst()
+                .orElse(null);
+        if (todayShift != null) {
+            model.addAttribute("todayShift", todayShift);
 
-        allShifts.stream()
-                .filter(s -> s.getEndedAt() != null && s.getEndedAt().isBefore(now))
-                .max(Comparator.comparing(Shift::getEndedAt))
-                .ifPresent(s -> model.addAttribute("previousShift", s));
+            boolean currentUserSubmittedNote = todayShift.getNotes().stream()
+                    .anyMatch(n -> n.getAuthor() != null && n.getAuthor().getId().equals(user.getId()));
+            model.addAttribute("currentUserSubmittedNote", currentUserSubmittedNote);
 
-        if (!todayShifts.isEmpty()) {
-            model.addAttribute("todayShift", todayShifts.get(0));
+            boolean userIsActive = todayShift.getCurrentVolunteer() != null &&
+                    todayShift.getCurrentVolunteer().getId().equals(user.getId());
+            model.addAttribute("userIsActive", userIsActive);
+            model.addAttribute("currentUserSubmittedNote", currentUserSubmittedNote);
+
+            todayShift.getNotes().stream()
+                    .filter(n -> n.getAuthor() != null && !n.getAuthor().getId().equals(user.getId()))
+                    .findFirst()
+                    .ifPresent(n -> model.addAttribute("sameShiftNote", n));
         }
+
+        // 2. Nota do turno anterior (Para aparecer no MODAL)
+        allShifts.stream()
+                .filter(s -> s.getDate().isBefore(now.toLocalDate())) // Qualquer turno de dias passados
+                .sorted(Comparator.comparing(Shift::getDate).reversed()) // O mais recente primeiro
+                .findFirst()
+                .ifPresent(lastShift -> {
+                    // Procura notas não lidas deste turno anterior
+                    lastShift.getNotes().stream()
+                            .filter(n -> !n.isRead())
+                            .findFirst()
+                            .ifPresent(n -> model.addAttribute("previousNote", n));
+                });
+
         List<MedicationRecord> meds = medicationRecordService.getAllActiveToday();
         Map<String, List<MedicationRecord>> medsByCat = new LinkedHashMap<>();
         for (MedicationRecord med : meds) {
-            String catName = med.getCat().getName();
-            medsByCat.computeIfAbsent(catName, k -> new ArrayList<>()).add(med);
+            medsByCat.computeIfAbsent(med.getCat().getName(), k -> new ArrayList<>()).add(med);
         }
         model.addAttribute("medsByCat", medsByCat);
+
         return "volunteer/view-shift";
     }
 
@@ -161,7 +181,6 @@ public class VolunteerController {
                               @RequestParam(required = false) String search) {
         model.addAttribute("user", authService.getAuthenticatedUser());
         LocalDate today = LocalDate.now();
-
         List<Shift> allPastShifts = shiftService.getAllShifts().stream()
                 .filter(s -> !s.getDate().isAfter(today))
                 .filter(s -> s.getEndedAt() != null)
@@ -179,36 +198,31 @@ public class VolunteerController {
                             && s.getDate().getYear() == today.getYear())
                     .collect(Collectors.toList());
         }
-
         model.addAttribute("shifts", displayShifts);
         model.addAttribute("search", search);
         return "volunteer/shift-report";
     }
 
-    @PostMapping("/read-notes/{id}")
-    public String readNotes(@PathVariable Long id) {
-        noteService.readNote(id);
+    @PostMapping("/start-shift/{id}")
+    public String startShift(@PathVariable Long id) {
+        User user = authService.getAuthenticatedUser();
+        noteService.startShift(id, user);
         return "redirect:/volunteer/view-shift";
     }
 
-    @PostMapping("/start-shift/{id}")
-    public String startShift(@PathVariable Long id) {
-        noteService.startShift(id, authService.getAuthenticatedUser());
+    @PostMapping("/read-note/{id}")
+    public String readNotes(@PathVariable Long id) {
+        noteService.readNote(id);
         return "redirect:/volunteer/view-shift";
     }
 
     @PostMapping("/save-note/{id}")
     public String saveNote(@PathVariable Long id,
                            @RequestParam String summary,
-                           @RequestParam String importantObservations) {
+                           @RequestParam String importantObservations,
+                           @RequestParam(required = false, defaultValue = "normal") String priority) {
         User user = authService.getAuthenticatedUser();
-        Shift shift = shiftService.getById(id);
-
-        if (!shift.getVolunteers().contains(user)) {
-            return "redirect:/volunteer/view-shift";
-        }
-
-        noteService.saveNote(id, summary, importantObservations);
+        noteService.saveNote(id, summary, importantObservations, priority, user);
         return "redirect:/volunteer/view-shift";
     }
 
@@ -222,6 +236,23 @@ public class VolunteerController {
     public String administerMedication(@PathVariable Long id) {
         medicationRecordService.markAdministered(id);
         return "redirect:/volunteer/view-shift";
+    }
+    @PostMapping("/request-stock")
+    public String handleStockRequest(
+            @RequestParam String item,
+            @RequestParam int quantity,
+            @RequestParam String observations) {
+
+        Stock novoPedido = new Stock();
+        novoPedido.setProductType(item);
+        novoPedido.setCurrentQuantity(quantity);
+        novoPedido.setStockNote(observations);
+        novoPedido.setUpdatedAt(LocalDateTime.now());
+
+        // Aqui deves chamar o teu repository ou service de Stock
+        // stockRepository.save(novoPedido);
+
+        return "redirect:/volunteer/request-stock?success=true";
     }
 }
 

@@ -136,6 +136,7 @@ public class AdminController {
         model.addAttribute("lowStockCount", lowStock);
         model.addAttribute("lowStockItems", lowStockItems);
         model.addAttribute("tags", tags);
+        model.addAttribute("pendingRequests", stockService.getPendingRequests()); //add ver pedidos dos Voluntários
         return "admin/manage-stock";
     }
 
