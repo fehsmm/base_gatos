@@ -4,24 +4,29 @@
 
 A **Java / Spring Boot** web application built for **MEG – Movimento Esterilização de Gatos de Lisboa**, a Lisbon-based nonprofit that rescues, neuters and cares for street cats.
 
-The system centralizes the management of the cats in the association's care and the organization of volunteer work.
+The system centralizes the management of the cats in the association's care, volunteer work, adoptions and donations.
 
 > Final group project of the intensive Java programming course at **ISCTE – University Institute of Lisbon** (2026).
 
 ## Features
 
-- Cat registration and tracking
+- Role-based access for **admins, volunteers and adopters** (Spring Security)
+- Cat registration and tracking, with photo upload
 - Per-animal medication records
-- Volunteer management and shift scheduling
-- [Donations via Stripe – confirm]
+- Volunteer shift scheduling, tasks and notes
+- Adoption requests
+- Stock control and announcements
+- Online donations via **Stripe** (test mode)
+- Email notifications
 - Preloaded database with realistic demo data
 
 ## Tech Stack
 
-- Java [17/21] · Spring Boot
-- Spring Data JPA / Hibernate
-- [MySQL / PostgreSQL / H2]
-- [Thymeleaf / HTML / CSS / JavaScript]
+- Java 17 · Spring Boot 4
+- Spring MVC · Spring Security
+- Spring Data JPA / Hibernate · MySQL
+- JSP / JSTL · HTML · CSS · JavaScript
+- Stripe API · Spring Mail
 - Maven
 
 ## Architecture
@@ -41,24 +46,29 @@ I was mainly responsible for the **volunteer-facing backend**:
 
 ## Getting Started
 
+**Requirements:** Java 17 and MySQL.
+
 1. Clone the repository
    ```bash
    git clone https://github.com/fehsmm/base_gatos.git
    ```
-2. Set the Stripe test key environment variable:
-   ```bash
-   STRIPE_SECRET_KEY=sk_test_...
+2. Create a MySQL database named `base_gatos_oficial`.
+3. Create the file `src/main/resources/application-secrets.properties` (it is git-ignored) with your own credentials:
+   ```properties
+   spring.datasource.password=your_mysql_password
+   stripe.api.key=sk_test_...
+   spring.mail.username=your_email@gmail.com
+   spring.mail.password=your_app_password
    ```
-3. [Configure the database in `application.properties`]
 4. Run the application
    ```bash
-   mvn spring-boot:run
+   ./mvnw spring-boot:run
    ```
 5. Open `http://localhost:8080`
 
 ## Team
 
-- Fernanda [Last name] – [LinkedIn]
+- Fernanda Moura
 - Daniel Duarte
 - João Louro
 - Vitor Braz
