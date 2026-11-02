@@ -4,24 +4,29 @@
 
 Aplicação web desenvolvida em **Java / Spring Boot** para o **MEG – Movimento Esterilização de Gatos de Lisboa**, uma associação que resgata, esteriliza e cuida de gatos de rua.
 
-O sistema centraliza a gestão dos gatos acompanhados pela associação e a organização do trabalho dos voluntários.
+O sistema centraliza a gestão dos gatos acompanhados pela associação, o trabalho dos voluntários, as adoções e as doações.
 
 > Projeto final em grupo do curso intensivo de programação Java no **ISCTE – Instituto Universitário de Lisboa** (2026).
 
 ## Funcionalidades
 
-- Cadastro e acompanhamento de gatos
-- Registro e controle de medicação por animal
-- Gestão de voluntários e escalas de turnos
-- [Doações via Stripe – confirmar]
+- Acesso por perfil para **administradores, voluntários e adotantes** (Spring Security)
+- Cadastro e acompanhamento de gatos, com upload de fotos
+- Registro de medicação por animal
+- Escala de turnos, tarefas e notas dos voluntários
+- Pedidos de adoção
+- Controle de estoque e avisos
+- Doações online via **Stripe** (modo de teste)
+- Notificações por e-mail
 - Base de dados pré-carregada com dados realistas para demonstração
 
 ## Tecnologias
 
-- Java [17/21] · Spring Boot
-- Spring Data JPA / Hibernate
-- [MySQL / PostgreSQL / H2]
-- [Thymeleaf / HTML / CSS / JavaScript]
+- Java 17 · Spring Boot 4
+- Spring MVC · Spring Security
+- Spring Data JPA / Hibernate · MySQL
+- JSP / JSTL · HTML · CSS · JavaScript
+- Stripe API · Spring Mail
 - Maven
 
 ## Arquitetura
@@ -41,24 +46,29 @@ Fui responsável principalmente pelo **backend voltado aos voluntários**:
 
 ## Como executar
 
+**Requisitos:** Java 17 e MySQL.
+
 1. Clone o repositório
    ```bash
    git clone https://github.com/fehsmm/base_gatos.git
    ```
-2. Configure a variável de ambiente da chave de teste do Stripe:
-   ```bash
-   STRIPE_SECRET_KEY=sk_test_...
+2. Crie um banco de dados MySQL chamado `base_gatos_oficial`.
+3. Crie o arquivo `src/main/resources/application-secrets.properties` (ele é ignorado pelo Git) com as suas credenciais:
+   ```properties
+   spring.datasource.password=sua_senha_mysql
+   stripe.api.key=sk_test_...
+   spring.mail.username=seu_email@gmail.com
+   spring.mail.password=sua_senha_de_app
    ```
-3. [Configure o banco de dados em `application.properties`]
 4. Rode a aplicação
    ```bash
-   mvn spring-boot:run
+   ./mvnw spring-boot:run
    ```
 5. Acesse `http://localhost:8080`
 
 ## Equipe
 
-- Fernanda [Sobrenome] – [LinkedIn]
+- Fernanda Moura
 - Daniel Duarte
 - João Louro
 - Vitor Braz
